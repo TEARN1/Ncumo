@@ -653,22 +653,39 @@ async function fetchWeatherAndSetTheme() {
     weatherData = await response.json();
     
     evaluateWeatherAlerts(weatherData);
-    
-    const isRaining = weatherData.current_weather && [51, 53, 55, 61, 63, 65, 80, 81, 82].includes(weatherData.current_weather.weathercode);
-    const hours = new Date().getHours();
-    
-    if (isRaining) {
-      switchTheme("rain");
-    } else if (hours >= 19 || hours < 5) {
-      switchTheme("dream");
-    } else {
-      switchTheme("sakura");
-    }
+    autoUpdateThemeBasedOnTime();
   } catch (e) {
     console.warn("Weather API unreachable, loading fallback alerts and default theme.", e);
     evaluateFallbackAlerts();
+    autoUpdateThemeBasedOnTime();
   }
 }
+
+function autoUpdateThemeBasedOnTime() {
+  if (sessionStorage.getItem("userSelectedTheme")) return;
+  
+  // If it's currently raining, default to rain theme
+  const isRaining = weatherData && weatherData.current_weather && [51, 53, 55, 61, 63, 65, 80, 81, 82].includes(weatherData.current_weather.weathercode);
+  if (isRaining) {
+    if (targetTheme !== "rain") switchTheme("rain");
+    return;
+  }
+  
+  const hours = new Date().getHours();
+  if (hours >= 19 || hours < 5) {
+    // Night is automatic (Midnight Dream)
+    if (targetTheme !== "dream") switchTheme("dream");
+  } else if (hours >= 16 && hours < 19) {
+    // Sunset hours (Sunset Cafe)
+    if (targetTheme !== "cafe") switchTheme("cafe");
+  } else {
+    // Rest of the day (Sakura Spring)
+    if (targetTheme !== "sakura") switchTheme("sakura");
+  }
+}
+
+// Check weather & time theme automatically every 60 seconds
+setInterval(autoUpdateThemeBasedOnTime, 60000);
 
 function evaluateWeatherAlerts(data) {
   const maxTemp = data.daily.temperature_2m_max[0];
@@ -826,10 +843,10 @@ function regeneratePetals(themeId) {
   }
 }
 
-document.getElementById("themeSakura").addEventListener("click", () => { playBubbleSFX(); switchTheme("sakura"); });
-document.getElementById("themeCafe").addEventListener("click", () => { playBubbleSFX(); switchTheme("cafe"); });
-document.getElementById("themeDream").addEventListener("click", () => { playBubbleSFX(); switchTheme("dream"); });
-document.getElementById("themeRain").addEventListener("click", () => { playBubbleSFX(); switchTheme("rain"); });
+document.getElementById("themeSakura").addEventListener("click", () => { playBubbleSFX(); sessionStorage.setItem("userSelectedTheme", "true"); switchTheme("sakura"); });
+document.getElementById("themeCafe").addEventListener("click", () => { playBubbleSFX(); sessionStorage.setItem("userSelectedTheme", "true"); switchTheme("cafe"); });
+document.getElementById("themeDream").addEventListener("click", () => { playBubbleSFX(); sessionStorage.setItem("userSelectedTheme", "true"); switchTheme("dream"); });
+document.getElementById("themeRain").addEventListener("click", () => { playBubbleSFX(); sessionStorage.setItem("userSelectedTheme", "true"); switchTheme("rain"); });
 
 document.getElementById("rainToggle").addEventListener("change", (e) => {
   if (e.target.checked) {
@@ -1721,25 +1738,53 @@ function updateGreetingMessage() {
   const now = new Date();
   const day = now.getDay();
   const hours = now.getHours();
-  let msg = "";
   
-  const isWeekend = (day === 0 || day === 6);
-  if (isWeekend) {
-    msg = "Shouldn't you be with me? 😉";
-  } else {
-    if (hours >= 20) {
-      msg = "It's late, Ncumo. Go get some rest. 🌙";
-    } else if (hours < 5) {
-      msg = "Go back to sleep, sthandwa sam. Dreamland is waiting for you. 🥱💤";
-    } else if (hours === 5) {
-      msg = "Up early? Good morning! ☀️";
-    } else if (hours === 6) {
-      msg = "Good morning, Ncumolwakhe. Hope you woke up with a smile today! ☀️🌸";
-    } else {
-      msg = "Have a good day! Go crush it. 🚀✨";
+  // Last visit time tracking
+  const lastVisitStr = localStorage.getItem("lastVisitTime");
+  const currentMs = Date.now();
+  let longingMsg = "";
+  
+  if (lastVisitStr) {
+    const lastVisitMs = parseInt(lastVisitStr, 10);
+    const diffHours = (currentMs - lastVisitMs) / (1000 * 60 * 60);
+    const diffDays = Math.floor(diffHours / 24);
+    
+    if (diffDays >= 7) {
+      longingMsg = `It's been a whole week (${diffDays} days) since you were last here... 😭 Did you forget about me, sthandwa sam? I missed you so much it hurts! 💔`;
+    } else if (diffDays >= 3) {
+      longingMsg = `It's been ${diffDays} days since you last visited... 🥺 I was starting to feel really lonely and sad. I missed you so much! 💔`;
+    } else if (diffHours >= 24) {
+      longingMsg = `I missed you yesterday... 🥺 It felt like a lifetime. I'm so glad you're back today, sthandwa sam! ♡`;
     }
   }
-  greetingEl.textContent = msg;
+  
+  // Save the current visit time
+  localStorage.setItem("lastVisitTime", currentMs.toString());
+  
+  if (longingMsg) {
+    greetingEl.textContent = longingMsg;
+  } else {
+    // Normal greetings based on time of day
+    let msg = "";
+    const isWeekend = (day === 0 || day === 6);
+    if (isWeekend) {
+      msg = "Shouldn't you be with me? 😉";
+    } else {
+      if (hours >= 20) {
+        msg = "It's late, Ncumo. Go get some rest. 🌙";
+      } else if (hours < 5) {
+        msg = "Go back to sleep, sthandwa sam. Dreamland is waiting for you. 🥱💤";
+      } else if (hours === 5) {
+        msg = "Up early? Good morning! ☀️";
+      } else if (hours === 6) {
+        msg = "Good morning, Ncumolwakhe. Hope you woke up with a smile today! ☀️🌸";
+      } else {
+        msg = "Have a good day! Go crush it. 🚀✨";
+      }
+    }
+    greetingEl.textContent = msg;
+  }
+  
   greetingBox.hidden = false;
 }
 
@@ -2398,9 +2443,12 @@ if (lofiFilter) {
 // =====================================================
 let heartTapCount = 0;
 let lastHeartTapTime = 0;
-const heartCanvas = document.getElementById("webglCanvas");
-if (heartCanvas) {
-  heartCanvas.addEventListener("pointerdown", (e) => {
+const heartTarget = document.querySelector(".hero") || document.getElementById("webglCanvas");
+if (heartTarget) {
+  heartTarget.addEventListener("pointerdown", (e) => {
+    // Ignore taps on interactive child elements like buttons and links
+    if (e.target.closest("button, a, input, select, textarea, label")) return;
+    
     const now = Date.now();
     if (now - lastHeartTapTime > 1500) {
       heartTapCount = 1;
