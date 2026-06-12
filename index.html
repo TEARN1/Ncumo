@@ -1,0 +1,3585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ncumolwakhe ♡ Sthandwa Sam</title>
+  
+  <!-- SEO & Social Meta -->
+  <meta name="description" content="A romantic slice-of-life anime-themed digital sanctuary built with love for Ziyanda." />
+  <meta name="theme-color" content="#ffb7c5" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Parisienne&family=Jost:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet" />
+  
+  <style>
+/* ============ Anime Aesthetic Foundations ============ */
+:root {
+  --blush-soft: #fff2f5;
+  --blush: #ffe3e9;
+  --sakura: #ffb7c5;
+  --sakura-deep: #f27b9b;
+  --berry: #9d3b5c;
+  --berry-dark: #5a1d32;
+  --gold: #d9ab55;
+  --gold-glow: #ffe89e;
+  --ink: #3b222c;
+  --white: #ffffff;
+  --sunset-peach: #ffefe8;
+  --sunset-orange: #ffd0b8;
+  
+  --shadow-sm: 0 4px 12px rgba(242, 123, 155, 0.1);
+  --shadow-md: 0 12px 30px rgba(242, 123, 155, 0.18);
+  --shadow-lg: 0 20px 50px rgba(90, 29, 50, 0.12);
+  --glass-border: 1px solid rgba(255, 183, 197, 0.4);
+  
+  --sans: "Jost", sans-serif;
+  --serif: "Cormorant Garamond", serif;
+  --script: "Parisienne", cursive;
+  --display: "Playfair Display", serif;
+  
+  --transition-bounce: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-smooth: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem; /* Prevents sticky nav from covering headings */
+}
+
+body {
+  font-family: var(--sans);
+  color: var(--ink);
+  background: 
+    radial-gradient(circle at 80% 20%, var(--sunset-peach) 0%, transparent 50%),
+    radial-gradient(circle at 15% 60%, var(--blush-soft) 0%, transparent 60%),
+    linear-gradient(180deg, var(--blush-soft) 0%, #fffbfd 40%, var(--sunset-peach) 100%);
+  overflow-x: hidden;
+  min-height: 100vh;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+body.dark-mode {
+  background: 
+    radial-gradient(circle at 80% 20%, #291220 0%, transparent 50%),
+    radial-gradient(circle at 15% 60%, #170d14 0%, transparent 60%),
+    linear-gradient(180deg, #1f0b15 0%, #0d0408 50%, #1a0812 100%);
+  color: #f7e6ec;
+  --blush-soft: #230f1a;
+  --blush: #3d1b2c;
+  --ink: #faeff3;
+  --glass-border: 1px solid rgba(242, 123, 155, 0.2);
+  --shadow-md: 0 12px 30px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.7);
+}
+
+/* Twinkling Stars Canvas */
+#starCanvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+body.dark-mode #starCanvas {
+  opacity: 0.65;
+}
+
+/* Particle Canvas (Sparkles & Confetti) */
+#particleCanvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* ============ Floating Sakura Petals ============ */
+#petals { position: fixed; inset: 0; pointer-events: none; z-index: 1; }
+.petal {
+  position: absolute;
+  top: -50px;
+  pointer-events: none;
+  transform-style: preserve-3d;
+  animation: sakuraFall linear infinite;
+  opacity: 0.8;
+}
+@keyframes sakuraFall {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg) rotateY(0deg);
+  }
+  100% {
+    transform: translate3d(var(--drift-x), 105vh, 0) rotate(360deg) rotateY(180deg);
+  }
+}
+
+/* ============ Navigation ============ */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 5vw;
+  background: rgba(255, 253, 254, 0.75);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 183, 197, 0.3);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-smooth);
+}
+body.dark-mode .nav {
+  background: rgba(29, 13, 22, 0.85);
+  border-bottom-color: rgba(242, 123, 155, 0.15);
+}
+.nav__logo {
+  font-family: var(--script);
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--sakura-deep);
+  text-decoration: none;
+  text-shadow: 1px 1px 2px rgba(242, 123, 155, 0.2);
+  transition: var(--transition-bounce);
+}
+.nav__logo:hover {
+  transform: scale(1.08);
+}
+.nav__toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  cursor: pointer;
+  color: var(--sakura-deep);
+}
+.nav__links {
+  display: flex;
+  gap: 1.8rem;
+  list-style: none;
+  align-items: center;
+}
+.nav__links a {
+  text-decoration: none;
+  color: var(--ink);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: var(--transition-smooth);
+  position: relative;
+  padding: 0.4rem 0;
+}
+.nav__links a::after {
+  content: "";
+  position: absolute;
+  bottom: 0; left: 0; width: 0; height: 2px;
+  background: var(--sakura-deep);
+  transition: var(--transition-smooth);
+}
+.nav__links a:hover::after {
+  width: 100%;
+}
+.nav__links a:hover {
+  color: var(--sakura-deep);
+}
+.nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.dark-toggle {
+  background: rgba(255, 239, 243, 0.8);
+  border: 1px solid rgba(255, 183, 197, 0.4);
+  width: 2.5rem; height: 2.5rem;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: var(--transition-bounce);
+}
+.dark-toggle:hover {
+  transform: scale(1.1) rotate(15deg);
+  background: var(--sakura);
+}
+body.dark-mode .dark-toggle {
+  background: rgba(90, 29, 50, 0.6);
+  border-color: rgba(242, 123, 155, 0.2);
+}
+
+/* ============ Hero ============ */
+.hero {
+  position: relative;
+  z-index: 10;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 6rem 5vw 3rem;
+  overflow: hidden;
+}
+.hero__decor {
+  position: absolute;
+  font-size: 10rem;
+  opacity: 0.03;
+  font-family: var(--script);
+  pointer-events: none;
+}
+.hero__decor--left { top: 10%; left: -2%; transform: rotate(-15deg); }
+.hero__decor--right { bottom: 10%; right: -2%; transform: rotate(15deg); }
+
+.hero__eyebrow {
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--sakura-deep);
+  margin-bottom: 1rem;
+}
+.hero__title {
+  font-family: var(--script);
+  font-size: clamp(2.2rem, 10vw, 9.5rem);
+  font-weight: 400;
+  line-height: 0.9;
+  background: linear-gradient(135deg, var(--berry) 20%, var(--sakura-deep) 55%, var(--gold) 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0px 2px 10px rgba(255, 183, 197, 0.15));
+}
+.hero__subtitle {
+  font-family: var(--serif);
+  font-size: clamp(1rem, 2.5vw, 1.45rem);
+  font-style: italic;
+  max-width: 38rem;
+  color: var(--berry);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+body.dark-mode .hero__subtitle {
+  color: #ffc2d3;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.95rem 2.5rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--sakura-deep), var(--berry));
+  color: var(--white);
+  text-decoration: none;
+  font-family: var(--sans);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  box-shadow: 0 10px 25px rgba(242, 123, 155, 0.35);
+  transition: var(--transition-bounce);
+  border: none;
+  cursor: pointer;
+}
+.btn:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 15px 35px rgba(242, 123, 155, 0.5);
+}
+.hero__hearts {
+  margin-top: 3.5rem;
+  display: flex;
+  gap: 2rem;
+  font-size: 1.6rem;
+  color: var(--sakura-deep);
+}
+.hero__hearts span {
+  animation: animeFloat 3s ease-in-out infinite;
+}
+.hero__hearts span:nth-child(2) { animation-delay: 0.8s; }
+.hero__hearts span:nth-child(3) { animation-delay: 1.6s; }
+
+@keyframes animeFloat {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.6; }
+  50% { transform: translateY(-15px) scale(1.2); opacity: 1; filter: drop-shadow(0 0 8px var(--sakura)); }
+}
+
+/* ============ Sections Shared ============ */
+section {
+  position: relative;
+  z-index: 10;
+  padding: 6rem 5vw;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+.section-title {
+  font-family: var(--script);
+  font-size: clamp(2.4rem, 7vw, 4.2rem);
+  color: var(--sakura-deep);
+  text-align: center;
+  margin-bottom: 0.5rem;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.05);
+}
+body.dark-mode .section-title {
+  color: var(--sakura);
+}
+.section-sub {
+  text-align: center;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1rem, 2.2vw, 1.25rem);
+  color: var(--berry);
+  margin-bottom: 4rem;
+}
+body.dark-mode .section-sub {
+  color: #ffb7c5;
+}
+.glass-panel {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(16px);
+  border: var(--glass-border);
+  border-radius: 28px;
+  padding: 3rem 2rem;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition-smooth);
+}
+body.dark-mode .glass-panel {
+  background: rgba(35, 15, 26, 0.45);
+}
+
+/* ============ About Her ============ */
+.about__card {
+  max-width: 46rem;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+}
+.about__badge {
+  display: inline-block;
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  animation: pulseBeat 2.5s infinite;
+}
+@keyframes pulseBeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+.about__card h2 {
+  font-family: var(--script);
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  color: var(--berry-dark);
+  margin: 0.5rem 0 1.5rem;
+}
+body.dark-mode .about__card h2 { color: var(--sakura); }
+
+.about__words {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-bottom: 2rem;
+}
+.word-chip {
+  padding: 0.5rem 1.4rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ffeef2, #ffd6e0);
+  border: 1px solid rgba(255, 183, 197, 0.5);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--berry-dark);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-bounce);
+  cursor: pointer;
+}
+.word-chip:hover {
+  transform: translateY(-3px) rotate(2deg);
+  background: linear-gradient(135deg, var(--sakura), var(--sakura-deep));
+  color: var(--white);
+}
+body.dark-mode .word-chip {
+  background: rgba(90, 29, 50, 0.4);
+  border-color: rgba(242, 123, 155, 0.2);
+  color: #ffc2d3;
+}
+.about__card p {
+  font-family: var(--serif);
+  font-size: clamp(1.15rem, 2.5vw, 1.35rem);
+  line-height: 1.8;
+  color: var(--ink);
+}
+.about__quote-bubble {
+  margin-top: 2.5rem;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 183, 197, 0.4);
+  border-radius: 20px;
+  padding: 1.5rem;
+  position: relative;
+  box-shadow: var(--shadow-sm);
+  max-width: 32rem;
+  margin-left: auto;
+  margin-right: auto;
+  transition: var(--transition-smooth);
+}
+body.dark-mode .about__quote-bubble {
+  background: rgba(54, 24, 40, 0.85);
+}
+.about__quote-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: 100%; left: 50%;
+  transform: translateX(-50%);
+  border-width: 10px;
+  border-style: solid;
+  border-color: transparent transparent rgba(255, 255, 255, 0.85) transparent;
+}
+body.dark-mode .about__quote-bubble::after {
+  border-color: transparent transparent rgba(54, 24, 40, 0.85) transparent;
+}
+.about__quote-text {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--berry);
+}
+body.dark-mode .about__quote-text { color: #ffaec1; }
+.about__quote-btn {
+  background: none;
+  border: none;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--sakura-deep);
+  cursor: pointer;
+  margin-top: 0.6rem;
+  font-weight: 600;
+  transition: var(--transition-smooth);
+}
+.about__quote-btn:hover {
+  color: var(--berry-dark);
+}
+
+/* ============ Our Story Timeline ============ */
+.story { text-align: center; }
+.story__counters {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+  margin-bottom: 2.5rem;
+  max-width: 38rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.counter {
+  padding: 1.5rem 1rem;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.85);
+  border: var(--glass-border);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  transition: var(--transition-bounce);
+}
+.counter:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--sakura);
+}
+body.dark-mode .counter {
+  background: rgba(45, 20, 33, 0.7);
+}
+.counter__num {
+  font-family: var(--display);
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 600;
+  color: var(--sakura-deep);
+}
+.counter__label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--berry);
+}
+body.dark-mode .counter__label { color: #f2a2ba; }
+
+/* Progress Rings Container */
+.story__progress-container {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin: 3rem 0;
+  flex-wrap: wrap;
+}
+.progress-ring-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+}
+.progress-ring-svg {
+  transform: rotate(-90deg);
+}
+.progress-ring-circle-bg {
+  fill: none;
+  stroke: rgba(255, 183, 197, 0.2);
+  stroke-width: 8;
+}
+.progress-ring-circle {
+  fill: none;
+  stroke: var(--sakura-deep);
+  stroke-width: 8;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.35s;
+}
+.progress-ring-label {
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--berry);
+}
+
+.story__weekend {
+  max-width: 32rem;
+  margin: 0 auto 3rem;
+  padding: 2.2rem 2rem;
+  border-radius: 26px;
+  background: linear-gradient(135deg, #ffffff, #ffeef2);
+  border: var(--glass-border);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+body.dark-mode .story__weekend {
+  background: linear-gradient(135deg, #381829, #230f1a);
+}
+.story__weekend-title {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--berry);
+  margin-bottom: 0.6rem;
+}
+body.dark-mode .story__weekend-title { color: var(--sakura); }
+.story__weekend-text {
+  font-size: 1.25rem;
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--sakura-deep);
+  font-weight: 600;
+}
+.story__weekend-sub {
+  margin-top: 0.8rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  color: var(--berry);
+  opacity: 0.85;
+}
+body.dark-mode .story__weekend-sub { color: #fcc; }
+
+/* Birthdays Grid */
+.birthday-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.8rem;
+  max-width: 42rem;
+  margin: 0 auto;
+}
+.birthday-card {
+  padding: 2rem 1.5rem;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.75);
+  border: var(--glass-border);
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  transition: var(--transition-bounce);
+  cursor: pointer;
+}
+.birthday-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+}
+body.dark-mode .birthday-card {
+  background: rgba(45, 20, 33, 0.6);
+}
+.birthday-card__title {
+  font-family: var(--serif);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--berry);
+  margin-bottom: 0.5rem;
+}
+body.dark-mode .birthday-card__title { color: #ffaec1; }
+.birthday-card__days {
+  font-family: var(--display);
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  font-weight: 600;
+  color: var(--sakura-deep);
+}
+
+/* ============ Interactive Love Timeline ============ */
+.timeline {
+  margin-top: 5rem;
+  position: relative;
+  text-align: left;
+}
+.timeline__path {
+  position: absolute;
+  top: 0; bottom: 0; left: 50%;
+  width: 4px;
+  background: var(--sakura);
+  transform: translateX(-50%);
+}
+body.dark-mode .timeline__path { background: rgba(242, 123, 155, 0.3); }
+.timeline__item {
+  margin-bottom: 3.5rem;
+  position: relative;
+  width: 50%;
+  padding-right: 3rem;
+  text-align: right;
+}
+.timeline__item:nth-child(even) {
+  align-self: flex-end;
+  margin-left: 50%;
+  padding-right: 0;
+  padding-left: 3rem;
+  text-align: left;
+}
+.timeline__node {
+  position: absolute;
+  top: 0.4rem; left: 100%;
+  transform: translateX(-50%);
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--sakura-deep);
+  border: 4px solid var(--blush-soft);
+  box-shadow: 0 0 10px var(--sakura);
+  z-index: 5;
+  transition: var(--transition-bounce);
+}
+.timeline__item:nth-child(even) .timeline__node {
+  left: 0;
+}
+.timeline__item:hover .timeline__node {
+  transform: translateX(-50%) scale(1.4);
+  background: var(--gold);
+}
+.timeline__content {
+  background: rgba(255, 255, 255, 0.8);
+  border: var(--glass-border);
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  display: inline-block;
+  max-width: 24rem;
+  transition: var(--transition-bounce);
+  cursor: pointer;
+}
+.timeline__content:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: var(--shadow-md);
+}
+body.dark-mode .timeline__content {
+  background: rgba(45, 20, 33, 0.85);
+}
+.timeline__date {
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--sakura-deep);
+  margin-bottom: 0.4rem;
+  display: block;
+}
+.timeline__title {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--berry-dark);
+  margin-bottom: 0.4rem;
+}
+body.dark-mode .timeline__title { color: var(--white); }
+.timeline__desc {
+  font-size: 0.85rem;
+  color: var(--berry);
+  line-height: 1.5;
+}
+body.dark-mode .timeline__desc { color: #f2a2ba; }
+
+/* ============ Interactive Cassette Music Player ============ */
+.cassette-widget {
+  width: 100%;
+  max-width: 24rem;
+  margin: 3rem auto 0;
+  padding: 1.5rem;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #2c1d25, #14080e);
+  border: 2px solid var(--sakura);
+  box-shadow: var(--shadow-lg);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  position: relative;
+}
+.cassette-body {
+  height: 9.5rem;
+  border-radius: 14px;
+  background: linear-gradient(185deg, #422d39 0%, #1f121a 100%);
+  border: 1px solid rgba(255, 183, 197, 0.15);
+  position: relative;
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+.cassette-label {
+  height: 3.5rem;
+  background: linear-gradient(180deg, #ffeef2 0%, #ffc4d4 100%);
+  border-radius: 6px;
+  padding: 0.4rem 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--berry-dark);
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.15);
+}
+.cassette-title-text {
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 12rem;
+}
+.cassette-label-brand {
+  font-family: var(--script);
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--berry);
+}
+.cassette-window {
+  width: 9rem; height: 2.2rem;
+  background: rgba(0, 0, 0, 0.85);
+  border-radius: 4px;
+  align-self: center;
+  border: 1px solid rgba(255, 183, 197, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 1.2rem;
+  position: relative;
+}
+.cassette-spindle {
+  width: 1.6rem; height: 1.6rem;
+  border-radius: 50%;
+  background: #3b2b35;
+  border: 4px dotted var(--sakura);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cassette-spindle::after {
+  content: "";
+  width: 0.4rem; height: 0.4rem;
+  background: #000;
+  border-radius: 50%;
+}
+.cassette-widget.playing .cassette-spindle {
+  animation: spinSpindle 3s linear infinite;
+}
+@keyframes spinSpindle {
+  100% { transform: rotate(360deg); }
+}
+.cassette-tape-roll {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 1.3rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.cassette-tape-roll--left {
+  left: 1rem;
+  width: 2.8rem; height: 2.8rem;
+  border: 8px solid rgba(80, 50, 70, 0.4);
+}
+.cassette-tape-roll--right {
+  right: 1rem;
+  width: 2.8rem; height: 2.8rem;
+  border: 8px solid rgba(80, 50, 70, 0.4);
+}
+.cassette-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+}
+.cassette-btn {
+  background: linear-gradient(180deg, #44323c, #2b1f26);
+  border: 1px solid rgba(255, 183, 197, 0.2);
+  border-radius: 8px;
+  color: #fff;
+  width: 3rem; height: 2.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+  transition: var(--transition-smooth);
+}
+.cassette-btn:hover {
+  background: #ffb7c5;
+  color: var(--berry-dark);
+}
+.cassette-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+.cassette-btn--play {
+  width: 4.5rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  background: linear-gradient(180deg, var(--sakura-deep), var(--berry));
+}
+
+/* ============ Love Notes Envelope ============ */
+.notes__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+  max-width: 52rem;
+  margin: 0 auto 5rem;
+}
+.note {
+  cursor: pointer;
+  border: none;
+  border-radius: 24px;
+  padding: 2.2rem 1.5rem;
+  background: linear-gradient(160deg, #ffffff 0%, #fff0f4 100%);
+  border: var(--glass-border);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  transition: var(--transition-bounce);
+}
+body.dark-mode .note {
+  background: linear-gradient(160deg, #3d1c2b, #26101a);
+}
+.note:hover {
+  transform: translateY(-8px) rotate(-1.5deg);
+  box-shadow: var(--shadow-md);
+  border-color: var(--sakura);
+}
+.note__seal {
+  width: 3.2rem; height: 3.2rem;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--sakura), var(--sakura-deep));
+  color: var(--white);
+  font-size: 1.3rem;
+  box-shadow: 0 8px 20px rgba(242, 123, 155, 0.4);
+}
+.note__label {
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--berry);
+}
+body.dark-mode .note__label { color: var(--sakura); }
+
+/* Folding Envelope Concept */
+.envelope-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 4rem;
+}
+.envelope {
+  position: relative;
+  width: 18rem; height: 12rem;
+  background: #ffdce4;
+  border-radius: 0 0 12px 12px;
+  box-shadow: var(--shadow-lg);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+body.dark-mode .envelope { background: #502538; }
+.envelope__flap {
+  position: absolute;
+  top: 0; left: 0;
+  width: 0; height: 0;
+  border-left: 9rem solid transparent;
+  border-right: 9rem solid transparent;
+  border-top: 6.5rem solid #ffc8d5;
+  transform-origin: top;
+  transition: transform 0.6s ease, border-top-color 0.4s;
+  z-index: 3;
+}
+body.dark-mode .envelope__flap { border-top-color: #6d324c; }
+.envelope__back {
+  position: absolute;
+  inset: 0;
+  border-left: 9rem solid #ffebf0;
+  border-right: 9rem solid #ffebf0;
+  border-bottom: 6rem solid #ffdae2;
+  border-radius: 0 0 12px 12px;
+  z-index: 2;
+}
+body.dark-mode .envelope__back {
+  border-left-color: #381a27;
+  border-right-color: #381a27;
+  border-bottom-color: #4c2335;
+}
+.envelope__seal-heart {
+  position: absolute;
+  top: 5.5rem; left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  z-index: 4;
+  transition: var(--transition-bounce);
+}
+.envelope:hover .envelope__seal-heart {
+  transform: translate(-50%, -50%) scale(1.2);
+}
+.envelope.open .envelope__flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+.envelope.open .envelope__seal-heart {
+  opacity: 0;
+}
+.envelope__letter {
+  position: absolute;
+  top: 10px; left: 15px; right: 15px; bottom: 10px;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+  font-family: var(--serif);
+  font-size: 0.85rem;
+  color: var(--berry-dark);
+  transition: transform 0.6s ease, z-index 0.6s;
+  z-index: 1;
+}
+body.dark-mode .envelope__letter {
+  background: #ffdce4;
+}
+.envelope.open .envelope__letter {
+  transform: translateY(-8rem) scale(1.05);
+  z-index: 5;
+  box-shadow: var(--shadow-lg);
+  height: 16rem;
+  overflow-y: auto;
+}
+.envelope__letter h4 {
+  font-family: var(--script);
+  font-size: 1.4rem;
+  color: var(--sakura-deep);
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+.envelope__letter p {
+  line-height: 1.6;
+  font-style: italic;
+}
+
+/* ============ Games Section ============ */
+.games { display: flex; flex-direction: column; align-items: center; gap: 2.5rem; }
+.game-card {
+  width: 100%;
+  max-width: 34rem;
+  text-align: center;
+}
+.game-card__title {
+  font-family: var(--serif);
+  font-size: clamp(1.4rem, 3.5vw, 1.75rem);
+  font-weight: 600;
+  color: var(--berry-dark);
+  margin-bottom: 0.5rem;
+}
+body.dark-mode .game-card__title { color: var(--sakura); }
+.game-card__hint {
+  font-size: 0.85rem;
+  color: var(--berry);
+  margin-bottom: 1.5rem;
+}
+body.dark-mode .game-card__hint { color: #f2a2ba; }
+.btn--small { padding: 0.65rem 1.8rem; font-size: 0.75rem; border: none; cursor: pointer; margin-top: 1rem; }
+.btn--ghost {
+  background: var(--white);
+  color: var(--sakura-deep);
+  border: 1px solid var(--sakura);
+  box-shadow: none;
+}
+body.dark-mode .btn--ghost {
+  background: rgba(90, 29, 50, 0.3);
+  color: #ffc2d3;
+  border-color: rgba(242, 123, 155, 0.4);
+}
+
+/* Memory Match 3D Flip Layout */
+.memory__stats, .catch__stats {
+  display: flex;
+  justify-content: center;
+  gap: 1.8rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--berry);
+  margin-bottom: 1.2rem;
+  flex-wrap: wrap;
+}
+body.dark-mode .memory__stats, body.dark-mode .catch__stats { color: #ffb7c5; }
+.memory__grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols, 4), 1fr);
+  gap: 0.6rem;
+  max-width: 22rem;
+  margin: 0 auto;
+}
+@media (max-width: 500px) {
+  .memory__grid { gap: 0.5rem; }
+}
+
+/* 3D Flip Card Styles */
+.mem-card-container {
+  aspect-ratio: 1;
+  perspective: 1000px;
+  cursor: pointer;
+  min-height: 4rem;
+}
+.mem-card {
+  width: 100%; height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+}
+.mem-card-container.flipped .mem-card {
+  transform: rotateY(180deg);
+}
+.mem-card-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 4px 10px rgba(90, 29, 50, 0.15);
+}
+.mem-card-front {
+  background: linear-gradient(135deg, var(--sakura), var(--sakura-deep));
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+/* Magic circle cardback decoration */
+.mem-card-front::after {
+  content: "❀";
+  font-size: 1.4rem;
+  opacity: 0.85;
+}
+.mem-card-back {
+  background: linear-gradient(135deg, #ffffff, #ffeef2);
+  color: var(--ink);
+  transform: rotateY(180deg);
+  border: 2px solid var(--sakura);
+  font-size: clamp(1.4rem, 4vw, 1.8rem);
+}
+body.dark-mode .mem-card-back {
+  background: linear-gradient(135deg, #3d1c2b, #26101a);
+  border-color: rgba(242, 123, 155, 0.4);
+}
+.mem-card-container.matched .mem-card {
+  animation: cardMatchPulse 0.6s ease forwards;
+}
+@keyframes cardMatchPulse {
+  0% { transform: rotateY(180deg) scale(1); }
+  50% { transform: rotateY(180deg) scale(1.15); filter: drop-shadow(0 0 10px var(--sakura)); }
+  100% { transform: rotateY(180deg) scale(1); opacity: 0.75; }
+}
+.game-card__win {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.05rem, 2.2vw, 1.2rem);
+  color: var(--sakura-deep);
+  font-weight: 600;
+  margin: 1rem 0;
+  animation: animePulse 2s infinite;
+}
+@keyframes animePulse {
+  0%, 100% { opacity: 0.8; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.02); }
+}
+
+/* Catch the Hearts Arena */
+.catch__arena {
+  position: relative;
+  height: 260px;
+  border-radius: 22px;
+  overflow: hidden;
+  background: 
+    radial-gradient(circle at 50% 20%, #ffe9ee, transparent 70%),
+    linear-gradient(165deg, #ffffff, #ffdce4);
+  border: 1px solid rgba(255, 183, 197, 0.5);
+  box-shadow: inset 0 4px 15px rgba(242, 123, 155, 0.08);
+}
+body.dark-mode .catch__arena {
+  background: 
+    radial-gradient(circle at 50% 20%, #44172a, transparent 70%),
+    linear-gradient(165deg, #230b16, #14040b);
+  border-color: rgba(242, 123, 155, 0.2);
+}
+.catch__msg {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--berry-dark);
+  padding: 1.5rem;
+  text-align: center;
+  z-index: 2;
+}
+body.dark-mode .catch__msg { color: #ffd6e0; }
+
+.falling-heart {
+  position: absolute;
+  top: -50px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 2rem;
+  animation: heartFall linear forwards;
+  transition: transform 0.15s;
+  padding: 0.4rem;
+  z-index: 3;
+}
+.falling-heart:hover {
+  transform: scale(1.3);
+}
+.falling-heart.caught {
+  animation: heartCatchPop 0.35s ease forwards;
+}
+@keyframes heartFall {
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(320px) rotate(15deg); }
+}
+@keyframes heartCatchPop {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(2.5) rotate(30deg); opacity: 0; filter: blur(2px); }
+}
+
+/* ============ Game: Chibi Wardrobe Dressing Room ============ */
+.wardrobe-panel {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+@media (max-width: 600px) {
+  .wardrobe-panel { grid-template-columns: 1fr; }
+}
+/* Visual Character Avatar */
+.chibi-wrapper {
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 183, 197, 0.4);
+  height: 18rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 2px 10px rgba(0,0,0,0.02);
+}
+body.dark-mode .chibi-wrapper {
+  background: rgba(45, 20, 33, 0.4);
+}
+.chibi-avatar {
+  width: 7.5rem; height: 15rem;
+  position: relative;
+}
+.chibi-layer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+/* Custom CSS styling for visual Chibi doll */
+.chibi-body {
+  width: 2.2rem; height: 11rem;
+  background: #fce6db;
+  border-radius: 20px;
+  position: absolute;
+  top: 3.5rem; left: 50%;
+  transform: translateX(-50%);
+  border: 2px solid #e8c7b8;
+}
+.chibi-body::before {
+  content: "";
+  position: absolute;
+  top: -2.8rem; left: 50%;
+  transform: translateX(-50%);
+  width: 3.2rem; height: 3.2rem;
+  border-radius: 50%;
+  background: #fce6db;
+  border: 2px solid #e8c7b8;
+}
+.chibi-face-details {
+  position: absolute;
+  top: 1.8rem; left: 50%;
+  transform: translateX(-50%);
+  width: 2.2rem;
+  display: flex;
+  justify-content: space-between;
+}
+.chibi-face-details::before, .chibi-face-details::after {
+  content: "•";
+  color: var(--ink);
+  font-size: 0.9rem;
+}
+/* Outfit custom elements updated by script */
+.chibi-layer-hair { z-index: 5; }
+.chibi-layer-top { z-index: 4; }
+.chibi-layer-bottom { z-index: 3; }
+.chibi-layer-shoes { z-index: 2; }
+
+/* Control Slots */
+.fit__display {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.fit__selector-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255,255,255,0.8);
+  border-radius: 14px;
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(255,183,197,0.3);
+}
+body.dark-mode .fit__selector-row {
+  background: rgba(45,20,33,0.6);
+}
+.fit__selector-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--berry);
+}
+body.dark-mode .fit__selector-label { color: #f2a2ba; }
+.fit__selector-btns {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.fit__arrow-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--sakura-deep);
+  transition: var(--transition-bounce);
+  padding: 0.2rem 0.5rem;
+}
+.fit__arrow-btn:hover {
+  transform: scale(1.25);
+}
+.fit__item-icon {
+  font-size: 1.6rem;
+  min-width: 2.2rem;
+  text-align: center;
+}
+.fit__verdict {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--berry-dark);
+  min-height: 1.5rem;
+  margin: 0.8rem 0;
+  font-weight: 500;
+}
+body.dark-mode .fit__verdict { color: #ffaec1; }
+.fit__actions { display: flex; justify-content: center; gap: 0.8rem; flex-wrap: wrap; }
+.fit__cart {
+  margin-top: 0.8rem;
+  font-size: 0.75rem;
+  color: var(--berry);
+  font-weight: 500;
+}
+body.dark-mode .fit__cart { color: #ffb7c5; }
+
+/* Lookbook saves */
+.lookbook-section {
+  margin-top: 1.5rem;
+  border-top: 1px solid rgba(255, 183, 197, 0.3);
+  padding-top: 1.2rem;
+}
+.lookbook-title {
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--berry);
+  margin-bottom: 0.6rem;
+  letter-spacing: 0.05em;
+}
+.lookbook-grid {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+.lookbook-item {
+  flex: 0 0 auto;
+  background: rgba(255,255,255,0.9);
+  border: 1px solid rgba(255,183,197,0.3);
+  padding: 0.4rem 0.8rem;
+  border-radius: 10px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+body.dark-mode .lookbook-item {
+  background: rgba(45,20,33,0.8);
+}
+.lookbook-item:hover {
+  background: var(--sakura);
+  color: var(--white);
+}
+
+/* ============ One Important Question ============ */
+.question__text {
+  font-family: var(--serif);
+  font-size: clamp(1.4rem, 3.5vw, 1.85rem);
+  font-style: italic;
+  color: var(--berry-dark);
+  margin-bottom: 1.2rem;
+  font-weight: 600;
+}
+body.dark-mode .question__text { color: var(--white); }
+.question__btns {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+  min-height: 5.5rem;
+  align-items: center;
+}
+#noBtn {
+  transition: top 0.25s cubic-bezier(0.25, 1, 0.5, 1), left 0.25s cubic-bezier(0.25, 1, 0.5, 1), transform 0.2s;
+}
+#noBtn.fleeing {
+  position: absolute;
+}
+#yesBtn {
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* ============ Anime Love Fortune (Omikuji) ============ */
+.fortune-box {
+  width: 100%;
+  max-width: 24rem;
+  margin: 0 auto;
+}
+.omikuji-drawer {
+  background: linear-gradient(135deg, #e0b880, #c4995c);
+  border: 2px solid #8e622b;
+  border-radius: 12px;
+  height: 6rem; width: 12rem;
+  margin: 0 auto;
+  position: relative;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.omikuji-drawer::after {
+  content: "";
+  width: 1.2rem; height: 1.2rem;
+  background: #3b222c;
+  border-radius: 50%;
+}
+.omikuji-drawer.shake {
+  animation: drawerShake 0.4s ease-in-out infinite;
+}
+@keyframes drawerShake {
+  0%, 100% { transform: rotate(0); }
+  25% { transform: rotate(-5deg) translateY(-2px); }
+  75% { transform: rotate(5deg) translateY(2px); }
+}
+.omikuji-stick {
+  position: absolute;
+  bottom: 100%; left: 50%;
+  width: 1.2rem; height: 4.5rem;
+  background: #f7dca1;
+  border-top: 10px solid #8e622b;
+  border-radius: 4px 4px 0 0;
+  transform: translate(-50%, 2rem);
+  z-index: -1;
+  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.omikuji-drawer.stick-out .omikuji-stick {
+  transform: translate(-50%, -3rem);
+}
+
+/* ============ Achievements Section ============ */
+.achievements__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 1.2rem;
+  max-width: 44rem;
+  margin: 0 auto;
+}
+.achievement {
+  padding: 1.5rem 0.8rem;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 2px solid rgba(255, 183, 197, 0.3);
+  text-align: center;
+  transition: var(--transition-bounce);
+  cursor: pointer;
+  opacity: 0.65;
+}
+body.dark-mode .achievement {
+  background: rgba(45, 20, 33, 0.6);
+  border-color: rgba(242, 123, 155, 0.15);
+}
+.achievement:hover {
+  transform: translateY(-5px);
+}
+.achievement.unlocked {
+  border-color: var(--sakura-deep);
+  background: linear-gradient(150deg, #ffeef2, #ffd6e0);
+  box-shadow: var(--shadow-sm);
+  animation: animeAchievementPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  opacity: 1;
+}
+body.dark-mode .achievement.unlocked {
+  background: linear-gradient(150deg, #3d1c2b, #26101a);
+}
+@keyframes animeAchievementPop {
+  0% { transform: scale(0.6); }
+  50% { transform: scale(1.18); }
+  100% { transform: scale(1); }
+}
+.achievement__icon {
+  font-size: 2.2rem;
+  margin-bottom: 0.6rem;
+  opacity: 0.35;
+  transition: var(--transition-bounce);
+}
+.achievement.unlocked .achievement__icon {
+  opacity: 1;
+  transform: scale(1.1);
+  filter: drop-shadow(0 4px 8px rgba(242,123,155,0.4));
+}
+.achievement__label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--berry);
+}
+body.dark-mode .achievement__label { color: #ffaec1; }
+
+/* ============ Our Bucket List ============ */
+.bucket__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.2rem;
+  max-width: 48rem;
+  margin: 0 auto 2.5rem;
+}
+.bucket-item {
+  padding: 1.6rem 1.2rem;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.8);
+  border: var(--glass-border);
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition-bounce);
+  position: relative;
+}
+body.dark-mode .bucket-item {
+  background: rgba(45, 20, 33, 0.6);
+}
+.bucket-item:hover {
+  transform: translateY(-5px);
+  border-color: var(--sakura-deep);
+}
+.bucket-item.done {
+  opacity: 0.55;
+  background: rgba(255, 255, 255, 0.45);
+}
+.bucket-item.done::after {
+  content: "💖";
+  position: absolute;
+  top: 0.5rem; right: 0.6rem;
+  font-size: 0.9rem;
+}
+.bucket-emoji {
+  font-size: 2.4rem;
+  margin-bottom: 0.6rem;
+  display: block;
+}
+.bucket-text {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--berry-dark);
+  font-family: var(--serif);
+}
+body.dark-mode .bucket-text { color: var(--white); }
+
+/* Custom Bucket List Adder */
+.bucket-adder {
+  display: flex;
+  justify-content: center;
+  max-width: 28rem;
+  margin: 0 auto;
+  gap: 0.5rem;
+}
+.bucket-adder__input {
+  flex: 1;
+  padding: 0.8rem 1.2rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 183, 197, 0.5);
+  background: rgba(255,255,255,0.9);
+  font-family: var(--sans);
+  font-size: 0.85rem;
+}
+body.dark-mode .bucket-adder__input {
+  background: rgba(45, 20, 33, 0.8);
+  color: #fff;
+  border-color: rgba(242, 123, 155, 0.3);
+}
+.bucket-adder__btn {
+  background: var(--sakura-deep);
+  color: #fff;
+  border: none;
+  padding: 0 1.5rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: var(--transition-bounce);
+}
+.bucket-adder__btn:hover {
+  transform: scale(1.05);
+  background: var(--berry);
+}
+
+/* ============ Moments / Gallery ============ */
+.moments__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.8rem;
+  max-width: 56rem;
+  margin: 0 auto;
+}
+@media (max-width: 500px) {
+  .moments__grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+}
+.moment {
+  background: #ffffff;
+  border: 1px solid rgba(255, 183, 197, 0.4);
+  border-radius: 4px;
+  padding: 0.8rem 0.8rem 2rem;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition-bounce);
+  cursor: pointer;
+  /* Retro polaroid tilt angle */
+  transform: rotate(var(--angle));
+}
+body.dark-mode .moment {
+  background: #ffe3eb;
+  border-color: transparent;
+}
+.moment:hover {
+  transform: translateY(-8px) scale(1.05) rotate(0deg);
+  z-index: 50;
+  box-shadow: var(--shadow-lg);
+}
+.moment__img {
+  height: 140px;
+  border-radius: 2px;
+  display: grid;
+  place-items: center;
+  font-size: 3.2rem;
+  background: 
+    radial-gradient(circle at 30% 30%, #fff0f3, transparent 70%),
+    linear-gradient(150deg, #ffc8d5, #ff9bb2);
+  margin-bottom: 0.8rem;
+  box-shadow: inset 0 2px 8px rgba(0,0,0,0.05);
+}
+body.dark-mode .moment__img {
+  background: 
+    radial-gradient(circle at 30% 30%, #ffd6e0, transparent 70%),
+    linear-gradient(150deg, #ffb7c5, #f27b9b);
+}
+.moment figcaption {
+  font-family: var(--script);
+  font-size: 1.45rem;
+  color: var(--berry);
+  margin-top: 0.5rem;
+}
+
+/* ============ Footer ============ */
+.footer {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 4rem 5vw;
+}
+.footer__script {
+  font-family: var(--script);
+  font-size: clamp(2rem, 5vw, 2.5rem);
+  color: var(--sakura-deep);
+}
+.footer__small {
+  margin-top: 0.5rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--berry);
+}
+body.dark-mode .footer__small { color: #f2a2ba; }
+
+/* ============ Modal ============ */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  display: grid;
+  place-items: center;
+  background: rgba(59, 34, 44, 0.5);
+  backdrop-filter: blur(10px);
+  padding: 1.5rem;
+}
+.modal[hidden] { display: none; }
+.modal__card {
+  position: relative;
+  max-width: 28rem;
+  width: 100%;
+  background: linear-gradient(165deg, #ffffff, #fff2f5);
+  border-radius: 26px;
+  padding: 3rem 2rem;
+  text-align: center;
+  box-shadow: 0 30px 80px rgba(59, 34, 44, 0.4);
+  border: 1px solid rgba(255, 183, 197, 0.4);
+  animation: animeModalPop 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+body.dark-mode .modal__card {
+  background: linear-gradient(165deg, #381a27, #1f0b15);
+}
+@keyframes animeModalPop {
+  from { transform: scale(0.7); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+.modal__ornament { color: var(--sakura-deep); letter-spacing: 0.4em; font-size: 1.2rem; }
+.modal__text {
+  margin-top: 1.5rem;
+  font-family: var(--serif);
+  font-size: clamp(1.2rem, 2.8vw, 1.45rem);
+  font-style: italic;
+  line-height: 1.7;
+  color: var(--berry-dark);
+}
+body.dark-mode .modal__text { color: #ffb7c5; }
+.modal__close {
+  position: absolute;
+  top: 1rem; right: 1.2rem;
+  border: none;
+  background: none;
+  font-size: 1.8rem;
+  color: var(--sakura-deep);
+  cursor: pointer;
+  transition: var(--transition-bounce);
+}
+.modal__close:hover {
+  transform: scale(1.2) rotate(90deg);
+}
+
+/* Greeting bubble styling in hero */
+.hero__greeting-bubble {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 183, 197, 0.5);
+  border-radius: 20px;
+  padding: 0.8rem 1.6rem;
+  max-width: 28rem;
+  box-shadow: var(--shadow-sm);
+  display: inline-block;
+  animation: floatBubble 4s ease-in-out infinite;
+  position: relative;
+}
+body.dark-mode .hero__greeting-bubble {
+  background: rgba(35, 15, 26, 0.75);
+  border-color: rgba(242, 123, 155, 0.3);
+}
+.hero__greeting-text {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(0.95rem, 2.2vw, 1.1rem);
+  color: var(--berry);
+  font-weight: 600;
+  line-height: 1.5;
+}
+body.dark-mode .hero__greeting-text {
+  color: #ffc2d3;
+}
+@keyframes floatBubble {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+/* ============ Reveal Anims ============ */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ============ Mobile Responsiveness ============ */
+@media (max-width: 768px) {
+  .nav__toggle { display: block; }
+  .nav__links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    background: rgba(255, 253, 254, 0.95);
+    padding: 1.5rem;
+    gap: 1.2rem;
+    border-bottom: 1px solid rgba(255, 183, 197, 0.3);
+    box-shadow: var(--shadow-md);
+  }
+  body.dark-mode .nav__links {
+    background: rgba(29, 13, 22, 0.95);
+  }
+  .nav__links.active { display: flex; }
+  .timeline__path { left: 1.5rem; }
+  .timeline__item { width: 100%; text-align: left; padding-left: 3.5rem; padding-right: 0; }
+  .timeline__item:nth-child(even) { padding-left: 3.5rem; margin-left: 0; text-align: left; }
+  .timeline__node { left: 1.5rem !important; transform: translateX(-50%); }
+  .story__progress-container { gap: 1.5rem; }
+}
+@media (max-width: 500px) {
+  .glass-panel {
+    padding: 2rem 1.2rem;
+  }
+  .story__counters {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+  }
+  .birthday-section {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+  .timeline__content {
+    width: 100%;
+  }
+}
+@media (max-width: 450px) {
+  .moments__grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    max-width: 18rem;
+    margin: 0 auto;
+  }
+}
+@media (max-width: 400px) {
+  .bucket-adder {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  .bucket-adder__input {
+    width: 100%;
+    text-align: center;
+  }
+  .bucket-adder__btn {
+    width: 100%;
+    padding: 0.8rem 0;
+  }
+}
+@media (max-width: 360px) {
+  .envelope-container {
+    transform: scale(0.85);
+    transform-origin: center;
+  }
+}
+  </style>
+</head>
+<body>
+
+  <!-- Star Twinkle Canvas (for Dark Mode) -->
+  <canvas id="starCanvas"></canvas>
+  
+  <!-- Interactive Confetti/Sparkle Canvas -->
+  <canvas id="particleCanvas"></canvas>
+
+  <div id="petals" aria-hidden="true"></div>
+
+  <!-- ===== Navigation Bar ===== -->
+  <nav class="nav">
+    <a class="nav__logo" href="#home">Ncumo</a>
+    <ul class="nav__links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">Her</a></li>
+      <li><a href="#story">Our Story</a></li>
+      <li><a href="#notes">Notes</a></li>
+      <li><a href="#games">Games</a></li>
+      <li><a href="#bucket">Bucket List</a></li>
+      <li><a href="#moments">Moments</a></li>
+    </ul>
+    <div class="nav__actions">
+      <button class="dark-toggle" id="darkToggle" title="Toggle Theme" aria-label="Toggle Theme">🌙</button>
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle Menu">☰</button>
+    </div>
+  </nav>
+
+  <!-- ===== Hero Header ===== -->
+  <header class="hero" id="home">
+    <div class="hero__decor hero__decor--left">Sthandwa</div>
+    <div class="hero__decor hero__decor--right">Sam</div>
+    
+    <p class="hero__eyebrow reveal">Sthandwa Sam ♡</p>
+    <h1 class="hero__title reveal">Ncumolwakhe</h1>
+    <p class="hero__subtitle reveal">Ziyanda... my Ncumo. A little anime-inspired digital garden, built with love — just for you.</p>
+    
+    <!-- Dynamic Greeting Bubble -->
+    <div class="hero__greeting-bubble reveal" id="heroGreeting" style="margin-top: 1.5rem; margin-bottom: 2rem;" hidden>
+      <span class="hero__greeting-text" id="heroGreetingText"></span>
+    </div>
+    
+    <a href="#notes" class="btn reveal">Open Your Love Notes ✉</a>
+    
+    <div class="hero__hearts" aria-hidden="true">
+      <span>💖</span><span>🌸</span><span>✨</span>
+    </div>
+  </header>
+
+  <!-- ===== About Her Section ===== -->
+  <section class="about" id="about">
+    <div class="glass-panel about__card reveal">
+      <span class="about__badge">✿</span>
+      <h2>She is...</h2>
+      <div class="about__words">
+        <!-- Will be dynamically populated by date seed -->
+      </div>
+      <p>
+        <em>Ncumolwakhe</em> — her smile. And what a perfect name,
+        because your smile is the whole reason this page exists.
+        <em>Ziyanda</em> — growing, increasing. Just like everything
+        I feel for you, weekend after weekend.
+      </p>
+      
+      <!-- Interactive Anime Quote Panel -->
+      <div class="about__quote-bubble">
+        <p class="about__quote-text" id="animeQuote">"I wanted to tell you... wherever you are in the world, I'll search for you." — Your Name</p>
+        <button class="about__quote-btn" id="nextQuote">Draw Another Card 🎴</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Our Story Section ===== -->
+  <section class="story" id="story">
+    <h2 class="section-title reveal">Our Story</h2>
+    <p class="section-sub reveal">It began on the 5th of June, 2026 ♡</p>
+
+    <!-- Anniversary Live Tickers -->
+    <div class="story__counters reveal">
+      <div class="counter">
+        <span class="counter__num" id="cDays">0</span>
+        <span class="counter__label">Days</span>
+      </div>
+      <div class="counter">
+        <span class="counter__num" id="cHours">0</span>
+        <span class="counter__label">Hours</span>
+      </div>
+      <div class="counter">
+        <span class="counter__num" id="cMins">0</span>
+        <span class="counter__label">Minutes</span>
+      </div>
+      <div class="counter">
+        <span class="counter__num" id="cSecs">0</span>
+        <span class="counter__label">Seconds</span>
+      </div>
+    </div>
+
+    <!-- Monthly/Yearly Anniversary Progress Rings -->
+    <div class="story__progress-container reveal">
+      <div class="progress-ring-box">
+        <svg class="progress-ring-svg" width="90" height="90">
+          <circle class="progress-ring-circle-bg" cx="45" cy="45" r="36"/>
+          <circle class="progress-ring-circle" id="monthProgressCircle" cx="45" cy="45" r="36"/>
+        </svg>
+        <span class="progress-ring-label">Month Progress</span>
+      </div>
+      <div class="progress-ring-box">
+        <svg class="progress-ring-svg" width="90" height="90">
+          <circle class="progress-ring-circle-bg" cx="45" cy="45" r="36"/>
+          <circle class="progress-ring-circle" id="yearProgressCircle" cx="45" cy="45" r="36"/>
+        </svg>
+        <span class="progress-ring-label">Year Progress</span>
+      </div>
+    </div>
+
+    <!-- Weekend Counter -->
+    <div class="story__weekend reveal">
+      <h3 class="story__weekend-title">⏳ Weekend Countdown</h3>
+      <p class="story__weekend-text" id="weekendText">Loading our countdown...</p>
+      <p class="story__weekend-sub">Weekdays are for grinding. Weekends are for <em>us</em>.</p>
+    </div>
+
+    <!-- Birthday Section -->
+    <div class="birthday-section reveal">
+      <div class="birthday-card" id="cardHerBday">
+        <div class="birthday-card__title">🎂 Her Birthday</div>
+        <div class="birthday-card__days" id="herBirthday">0</div>
+        <p style="font-size: 0.7rem; color: var(--berry); font-weight: 500; margin-top: 0.5rem;">29 January</p>
+      </div>
+      <div class="birthday-card" id="cardMyBday">
+        <div class="birthday-card__title">🎉 My Birthday</div>
+        <div class="birthday-card__days" id="myBirthday">0</div>
+        <p style="font-size: 0.7rem; color: var(--berry); font-weight: 500; margin-top: 0.5rem;">8 December</p>
+      </div>
+    </div>
+
+    <!-- Anime Roadmap Timeline -->
+    <div class="timeline">
+      <div class="timeline__path"></div>
+      
+      <div class="timeline__item reveal">
+        <div class="timeline__node"></div>
+        <div class="timeline__content">
+          <span class="timeline__date">05 Jun 2026</span>
+          <h4 class="timeline__title">The First Spark ✨</h4>
+          <p class="timeline__desc">Our paths crossed, and the stars aligned. The day our story officially began.</p>
+        </div>
+      </div>
+      
+      <div class="timeline__item reveal">
+        <div class="timeline__node"></div>
+        <div class="timeline__content">
+          <span class="timeline__date">11 Jun 2026</span>
+          <h4 class="timeline__title">Interactive Space 🌸</h4>
+          <p class="timeline__desc">A little garden page created to keep our laughs, memories, and weekend plans alive.</p>
+        </div>
+      </div>
+      
+      <div class="timeline__item reveal">
+        <div class="timeline__node"></div>
+        <div class="timeline__content">
+          <span class="timeline__date">Future</span>
+          <h4 class="timeline__title">Next Chapters 💍</h4>
+          <p class="timeline__desc">Fly-away plans, sunset coffee dates, and matching memories waiting to be written.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Love Notes Section ===== -->
+  <section class="notes" id="notes">
+    <h2 class="section-title reveal">Love Notes</h2>
+    <p class="section-sub reveal">Tap a seal to read, or open the wax envelope below ♡</p>
+    
+    <div class="notes__grid">
+      <button class="note reveal" data-note="">
+        <span class="note__seal">♡</span><span class="note__label">Note One</span>
+      </button>
+      <button class="note reveal" data-note="">
+        <span class="note__seal">❀</span><span class="note__label">Note Two</span>
+      </button>
+      <button class="note reveal" data-note="">
+        <span class="note__seal">♡</span><span class="note__label">Note Three</span>
+      </button>
+      <button class="note reveal" data-note="">
+        <span class="note__seal">✿</span><span class="note__label">Note Four</span>
+      </button>
+    </div>
+
+    <!-- Fold-open Anime Love Letter -->
+    <div class="envelope-container reveal">
+      <div class="envelope" id="loveLetterEnvelope" title="Click to open letter">
+        <div class="envelope__flap"></div>
+        <div class="envelope__back"></div>
+        <span class="envelope__seal-heart">💌</span>
+        <div class="envelope__letter">
+          <!-- Populated dynamically by javascript -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Games Section ===== -->
+  <section class="games" id="games">
+    <h2 class="section-title reveal">Little Games</h2>
+    <p class="section-sub reveal">Play to unlock badges and cute fortunes ♡</p>
+
+    <!-- Game 1: 3D Memory Card Match -->
+    <div class="glass-panel game-card reveal">
+      <h3 class="game-card__title">🌸 Flower Memory</h3>
+      <p class="game-card__hint" id="memLevelName">First Blush 🌸</p>
+      <div class="memory__stats">
+        <span>Stage: <strong id="memLevel">1</strong>/4</span>
+        <span>Moves: <strong id="memMoves">0</strong></span>
+        <span>Pairs: <strong id="memPairs">0/2</strong></span>
+      </div>
+      <div class="memory__grid" id="memoryGrid"></div>
+      <p class="game-card__win" id="memWin" hidden></p>
+      <button class="btn btn--small" id="memReset">Reset Deck</button>
+    </div>
+
+    <!-- Game 2: Catch the Falling Hearts -->
+    <div class="glass-panel game-card reveal">
+      <h3 class="game-card__title">💘 Catch My Hearts</h3>
+      <p class="game-card__hint" id="catchHint">Catch the falling bubbles before they fade! 20s round.</p>
+      <div class="catch__stats">
+        <span>Stage: <strong id="catchStage">1</strong>/3</span>
+        <span>Score: <strong id="catchScore">0</strong></span>
+        <span>Time: <strong id="catchTime">20</strong>s</span>
+        <span>High Record: <strong id="catchBest">0</strong></span>
+      </div>
+      <div class="catch__arena" id="catchArena">
+        <p class="catch__msg" id="catchMsg">Press start, sthandwa sam ♡</p>
+      </div>
+      <button class="btn btn--small" id="catchStart">Start catching</button>
+    </div>
+
+    <!-- Game 3: Chibi Wardrobe Dressing Room -->
+    <div class="glass-panel game-card reveal">
+      <h3 class="game-card__title">🛍️ Chibi Dresser Room</h3>
+      <p class="game-card__hint">Ziyanda, design my perfect wardrobe look! 🎲</p>
+      
+      <div class="wardrobe-panel">
+        <!-- Live character preview -->
+        <div class="chibi-wrapper">
+          <div class="chibi-avatar">
+            <div class="chibi-body">
+              <div class="chibi-face-details"></div>
+            </div>
+            <div class="chibi-layer chibi-layer-hair" id="avatarHair">👦</div>
+            <div class="chibi-layer chibi-layer-top" id="avatarTop" style="transform:translateY(1.6rem);">👕</div>
+            <div class="chibi-layer chibi-layer-bottom" id="avatarBottom" style="transform:translateY(3.8rem);">👖</div>
+            <div class="chibi-layer chibi-layer-shoes" id="avatarShoes" style="transform:translateY(6rem);">👟</div>
+          </div>
+        </div>
+        
+        <!-- Controls -->
+        <div class="fit__display">
+          <div class="fit__selector-row">
+            <span class="fit__selector-label">Haircut</span>
+            <div class="fit__selector-btns">
+              <button class="fit__arrow-btn" id="prevHair">◀</button>
+              <span class="fit__item-icon" id="iconHair">👦</span>
+              <button class="fit__arrow-btn" id="nextHair">▶</button>
+            </div>
+          </div>
+          
+          <div class="fit__selector-row">
+            <span class="fit__selector-label">Tops</span>
+            <div class="fit__selector-btns">
+              <button class="fit__arrow-btn" id="prevTop">◀</button>
+              <span class="fit__item-icon" id="iconTop">👕</span>
+              <button class="fit__arrow-btn" id="nextTop">▶</button>
+            </div>
+          </div>
+          
+          <div class="fit__selector-row">
+            <span class="fit__selector-label">Pants</span>
+            <div class="fit__selector-btns">
+              <button class="fit__arrow-btn" id="prevBottom">◀</button>
+              <span class="fit__item-icon" id="iconBottom">👖</span>
+              <button class="fit__arrow-btn" id="nextBottom">▶</button>
+            </div>
+          </div>
+          
+          <div class="fit__selector-row">
+            <span class="fit__selector-label">Kicks</span>
+            <div class="fit__selector-btns">
+              <button class="fit__arrow-btn" id="prevShoes">◀</button>
+              <span class="fit__item-icon" id="iconShoes">👟</span>
+              <button class="fit__arrow-btn" id="nextShoes">▶</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <p class="fit__verdict" id="fitVerdict">Create a fresh drip style...</p>
+      
+      <div class="fit__actions">
+        <button class="btn btn--small" id="fitShuffle">Shuffle 🎲</button>
+        <button class="btn btn--small" id="fitBuy">Save Look 🛒</button>
+      </div>
+      <p class="fit__cart" id="fitCart">No looks saved to Lookbook yet.</p>
+
+      <!-- Lookbook Outfit Saves list -->
+      <div class="lookbook-section" id="lookbookSec" hidden>
+        <h4 class="lookbook-title">Saved Lookbook</h4>
+        <div class="lookbook-grid" id="lookbookGrid"></div>
+      </div>
+    </div>
+
+    <!-- Game 4: Anime Love Fortune Box (Omikuji) -->
+    <div class="glass-panel game-card reveal">
+      <h3 class="game-card__title">🎴 Love Fortune (Omikuji)</h3>
+      <p class="game-card__hint">Tap the wooden box to shake out a sweet fortune stick!</p>
+      
+      <div class="fortune-box">
+        <div class="omikuji-drawer" id="fortuneDrawer">
+          <div class="omikuji-stick" id="fortuneStick"></div>
+        </div>
+      </div>
+      
+      <p class="game-card__win" id="fortuneWin" style="margin-top: 1.5rem;" hidden></p>
+    </div>
+
+    <!-- Game 5: The Important Question -->
+    <div class="glass-panel game-card reveal">
+      <h3 class="game-card__title">🥺 One Important Question</h3>
+      <p class="question__text" id="questionText">Do you love me?</p>
+      <div class="question__btns" id="questionBtns">
+        <button class="btn btn--small" id="yesBtn">Yes 💖</button>
+        <button class="btn btn--small btn--ghost" id="noBtn">No</button>
+      </div>
+      <p class="game-card__win" id="yesWin" hidden>I knew it!! I love you more 💍✨</p>
+    </div>
+
+    <!-- Procedural Lofi Cassette Widget -->
+    <div class="cassette-widget reveal" id="cassetteWidget">
+      <div class="cassette-body">
+        <div class="cassette-label">
+          <span class="cassette-title-text" id="cassetteTrackName">Lofi Melodies: Ncumo Romance</span>
+          <span class="cassette-label-brand">Ncumo</span>
+        </div>
+        <div class="cassette-window">
+          <div class="cassette-tape-roll cassette-tape-roll--left"></div>
+          <div class="cassette-spindle"></div>
+          <div class="cassette-spindle"></div>
+          <div class="cassette-tape-roll cassette-tape-roll--right"></div>
+        </div>
+      </div>
+      <div class="cassette-controls">
+        <button class="cassette-btn" id="cassettePrev" title="Previous Synthesizer Chord Tone">◀</button>
+        <button class="cassette-btn cassette-btn--play" id="cassettePlay">PLAY</button>
+        <button class="cassette-btn" id="cassetteNext" title="Next Synthesizer Chord Tone">▶</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Achievements Badges ===== -->
+  <section class="games" id="achievements">
+    <h2 class="section-title reveal">🏆 Badges</h2>
+    <p class="section-sub reveal">Interactive goals unlocked by playing ♡</p>
+    <div class="achievements__grid reveal" id="achievementsGrid"></div>
+  </section>
+
+  <!-- ===== Our Bucket List Section ===== -->
+  <section class="games" id="bucket">
+    <h2 class="section-title reveal">🎯 Our Bucket List</h2>
+    <p class="section-sub reveal">Check items off or add your own plans ♡</p>
+    <div class="bucket__grid" id="bucketGrid"></div>
+    
+    <div class="bucket-adder reveal">
+      <input type="text" class="bucket-adder__input" id="bucketInput" placeholder="Add a sweet new date idea..." aria-label="Bucket item title"/>
+      <button class="bucket-adder__btn" id="bucketAddBtn">Add Idea</button>
+    </div>
+  </section>
+
+  <!-- ===== Moments Polaroid Gallery ===== -->
+  <section class="moments" id="moments">
+    <h2 class="section-title reveal">Our Moments</h2>
+    <p class="section-sub reveal">Retro Polaroid frames holding our memories.</p>
+    <div class="moments__grid">
+      <figure class="moment reveal" style="--angle: -2.5deg;"><div class="moment__img">🌸</div><figcaption>The Day We Met</figcaption></figure>
+      <figure class="moment reveal" style="--angle: 3deg;"><div class="moment__img">🌷</div><figcaption>Our First Laugh</figcaption></figure>
+      <figure class="moment reveal" style="--angle: -1.8deg;"><div class="moment__img">🌺</div><figcaption>Golden Evenings</figcaption></figure>
+      <figure class="moment reveal" style="--angle: 2.2deg;"><div class="moment__img">💐</div><figcaption>Every Day With You</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <p class="footer__script">Ndiyakuthanda, Ncumolwakhe</p>
+    <p class="footer__small">from Asemahle "TEARN" Nkwali · Ivory Park · since 05.06.2026 ♡</p>
+  </footer>
+
+  <!-- ===== Detail Modal ===== -->
+  <div class="modal" id="modal" hidden>
+    <div class="modal__card">
+      <button class="modal__close" id="modalClose" aria-label="Close modal">×</button>
+      <span class="modal__ornament">❀ ♡ ❀</span>
+      <p class="modal__text" id="modalText"></p>
+    </div>
+  </div>
+
+  <script>
+// ============ Seeded PRNG (Mulberry32) ============
+function getDaySeed() {
+  const now = new Date();
+  return now.getFullYear() * 10000 + (now.getMonth() + 1) * 100 + now.getDate();
+}
+
+function createPRNG(seed) {
+  let a = seed;
+  return function() {
+    let t = a += 0x6D2B79F5;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  }
+}
+
+// ============ Interactive Lists Assets ============
+const ACHIEVEMENTS = [
+  { id: "memory_win", icon: "🧠", label: "Memory Master" },
+  { id: "hearts_50", icon: "💝", label: "50 Hearts" },
+  { id: "hearts_100", icon: "💌", label: "100 Hearts" },
+  { id: "fashion_king", icon: "👑", label: "Fashion Guru" },
+  { id: "question_yes", icon: "💖", label: "Said Yes" },
+  { id: "fortune_draw", icon: "🎴", label: "Fortune Seeker" }
+];
+
+const DEFAULT_BUCKET_ITEMS = [
+  { emoji: "🏖️", text: "Sunset beach trip" },
+  { emoji: "🍽️", text: "Candlelight dinner" },
+  { emoji: "🎬", text: "Cozy movie night" },
+  { emoji: "🗻", text: "Mountain hiking trip" },
+  { emoji: "✈️", text: "Fly away adventure" },
+  { emoji: "💍", text: "Making future plans" }
+];
+
+const ANIME_QUOTES = [
+  { text: '"I wanted to tell you... wherever you are in the world, I\'ll search for you."', author: "Your Name" },
+  { text: '"If it\'s possible for one person to be hurt by another, then it\'s possible for that person to be healed by another."', author: "Fruits Basket" },
+  { text: '"You made me realize that even if we are apart, my feelings will never change."', author: "Cardcaptor Sakura" },
+  { text: '"I love you. I knew it the minute I met you. No, even before I met you."', author: "Weathering With You" },
+  { text: '"It was like you brought color into my world. You changed my life."', author: "Your Lie in April" },
+  { text: '"Meeting you was the best thing that ever happened to me."', author: "Kimi ni Todoke" },
+  { text: '"If I can meet you again, against the 6 billion to 1 odds, even if you can\'t move, I will marry you."', author: "Angel Beats" },
+  { text: '"I will love you forever, no matter what happens to us."', author: "Sailor Moon" }
+];
+
+const OMIKUJI_FORTUNES = [
+  { badge: "🌟 Dai-kichi (Great Blessing)", desc: "Perfect stars align! An extremely cozy weekend date is ahead. Hug chance: 100%." },
+  { badge: "🌸 Chuu-kichi (Middle Blessing)", desc: "A sweet text message is heading your way. Your smile is guaranteed to grow today." },
+  { badge: "✨ Shou-kichi (Small Blessing)", desc: "A cozy laugh and hot chocolate are in your near future. Joy is in small things!" },
+  { badge: "🍀 Kichi (Blessing)", desc: "Excellent vibes. Dressed outfits will look extra fashionable this weekend." }
+];
+
+// Dictionaries for Adjectives and dynamic love notes
+const ADJECTIVES = [
+  "Radiant", "Kind", "Graceful", "Brilliant", "Loved", "Irreplaceable", "Ethereal", "Angelic", 
+  "Playful", "Dreamy", "Breathtaking", "Captivating", "Compassionate", "Genuine", "Inspiring", 
+  "Magical", "Pure-hearted", "Warm-hearted", "Affectionate", "Charming", "Dazzling", "Elegant", 
+  "Fascinating", "Gorgeous", "Heavenly", "Luminous", "Splendid", "Sweet", "Tender", "Wonderful", 
+  "Adorable", "Beautiful", "Cheerful", "Delightful", "Exquisite", "Joyful", "Lovely", "Precious", 
+  "Sparkling", "Unique", "Vibrant", "Enchanting", "Cute", "Fabulous", "Warm", "Gentle"
+];
+
+const NOTE1_OPENINGS = ["Sthandwa sam,", "Ziyanda,", "My beautiful Ncumo,", "To my favourite person,", "My princess Ziyanda,"];
+const NOTE1_BODIES = [
+  "you make even the most ordinary days feel like a scene from a beautiful Ghibli film.",
+  "your smile has this magical way of melting away all my weekday stress.",
+  "being with you makes me realize what it truly means to be happy.",
+  "every moment spent laughing with you is a memory I keep locked in my heart.",
+  "your warmth and kindness make the world feel so much softer and brighter."
+];
+const NOTE1_CLOSINGS = ["Thank you for being you. ♡", "You are my whole world. 💖", "Ndiyakuthanda always. 💍", "Always yours, TEARN.", "Forever and always. ♡"];
+
+const NOTE2_OPENINGS = ["Just a reminder,", "Hey stylist Ziyanda,", "By the way,", "Sweet Ziyanda,", "Dearest,"];
+const NOTE2_BODIES = [
+  "your laugh is my absolute favourite soundtrack, and I hope to hear it every day.",
+  "I am still thinking about that sweet laugh we shared last weekend.",
+  "you look absolutely breathtaking in every single style under the sun.",
+  "you have this effortless way of bringing joy wherever you go.",
+  "my day is always ten times better the second I think of you."
+];
+const NOTE2_CLOSINGS = ["Can't wait for our weekend date! 🗓️", "Sending you a huge virtual hug right now. 🤗", "Smile for me today! 🌸", "Hope this makes you grin! 🧸", "Ndiyakuthanda! ♡"];
+
+const NOTE3_OPENINGS = ["Looking forward,", "Our future,", "Every single day,", "Looking ahead,"];
+const NOTE3_BODIES = [
+  "is filled with so many sunset dates, coffee walks, and shared dinners.",
+  "has so many blank polaroid frames waiting to be filled by our adventures.",
+  "is going to be a beautiful story that we write together step by step.",
+  "holds so many exciting plans that I can't wait to share with you."
+];
+const NOTE3_CLOSINGS = ["Let's build more memories this weekend. 🗺️", "Always countdown-ing to our next date. ⏳", "Excited for everything to come! ✨", "You and me, always. 💍"];
+
+const NOTE4_OPENINGS = ["In a world of temporary things,", "No matter where we go,", "Since June 5th,", "Every single day,"];
+const NOTE4_BODIES = [
+  "you are my forever and my safest, warmest space.",
+  "my feelings for you only grow stronger and deeper with each passing day.",
+  "you are the absolute main character of my story, and always will be.",
+  "you prove to me that true love is the most beautiful thing in the world."
+];
+const NOTE4_CLOSINGS = ["Forever mine. ♡", "Ndiyakuthanda, sthandwa sam. 💖", "You have all of my heart. 💍", "My irreplaceable girl. 🌸"];
+
+// ============ Web Audio Synthesizer (Zero Asset Audio) ============
+let audioCtx = null;
+let lofiInterval = null;
+let currentChordIdx = 0;
+let isLofiPlaying = false;
+let fortuneDrawCount = 0;
+
+const CHORD_PROGRESSIONS = [
+  [261.63, 329.63, 392.00, 493.88], // Cmaj7
+  [293.66, 349.23, 440.00, 587.33], // Dm7
+  [329.63, 392.00, 493.88, 587.33], // Em7
+  [349.23, 440.00, 523.25, 698.46]  // Fmaj7
+];
+
+function initAudio() {
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  if (audioCtx.state === 'suspended') {
+    audioCtx.resume();
+  }
+}
+
+function playSynthNote(freq, type = 'sine', duration = 0.3, slideTo = null, gainValue = 0.12) {
+  try {
+    initAudio();
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+    if (slideTo) {
+      osc.frequency.exponentialRampToValueAtTime(slideTo, audioCtx.currentTime + duration);
+    }
+    
+    gain.gain.setValueAtTime(gainValue, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+    
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    
+    osc.start();
+    osc.stop(audioCtx.currentTime + duration);
+  } catch (e) {
+    console.warn("Audio Context blocked or failed.", e);
+  }
+}
+
+// Procedural Melodies
+function playChord(frequencies) {
+  frequencies.forEach((freq, idx) => {
+    setTimeout(() => {
+      playSynthNote(freq, 'triangle', 2.0, null, 0.05);
+    }, idx * 120); // Arpeggiated soft pads
+  });
+}
+
+function startLofiLoop() {
+  if (isLofiPlaying) return;
+  isLofiPlaying = true;
+  document.getElementById("cassetteWidget").classList.add("playing");
+  document.getElementById("cassettePlay").textContent = "PAUSE";
+  
+  // Play immediately
+  playChord(CHORD_PROGRESSIONS[currentChordIdx]);
+  
+  lofiInterval = setInterval(() => {
+    currentChordIdx = (currentChordIdx + 1) % CHORD_PROGRESSIONS.length;
+    playChord(CHORD_PROGRESSIONS[currentChordIdx]);
+    
+    // Play a tiny high-pitched lofi key note randomly
+    if (Math.random() > 0.4) {
+      setTimeout(() => {
+        const highNotes = [523.25, 587.33, 659.25, 783.99, 880.00];
+        const randomNote = highNotes[Math.floor(Math.random() * highNotes.length)];
+        playSynthNote(randomNote, 'sine', 0.8, null, 0.03);
+      }, 800);
+    }
+  }, 3000);
+}
+
+function stopLofiLoop() {
+  isLofiPlaying = false;
+  document.getElementById("cassetteWidget").classList.remove("playing");
+  document.getElementById("cassettePlay").textContent = "PLAY";
+  clearInterval(lofiInterval);
+}
+
+// SFX Synthesizer
+const playFlipSFX = () => playSynthNote(350, 'triangle', 0.12, 600, 0.1);
+const playMatchSFX = () => {
+  playSynthNote(523.25, 'sine', 0.15, null, 0.1);
+  setTimeout(() => playSynthNote(659.25, 'sine', 0.15, null, 0.1), 80);
+  setTimeout(() => playSynthNote(783.99, 'sine', 0.25, null, 0.1), 160);
+};
+const playBubbleSFX = () => playSynthNote(450, 'sine', 0.06, null, 0.08);
+const playDodgeSFX = () => playSynthNote(500, 'triangle', 0.12, 280, 0.08);
+const playWinFanfare = () => {
+  const notes = [523.25, 659.25, 783.99, 1046.50];
+  notes.forEach((f, i) => {
+    setTimeout(() => playSynthNote(f, 'sine', i === 3 ? 0.8 : 0.18, null, 0.12), i * 140);
+  });
+};
+
+// ============ UI Elements & Toggles ============
+const darkToggle = document.getElementById("darkToggle");
+const navToggle = document.getElementById("navToggle");
+const navLinks = document.getElementById("navLinks");
+
+// Theme management
+const setDarkTheme = (isDark) => {
+  if (isDark) {
+    document.body.classList.add("dark-mode");
+    darkToggle.textContent = "☀️";
+  } else {
+    document.body.classList.remove("dark-mode");
+    darkToggle.textContent = "🌙";
+  }
+};
+
+darkToggle.addEventListener("click", () => {
+  const isDark = !document.body.classList.contains("dark-mode");
+  setDarkTheme(isDark);
+  localStorage.setItem("darkMode", isDark);
+  playBubbleSFX();
+});
+if (localStorage.getItem("darkMode") === "true") {
+  setDarkTheme(true);
+}
+
+// Nav responsive toggler
+navToggle.addEventListener("click", () => {
+  navLinks.classList.toggle("active");
+  playBubbleSFX();
+});
+document.querySelectorAll(".nav__links a").forEach(link => {
+  link.addEventListener("click", () => {
+    navLinks.classList.remove("active");
+  });
+});
+
+// ============ Twinkling Star Canvas ============
+const starCanvas = document.getElementById("starCanvas");
+const starCtx = starCanvas.getContext("2d");
+let stars = [];
+
+function resizeStarCanvas() {
+  starCanvas.width = window.innerWidth;
+  starCanvas.height = window.innerHeight;
+  initStars();
+}
+function initStars() {
+  stars = [];
+  const count = Math.floor((starCanvas.width * starCanvas.height) / 10000);
+  for (let i = 0; i < count; i++) {
+    stars.push({
+      x: Math.random() * starCanvas.width,
+      y: Math.random() * starCanvas.height,
+      size: Math.random() * 1.5,
+      alpha: Math.random(),
+      speed: 0.01 + Math.random() * 0.02
+    });
+  }
+}
+function drawStars() {
+  starCtx.clearRect(0, 0, starCanvas.width, starCanvas.height);
+  if (document.body.classList.contains("dark-mode")) {
+    starCtx.fillStyle = "#ffffff";
+    stars.forEach(s => {
+      s.alpha += s.speed;
+      if (s.alpha > 1 || s.alpha < 0) s.speed = -s.speed;
+      starCtx.globalAlpha = Math.max(0, s.alpha);
+      starCtx.fillRect(s.x, s.y, s.size, s.size);
+    });
+  }
+  requestAnimationFrame(drawStars);
+}
+window.addEventListener("resize", resizeStarCanvas);
+resizeStarCanvas();
+drawStars();
+
+// ============ Particle Systems (Confetti & Sparkles) ============
+const partCanvas = document.getElementById("particleCanvas");
+const partCtx = partCanvas.getContext("2d");
+let particles = [];
+
+function resizeParticleCanvas() {
+  partCanvas.width = window.innerWidth;
+  partCanvas.height = window.innerHeight;
+}
+window.addEventListener("resize", resizeParticleCanvas);
+resizeParticleCanvas();
+
+class Particle {
+  constructor(x, y, char, size, color) {
+    this.x = x;
+    this.y = y;
+    this.char = char;
+    this.size = size || 10 + Math.random() * 18;
+    this.color = color || "var(--sakura-deep)";
+    this.vx = (Math.random() - 0.5) * 6;
+    this.vy = -(3 + Math.random() * 5);
+    this.alpha = 1;
+    this.decay = 0.015 + Math.random() * 0.02;
+    this.rotation = Math.random() * 360;
+    this.rotationSpeed = (Math.random() - 0.5) * 4;
+  }
+  update() {
+    this.x += this.vx;
+    this.y += this.vy;
+    this.vy += 0.1; // gravity
+    this.alpha -= this.decay;
+    this.rotation += this.rotationSpeed;
+  }
+  draw() {
+    partCtx.save();
+    partCtx.globalAlpha = this.alpha;
+    partCtx.translate(this.x, this.y);
+    partCtx.rotate((this.rotation * Math.PI) / 180);
+    partCtx.font = `${this.size}px sans-serif`;
+    partCtx.textAlign = "center";
+    partCtx.textBaseline = "middle";
+    partCtx.fillText(this.char, 0, 0);
+    partCtx.restore();
+  }
+}
+
+function spawnSparklesAt(x, y, count = 6, chars = ["✨", "💖", "🌸", "🌟"]) {
+  for (let i = 0; i < count; i++) {
+    const char = chars[Math.floor(Math.random() * chars.length)];
+    particles.push(new Particle(x, y, char));
+  }
+}
+
+function triggerWinConfetti() {
+  const x = partCanvas.width / 2;
+  const y = partCanvas.height * 0.7;
+  const emojis = ["💖", "🌸", "✨", "🎀", "🧸", "🌷", "💗"];
+  for (let i = 0; i < 60; i++) {
+    const char = emojis[Math.floor(Math.random() * emojis.length)];
+    const p = new Particle(x, y, char, 16 + Math.random() * 22);
+    p.vx = (Math.random() - 0.5) * 12;
+    p.vy = -(8 + Math.random() * 12);
+    particles.push(p);
+  }
+  playWinFanfare();
+}
+
+function drawParticles() {
+  partCtx.clearRect(0, 0, partCanvas.width, partCanvas.height);
+  particles = particles.filter(p => {
+    p.update();
+    p.draw();
+    return p.alpha > 0;
+  });
+  requestAnimationFrame(drawParticles);
+}
+drawParticles();
+
+// Tap-sparkle click listener
+window.addEventListener("click", (e) => {
+  if (e.target.tagName !== "BUTTON" && e.target.tagName !== "A") {
+    spawnSparklesAt(e.clientX, e.clientY);
+  }
+});
+
+// ============ Floating Sakura Petals ============
+const petalsContainer = document.getElementById("petals");
+const SAKURA_GLYPHS = ["🌸", "🌷", "💗", "❀"];
+const SAKURA_COUNT = 24;
+
+for (let i = 0; i < SAKURA_COUNT; i++) {
+  const petal = document.createElement("span");
+  petal.className = "petal";
+  petal.textContent = SAKURA_GLYPHS[Math.floor(Math.random() * SAKURA_GLYPHS.length)];
+  petal.style.left = Math.random() * 100 + "vw";
+  petal.style.fontSize = 0.8 + Math.random() * 1.2 + "rem";
+  petal.style.animationDuration = 7 + Math.random() * 11 + "s";
+  petal.style.animationDelay = -Math.random() * 20 + "s";
+  petal.style.setProperty("--drift-x", (Math.random() * 20 - 10) + "vw");
+  petal.style.opacity = 0.4 + Math.random() * 0.5;
+  petalsContainer.appendChild(petal);
+}
+
+// ============ Scroll Reveal Elements ============
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+
+// ============ Love Notes Modal ============
+const modal = document.getElementById("modal");
+const modalText = document.getElementById("modalText");
+const modalClose = document.getElementById("modalClose");
+
+document.querySelectorAll(".note").forEach((note) => {
+  note.addEventListener("click", () => {
+    modalText.textContent = note.dataset.note;
+    modal.hidden = false;
+    playBubbleSFX();
+    unlockAchievement("visited_all");
+  });
+});
+modalClose.addEventListener("click", () => {
+  modal.hidden = true;
+  playBubbleSFX();
+});
+modal.addEventListener("click", (e) => {
+  if (e.target === modal) modal.hidden = true;
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") modal.hidden = true;
+});
+
+// ============ Envelope Love Letter toggler ============
+const envelope = document.getElementById("loveLetterEnvelope");
+envelope.addEventListener("click", (e) => {
+  e.stopPropagation();
+  const open = envelope.classList.toggle("open");
+  playSynthNote(open ? 440 : 330, 'sine', 0.25, open ? 880 : 220, 0.1);
+  if (open) {
+    spawnSparklesAt(window.innerWidth / 2, window.innerHeight / 2, 12);
+  }
+});
+
+// ============ Live Counters ============
+const ANNIVERSARY = new Date(2026, 5, 5); // June 5, 2026
+const HER_BIRTHDAY = new Date(2026, 0, 29); // Jan 29
+const MY_BIRTHDAY = new Date(2026, 11, 8); // Dec 8
+
+function updateAnniversaryProgress(daysElapsed) {
+  const monthProgress = (daysElapsed % 30.4) / 30.4;
+  const yearProgress = (daysElapsed % 365.25) / 365.25;
+  
+  const mCircle = document.getElementById("monthProgressCircle");
+  const yCircle = document.getElementById("yearProgressCircle");
+  const circ = 2 * Math.PI * 36;
+  
+  mCircle.style.strokeDasharray = `${circ} ${circ}`;
+  mCircle.style.strokeDashoffset = circ - (monthProgress * circ);
+  
+  yCircle.style.strokeDasharray = `${circ} ${circ}`;
+  yCircle.style.strokeDashoffset = circ - (yearProgress * circ);
+}
+
+function updateTogether() {
+  let diff = Date.now() - ANNIVERSARY.getTime();
+  if (diff < 0) diff = 0;
+  const secs = Math.floor(diff / 1000);
+  const daysVal = Math.floor(secs / 86400);
+  
+  document.getElementById("cDays").textContent = daysVal;
+  document.getElementById("cHours").textContent = Math.floor((secs % 86400) / 3600);
+  document.getElementById("cMins").textContent = Math.floor((secs % 3600) / 60);
+  document.getElementById("cSecs").textContent = secs % 60;
+  
+  updateAnniversaryProgress(daysVal);
+}
+updateTogether();
+setInterval(updateTogether, 1000);
+
+function updateBirthdays() {
+  const now = new Date();
+  let nextHer = new Date(now.getFullYear(), HER_BIRTHDAY.getMonth(), HER_BIRTHDAY.getDate());
+  let nextMine = new Date(now.getFullYear(), MY_BIRTHDAY.getMonth(), MY_BIRTHDAY.getDate());
+
+  if (now > nextHer) nextHer.setFullYear(now.getFullYear() + 1);
+  if (now > nextMine) nextMine.setFullYear(now.getFullYear() + 1);
+
+  const daysHer = Math.ceil((nextHer - now) / 86400000);
+  const daysMine = Math.ceil((nextMine - now) / 86400000);
+
+  document.getElementById("herBirthday").textContent = daysHer;
+  document.getElementById("myBirthday").textContent = daysMine;
+}
+updateBirthdays();
+setInterval(updateBirthdays, 60000);
+
+// Birthday details click commentary
+document.getElementById("cardHerBday").addEventListener("click", () => {
+  playSynthNote(523, 'sine', 0.25, 783);
+  modalText.textContent = "29 January — An Aquarius princess who lights up the whole room! 🌟";
+  modal.hidden = false;
+});
+document.getElementById("cardMyBday").addEventListener("click", () => {
+  playSynthNote(349, 'sine', 0.25, 523);
+  modalText.textContent = "8 December — A Sagittarius guy who is incredibly lucky to have you. ♐";
+  modal.hidden = false;
+});
+
+// Weekend Countdown
+const weekendText = document.getElementById("weekendText");
+function updateWeekend() {
+  const now = new Date();
+  const day = now.getDay();
+  if (day === 6 || day === 0) {
+    weekendText.innerHTML = "It's the weekend — you're mine right now 💖";
+    return;
+  }
+  const next = new Date(now);
+  next.setDate(now.getDate() + ((6 - day + 7) % 7));
+  next.setHours(0, 0, 0, 0);
+  const diff = next - now;
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  weekendText.textContent = `${d}d ${h}h ${m}m until I see you again, Ziyanda ♡`;
+}
+updateWeekend();
+setInterval(updateWeekend, 30000);
+
+// ============ Seeded Dynamic Populators ============
+function populateAdjectives() {
+  const container = document.querySelector(".about__words");
+  if (!container) return;
+  container.innerHTML = "";
+  
+  const seed = getDaySeed();
+  const rnd = createPRNG(seed);
+  
+  const adjCopy = [...ADJECTIVES];
+  const selected = [];
+  for (let i = 0; i < 6; i++) {
+    const idx = Math.floor(rnd() * adjCopy.length);
+    selected.push(adjCopy.splice(idx, 1)[0]);
+  }
+  
+  selected.forEach(word => {
+    const span = document.createElement("span");
+    span.className = "word-chip";
+    span.textContent = word;
+    container.appendChild(span);
+  });
+}
+
+function populateLoveNotes() {
+  const notes = document.querySelectorAll(".note");
+  const seed = getDaySeed();
+  const rnd = createPRNG(seed + 12345);
+  
+  const templates = [
+    () => {
+      const o = NOTE1_OPENINGS[Math.floor(rnd() * NOTE1_OPENINGS.length)];
+      const b = NOTE1_BODIES[Math.floor(rnd() * NOTE1_BODIES.length)];
+      const c = NOTE1_CLOSINGS[Math.floor(rnd() * NOTE1_CLOSINGS.length)];
+      return `${o} ${b} ${c}`;
+    },
+    () => {
+      const o = NOTE2_OPENINGS[Math.floor(rnd() * NOTE2_OPENINGS.length)];
+      const b = NOTE2_BODIES[Math.floor(rnd() * NOTE2_BODIES.length)];
+      const c = NOTE2_CLOSINGS[Math.floor(rnd() * NOTE2_CLOSINGS.length)];
+      return `${o} ${b} ${c}`;
+    },
+    () => {
+      const o = NOTE3_OPENINGS[Math.floor(rnd() * NOTE3_OPENINGS.length)];
+      const b = NOTE3_BODIES[Math.floor(rnd() * NOTE3_BODIES.length)];
+      const c = NOTE3_CLOSINGS[Math.floor(rnd() * NOTE3_CLOSINGS.length)];
+      return `${o} ${b} ${c}`;
+    },
+    () => {
+      const o = NOTE4_OPENINGS[Math.floor(rnd() * NOTE4_OPENINGS.length)];
+      const b = NOTE4_BODIES[Math.floor(rnd() * NOTE4_BODIES.length)];
+      const c = NOTE4_CLOSINGS[Math.floor(rnd() * NOTE4_CLOSINGS.length)];
+      return `${o} ${b} ${c}`;
+    }
+  ];
+  
+  notes.forEach((noteBtn, idx) => {
+    if (idx < templates.length) {
+      const noteText = templates[idx]();
+      noteBtn.dataset.note = noteText;
+    }
+  });
+}
+
+function populateEnvelopeLetter() {
+  const letterEl = document.querySelector(".envelope__letter");
+  if (!letterEl) return;
+  const now = new Date();
+  const day = now.getDate();
+  const month = now.getMonth();
+  
+  let letterTitle = "Dearest Ziyanda,";
+  let letterText = "";
+  
+  if (month === 0 && day === 29) {
+    letterTitle = "Happy Birthday Ziyanda! 🎂";
+    letterText = "Happy Birthday to the most beautiful girl in the universe! Today is all about celebrating you, my Ziyanda. You deserve all the joy, smiles, and love in the world. I'm so lucky to have you. Ndiyakuthanda! 🎂💖<br><br>— TEARN";
+  } else if (month === 11 && day === 8) {
+    letterTitle = "Happy Birthday to Me! 🎉";
+    letterText = "It's my birthday today, but the greatest gift I could ever ask for is having you in my life. Thank you for making my world so much brighter. I'm so glad we get to celebrate these days together. ♡<br><br>— TEARN";
+  } else if (day === 5) {
+    letterTitle = "Happy Monthly Anniversary! 💍";
+    letterText = "Happy Monthly Anniversary, sthandwa sam! Another month of being mine, of weekend dates, of endless laughs, and growing love. Here's to forever. Ndiyakuthanda, Ncumolwakhe! 💍✨<br><br>— TEARN";
+  } else {
+    const seed = getDaySeed();
+    const rnd = createPRNG(seed + 999);
+    const letterOpenings = [
+      "This little corner of the internet is dedicated to your beautiful smile. Thank you for filling my weekends with laughter and making the weekdays worth grinding for.",
+      "Just wanted to write you a tiny reminder today of how much you mean to me. You bring so much color and warmth to my life.",
+      "Every single day since we started this journey, my feelings for you have grown stronger. You are my sunshine and my safest space.",
+      "No matter how tough or busy the weekdays get, thinking of you always brings a smile to my face. I'm so lucky to have you."
+    ];
+    const letterBodies = [
+      " You are irreplaceable, and I cherish every little thing about you—your laugh, your kindness, and the way you look at me.",
+      " I hope this day brings you as much happiness as you bring to my heart every single second.",
+      " I'm constantly counting down the days until the weekend, so I can see you again and make you laugh.",
+      " You make everything feel so special. I'm looking forward to all our future dates and adventures together."
+    ];
+    const letterClosings = [
+      "<br><br>Ndiyakuthanda, Ncumolwakhe! ♡<br><br>— TEARN",
+      "<br><br>Forever yours, sthandwa sam! 💖<br><br>— TEARN",
+      "<br><br>Always and forever, my love! 💍<br><br>— TEARN",
+      "<br><br>With all my love, sthandwa sam! 🌸<br><br>— TEARN"
+    ];
+    
+    const opening = letterOpenings[Math.floor(rnd() * letterOpenings.length)];
+    const body = letterBodies[Math.floor(rnd() * letterBodies.length)];
+    const closing = letterClosings[Math.floor(rnd() * letterClosings.length)];
+    letterText = `${opening}${body}${closing}`;
+  }
+  
+  letterEl.innerHTML = `<h4>${letterTitle}</h4><p>${letterText}</p>`;
+}
+
+function setupDailyQuote() {
+  const seed = getDaySeed();
+  const rnd = createPRNG(seed + 777);
+  const q = ANIME_QUOTES[Math.floor(rnd() * ANIME_QUOTES.length)];
+  const quoteEl = document.getElementById("animeQuote");
+  if (quoteEl) {
+    quoteEl.textContent = `${q.text} — ${q.author}`;
+  }
+}
+
+function populateTimeline() {
+  const timeline = document.querySelector(".timeline");
+  if (!timeline) return;
+  const items = timeline.querySelectorAll(".timeline__item");
+  
+  const diff = Date.now() - ANNIVERSARY.getTime();
+  const daysVal = Math.max(0, Math.floor(diff / 86400000));
+  
+  const existingDyn = timeline.querySelector(".timeline__item--dynamic");
+  if (existingDyn) existingDyn.remove();
+  
+  const dynNode = document.createElement("div");
+  dynNode.className = "timeline__item timeline__item--dynamic reveal visible";
+  
+  const seed = getDaySeed();
+  const rnd = createPRNG(seed + 8888);
+  const milestoneNotes = [
+    "Laughing together, holding hands, and making every second count.",
+    "Another beautiful day in our story. Every page is better with you.",
+    "Days are passing, but my love for you keeps growing higher.",
+    "So grateful for every laugh we shared and every plan we are building.",
+    "Watching our future dreams fold closer day by day."
+  ];
+  const noteText = milestoneNotes[Math.floor(rnd() * milestoneNotes.length)];
+  
+  const todayStr = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+  
+  dynNode.innerHTML = `
+    <div class="timeline__node"></div>
+    <div class="timeline__content">
+      <span class="timeline__date">${todayStr} (Day ${daysVal})</span>
+      <h4 class="timeline__title">Today With You 💖</h4>
+      <p class="timeline__desc">${noteText}</p>
+    </div>
+  `;
+  
+  const lastItem = items[items.length - 1];
+  timeline.insertBefore(dynNode, lastItem);
+}
+
+// Playful dynamic greeting message handler
+function updateGreetingMessage() {
+  const greetingBox = document.getElementById("heroGreeting");
+  const greetingEl = document.getElementById("heroGreetingText");
+  if (!greetingBox || !greetingEl) return;
+  
+  const now = new Date();
+  const day = now.getDay(); // 0: Sunday, 6: Saturday
+  const hours = now.getHours();
+  let msg = "";
+  
+  const isWeekend = (day === 0 || day === 6);
+  
+  if (isWeekend) {
+    msg = "Shouldn't you be with me? 😉";
+  } else {
+    // Weekday rules
+    if (hours >= 20) {
+      msg = "It's late, Ncumo. Go get some rest. 🌙";
+    } else if (hours < 5) {
+      msg = "Go back to sleep, sthandwa sam. Dreamland is waiting for you. 🥱💤";
+    } else if (hours === 5) {
+      msg = "Up early? Good morning! ☀️";
+    } else if (hours === 6) {
+      msg = "Good morning, Ncumolwakhe. Hope you woke up with a smile today! ☀️🌸";
+    } else {
+      msg = "Have a good day! Go crush it. 🚀✨";
+    }
+  }
+  greetingEl.textContent = msg;
+  greetingBox.hidden = false;
+}
+
+// Call daily seed-based populators & greetings
+populateAdjectives();
+populateLoveNotes();
+populateEnvelopeLetter();
+setupDailyQuote();
+populateTimeline();
+updateGreetingMessage();
+
+// ============ Quote Drawer ============
+let currentQuoteIdx = 0;
+document.getElementById("nextQuote").addEventListener("click", () => {
+  playBubbleSFX();
+  let nextIdx = currentQuoteIdx;
+  while (nextIdx === currentQuoteIdx) {
+    nextIdx = Math.floor(Math.random() * ANIME_QUOTES.length);
+  }
+  currentQuoteIdx = nextIdx;
+  const q = ANIME_QUOTES[currentQuoteIdx];
+  const textEl = document.getElementById("animeQuote");
+  textEl.style.opacity = 0;
+  setTimeout(() => {
+    textEl.textContent = `${q.text} — ${q.author}`;
+    textEl.style.opacity = 1;
+  }, 200);
+  spawnSparklesAt(window.innerWidth / 2, window.innerHeight * 0.4, 4);
+});
+
+// ============ Achievements Badges ============
+let achievements = JSON.parse(localStorage.getItem("ncumoAchievements")) || [];
+function initAchievements() {
+  const grid = document.getElementById("achievementsGrid");
+  grid.innerHTML = "";
+  ACHIEVEMENTS.forEach(ach => {
+    const div = document.createElement("div");
+    div.className = "achievement";
+    if (achievements.includes(ach.id)) div.classList.add("unlocked");
+    div.innerHTML = `<span class="achievement__icon">${ach.icon}</span><div class="achievement__label">${ach.label}</div>`;
+    grid.appendChild(div);
+  });
+}
+function unlockAchievement(id) {
+  if (!achievements.includes(id)) {
+    achievements.push(id);
+    localStorage.setItem("ncumoAchievements", JSON.stringify(achievements));
+    initAchievements();
+    setTimeout(triggerWinConfetti, 100);
+  }
+}
+initAchievements();
+
+// ============ Our Bucket List Checklist ============
+let bucketItems = JSON.parse(localStorage.getItem("ncumoBucketList")) || DEFAULT_BUCKET_ITEMS;
+function renderBucketList() {
+  const grid = document.getElementById("bucketGrid");
+  grid.innerHTML = "";
+  bucketItems.forEach((item, i) => {
+    const div = document.createElement("div");
+    div.className = "bucket-item";
+    if (item.done) div.classList.add("done");
+    div.innerHTML = `<span class="bucket-emoji">${item.emoji}</span><div class="bucket-text">${item.text}</div>`;
+    div.addEventListener("click", () => {
+      item.done = !item.done;
+      playBubbleSFX();
+      localStorage.setItem("ncumoBucketList", JSON.stringify(bucketItems));
+      renderBucketList();
+    });
+    grid.appendChild(div);
+  });
+}
+document.getElementById("bucketAddBtn").addEventListener("click", () => {
+  const val = document.getElementById("bucketInput").value.trim();
+  if (val) {
+    bucketItems.push({ emoji: "✨", text: val, done: false });
+    localStorage.setItem("ncumoBucketList", JSON.stringify(bucketItems));
+    document.getElementById("bucketInput").value = "";
+    playBubbleSFX();
+    renderBucketList();
+    spawnSparklesAt(window.innerWidth / 2, window.innerHeight * 0.7, 5);
+  }
+});
+renderBucketList();
+
+// ============ Game 1: 3D Memory Match Game ============
+const memoryGrid = document.getElementById("memoryGrid");
+const memMoves = document.getElementById("memMoves");
+const memPairs = document.getElementById("memPairs");
+const memWin = document.getElementById("memWin");
+const memReset = document.getElementById("memReset");
+
+let memFirst = null;
+let memLock = false;
+let memMatched = 0;
+let memMoveCount = 0;
+let memLevel = 1;
+
+const MEM_LEVELS = [
+  { pairs: 2, cols: 2, name: "First Blush 🌸", emojis: ["🌸", "💖"] },
+  { pairs: 4, cols: 4, name: "Growing Feelings 🌷", emojis: ["🌸", "🌷", "💖", "🧸"] },
+  { pairs: 6, cols: 4, name: "Sweet Harmony 🦋", emojis: ["🌸", "🌷", "💖", "🧸", "🦋", "✨"] },
+  { pairs: 8, cols: 4, name: "Infinite Love 💍", emojis: ["🌸", "🌷", "💖", "🧸", "🦋", "✨", "🎀", "💍"] }
+];
+
+function buildMemory() {
+  const levelInfo = MEM_LEVELS[memLevel - 1];
+  document.getElementById("memLevel").textContent = memLevel;
+  document.getElementById("memLevelName").textContent = `Stage: ${levelInfo.name}`;
+  memoryGrid.style.setProperty("--grid-cols", levelInfo.cols);
+  
+  memoryGrid.innerHTML = "";
+  memWin.hidden = true;
+  memFirst = null;
+  memLock = false;
+  memMatched = 0;
+  memMoveCount = 0;
+  memMoves.textContent = "0";
+  memPairs.textContent = `0/${levelInfo.pairs}`;
+
+  const deck = [...levelInfo.emojis, ...levelInfo.emojis].sort(() => Math.random() - 0.5);
+  deck.forEach((emoji) => {
+    const container = document.createElement("div");
+    container.className = "mem-card-container";
+    if (levelInfo.cols === 4) {
+      container.style.minHeight = "3.2rem";
+    } else {
+      container.style.minHeight = "4rem";
+    }
+    
+    const card = document.createElement("div");
+    card.className = "mem-card";
+    
+    const front = document.createElement("div");
+    front.className = "mem-card-face mem-card-front";
+    
+    const back = document.createElement("div");
+    back.className = "mem-card-face mem-card-back";
+    back.textContent = emoji;
+    
+    card.appendChild(front);
+    card.appendChild(back);
+    container.appendChild(card);
+    
+    container.addEventListener("click", () => flipCard(container));
+    memoryGrid.appendChild(container);
+  });
+}
+
+function flipCard(container) {
+  if (memLock || container.classList.contains("flipped") || container.classList.contains("matched")) return;
+  container.classList.add("flipped");
+  playFlipSFX();
+
+  if (!memFirst) {
+    memFirst = container;
+    return;
+  }
+
+  memMoveCount++;
+  memMoves.textContent = memMoveCount;
+
+  const firstBack = memFirst.querySelector(".mem-card-back").textContent;
+  const secondBack = container.querySelector(".mem-card-back").textContent;
+  const levelInfo = MEM_LEVELS[memLevel - 1];
+
+  if (firstBack === secondBack) {
+    memFirst.classList.add("matched");
+    container.classList.add("matched");
+    memFirst = null;
+    memMatched++;
+    memPairs.textContent = `${memMatched}/${levelInfo.pairs}`;
+    setTimeout(playMatchSFX, 200);
+    
+    if (memMatched === levelInfo.pairs) {
+      setTimeout(() => {
+        if (memLevel < MEM_LEVELS.length) {
+          memWin.innerHTML = `Stage Clear! "${levelInfo.name}" matched! 💖<br><button class="btn btn--small" id="memNextBtn" style="margin-top:0.8rem;">Play Stage ${memLevel + 1} ⏭️</button>`;
+          memWin.hidden = false;
+          unlockAchievement("memory_win");
+          document.getElementById("memNextBtn").addEventListener("click", () => {
+            memLevel++;
+            buildMemory();
+          });
+        } else {
+          memWin.innerHTML = `Ultimate Level Cleared! 💍 You matched all of them, just like you matched my heart! 💍✨<br><button class="btn btn--small" id="memRestartBtn" style="margin-top:0.8rem;">Restart Stages 🔄</button>`;
+          memWin.hidden = false;
+          unlockAchievement("memory_win");
+          document.getElementById("memRestartBtn").addEventListener("click", () => {
+            memLevel = 1;
+            buildMemory();
+          });
+        }
+        triggerWinConfetti();
+      }, 500);
+    }
+  } else {
+    memLock = true;
+    const first = memFirst;
+    memFirst = null;
+    setTimeout(() => {
+      first.classList.remove("flipped");
+      container.classList.remove("flipped");
+      memLock = false;
+    }, 1000);
+  }
+}
+memReset.addEventListener("click", () => {
+  playBubbleSFX();
+  buildMemory();
+});
+buildMemory();
+
+// ============ Game 2: Catch the Hearts ============
+const catchArena = document.getElementById("catchArena");
+const catchScore = document.getElementById("catchScore");
+const catchTime = document.getElementById("catchTime");
+const catchBest = document.getElementById("catchBest");
+const catchStart = document.getElementById("catchStart");
+const catchMsg = document.getElementById("catchMsg");
+const HEART_GLYPHS = ["💖", "💝", "💗", "💕", "🌸"];
+
+let catchRunning = false;
+let score = 0;
+let timeLeft = 20;
+let spawnTimer, countdownTimer;
+let best = Number(localStorage.getItem("ncumoBest") || 0);
+catchBest.textContent = best;
+
+let catchStage = 1;
+const CATCH_STAGES = [
+  { id: 1, name: "Soft Breeze 🌸", target: 15, durationMin: 2.2, durationMax: 3.2, spawnRate: 600, hint: "Catch the falling bubbles. Simple and sweet." },
+  { id: 2, name: "Shower of Affection 💖", target: 25, durationMin: 1.5, durationMax: 2.2, spawnRate: 400, hint: "Hearts fall faster now! Focus, sthandwa sam." },
+  { id: 3, name: "Storm of Love ⛈️", target: 35, durationMin: 1.0, durationMax: 1.7, spawnRate: 350, hint: "Blazing fast! Avoid clicking the work stress 💻!" }
+];
+
+function spawnHeart() {
+  if (!catchRunning) return;
+  const stageInfo = CATCH_STAGES[catchStage - 1];
+  const item = document.createElement("button");
+  item.className = "falling-heart";
+  
+  // Decide whether to spawn obstacle on Stage 3
+  const isObstacle = (stageInfo.id === 3 && Math.random() > 0.65);
+  
+  if (isObstacle) {
+    item.textContent = "💻";
+    item.title = "Weekday Stress!";
+  } else {
+    item.textContent = HEART_GLYPHS[Math.floor(Math.random() * HEART_GLYPHS.length)];
+  }
+  
+  item.style.left = Math.random() * 85 + "%";
+  const dur = stageInfo.durationMin + Math.random() * (stageInfo.durationMax - stageInfo.durationMin);
+  item.style.animationDuration = dur + "s";
+  
+  item.addEventListener("click", () => {
+    if (item.classList.contains("caught")) return;
+    item.classList.add("caught");
+    
+    if (isObstacle) {
+      score = Math.max(0, score - 3);
+      catchScore.textContent = score;
+      playSynthNote(180, 'sawtooth', 0.22, 100, 0.15);
+      spawnSparklesAt(parseFloat(item.style.left) * catchArena.clientWidth / 100, item.offsetTop, 4, ["💥", "💻", "❌"]);
+    } else {
+      score++;
+      catchScore.textContent = score;
+      playSynthNote(750 + (score * 5), 'sine', 0.1, 1000, 0.08);
+      
+      if (score === 50) unlockAchievement("hearts_50");
+      if (score === 100) unlockAchievement("hearts_100");
+    }
+    
+    setTimeout(() => item.remove(), 350);
+  });
+  
+  item.addEventListener("animationend", () => item.remove());
+  catchArena.appendChild(item);
+}
+
+function endCatch() {
+  catchRunning = false;
+  clearInterval(spawnTimer);
+  clearInterval(countdownTimer);
+  catchArena.querySelectorAll(".falling-heart").forEach((h) => h.remove());
+  
+  const stageInfo = CATCH_STAGES[catchStage - 1];
+  
+  if (score >= stageInfo.target) {
+    if (catchStage < CATCH_STAGES.length) {
+      catchMsg.innerHTML = `Stage ${catchStage} Cleared! Score: ${score}/${stageInfo.target} 🎉<br><button class="btn btn--small" id="catchNextBtn" style="margin-top:0.8rem;">Advance to Stage ${catchStage + 1} ⏭️</button>`;
+      catchStage++;
+      document.getElementById("catchStage").textContent = catchStage;
+      setTimeout(() => {
+        document.getElementById("catchNextBtn").addEventListener("click", () => {
+          document.getElementById("catchHint").textContent = CATCH_STAGES[catchStage - 1].hint;
+          playBubbleSFX();
+          catchMsg.innerHTML = `Ready for Stage ${catchStage}? Let's go!`;
+        });
+      }, 50);
+    } else {
+      catchMsg.innerHTML = `Ultimate Stage Cleared! Final Score: ${score} 🏆<br>You are a true heart-catching master! 💖<br><button class="btn btn--small" id="catchRestartBtn" style="margin-top:0.8rem;">Restart Game 🔄</button>`;
+      setTimeout(() => {
+        document.getElementById("catchRestartBtn").addEventListener("click", () => {
+          catchStage = 1;
+          document.getElementById("catchStage").textContent = catchStage;
+          document.getElementById("catchHint").textContent = CATCH_STAGES[0].hint;
+          playBubbleSFX();
+          catchMsg.innerHTML = `Ready to play again, sthandwa sam?`;
+        });
+      }, 50);
+    }
+    
+    if (score > best) {
+      best = score;
+      localStorage.setItem("ncumoBest", best);
+      catchBest.textContent = best;
+    }
+    triggerWinConfetti();
+  } else {
+    catchMsg.innerHTML = `Failed! You caught ${score}/${stageInfo.target} hearts.<br>Keep going, you've got this! 🌸`;
+    playSynthNote(220, 'sawtooth', 0.4, 100, 0.1);
+  }
+  
+  catchMsg.hidden = false;
+  catchStart.textContent = "Play Again";
+}
+
+catchStart.addEventListener("click", () => {
+  initAudio();
+  if (catchRunning) return;
+  catchRunning = true;
+  score = 0;
+  timeLeft = 20;
+  catchScore.textContent = "0";
+  catchTime.textContent = timeLeft;
+  catchMsg.hidden = true;
+  catchStart.textContent = "Catching...";
+  
+  const stageInfo = CATCH_STAGES[catchStage - 1];
+  spawnTimer = setInterval(spawnHeart, stageInfo.spawnRate);
+  countdownTimer = setInterval(() => {
+    timeLeft--;
+    catchTime.textContent = timeLeft;
+    if (timeLeft <= 0) endCatch();
+  }, 1000);
+});
+
+// ============ Game 3: Chibi Wardrobe Dressing Room ============
+const HAIRCUTS = ["👦", "💇‍♂️", "🧢", "🎩", "👑"];
+const TOPS = ["👕", "🧥", "👔", "🦺", "🧣"];
+const BOTTOMS = ["👖", "🩳", "🩲", "🥋"];
+const SHOES = ["👟", "🥾", "👞", "🩴"];
+
+const WARDROBE_VERDICTS = [
+  "Okay stylist Ziyanda, I see you 👀🔥",
+  "TEARN about to be the best-dressed man in Ivory Park 😮‍💨",
+  "Hmm... would you still hold my hand in this?",
+  "This one's for our weekend date 😏",
+  "Drip level: dangerously in love 💖",
+  "If you like it, I'm wearing it. Simple.",
+];
+
+let curHair = 0, curTop = 0, curBottom = 0, curShoes = 0;
+let savedLooks = JSON.parse(localStorage.getItem("ncumoLookbook")) || [];
+
+const avatarHair = document.getElementById("avatarHair");
+const avatarTop = document.getElementById("avatarTop");
+const avatarBottom = document.getElementById("avatarBottom");
+const avatarShoes = document.getElementById("avatarShoes");
+
+const iconHair = document.getElementById("iconHair");
+const iconTop = document.getElementById("iconTop");
+const iconBottom = document.getElementById("iconBottom");
+const iconShoes = document.getElementById("iconShoes");
+
+const fitVerdict = document.getElementById("fitVerdict");
+const fitCart = document.getElementById("fitCart");
+const lookbookGrid = document.getElementById("lookbookGrid");
+const lookbookSec = document.getElementById("lookbookSec");
+
+function updateAvatarUI() {
+  avatarHair.textContent = HAIRCUTS[curHair];
+  avatarTop.textContent = TOPS[curTop];
+  avatarBottom.textContent = BOTTOMS[curBottom];
+  avatarShoes.textContent = SHOES[curShoes];
+
+  iconHair.textContent = HAIRCUTS[curHair];
+  iconTop.textContent = TOPS[curTop];
+  iconBottom.textContent = BOTTOMS[curBottom];
+  iconShoes.textContent = SHOES[curShoes];
+}
+
+function selectNextItem(type, step) {
+  playBubbleSFX();
+  if (type === "hair") {
+    curHair = (curHair + step + HAIRCUTS.length) % HAIRCUTS.length;
+  } else if (type === "top") {
+    curTop = (curTop + step + TOPS.length) % TOPS.length;
+  } else if (type === "bottom") {
+    curBottom = (curBottom + step + BOTTOMS.length) % BOTTOMS.length;
+  } else if (type === "shoes") {
+    curShoes = (curShoes + step + SHOES.length) % SHOES.length;
+  }
+  updateAvatarUI();
+  fitVerdict.textContent = WARDROBE_VERDICTS[Math.floor(Math.random() * WARDROBE_VERDICTS.length)];
+}
+
+document.getElementById("prevHair").addEventListener("click", () => selectNextItem("hair", -1));
+document.getElementById("nextHair").addEventListener("click", () => selectNextItem("hair", 1));
+document.getElementById("prevTop").addEventListener("click", () => selectNextItem("top", -1));
+document.getElementById("nextTop").addEventListener("click", () => selectNextItem("top", 1));
+document.getElementById("prevBottom").addEventListener("click", () => selectNextItem("bottom", -1));
+document.getElementById("nextBottom").addEventListener("click", () => selectNextItem("bottom", 1));
+document.getElementById("prevShoes").addEventListener("click", () => selectNextItem("shoes", -1));
+document.getElementById("nextShoes").addEventListener("click", () => selectNextItem("shoes", 1));
+
+document.getElementById("fitShuffle").addEventListener("click", () => {
+  playBubbleSFX();
+  curHair = Math.floor(Math.random() * HAIRCUTS.length);
+  curTop = Math.floor(Math.random() * TOPS.length);
+  curBottom = Math.floor(Math.random() * BOTTOMS.length);
+  curShoes = Math.floor(Math.random() * SHOES.length);
+  updateAvatarUI();
+  fitVerdict.textContent = "Surprise drip styled! 🎲 How do I look?";
+});
+
+function renderLookbook() {
+  lookbookGrid.innerHTML = "";
+  if (savedLooks.length > 0) {
+    lookbookSec.hidden = false;
+    fitCart.textContent = `Cart: ${savedLooks.length} custom outfits saved!`;
+    savedLooks.forEach((look, idx) => {
+      const div = document.createElement("button");
+      div.className = "lookbook-item";
+      div.innerHTML = `<span>Look ${idx+1}:</span> ${look.hair} ${look.top} ${look.bottom} ${look.shoes}`;
+      div.addEventListener("click", () => {
+        playBubbleSFX();
+        curHair = HAIRCUTS.indexOf(look.hair);
+        curTop = TOPS.indexOf(look.top);
+        curBottom = BOTTOMS.indexOf(look.bottom);
+        curShoes = SHOES.indexOf(look.shoes);
+        updateAvatarUI();
+        fitVerdict.textContent = `Restored Look ${idx+1}! Great taste.`;
+      });
+      lookbookGrid.appendChild(div);
+    });
+  } else {
+    lookbookSec.hidden = true;
+    fitCart.textContent = "No looks saved to Lookbook yet.";
+  }
+}
+
+document.getElementById("fitBuy").addEventListener("click", () => {
+  playMatchSFX();
+  const look = {
+    hair: HAIRCUTS[curHair],
+    top: TOPS[curTop],
+    bottom: BOTTOMS[curBottom],
+    shoes: SHOES[curShoes]
+  };
+  savedLooks.push(look);
+  localStorage.setItem("ncumoLookbook", JSON.stringify(savedLooks));
+  renderLookbook();
+  unlockAchievement("fashion_king");
+  spawnSparklesAt(window.innerWidth / 2, window.innerHeight * 0.7, 8);
+});
+
+// Seeded starter fit setup
+function setupDailyDrip() {
+  const seed = getDaySeed();
+  const rnd = createPRNG(seed + 54321);
+  
+  curHair = Math.floor(rnd() * HAIRCUTS.length);
+  curTop = Math.floor(rnd() * TOPS.length);
+  curBottom = Math.floor(rnd() * BOTTOMS.length);
+  curShoes = Math.floor(rnd() * SHOES.length);
+  
+  updateAvatarUI();
+  
+  const dailyOutfits = [
+    "Cozy Sunday Drip", "Sunset Walk Vibe", "Ivory Park Chic", 
+    "Lofi Study Aesthetic", "Anime Convention Style", "Weekend Date Look",
+    "Casual Coffee Drip", "Magical Evening Fit"
+  ];
+  const outfitName = dailyOutfits[Math.floor(rnd() * dailyOutfits.length)];
+  fitVerdict.textContent = `Today's Daily Look: "${outfitName}"! 🎲 Style me more!`;
+}
+
+setupDailyDrip();
+renderLookbook();
+
+// ============ Game 4: Anime Love Fortune Omikuji Box ============
+const fortuneDrawer = document.getElementById("fortuneDrawer");
+const fortuneStick = document.getElementById("fortuneStick");
+const fortuneWin = document.getElementById("fortuneWin");
+let fortuneLock = false;
+
+fortuneDrawer.addEventListener("click", () => {
+  if (fortuneLock) return;
+  fortuneLock = true;
+  fortuneWin.hidden = true;
+  
+  initAudio();
+  playSynthNote(220, 'triangle', 0.5, 440);
+  fortuneDrawer.classList.add("shake");
+  
+  setTimeout(() => {
+    fortuneDrawer.classList.remove("shake");
+    fortuneDrawer.classList.add("stick-out");
+    playMatchSFX();
+    
+    setTimeout(() => {
+      const seed = getDaySeed();
+      const rnd = createPRNG(seed + (fortuneDrawCount * 100));
+      const fort = OMIKUJI_FORTUNES[Math.floor(rnd() * OMIKUJI_FORTUNES.length)];
+      fortuneWin.innerHTML = `<strong>${fort.badge}</strong><br>${fort.desc}`;
+      fortuneWin.hidden = false;
+      fortuneDrawer.classList.remove("stick-out");
+      fortuneLock = false;
+      unlockAchievement("fortune_draw");
+      spawnSparklesAt(window.innerWidth / 2, window.innerHeight * 0.6, 6);
+      fortuneDrawCount++;
+    }, 700);
+  }, 600);
+});
+
+// ============ Game 5: One Important Question ============
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const questionBtns = document.getElementById("questionBtns");
+const questionText = document.getElementById("questionText");
+const yesWin = document.getElementById("yesWin");
+const NO_TAUNTS = ["No", "Are you sure?", "Really?? 🥺", "Think again!", "Nani?! 😳", "No way! ✨", "Excuses... 🌸"];
+let noDodges = 0;
+
+function dodge() {
+  noDodges++;
+  playDodgeSFX();
+  noBtn.classList.add("fleeing");
+  
+  // Calculate window/parent bounds to avoid clipping
+  const maxX = questionBtns.clientWidth - noBtn.offsetWidth;
+  const maxY = questionBtns.clientHeight - noBtn.offsetHeight;
+  noBtn.style.left = Math.random() * Math.max(maxX, 0) + "px";
+  noBtn.style.top = Math.random() * Math.max(maxY, 0) + "px";
+  
+  // Dynamic scaling & label adjustments
+  noBtn.textContent = NO_TAUNTS[Math.min(noDodges, NO_TAUNTS.length - 1)];
+  const scaleDodge = Math.max(0.4, 1 - noDodges * 0.1);
+  const scaleYes = 1 + Math.min(noDodges, 8) * 0.12;
+  
+  noBtn.style.transform = `scale(${scaleDodge})`;
+  yesBtn.style.transform = `scale(${scaleYes})`;
+  
+  if (noDodges >= 7) {
+    noBtn.remove(); // Fled completely!
+  }
+}
+
+noBtn.addEventListener("mouseenter", dodge);
+noBtn.addEventListener("click", dodge);
+noBtn.addEventListener("touchstart", (e) => {
+  e.preventDefault();
+  dodge();
+});
+
+yesBtn.addEventListener("click", () => {
+  questionText.textContent = "💖💖💖";
+  questionBtns.hidden = true;
+  yesWin.hidden = false;
+  unlockAchievement("question_yes");
+  setTimeout(triggerWinConfetti, 50);
+});
+
+// ============ Cassette Player Controller ============
+const cassettePlay = document.getElementById("cassettePlay");
+const cassettePrev = document.getElementById("cassettePrev");
+const cassetteNext = document.getElementById("cassetteNext");
+const cassetteTrackName = document.getElementById("cassetteTrackName");
+
+cassettePlay.addEventListener("click", () => {
+  initAudio();
+  if (isLofiPlaying) {
+    stopLofiLoop();
+  } else {
+    startLofiLoop();
+  }
+});
+
+cassettePrev.addEventListener("click", () => {
+  playBubbleSFX();
+  currentChordIdx = (currentChordIdx - 1 + CHORD_PROGRESSIONS.length) % CHORD_PROGRESSIONS.length;
+  if (isLofiPlaying) {
+    playChord(CHORD_PROGRESSIONS[currentChordIdx]);
+  }
+  cassetteTrackName.textContent = `Lofi Melodies: Chord Tone ${currentChordIdx+1}`;
+});
+
+cassetteNext.addEventListener("click", () => {
+  playBubbleSFX();
+  currentChordIdx = (currentChordIdx + 1) % CHORD_PROGRESSIONS.length;
+  if (isLofiPlaying) {
+    playChord(CHORD_PROGRESSIONS[currentChordIdx]);
+  }
+  cassetteTrackName.textContent = `Lofi Melodies: Chord Tone ${currentChordIdx+1}`;
+});
+
+// ============ Keyboard Easter Egg (Konami Code: l-o-v-e) ============
+let eggInput = "";
+const targetWord = "love";
+document.addEventListener("keydown", (e) => {
+  eggInput += e.key.toLowerCase();
+  if (eggInput.length > targetWord.length) {
+    eggInput = eggInput.substring(eggInput.length - targetWord.length);
+  }
+  if (eggInput === targetWord) {
+    eggInput = "";
+    initAudio();
+    playWinFanfare();
+    // Rain down hearts & sparkles on entire viewport
+    for (let i = 0; i < 40; i++) {
+      setTimeout(() => {
+        spawnSparklesAt(Math.random() * window.innerWidth, Math.random() * window.innerHeight, 5, ["💖", "💗", "✨", "🌸"]);
+      }, i * 80);
+    }
+  }
+});
+</script>
+</body>
+</html>
