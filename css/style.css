@@ -1929,7 +1929,9 @@ body.theme-dream .hero__greeting-text { color: #ffc2d3; }
     border-bottom: 1px solid rgba(255, 183, 197, 0.3);
     box-shadow: var(--shadow-md);
   }
-  body.theme-dream .nav__links { background: rgba(29, 13, 22, 0.95); }
+  body.theme-cafe .nav__links { background: rgba(255, 239, 232, 0.95); border-bottom-color: rgba(255, 124, 67, 0.2); }
+  body.theme-dream .nav__links { background: rgba(29, 13, 22, 0.95); border-bottom-color: rgba(155, 114, 207, 0.2); }
+  body.theme-rain .nav__links { background: rgba(240, 244, 248, 0.95); border-bottom-color: rgba(79, 172, 254, 0.25); }
   .nav__links.active { display: flex; }
   .timeline__path { left: 1.5rem; }
   .timeline__item { width: 100%; text-align: left; padding-left: 3.5rem; padding-right: 0; }

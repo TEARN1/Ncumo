@@ -1,7 +1,7 @@
 // =====================================================
 // Global Mouse / Touch Tracking & Math Utilities
 // =====================================================
-const SANCTUARY_LOCKED = true; // Set to false to disable the lock screen completely
+const SANCTUARY_LOCKED = false; // Set to false to disable the lock screen completely
 let mouseX = 0, mouseY = 0;
 window.addEventListener("mousemove", (e) => {
   mouseX = (e.clientX / window.innerWidth) * 2 - 1;
@@ -1131,8 +1131,10 @@ function initWebGLHeart() {
     let smoothMouseX = 0, smoothMouseY = 0;
     
     function resize() {
-      const displayWidth = canvas.clientWidth;
-      const displayHeight = canvas.clientHeight;
+      const isMobile = window.innerWidth < 768;
+      const scale = isMobile ? 0.75 : 1.0;
+      const displayWidth = Math.floor(canvas.clientWidth * scale);
+      const displayHeight = Math.floor(canvas.clientHeight * scale);
       if (canvas.width !== displayWidth || canvas.height !== displayHeight) {
         canvas.width = displayWidth;
         canvas.height = displayHeight;
