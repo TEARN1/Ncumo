@@ -13,6 +13,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Parisienne&family=Jost:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet" />
   
+  <!-- Three.js CDN for 3D Particle Heart -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  
   <style>
 /* ============ Anime Aesthetic Foundations ============ */
 :root {
@@ -99,6 +102,20 @@ body.dark-mode #starCanvas {
 
 /* ============ Floating Sakura Petals ============ */
 #petals { position: fixed; inset: 0; pointer-events: none; z-index: 1; }
+
+#webglCanvas {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.85;
+}
+/* Ensure hero content floats above WebGL canvas */
+.hero__decor, .hero__eyebrow, .hero__title, .hero__subtitle, .hero__greeting-bubble, .hero .btn, .hero__hearts {
+  position: relative;
+  z-index: 10;
+}
 .petal {
   position: absolute;
   top: -50px;
@@ -1865,6 +1882,7 @@ body.dark-mode .hero__greeting-text {
 
   <!-- ===== Hero Header ===== -->
   <header class="hero" id="home">
+    <canvas id="webglCanvas"></canvas>
     <div class="hero__decor hero__decor--left">Sthandwa</div>
     <div class="hero__decor hero__decor--right">Sam</div>
     
@@ -2010,17 +2028,17 @@ body.dark-mode .hero__greeting-text {
     <p class="section-sub reveal">Tap a seal to read, or open the wax envelope below ♡</p>
     
     <div class="notes__grid">
-      <button class="note reveal" data-note="">
-        <span class="note__seal">♡</span><span class="note__label">Note One</span>
+      <button class="note reveal" data-note="The 5th of June 2026. The day everything changed. Best yes of my life, Ziyanda.">
+        <span class="note__seal">♡</span><span class="note__label">05 · 06 · 26</span>
       </button>
-      <button class="note reveal" data-note="">
-        <span class="note__seal">❀</span><span class="note__label">Note Two</span>
+      <button class="note reveal" data-note="Monday to Friday I count days. Saturday and Sunday I count blessings — because you're here with me.">
+        <span class="note__seal">❀</span><span class="note__label">Weekends</span>
       </button>
-      <button class="note reveal" data-note="">
-        <span class="note__seal">♡</span><span class="note__label">Note Three</span>
+      <button class="note reveal" data-note="Your name says it all — Ncumolwakhe. Her smile. The one I think about all week long.">
+        <span class="note__seal">♡</span><span class="note__label">Her Smile</span>
       </button>
-      <button class="note reveal" data-note="">
-        <span class="note__seal">✿</span><span class="note__label">Note Four</span>
+      <button class="note reveal" data-note="Ndiyakuthanda, sthandwa sam. From Ivory Park to wherever you are — my heart always finds you.">
+        <span class="note__seal">✿</span><span class="note__label">Ndiyakuthanda</span>
       </button>
     </div>
 
@@ -2227,7 +2245,7 @@ body.dark-mode .hero__greeting-text {
   <!-- ===== Footer ===== -->
   <footer class="footer">
     <p class="footer__script">Ndiyakuthanda, Ncumolwakhe</p>
-    <p class="footer__small">from Asemahle "TEARN" Nkwali · Ivory Park · since 05.06.2026 ♡</p>
+    <p class="footer__small">with all my love · since 05.06.2026 ♡</p>
   </footer>
 
   <!-- ===== Detail Modal ===== -->
@@ -2240,6 +2258,168 @@ body.dark-mode .hero__greeting-text {
   </div>
 
   <script>
+// Global mouse/touch tracking
+let mouseX = 0, mouseY = 0;
+window.addEventListener("mousemove", (e) => {
+  mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+  mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+});
+window.addEventListener("touchmove", (e) => {
+  if (e.touches.length > 0) {
+    mouseX = (e.touches[0].clientX / window.innerWidth) * 2 - 1;
+    mouseY = -(e.touches[0].clientY / window.innerHeight) * 2 + 1;
+  }
+});
+
+// 2D Canvas Fallback for 3D Heart
+function runCanvasFallback() {
+  const canvas = document.getElementById("webglCanvas");
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
+  let width = canvas.width = canvas.clientWidth;
+  let height = canvas.height = canvas.clientHeight;
+  
+  window.addEventListener("resize", () => {
+    width = canvas.width = canvas.clientWidth;
+    height = canvas.height = canvas.clientHeight;
+  });
+  
+  const particles = [];
+  const numParticles = 350;
+  for (let i = 0; i < numParticles; i++) {
+    const t = Math.PI * 2 * Math.random();
+    const r = 0.2 + 0.8 * Math.sqrt(Math.random());
+    const x = 16 * Math.pow(Math.sin(t), 3) * r;
+    const y = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t)) * r;
+    particles.push({
+      ox: x * 6,
+      oy: y * 6,
+      size: 1.2 + Math.random() * 2.2,
+      alpha: 0.3 + Math.random() * 0.7
+    });
+  }
+  
+  let angle = 0;
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+    const pulse = 1 + 0.05 * Math.sin(angle);
+    angle += 0.04;
+    
+    ctx.save();
+    ctx.translate(width / 2, height / 2);
+    
+    particles.forEach(p => {
+      const cos = Math.cos(0.005);
+      const sin = Math.sin(0.005);
+      const nx = p.ox * cos - p.oy * sin;
+      const ny = p.ox * sin + p.oy * cos;
+      p.ox = nx;
+      p.oy = ny;
+      
+      const px = p.ox * pulse + mouseX * 25;
+      const py = p.oy * pulse - mouseY * 25;
+      
+      ctx.fillStyle = `rgba(255, 183, 197, ${p.alpha})`;
+      ctx.beginPath();
+      ctx.arc(px, py, p.size, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    
+    ctx.restore();
+    requestAnimationFrame(animate);
+  }
+  animate();
+}
+
+// WebGL Three.js Heart
+function initWebGLHeart() {
+  if (typeof THREE === 'undefined') {
+    runCanvasFallback();
+    return;
+  }
+  
+  const canvas = document.getElementById("webglCanvas");
+  if (!canvas) return;
+  
+  try {
+    const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
+    
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, canvas.clientWidth / canvas.clientHeight, 0.1, 100);
+    camera.position.z = 30;
+    
+    const geometry = new THREE.BufferGeometry();
+    const vertices = [];
+    const numParticles = 2800;
+    
+    for (let i = 0; i < numParticles; i++) {
+      const t = Math.PI * 2 * Math.random();
+      const r = 0.15 + 0.85 * Math.sqrt(Math.random());
+      const x = 16 * Math.pow(Math.sin(t), 3) * r;
+      const y = (13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t)) * r;
+      const z = (Math.random() - 0.5) * 8 * r;
+      
+      const scale = 0.35;
+      vertices.push(x * scale, y * scale, z * scale);
+    }
+    
+    geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+    
+    const pCanvas = document.createElement('canvas');
+    pCanvas.width = 16;
+    pCanvas.height = 16;
+    const pCtx = pCanvas.getContext('2d');
+    const grad = pCtx.createRadialGradient(8, 8, 0, 8, 8, 8);
+    grad.addColorStop(0, 'rgba(255, 255, 255, 1)');
+    grad.addColorStop(0.3, 'rgba(255, 183, 197, 0.8)');
+    grad.addColorStop(1, 'rgba(255, 183, 197, 0)');
+    pCtx.fillStyle = grad;
+    pCtx.fillRect(0, 0, 16, 16);
+    const texture = new THREE.CanvasTexture(pCanvas);
+    
+    const material = new THREE.PointsMaterial({
+      size: 0.55,
+      map: texture,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+      transparent: true,
+      opacity: 0.85
+    });
+    
+    const points = new THREE.Points(geometry, material);
+    scene.add(points);
+    
+    window.addEventListener("resize", () => {
+      camera.aspect = canvas.clientWidth / canvas.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
+    });
+    
+    function animate() {
+      requestAnimationFrame(animate);
+      
+      const pulse = 1 + 0.05 * Math.sin(Date.now() * 0.0035);
+      points.scale.set(pulse, pulse, pulse);
+      
+      points.rotation.y += 0.004;
+      points.rotation.x = 0.15 * Math.sin(Date.now() * 0.0006);
+      
+      const targetY = mouseX * 0.4;
+      const targetX = mouseY * 0.4;
+      points.rotation.y += (targetY - points.rotation.y) * 0.05;
+      points.rotation.x += (targetX - points.rotation.x) * 0.05;
+      
+      renderer.render(scene, camera);
+    }
+    animate();
+  } catch (e) {
+    console.warn("WebGL initialization failed, falling back to 2D Canvas.", e);
+    runCanvasFallback();
+  }
+}
+
 // ============ Seeded PRNG (Mulberry32) ============
 function getDaySeed() {
   const now = new Date();
@@ -2833,13 +3013,13 @@ function populateEnvelopeLetter() {
   
   if (month === 0 && day === 29) {
     letterTitle = "Happy Birthday Ziyanda! 🎂";
-    letterText = "Happy Birthday to the most beautiful girl in the universe! Today is all about celebrating you, my Ziyanda. You deserve all the joy, smiles, and love in the world. I'm so lucky to have you. Ndiyakuthanda! 🎂💖<br><br>— TEARN";
+    letterText = "Happy Birthday to the most beautiful girl in the universe! Today is all about celebrating you, my Ziyanda. You deserve all the joy, smiles, and love in the world. I'm so lucky to have you. Ndiyakuthanda! 🎂💖<br><br>— Yours ♡";
   } else if (month === 11 && day === 8) {
     letterTitle = "Happy Birthday to Me! 🎉";
-    letterText = "It's my birthday today, but the greatest gift I could ever ask for is having you in my life. Thank you for making my world so much brighter. I'm so glad we get to celebrate these days together. ♡<br><br>— TEARN";
+    letterText = "It's my birthday today, but the greatest gift I could ever ask for is having you in my life. Thank you for making my world so much brighter. I'm so glad we get to celebrate these days together. ♡<br><br>— Yours ♡";
   } else if (day === 5) {
     letterTitle = "Happy Monthly Anniversary! 💍";
-    letterText = "Happy Monthly Anniversary, sthandwa sam! Another month of being mine, of weekend dates, of endless laughs, and growing love. Here's to forever. Ndiyakuthanda, Ncumolwakhe! 💍✨<br><br>— TEARN";
+    letterText = "Happy Monthly Anniversary, sthandwa sam! Another month of being mine, of weekend dates, of endless laughs, and growing love. Here's to forever. Ndiyakuthanda, Ncumolwakhe! 💍✨<br><br>— Yours ♡";
   } else {
     const seed = getDaySeed();
     const rnd = createPRNG(seed + 999);
@@ -2856,10 +3036,10 @@ function populateEnvelopeLetter() {
       " You make everything feel so special. I'm looking forward to all our future dates and adventures together."
     ];
     const letterClosings = [
-      "<br><br>Ndiyakuthanda, Ncumolwakhe! ♡<br><br>— TEARN",
-      "<br><br>Forever yours, sthandwa sam! 💖<br><br>— TEARN",
-      "<br><br>Always and forever, my love! 💍<br><br>— TEARN",
-      "<br><br>With all my love, sthandwa sam! 🌸<br><br>— TEARN"
+      "<br><br>Ndiyakuthanda, Ncumolwakhe! ♡<br><br>— Yours ♡",
+      "<br><br>Forever yours, sthandwa sam! 💖<br><br>— Yours ♡",
+      "<br><br>Always and forever, my love! 💍<br><br>— Yours ♡",
+      "<br><br>With all my love, sthandwa sam! 🌸<br><br>— Yours ♡"
     ];
     
     const opening = letterOpenings[Math.floor(rnd() * letterOpenings.length)];
@@ -2961,6 +3141,7 @@ populateEnvelopeLetter();
 setupDailyQuote();
 populateTimeline();
 updateGreetingMessage();
+initWebGLHeart();
 
 // ============ Quote Drawer ============
 let currentQuoteIdx = 0;
