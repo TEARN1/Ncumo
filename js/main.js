@@ -29,6 +29,15 @@ function createPRNG(seed) {
   }
 }
 
+// Helper to get week number of the year (1-53)
+function getWeekNumber(d) {
+  d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+  d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay()||7));
+  const yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1));
+  const weekNo = Math.ceil(( ( (d - yearStart) / 86400000) + 1)/7);
+  return weekNo;
+}
+
 // =====================================================
 // Theme Color Definitions for WebGL Shader
 // =====================================================
@@ -179,19 +188,35 @@ const NOTE4_CLOSINGS = ["Forever mine. ♡", "Ndiyakuthanda, sthandwa sam. 💖"
 // =====================================================
 const WEEKEND_PROMPTS = [
   {
-    text: "Should't you be with me? 😉 Also... I haven't cleaned my place yet. You're going to help me clean when you come over, right? 🧹✨",
+    text: "Shouldn't you be with me? 😉 Also... I haven't cleaned my place yet. You're going to help me clean when you come over, right? 🧹✨",
     responses: ["Only if I get snacks! 🍫", "Of course! 🧼", "You're on your own 😜"]
   },
   {
+    text: "Shouldn't you be with me? 😉 Because my weekend has officially started and my favorite person is missing! 💖",
+    responses: ["Pick me up! 🚗", "Let's stay in 🍕", "On my way! 🏃‍♀️"]
+  },
+  {
+    text: "Don't you miss me? 🥺 My room is too quiet, my schedule is empty, and I need a Ziyanda laugh right now. ♡",
+    responses: ["I miss you more! 🤗", "Only a little bit 😜", "Coming over! 🚀"]
+  },
+  {
+    text: "Shouldn't you be with me? 😉 Let's drop whatever we are doing and go get some warm coffee. Thoughts? ☕",
+    responses: ["mocha for me! ☕", "Tea date instead 🍵", "You're buying! 💸"]
+  },
+  {
+    text: "Don't you miss me? 🥺 Let's plan our weekend date right now. You can't say no! 🗺️✨",
+    responses: ["Yes, please! 💖", "Let's explore 🔍", "Pick the spot! 🌳"]
+  },
+  {
     text: "It's the weekend! 🏖️ Are we going on a date, or are you just gonna let me miss you all day?",
-    responses: ["Pick me up! 🚗", "Let's stay in 🍕", "Let me think about it 😜"]
+    responses: ["Pick me up! 🚗", "Let's stay in 🍕", "Let me think 😜"]
   },
   {
     text: "Weekend warning: Extreme cuddle threat detected! Are you prepared?",
-    responses: ["100% ready! 🤗", "Only if you have snacks 🍿", "I'm running away! 🏃‍♀️"]
+    responses: ["100% ready! 🤗", "Only with snacks 🍿", "I'm running away! 🏃‍♀️"]
   },
   {
-    text: "I was thinking... we look pretty good together. Let's test that theory today?",
+    text: "I was thinking... we look pretty good together. Let's test that today?",
     responses: ["Definitely! 💍", "Need to double check 🔍", "We look amazing! ✨"]
   },
   {
@@ -327,24 +352,8 @@ const WEEKEND_PROMPTS = [
     responses: ["Same vibe! 🛌", "Excited! 🚀", "Ndiyakuthanda! ♡"]
   },
   {
-    text: "I was thinking of our next adventure. Where are we going today?",
-    responses: ["Let's explore! 🗺️", "Coffee shop ☕", "Cozy room 🏡"]
-  },
-  {
-    text: "Just checked: my arms are still the perfect size to hold you. Come verify?",
-    responses: ["Verified! 🤗", "Testing soon 🕰️", "Aww! 💖"]
-  },
-  {
-    text: "Warning: high chance of laughter and smiles when we hang out today! 😄",
-    responses: ["Looking forward! 🌸", "I'm ready! 🚀", "Always! ♡"]
-  },
-  {
     text: "Shouldn't you be with me? 😉 Also... I haven't watered the plants. You're going to help me garden, right? 🪴",
     responses: ["Only if I get dirty 🌱", "I'll talk to the plants 🗣️", "Water fight instead! 💦"]
-  },
-  {
-    text: "My favorite weekend activity is making you smile. Let's do it all day.",
-    responses: ["Yes! 🥰", "Already smiling! 😊", "Ndiyakuthanda! ♡"]
   }
 ];
 
@@ -437,7 +446,6 @@ function playSynthNote(freq, type = 'sine', duration = 0.3, slideTo = null, gain
 function playChord(frequencies) {
   frequencies.forEach((freq, idx) => {
     setTimeout(() => {
-      // Use low cutoff filters for rain theme chords to sound muted/cozy
       const type = (targetTheme === 'rain') ? 'sine' : 'triangle';
       const gain = (targetTheme === 'rain') ? 0.04 : 0.05;
       playSynthNote(freq, type, 2.0, null, gain);
@@ -498,13 +506,12 @@ function startCozyRain() {
   rainSource.buffer = generateRainBuffer();
   rainSource.loop = true;
   
-  // Create filters to filter out high frequencies making it warm/low-passed
   const lowpassFilter = audioCtx.createBiquadFilter();
   lowpassFilter.type = "lowpass";
-  lowpassFilter.frequency.setValueAtTime(450, audioCtx.currentTime); // Cozy muffled rain
+  lowpassFilter.frequency.setValueAtTime(450, audioCtx.currentTime);
   
   rainGain = audioCtx.createGain();
-  rainGain.gain.setValueAtTime(0.08, audioCtx.currentTime); // Soft background volume
+  rainGain.gain.setValueAtTime(0.08, audioCtx.currentTime);
   
   rainSource.connect(lowpassFilter);
   lowpassFilter.connect(rainGain);
@@ -528,13 +535,11 @@ function startVisualizerDraw() {
   if (!visualizerCanvas) return;
   visualizerCtx = visualizerCanvas.getContext("2d");
   
-  // Set physical drawing size
   visualizerCanvas.width = visualizerCanvas.clientWidth;
   visualizerCanvas.height = visualizerCanvas.clientHeight;
   
   function draw() {
     if (!isLofiPlaying) {
-      // Draw static flat neon line
       visualizerCtx.clearRect(0, 0, visualizerCanvas.width, visualizerCanvas.height);
       visualizerCtx.beginPath();
       visualizerCtx.moveTo(0, visualizerCanvas.height / 2);
@@ -573,9 +578,8 @@ function startVisualizerDraw() {
     
     visualizerCtx.lineTo(visualizerCanvas.width, visualizerCanvas.height / 2);
     visualizerCtx.stroke();
-    visualizerCtx.shadowBlur = 0; // reset
+    visualizerCtx.shadowBlur = 0;
   }
-  
   draw();
 }
 
@@ -613,15 +617,12 @@ async function fetchWeatherAndSetTheme() {
   if (!statusAlerts) return;
   
   try {
-    // Latitude and Longitude for Ivory Park, South Africa
     const response = await fetch("https://api.open-meteo.com/v1/forecast?latitude=-25.9989&longitude=28.1818&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max&current_weather=true&timezone=Africa/Johannesburg");
     if (!response.ok) throw new Error("Failed to fetch weather forecast.");
     weatherData = await response.json();
     
-    // Evaluate and output weather warning alerts
     evaluateWeatherAlerts(weatherData);
     
-    // Auto change theme based on current weather code
     const isRaining = weatherData.current_weather && [51, 53, 55, 61, 63, 65, 80, 81, 82].includes(weatherData.current_weather.weathercode);
     const hours = new Date().getHours();
     
@@ -634,46 +635,32 @@ async function fetchWeatherAndSetTheme() {
     }
   } catch (e) {
     console.warn("Weather API unreachable, loading fallback alerts and default theme.", e);
-    // fallback alert check
     evaluateFallbackAlerts();
   }
 }
 
 function evaluateWeatherAlerts(data) {
-  const container = document.getElementById("statusAlerts");
-  
-  // Parse weather codes & temperatures
   const maxTemp = data.daily.temperature_2m_max[0];
-  const minTemp = data.daily.temperature_2m_min[0];
   const rainProbToday = data.daily.precipitation_probability_max[0];
   const rainProbTomorrow = data.daily.precipitation_probability_max[1];
   
-  // 1. Rain alert
   if (rainProbToday > 40) {
     injectAlert("🌧️", `It might rain today in Ivory Park (Probability: ${rainProbToday}%). Make sure you carry an umbrella, sthandwa sam! ☔`);
   }
-  
-  // 2. Laundry alert
   if (rainProbTomorrow > 50) {
     injectAlert("👕", "Just checked the forecast — rain is coming tomorrow. Better do your laundry today while the sun is out! ☀️👕");
   }
-  
-  // 3. Sunny advisory
   if (rainProbToday <= 15 && maxTemp > 26) {
     injectAlert("☀️", `It's going to be warm and beautiful today (${maxTemp}°C). Have a lovely walk, sthandwa sam!`);
   }
   
-  // Trigger standard updates (Work schedule and loadshedding scheduler)
   updateWorkAlerts();
   updateLoadsheddingAlerts();
 }
 
 function evaluateFallbackAlerts() {
-  // Check conditions if weather API fails
   const date = new Date();
   const day = date.getDay();
-  
-  // In case of weekend, default sunshine indicator
   if (day === 6 || day === 0) {
     injectAlert("☀️", "Beautiful weekend vibes! Hope you wake up with a smile today. 🌸");
   }
@@ -695,15 +682,12 @@ function injectAlert(icon, text) {
 // =====================================================
 function updateLoadsheddingAlerts() {
   const now = new Date();
-  const day = now.getDay();
-  // Ivory Park Block 16 schedule simulator (Stage 2 loadshedding)
   const scheduleToday = getLoadsheddingSchedule(now);
   
   if (scheduleToday && scheduleToday.slots.length > 0) {
     const slotStr = scheduleToday.slots.join(", ");
     injectAlert("⚡", `Power Warning (Ivory Park Block 16): Loadshedding is scheduled for today at ${slotStr}. Remember to charge your phone and power bank! ⚡🔋`);
   } else {
-    // Check tomorrow schedule
     const tomorrow = new Date();
     tomorrow.setDate(now.getDate() + 1);
     const scheduleTomorrow = getLoadsheddingSchedule(tomorrow);
@@ -716,8 +700,7 @@ function updateLoadsheddingAlerts() {
 }
 
 function getLoadsheddingSchedule(date) {
-  const day = date.getDay(); // 0 Sun ... 6 Sat
-  // Stage 2 active on days that are multiples of 2/3
+  const day = date.getDay();
   const stage = (day % 3 === 0) ? 0 : 2; 
   if (stage === 0) return null;
   
@@ -741,15 +724,12 @@ function updateWorkAlerts() {
   const day = now.getDay();
   const hours = now.getHours();
   
-  // Sunday Alert (Check if tomorrow is Monday)
   if (day === 0) {
     injectAlert("💼", "Heads up sthandwa sam, just a reminder that I work early tomorrow (Monday, 06:00 - 18:00) so I might be offline during the day, but I'll text you the moment I finish! 💼");
   }
-  // Thursday Alert (Check if tomorrow is Friday)
   else if (day === 4) {
     injectAlert("💼", "Heads up sthandwa sam, just a reminder that I work early tomorrow (Friday, 06:00 - 18:00). Have a beautiful day ahead! 💼🌸");
   }
-  // Monday / Friday live checking during 6 to 18
   else if ((day === 1 || day === 5) && (hours >= 6 && hours < 18)) {
     injectAlert("💼", "I'm currently at work (06:00 - 18:00), counting down the hours until I can message you! 💼⏳");
   }
@@ -762,16 +742,13 @@ function switchTheme(themeId) {
   if (!THEME_COLORS[themeId]) return;
   targetTheme = themeId;
   
-  // Transition body classes
   document.body.className = `theme-${themeId}`;
   
-  // Show/Hide cozy rain toggle
   const rainControlSec = document.getElementById("rainControlSec");
   if (rainControlSec) {
     rainControlSec.style.display = (themeId === "rain") ? "block" : "none";
   }
   if (themeId !== "rain") {
-    // turn off rain noise if leaving rain theme
     const rainToggle = document.getElementById("rainToggle");
     if (rainToggle) {
       rainToggle.checked = false;
@@ -779,20 +756,17 @@ function switchTheme(themeId) {
     stopCozyRain();
   }
   
-  // Switch theme button active states
   document.querySelectorAll(".theme-btn").forEach(btn => {
     btn.classList.remove("active");
   });
   const activeBtn = document.getElementById(`theme${themeId.charAt(0).toUpperCase() + themeId.slice(1)}`);
   if (activeBtn) activeBtn.classList.add("active");
   
-  // Reset lofi track label to reflect progression change
   const cassetteTrackName = document.getElementById("cassetteTrackName");
   if (cassetteTrackName) {
     cassetteTrackName.textContent = `Lofi Melodies: Chord Tone ${currentChordIdx+1}`;
   }
   
-  // Clear and regenerate particles for the theme
   regeneratePetals(themeId);
 }
 
@@ -821,13 +795,11 @@ function regeneratePetals(themeId) {
   }
 }
 
-// Bind navbar theme buttons
 document.getElementById("themeSakura").addEventListener("click", () => { playBubbleSFX(); switchTheme("sakura"); });
 document.getElementById("themeCafe").addEventListener("click", () => { playBubbleSFX(); switchTheme("cafe"); });
 document.getElementById("themeDream").addEventListener("click", () => { playBubbleSFX(); switchTheme("dream"); });
 document.getElementById("themeRain").addEventListener("click", () => { playBubbleSFX(); switchTheme("rain"); });
 
-// Cozy Rain Toggle Checkbox Listener
 document.getElementById("rainToggle").addEventListener("change", (e) => {
   if (e.target.checked) {
     startCozyRain();
@@ -837,7 +809,7 @@ document.getElementById("rainToggle").addEventListener("change", (e) => {
 });
 
 // =====================================================
-// Delayed Weekend Cleaning Popup Manager
+// Delayed Weekend Cleaning Popup Manager (Cached Weekly)
 // =====================================================
 function checkWeekendCleanPopup() {
   const now = new Date();
@@ -847,12 +819,20 @@ function checkWeekendCleanPopup() {
   if (isWeekend) {
     const delay = 5000 + Math.random() * 15000; // between 5 and 20 seconds
     setTimeout(() => {
-      // Calculate weekend week index from anniversary date
-      const anniversaryDiff = now.getTime() - ANNIVERSARY.getTime();
-      const weeksElapsed = Math.floor(anniversaryDiff / (1000 * 60 * 60 * 24 * 7));
-      const promptIdx = weeksElapsed % WEEKEND_PROMPTS.length;
+      // Calculate weekend week index to ensure persistence for the same weekend
+      const weekendId = `${now.getFullYear()}-W${getWeekNumber(now)}`;
+      let chosenIdx = localStorage.getItem("ncumoWeekendPromptIdx");
+      let savedWeekendId = localStorage.getItem("ncumoWeekendId");
       
-      const promptObj = WEEKEND_PROMPTS[promptIdx];
+      if (chosenIdx === null || savedWeekendId !== weekendId) {
+        chosenIdx = Math.floor(Math.random() * WEEKEND_PROMPTS.length);
+        localStorage.setItem("ncumoWeekendPromptIdx", chosenIdx);
+        localStorage.setItem("ncumoWeekendId", weekendId);
+      } else {
+        chosenIdx = parseInt(chosenIdx, 10);
+      }
+      
+      const promptObj = WEEKEND_PROMPTS[chosenIdx];
       const cleanModal = document.getElementById("weekendCleanModal");
       const cleanText = document.getElementById("weekendCleanText");
       const cleanBtns = document.getElementById("weekendCleanBtns");
@@ -911,6 +891,7 @@ function initWebGLHeart() {
     uniform vec3 u_innerColor;
     uniform vec3 u_bgColor1;
     uniform vec3 u_bgColor2;
+    uniform float u_theme; // 0.0: sakura, 1.0: cafe, 2.0: dream, 3.0: rain
 
     float sdHeart(vec3 p) {
       p.x = abs(p.x);
@@ -951,13 +932,59 @@ function initWebGLHeart() {
 
     void main() {
       vec2 uv = (gl_FragCoord.xy - 0.5 * u_resolution.xy) / u_resolution.y;
-      vec2 bgUv = gl_FragCoord.xy / u_resolution.xy;
       
+      // Dynamic coordinate distortion based on weather themes
+      if (u_theme == 1.0) {
+        // Sunset Cafe: Heat wave wobble
+        float heat = sin(uv.y * 12.0 + u_time * 2.5) * 0.004;
+        uv.x += heat;
+      } else if (u_theme == 3.0) {
+        // Lofi Rain: Refractive screen raindrop ripples
+        float ripple = sin(uv.y * 30.0 + u_time * 4.0) * cos(uv.x * 20.0 - u_time * 2.0);
+        if (ripple > 0.982) {
+          uv += vec2(sin(u_time + uv.y * 10.0), cos(u_time + uv.x * 10.0)) * 0.015;
+        }
+      }
+
       vec3 col = u_bgColor1;
       float dist = length(uv - vec2(0.0, 0.05));
       float wave = sin(uv.x * 2.5 + u_time * 0.4) * cos(uv.y * 2.5 + u_time * 0.4);
       col = mix(col, u_bgColor2, smoothstep(0.85, 0.25, dist + wave * 0.1));
       col = mix(col, u_innerColor, smoothstep(0.45, 0.0, dist + wave * 0.15) * 0.5);
+
+      // WebGL Environmental Weather Graphics
+      if (u_theme == 0.0) {
+        // Sakura / Sunny: Drifting light rays and warm rising ember particles
+        float rays = sin(uv.x * 3.0 + uv.y * 1.5 - u_time * 0.8) * cos(-uv.x * 1.0 + uv.y * 2.0 + u_time * 0.4);
+        col += vec3(1.0, 0.92, 0.94) * max(0.0, rays) * 0.05;
+        
+        float embers = sin(uv.x * 35.0 + u_time) * cos(uv.y * 35.0 - u_time * 0.7);
+        if (embers > 0.975) {
+          col += vec3(0.98, 0.65, 0.75) * (0.3 + 0.7 * sin(u_time * 2.0 + uv.x * 100.0)) * 0.4;
+        }
+      } else if (u_theme == 1.0) {
+        // Sunset Cafe: Sunset solar corona aura
+        float aura = 1.0 / (dist * 10.0 + 1.0);
+        col += vec3(1.0, 0.55, 0.25) * aura * 0.28;
+      } else if (u_theme == 2.0) {
+        // Midnight Dream: Rotating galaxy core and twinkling stars field
+        float angle = u_time * 0.12;
+        float s = sin(angle), c = cos(angle);
+        vec2 rotUv = mat2(c, -s, s, c) * uv;
+        float spiral = sin(length(rotUv) * 15.0 - u_time * 1.5 + atan(rotUv.y, rotUv.x));
+        col += vec3(0.65, 0.45, 0.95) * max(0.0, spiral) * 0.05 / (length(rotUv) + 0.1);
+        
+        float starsField = sin(uv.x * 45.0 + sin(uv.y * 20.0)) * cos(uv.y * 45.0 + u_time * 1.8);
+        if (starsField > 0.985) {
+          col += vec3(1.0, 0.95, 0.7) * (0.4 + 0.6 * sin(u_time * 3.0 + uv.y * 50.0));
+        }
+      } else if (u_theme == 3.0) {
+        // Lofi Rain: Falling rain streaks scrolling down
+        float rainStreak = sin(uv.x * 50.0 + uv.y * 5.0) * cos(uv.y * 10.0 + u_time * 8.0);
+        if (rainStreak > 0.95) {
+          col = mix(col, vec3(0.72, 0.84, 0.92), 0.15 * max(0.0, rainStreak));
+        }
+      }
 
       vec3 ro = vec3(0.0, 0.0, 4.0);
       vec3 rd = normalize(vec3(uv, -1.5));
@@ -993,11 +1020,6 @@ function initWebGLHeart() {
         
         vec3 litColor = shaded * (diff * 0.7 + 0.3) + vec3(1.0) * spec * 0.75;
         col = mix(col, litColor, 0.94);
-      }
-      
-      float star = sin(uv.x * 20.0 + u_time) * cos(uv.y * 20.0 + u_time * 0.5);
-      if (star > 0.975) {
-        col += vec3(1.0, 0.9, 0.95) * (0.3 + 0.7 * sin(u_time * 2.0));
       }
       
       gl_FragColor = vec4(col, 1.0);
@@ -1054,6 +1076,7 @@ function initWebGLHeart() {
     const uInnerColor = gl.getUniformLocation(program, "u_innerColor");
     const uBg1 = gl.getUniformLocation(program, "u_bgColor1");
     const uBg2 = gl.getUniformLocation(program, "u_bgColor2");
+    const uTheme = gl.getUniformLocation(program, "u_theme");
     
     let startTime = Date.now();
     let smoothMouseX = 0, smoothMouseY = 0;
@@ -1075,7 +1098,7 @@ function initWebGLHeart() {
       smoothMouseX += (mouseX - smoothMouseX) * 0.05;
       smoothMouseY += (mouseY - smoothMouseY) * 0.05;
       
-      // Interpolate colors towards active target colors
+      // Interpolate colors smoothly
       const targetColors = THEME_COLORS[targetTheme];
       for (let i = 0; i < 3; i++) {
         curHeartColor[i] += (targetColors.heart[i] - curHeartColor[i]) * 0.04;
@@ -1083,6 +1106,12 @@ function initWebGLHeart() {
         curBg1Color[i] += (targetColors.bg1[i] - curBg1Color[i]) * 0.04;
         curBg2Color[i] += (targetColors.bg2[i] - curBg2Color[i]) * 0.04;
       }
+      
+      // Map active theme ID to uniform float
+      let themeVal = 0.0; // sakura
+      if (targetTheme === "cafe") themeVal = 1.0;
+      if (targetTheme === "dream") themeVal = 2.0;
+      if (targetTheme === "rain") themeVal = 3.0;
       
       gl.uniform2f(uResolution, canvas.width, canvas.height);
       gl.uniform1f(uTime, elapsed);
@@ -1092,6 +1121,7 @@ function initWebGLHeart() {
       gl.uniform3fv(uInnerColor, new Float32Array(curInnerColor));
       gl.uniform3fv(uBg1, new Float32Array(curBg1Color));
       gl.uniform3fv(uBg2, new Float32Array(curBg2Color));
+      gl.uniform1f(uTheme, themeVal);
       
       gl.drawArrays(gl.TRIANGLES, 0, 6);
       requestAnimationFrame(renderShader);
@@ -1933,7 +1963,6 @@ function spawnHeart() {
   const item = document.createElement("button");
   item.className = "falling-heart";
   
-  // Decide whether to spawn work obstacle on Stage 3
   const isObstacle = (stageInfo.id === 3 && Math.random() > 0.65);
   
   if (isObstacle) {
@@ -2108,7 +2137,7 @@ function triggerChibiAnimation() {
   const avatar = document.getElementById("chibiAvatar");
   if (!avatar) return;
   avatar.classList.remove("poof");
-  void avatar.offsetWidth; // trigger reflow
+  void avatar.offsetWidth; 
   avatar.classList.add("poof");
 }
 
@@ -2178,7 +2207,6 @@ document.getElementById("fitBuy").addEventListener("click", () => {
   spawnSparklesAt(window.innerWidth / 2, window.innerHeight * 0.7, 8);
 });
 
-// Seeded starter fit setup
 function setupDailyDrip() {
   const seed = getDaySeed();
   const rnd = createPRNG(seed + 54321);
