@@ -965,6 +965,59 @@ body.theme-dream .timeline__desc { color: #f2a2ba; }
   border-color: var(--sakura);
 }
 
+.filter-control {
+  margin-top: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0 0.5rem;
+}
+.filter-label {
+  font-size: 0.72rem;
+  opacity: 0.8;
+  color: #ffc4d4;
+  white-space: nowrap;
+}
+.lofi-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  background: rgba(255, 255, 255, 0.1);
+  height: 6px;
+  border-radius: 99px;
+  outline: none;
+  width: 100%;
+  cursor: pointer;
+}
+.lofi-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--sakura);
+  cursor: pointer;
+  box-shadow: 0 0 8px var(--sakura);
+  transition: transform 0.1s ease;
+}
+.lofi-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+.lofi-slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--sakura);
+  cursor: pointer;
+  box-shadow: 0 0 8px var(--sakura);
+  border: none;
+  transition: transform 0.1s ease;
+}
+.lofi-slider::-moz-range-thumb:hover {
+  transform: scale(1.2);
+}
+
 /* ============ Love Notes Envelope ============ */
 .notes__grid {
   display: grid;

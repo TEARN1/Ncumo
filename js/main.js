@@ -365,9 +365,11 @@ let lofiInterval = null;
 let currentChordIdx = 0;
 let isLofiPlaying = false;
 let fortuneDrawCount = 0;
+let tapeProgress = 0.0;
 
 let analyser = null;
 let dataArray = null;
+let masterFilter = null;
 let visualizerCanvas = null;
 let visualizerCtx = null;
 let visualizerAnimId = null;
@@ -411,6 +413,16 @@ function initAudio() {
     analyser.fftSize = 64;
     const bufferLength = analyser.frequencyBinCount;
     dataArray = new Uint8Array(bufferLength);
+    
+    // Create master low-pass filter for the DJ control
+    masterFilter = audioCtx.createBiquadFilter();
+    masterFilter.type = "lowpass";
+    const filterSlider = document.getElementById("lofiFilter");
+    const initFreq = filterSlider ? parseFloat(filterSlider.value) : 15000;
+    masterFilter.frequency.setValueAtTime(initFreq, audioCtx.currentTime);
+    
+    masterFilter.connect(analyser);
+    analyser.connect(audioCtx.destination);
   }
   if (audioCtx.state === 'suspended') {
     audioCtx.resume();
@@ -433,8 +445,12 @@ function playSynthNote(freq, type = 'sine', duration = 0.3, slideTo = null, gain
     gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
     
     osc.connect(gain);
-    gain.connect(analyser); // Route notes through analyser first
-    gain.connect(audioCtx.destination);
+    if (masterFilter) {
+      gain.connect(masterFilter);
+    } else {
+      gain.connect(analyser);
+      gain.connect(audioCtx.destination);
+    }
     
     osc.start();
     osc.stop(audioCtx.currentTime + duration);
@@ -538,6 +554,9 @@ function startVisualizerDraw() {
   visualizerCanvas.width = visualizerCanvas.clientWidth;
   visualizerCanvas.height = visualizerCanvas.clientHeight;
   
+  const leftRoll = document.querySelector(".cassette-tape-roll--left");
+  const rightRoll = document.querySelector(".cassette-tape-roll--right");
+  
   function draw() {
     if (!isLofiPlaying) {
       visualizerCtx.clearRect(0, 0, visualizerCanvas.width, visualizerCanvas.height);
@@ -553,6 +572,18 @@ function startVisualizerDraw() {
     
     visualizerAnimId = requestAnimationFrame(draw);
     analyser.getByteTimeDomainData(dataArray);
+    
+    // Animate winding tape reels (left to right)
+    if (leftRoll && rightRoll) {
+      tapeProgress += 0.0003;
+      if (tapeProgress > 1.0) {
+        tapeProgress = 0.0;
+      }
+      const leftWidth = 2 + Math.floor((1.0 - tapeProgress) * 12);
+      const rightWidth = 2 + Math.floor(tapeProgress * 12);
+      leftRoll.style.borderWidth = `${leftWidth}px`;
+      rightRoll.style.borderWidth = `${rightWidth}px`;
+    }
     
     visualizerCtx.clearRect(0, 0, visualizerCanvas.width, visualizerCanvas.height);
     visualizerCtx.lineWidth = 2.5;
@@ -2321,6 +2352,7 @@ const cassettePlay = document.getElementById("cassettePlay");
 const cassettePrev = document.getElementById("cassettePrev");
 const cassetteNext = document.getElementById("cassetteNext");
 const cassetteTrackName = document.getElementById("cassetteTrackName");
+const lofiFilter = document.getElementById("lofiFilter");
 
 cassettePlay.addEventListener("click", () => {
   initAudio();
@@ -2350,6 +2382,46 @@ cassetteNext.addEventListener("click", () => {
   }
   cassetteTrackName.textContent = `Lofi Melodies: Chord Tone ${currentChordIdx+1}`;
 });
+
+if (lofiFilter) {
+  lofiFilter.addEventListener("input", (e) => {
+    const val = parseFloat(e.target.value);
+    initAudio();
+    if (masterFilter) {
+      masterFilter.frequency.setTargetAtTime(val, audioCtx.currentTime, 0.05);
+    }
+  });
+}
+
+// =====================================================
+// Secret Mobile Heart-Tap Easter Egg
+// =====================================================
+let heartTapCount = 0;
+let lastHeartTapTime = 0;
+const heartCanvas = document.getElementById("webglCanvas");
+if (heartCanvas) {
+  heartCanvas.addEventListener("pointerdown", (e) => {
+    const now = Date.now();
+    if (now - lastHeartTapTime > 1500) {
+      heartTapCount = 1;
+    } else {
+      heartTapCount++;
+    }
+    lastHeartTapTime = now;
+
+    // Spawn cute heart and blossom sparkles at tap position
+    if (partCanvas) {
+      const px = e.clientX;
+      const py = e.clientY;
+      spawnSparklesAt(px, py, 6, ["💖", "✨", "🌸", "🌷"]);
+    }
+
+    if (heartTapCount >= 5) {
+      triggerWinConfetti();
+      heartTapCount = 0;
+    }
+  });
+}
 
 // =====================================================
 // Konami Code Easter Egg (L-O-V-E)
