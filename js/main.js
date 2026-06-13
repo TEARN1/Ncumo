@@ -2482,13 +2482,22 @@ function init3DScrollverse() {
       }
     });
     
-    // Toggle DOM elements
+    // Toggle DOM elements using CSS classes for transitions
     const cssCube = document.getElementById("scroll3dCssCubeContainer");
     const ascii = document.getElementById("scroll3dAsciiContainer");
     const typo = document.getElementById("scroll3dCssTyposContainer");
-    if (cssCube) cssCube.hidden = (activeDimension !== 3);
-    if (ascii) ascii.hidden = (activeDimension !== 5);
-    if (typo) typo.hidden = (activeDimension !== 9);
+    if (cssCube) {
+      if (activeDimension === 3) cssCube.classList.add("active");
+      else cssCube.classList.remove("active");
+    }
+    if (ascii) {
+      if (activeDimension === 5) ascii.classList.add("active");
+      else ascii.classList.remove("active");
+    }
+    if (typo) {
+      if (activeDimension === 9) typo.classList.add("active");
+      else typo.classList.remove("active");
+    }
   }
   window.addEventListener("scroll", handleScroll3d);
   handleScroll3d(); // run once
@@ -2551,7 +2560,8 @@ function init3DScrollverse() {
     u_innerColor: { value: new THREE.Color(1.0, 0.89, 0.91) },
     u_bgColor1: { value: new THREE.Color(1.0, 0.95, 0.96) },
     u_bgColor2: { value: new THREE.Color(0.98, 0.93, 0.99) },
-    u_theme: { value: 1.0 }
+    u_theme: { value: 1.0 },
+    u_opacity: { value: 0.0 }
   };
   
   const shaderMaterial = new THREE.ShaderMaterial({
@@ -2572,6 +2582,7 @@ function init3DScrollverse() {
       uniform vec3 u_bgColor1;
       uniform vec3 u_bgColor2;
       uniform float u_theme;
+      uniform float u_opacity;
 
       float sdHeart(vec3 p) {
         p.x = abs(p.x);
@@ -2675,10 +2686,11 @@ function init3DScrollverse() {
             col = hCol * (diff * 0.8 + 0.2) + vec3(1.0) * spec * 0.4;
           }
         }
-        gl_FragColor = vec4(col, 1.0);
+        gl_FragColor = vec4(col, u_opacity);
       }
     `,
     uniforms: uniforms,
+    transparent: true,
     depthWrite: false,
     depthTest: false
   });
@@ -2724,7 +2736,7 @@ function init3DScrollverse() {
     size: 0.09,
     vertexColors: true,
     transparent: true,
-    opacity: 0.9,
+    opacity: 0.0,
     blending: THREE.AdditiveBlending
   });
   const pointCloud = new THREE.Points(pGeo, pMat);
@@ -2732,7 +2744,7 @@ function init3DScrollverse() {
   
   // 4. Torus Knot wireframe mesh
   const torusGeo = new THREE.TorusKnotGeometry(1.0, 0.28, 100, 12);
-  const torusMat = new THREE.MeshBasicMaterial({ color: 0xff4fac, wireframe: true, transparent: true, opacity: 0.8 });
+  const torusMat = new THREE.MeshBasicMaterial({ color: 0xff4fac, wireframe: true, transparent: true, opacity: 0.0 });
   const torusMesh = new THREE.Mesh(torusGeo, torusMat);
   sceneThreeD.add(torusMesh);
   
@@ -2771,6 +2783,7 @@ function init3DScrollverse() {
       }
     }
   }
+  voxelGroup.scale.set(0, 0, 0);
   sceneThreeD.add(voxelGroup);
   
   // Main animation / render loop
@@ -2781,14 +2794,6 @@ function init3DScrollverse() {
     
     const time = clock.getElapsedTime();
     
-    // Toggle DOM elements
-    const cssCube = document.getElementById("scroll3dCssCubeContainer");
-    const ascii = document.getElementById("scroll3dAsciiContainer");
-    const typo = document.getElementById("scroll3dCssTyposContainer");
-    if (cssCube) cssCube.hidden = (activeDimension !== 3);
-    if (ascii) ascii.hidden = (activeDimension !== 5);
-    if (typo) typo.hidden = (activeDimension !== 9);
-    
     // 3. CSS 3D Cube (Dimension 3)
     if (activeDimension === 3) {
       if (renderer) renderer.clear();
@@ -2797,6 +2802,17 @@ function init3DScrollverse() {
         const ry = time * 25 + scrollMouseX * 45;
         const rx = scrollMouseY * 35;
         cube.style.transform = `rotateX(${-rx}deg) rotateY(${ry}deg)`;
+      }
+      // Fade out Three.js groups
+      if (renderer) {
+        uniforms.u_opacity.value += (0.0 - uniforms.u_opacity.value) * 0.1;
+        pMat.opacity += (0.0 - pMat.opacity) * 0.1;
+        torusMat.opacity += (0.0 - torusMat.opacity) * 0.1;
+        voxelGroup.scale.set(
+          voxelGroup.scale.x + (0.0 - voxelGroup.scale.x) * 0.1,
+          voxelGroup.scale.y + (0.0 - voxelGroup.scale.y) * 0.1,
+          voxelGroup.scale.z + (0.0 - voxelGroup.scale.z) * 0.1
+        );
       }
       return;
     }
@@ -2807,6 +2823,17 @@ function init3DScrollverse() {
       const pre = document.getElementById("scroll3dAsciiPre");
       if (pre) {
         pre.innerHTML = renderAsciiBuffer(time, scrollMouseX, scrollMouseY);
+      }
+      // Fade out Three.js groups
+      if (renderer) {
+        uniforms.u_opacity.value += (0.0 - uniforms.u_opacity.value) * 0.1;
+        pMat.opacity += (0.0 - pMat.opacity) * 0.1;
+        torusMat.opacity += (0.0 - torusMat.opacity) * 0.1;
+        voxelGroup.scale.set(
+          voxelGroup.scale.x + (0.0 - voxelGroup.scale.x) * 0.1,
+          voxelGroup.scale.y + (0.0 - voxelGroup.scale.y) * 0.1,
+          voxelGroup.scale.z + (0.0 - voxelGroup.scale.z) * 0.1
+        );
       }
       return;
     }
@@ -2819,6 +2846,17 @@ function init3DScrollverse() {
         const ry = scrollMouseX * 35;
         const rx = -scrollMouseY * 35;
         container.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
+      }
+      // Fade out Three.js groups
+      if (renderer) {
+        uniforms.u_opacity.value += (0.0 - uniforms.u_opacity.value) * 0.1;
+        pMat.opacity += (0.0 - pMat.opacity) * 0.1;
+        torusMat.opacity += (0.0 - torusMat.opacity) * 0.1;
+        voxelGroup.scale.set(
+          voxelGroup.scale.x + (0.0 - voxelGroup.scale.x) * 0.1,
+          voxelGroup.scale.y + (0.0 - voxelGroup.scale.y) * 0.1,
+          voxelGroup.scale.z + (0.0 - voxelGroup.scale.z) * 0.1
+        );
       }
       return;
     }
@@ -2852,6 +2890,27 @@ function init3DScrollverse() {
     uniforms.u_mouse.value.x += (scrollMouseX - uniforms.u_mouse.value.x) * 0.1;
     uniforms.u_mouse.value.y += (scrollMouseY - uniforms.u_mouse.value.y) * 0.1;
     
+    // Smooth transition interpolations for mesh properties
+    const targetRaymarchOp = (activeDimension === 1 || activeDimension === 8) ? 1.0 : 0.0;
+    uniforms.u_opacity.value += (targetRaymarchOp - uniforms.u_opacity.value) * 0.15;
+    planeMesh.visible = (uniforms.u_opacity.value > 0.01);
+    
+    const targetPointsOp = (activeDimension === 2 || activeDimension === 10) ? 0.9 : 0.0;
+    pMat.opacity += (targetPointsOp - pMat.opacity) * 0.15;
+    pointCloud.visible = (pMat.opacity > 0.01);
+    
+    const targetTorusOp = (activeDimension === 4) ? (0.35 + 0.65 * (1.0 - dimensionProgress)) : 0.0;
+    torusMat.opacity += (targetTorusOp - torusMat.opacity) * 0.15;
+    torusMesh.visible = (torusMat.opacity > 0.01);
+    
+    const targetVoxelScale = (activeDimension === 6 || activeDimension === 7) ? 1.0 : 0.0;
+    voxelGroup.scale.set(
+      voxelGroup.scale.x + (targetVoxelScale - voxelGroup.scale.x) * 0.12,
+      voxelGroup.scale.y + (targetVoxelScale - voxelGroup.scale.y) * 0.12,
+      voxelGroup.scale.z + (targetVoxelScale - voxelGroup.scale.z) * 0.12
+    );
+    voxelGroup.visible = (voxelGroup.scale.x > 0.01);
+    
     // 1. Raymarch Render (Dimensions 1 and 8)
     if (activeDimension === 1 || activeDimension === 8) {
       uniforms.u_theme.value = activeDimension;
@@ -2860,10 +2919,6 @@ function init3DScrollverse() {
     
     // 2. Points (Dimension 2 & SBS 10)
     else if (activeDimension === 2 || activeDimension === 10) {
-      pointCloud.visible = true;
-      torusMesh.visible = false;
-      voxelGroup.visible = false;
-      
       pointCloud.rotation.y = time * 0.4 + scrollMouseX * 0.6;
       pointCloud.rotation.x = scrollMouseY * 0.4;
       
@@ -2910,31 +2965,19 @@ function init3DScrollverse() {
     
     // 4. Wireframe Torus (Dimension 4)
     else if (activeDimension === 4) {
-      pointCloud.visible = false;
-      torusMesh.visible = true;
-      voxelGroup.visible = false;
-      
       torusMesh.rotation.y = time * 0.55 + scrollMouseX * 0.7;
       torusMesh.rotation.x = time * 0.35 - scrollMouseY * 0.5;
-      
-      // Modify opacity slightly with progress
-      torusMat.opacity = 0.3 + 0.7 * (1.0 - dimensionProgress);
-      
       renderer.render(sceneThreeD, cameraPersp);
     }
     
     // 6. Voxel Heart (Dimension 6)
     else if (activeDimension === 6) {
-      pointCloud.visible = false;
-      torusMesh.visible = false;
-      voxelGroup.visible = true;
-      
       voxelGroup.rotation.y = time * 0.45 + scrollMouseX * 0.5;
       voxelGroup.rotation.x = scrollMouseY * 0.4;
       
       voxelGroup.children.forEach((vox, idx) => {
-        const scaleVal = Math.max(0.01, Math.min(1.0, (1.2 - idx / voxelGroup.children.length) + (dimensionProgress - 0.5) * 2.0));
-        vox.scale.set(scaleVal, scaleVal, scaleVal);
+        const targetScale = Math.max(0.01, Math.min(1.0, (1.2 - idx / voxelGroup.children.length) + (dimensionProgress - 0.5) * 2.0));
+        vox.scale.set(targetScale, targetScale, targetScale);
       });
       
       renderer.render(sceneThreeD, cameraPersp);
@@ -2942,10 +2985,6 @@ function init3DScrollverse() {
     
     // 7. Red-Cyan Anaglyph Voxel Heart (Dimension 7)
     else if (activeDimension === 7) {
-      pointCloud.visible = false;
-      torusMesh.visible = false;
-      voxelGroup.visible = true;
-      
       voxelGroup.rotation.y = time * 0.45 + scrollMouseX * 0.5;
       voxelGroup.rotation.x = scrollMouseY * 0.4;
       voxelGroup.children.forEach(vox => vox.scale.set(1, 1, 1));
