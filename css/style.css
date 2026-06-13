@@ -1946,6 +1946,44 @@ body.theme-dream .hero__greeting-text { color: #ffc2d3; }
   .story__counters { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
   .birthday-section { grid-template-columns: 1fr; gap: 1.2rem; }
   .timeline__content { width: 100%; }
+  
+  /* Responsive Achievements Grid */
+  .achievements__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+  }
+  .achievement {
+    padding: 0.8rem 0.4rem;
+    border-radius: 14px;
+  }
+  .achievement__icon {
+    font-size: 1.6rem;
+    margin-bottom: 0.3rem;
+  }
+  .achievement__label {
+    font-size: 0.5rem;
+    letter-spacing: 0.05em;
+    line-height: 1.2;
+  }
+
+  /* Responsive Bucket Grid */
+  .bucket__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+  }
+  .bucket-item {
+    padding: 1.1rem 0.6rem;
+    border-radius: 16px;
+  }
+  .bucket-emoji {
+    font-size: 1.8rem;
+    margin-bottom: 0.3rem;
+  }
+  .bucket-text {
+    font-size: 0.72rem;
+    line-height: 1.3;
+  }
 }
 @media (max-width: 450px) {
   .moments__grid {
