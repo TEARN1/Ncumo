@@ -125,14 +125,13 @@ const OMIKUJI_FORTUNES = [
   { badge: "🌟 Dai-kichi (Great Blessing)", desc: "Perfect stars align! An extremely cozy weekend date is ahead. Hug chance: 100%." },
   { badge: "🌸 Chuu-kichi (Middle Blessing)", desc: "A sweet text message is heading your way. Your smile is guaranteed to grow today." },
   { badge: "✨ Shou-kichi (Small Blessing)", desc: "A cozy laugh and hot chocolate are in your near future. Joy is in small things!" },
-  { badge: "🍀 Kichi (Blessing)", desc: "Excellent vibes. Dressed outfits will look extra fashionable this weekend." }
+  { badge: "🍀 Kichi (Blessing)", desc: "Excellent vibes. The cozy ambient sounds will feel extra peaceful this weekend." }
 ];
 
 const ACHIEVEMENTS = [
   { id: "memory_win", icon: "🧠", label: "Memory Master" },
   { id: "hearts_50", icon: "💝", label: "50 Hearts" },
   { id: "hearts_100", icon: "💌", label: "100 Hearts" },
-  { id: "fashion_king", icon: "👑", label: "Fashion Guru" },
   { id: "question_yes", icon: "💖", label: "Said Yes" },
   { id: "fortune_draw", icon: "🎴", label: "Fortune Seeker" }
 ];
@@ -665,23 +664,35 @@ async function fetchWeatherAndSetTheme() {
 function autoUpdateThemeBasedOnTime() {
   if (sessionStorage.getItem("userSelectedTheme")) return;
   
-  // If it's currently raining, default to rain theme
-  const isRaining = weatherData && weatherData.current_weather && [51, 53, 55, 61, 63, 65, 80, 81, 82].includes(weatherData.current_weather.weathercode);
-  if (isRaining) {
-    if (targetTheme !== "rain") switchTheme("rain");
-    return;
-  }
-  
   const hours = new Date().getHours();
-  if (hours >= 19 || hours < 5) {
-    // Night is automatic (Midnight Dream)
-    if (targetTheme !== "dream") switchTheme("dream");
-  } else if (hours >= 16 && hours < 19) {
-    // Sunset hours (Sunset Cafe)
-    if (targetTheme !== "cafe") switchTheme("cafe");
+  const isNight = (hours >= 19 || hours < 5);
+  
+  if (weatherData && weatherData.current_weather) {
+    const code = weatherData.current_weather.weathercode;
+    
+    // Open-Meteo Weather Codes:
+    // Rainy / Showery / Stormy codes -> Lofi Rain
+    const rainCodes = [51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82, 95, 96, 99];
+    // Cloudy / Overcast / Foggy codes -> Sunset Cafe
+    const cloudyCodes = [2, 3, 45, 48];
+    
+    if (rainCodes.includes(code)) {
+      if (targetTheme !== "rain") switchTheme("rain");
+    } else if (isNight) {
+      if (targetTheme !== "dream") switchTheme("dream");
+    } else if (cloudyCodes.includes(code)) {
+      if (targetTheme !== "cafe") switchTheme("cafe");
+    } else {
+      // Clear sky / Mainly clear -> Sakura Spring
+      if (targetTheme !== "sakura") switchTheme("sakura");
+    }
   } else {
-    // Rest of the day (Sakura Spring)
-    if (targetTheme !== "sakura") switchTheme("sakura");
+    // Fallback if weatherData is not loaded yet or API is unreachable
+    if (isNight) {
+      if (targetTheme !== "dream") switchTheme("dream");
+    } else {
+      if (targetTheme !== "sakura") switchTheme("sakura");
+    }
   }
 }
 
@@ -2148,169 +2159,10 @@ catchStart.addEventListener("click", () => {
   }, 1000);
 });
 
-// =====================================================
-// Game 3: Chibi Dresser Room (Anonymity Checked)
-// =====================================================
-const HAIRCUTS = ["👦", "💇‍♂️", "🧢", "🎩", "👑"];
-const TOPS = ["👕", "🧥", "👔", "🦺", "🧣"];
-const BOTTOMS = ["👖", "🩳", "🩲", "🥋"];
-const SHOES = ["👟", "🥾", "👞", "🩴"];
 
-const WARDROBE_VERDICTS = [
-  "Okay stylist Ziyanda, I see you 👀🔥",
-  "You are styling me to be the best-dressed man in Ivory Park 😮‍💨",
-  "Hmm... would you still hold my hand in this?",
-  "This one's for our weekend date 😏",
-  "Drip level: dangerously in love 💖",
-  "If you like it, I'm wearing it. Simple."
-];
-
-let curHair = 0, curTop = 0, curBottom = 0, curShoes = 0;
-let savedLooks = JSON.parse(localStorage.getItem("ncumoLookbook")) || [];
-
-const avatarHair = document.getElementById("avatarHair");
-const avatarTop = document.getElementById("avatarTop");
-const avatarBottom = document.getElementById("avatarBottom");
-const avatarShoes = document.getElementById("avatarShoes");
-
-const iconHair = document.getElementById("iconHair");
-const iconTop = document.getElementById("iconTop");
-const iconBottom = document.getElementById("iconBottom");
-const iconShoes = document.getElementById("iconShoes");
-
-const fitVerdict = document.getElementById("fitVerdict");
-const fitCart = document.getElementById("fitCart");
-const lookbookGrid = document.getElementById("lookbookGrid");
-const lookbookSec = document.getElementById("lookbookSec");
-
-function updateAvatarUI() {
-  avatarHair.textContent = HAIRCUTS[curHair];
-  avatarTop.textContent = TOPS[curTop];
-  avatarBottom.textContent = BOTTOMS[curBottom];
-  avatarShoes.textContent = SHOES[curShoes];
-
-  iconHair.textContent = HAIRCUTS[curHair];
-  iconTop.textContent = TOPS[curTop];
-  iconBottom.textContent = BOTTOMS[curBottom];
-  iconShoes.textContent = SHOES[curShoes];
-}
-
-function selectNextItem(type, step) {
-  playBubbleSFX();
-  triggerChibiAnimation();
-  
-  if (type === "hair") {
-    curHair = (curHair + step + HAIRCUTS.length) % HAIRCUTS.length;
-  } else if (type === "top") {
-    curTop = (curTop + step + TOPS.length) % TOPS.length;
-  } else if (type === "bottom") {
-    curBottom = (curBottom + step + BOTTOMS.length) % BOTTOMS.length;
-  } else if (type === "shoes") {
-    curShoes = (curShoes + step + SHOES.length) % SHOES.length;
-  }
-  
-  updateAvatarUI();
-  fitVerdict.textContent = WARDROBE_VERDICTS[Math.floor(Math.random() * WARDROBE_VERDICTS.length)];
-}
-
-function triggerChibiAnimation() {
-  const avatar = document.getElementById("chibiAvatar");
-  if (!avatar) return;
-  avatar.classList.remove("poof");
-  void avatar.offsetWidth; 
-  avatar.classList.add("poof");
-}
-
-document.getElementById("prevHair").addEventListener("click", () => selectNextItem("hair", -1));
-document.getElementById("nextHair").addEventListener("click", () => selectNextItem("hair", 1));
-document.getElementById("prevTop").addEventListener("click", () => selectNextItem("top", -1));
-document.getElementById("nextTop").addEventListener("click", () => selectNextItem("top", 1));
-document.getElementById("prevBottom").addEventListener("click", () => selectNextItem("bottom", -1));
-document.getElementById("nextBottom").addEventListener("click", () => selectNextItem("bottom", 1));
-document.getElementById("prevShoes").addEventListener("click", () => selectNextItem("shoes", -1));
-document.getElementById("nextShoes").addEventListener("click", () => selectNextItem("shoes", 1));
-
-document.getElementById("fitShuffle").addEventListener("click", () => {
-  playBubbleSFX();
-  triggerChibiAnimation();
-  
-  curHair = Math.floor(Math.random() * HAIRCUTS.length);
-  curTop = Math.floor(Math.random() * TOPS.length);
-  curBottom = Math.floor(Math.random() * BOTTOMS.length);
-  curShoes = Math.floor(Math.random() * SHOES.length);
-  
-  updateAvatarUI();
-  fitVerdict.textContent = "Surprise drip styled! 🎲 How do I look?";
-});
-
-function renderLookbook() {
-  lookbookGrid.innerHTML = "";
-  if (savedLooks.length > 0) {
-    lookbookSec.hidden = false;
-    fitCart.textContent = `Cart: ${savedLooks.length} custom outfits saved!`;
-    savedLooks.forEach((look, idx) => {
-      const div = document.createElement("button");
-      div.className = "lookbook-item";
-      div.innerHTML = `<span>Look ${idx+1}:</span> ${look.hair} ${look.top} ${look.bottom} ${look.shoes}`;
-      div.addEventListener("click", () => {
-        playBubbleSFX();
-        triggerChibiAnimation();
-        
-        curHair = HAIRCUTS.indexOf(look.hair);
-        curTop = TOPS.indexOf(look.top);
-        curBottom = BOTTOMS.indexOf(look.bottom);
-        curShoes = SHOES.indexOf(look.shoes);
-        
-        updateAvatarUI();
-        fitVerdict.textContent = `Restored Look ${idx+1}! Great taste.`;
-      });
-      lookbookGrid.appendChild(div);
-    });
-  } else {
-    lookbookSec.hidden = true;
-    fitCart.textContent = "No looks saved to Lookbook yet.";
-  }
-}
-
-document.getElementById("fitBuy").addEventListener("click", () => {
-  playMatchSFX();
-  const look = {
-    hair: HAIRCUTS[curHair],
-    top: TOPS[curTop],
-    bottom: BOTTOMS[curBottom],
-    shoes: SHOES[curShoes]
-  };
-  savedLooks.push(look);
-  localStorage.setItem("ncumoLookbook", JSON.stringify(savedLooks));
-  renderLookbook();
-  unlockAchievement("fashion_king");
-  spawnSparklesAt(window.innerWidth / 2, window.innerHeight * 0.7, 8);
-});
-
-function setupDailyDrip() {
-  const seed = getDaySeed();
-  const rnd = createPRNG(seed + 54321);
-  
-  curHair = Math.floor(rnd() * HAIRCUTS.length);
-  curTop = Math.floor(rnd() * TOPS.length);
-  curBottom = Math.floor(rnd() * BOTTOMS.length);
-  curShoes = Math.floor(rnd() * SHOES.length);
-  
-  updateAvatarUI();
-  
-  const dailyOutfits = [
-    "Cozy Sunday Drip", "Sunset Walk Vibe", "Ivory Park Chic", 
-    "Lofi Study Aesthetic", "Anime Convention Style", "Weekend Date Look",
-    "Casual Coffee Drip", "Magical Evening Fit"
-  ];
-  const outfitName = dailyOutfits[Math.floor(rnd() * dailyOutfits.length)];
-  fitVerdict.textContent = `Today's Daily Look: "${outfitName}"! 🎲 Style me more!`;
-}
-setupDailyDrip();
-renderLookbook();
 
 // =====================================================
-// Game 4: Anime Love Fortune Omikuji Box
+// Game 3: Anime Love Fortune Omikuji Box
 // =====================================================
 const fortuneDrawer = document.getElementById("fortuneDrawer");
 const fortuneStick = document.getElementById("fortuneStick");
@@ -2347,7 +2199,7 @@ fortuneDrawer.addEventListener("click", () => {
 });
 
 // =====================================================
-// Game 5: One Important Question
+// Game 4: One Important Question
 // =====================================================
 const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
