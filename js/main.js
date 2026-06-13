@@ -2509,14 +2509,19 @@ function init3DScrollverse() {
   });
   
   // Setup Three.js
-  const renderer = new THREE.WebGLRenderer({ canvas: scrollCanvas, alpha: true, antialias: true });
-  renderer.setSize(scrollCanvas.clientWidth, scrollCanvas.clientHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  let renderer;
+  try {
+    renderer = new THREE.WebGLRenderer({ canvas: scrollCanvas, alpha: true, antialias: true });
+    renderer.setSize(scrollCanvas.clientWidth, scrollCanvas.clientHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  } catch (err) {
+    console.warn("Could not start WebGL in scrollverse. Modes 3, 5, and 9 will still work.", err);
+  }
   
   window.addEventListener("resize", () => {
     const w = scrollCanvas.clientWidth;
     const h = scrollCanvas.clientHeight;
-    renderer.setSize(w, h);
+    if (renderer) renderer.setSize(w, h);
     cameraPersp.aspect = w / h;
     cameraPersp.updateProjectionMatrix();
   });
@@ -2776,6 +2781,51 @@ function init3DScrollverse() {
     
     const time = clock.getElapsedTime();
     
+    // Toggle DOM elements
+    const cssCube = document.getElementById("scroll3dCssCubeContainer");
+    const ascii = document.getElementById("scroll3dAsciiContainer");
+    const typo = document.getElementById("scroll3dCssTyposContainer");
+    if (cssCube) cssCube.hidden = (activeDimension !== 3);
+    if (ascii) ascii.hidden = (activeDimension !== 5);
+    if (typo) typo.hidden = (activeDimension !== 9);
+    
+    // 3. CSS 3D Cube (Dimension 3)
+    if (activeDimension === 3) {
+      if (renderer) renderer.clear();
+      const cube = document.querySelector(".cube3d");
+      if (cube) {
+        const ry = time * 25 + scrollMouseX * 45;
+        const rx = scrollMouseY * 35;
+        cube.style.transform = `rotateX(${-rx}deg) rotateY(${ry}deg)`;
+      }
+      return;
+    }
+    
+    // 5. ASCII 3D Console (Dimension 5)
+    else if (activeDimension === 5) {
+      if (renderer) renderer.clear();
+      const pre = document.getElementById("scroll3dAsciiPre");
+      if (pre) {
+        pre.innerHTML = renderAsciiBuffer(time, scrollMouseX, scrollMouseY);
+      }
+      return;
+    }
+    
+    // 9. CSS 3D Parallax Typography (Dimension 9)
+    else if (activeDimension === 9) {
+      if (renderer) renderer.clear();
+      const container = document.querySelector(".typo3d-container");
+      if (container) {
+        const ry = scrollMouseX * 35;
+        const rx = -scrollMouseY * 35;
+        container.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
+      }
+      return;
+    }
+    
+    // All other dimensions require WebGL:
+    if (!renderer) return;
+    
     // Update theme specific background colors inside uniforms
     const bodyClass = document.body.className;
     if (bodyClass.includes("theme-sakura")) {
@@ -2858,18 +2908,6 @@ function init3DScrollverse() {
       }
     }
     
-    // 3. CSS 3D Cube (Dimension 3)
-    else if (activeDimension === 3) {
-      // Clear renderer frame
-      renderer.clear();
-      const cube = document.querySelector(".cube3d");
-      if (cube) {
-        const ry = time * 25 + scrollMouseX * 45;
-        const rx = scrollMouseY * 35;
-        cube.style.transform = `rotateX(${-rx}deg) rotateY(${ry}deg)`;
-      }
-    }
-    
     // 4. Wireframe Torus (Dimension 4)
     else if (activeDimension === 4) {
       pointCloud.visible = false;
@@ -2883,15 +2921,6 @@ function init3DScrollverse() {
       torusMat.opacity = 0.3 + 0.7 * (1.0 - dimensionProgress);
       
       renderer.render(sceneThreeD, cameraPersp);
-    }
-    
-    // 5. ASCII 3D Console (Dimension 5)
-    else if (activeDimension === 5) {
-      renderer.clear();
-      const pre = document.getElementById("scroll3dAsciiPre");
-      if (pre) {
-        pre.innerHTML = renderAsciiBuffer(time, scrollMouseX, scrollMouseY);
-      }
     }
     
     // 6. Voxel Heart (Dimension 6)
@@ -2939,17 +2968,6 @@ function init3DScrollverse() {
       
       // Reset color write mask
       renderer.colorMask(true, true, true, true);
-    }
-    
-    // 9. CSS 3D Parallax Typography (Dimension 9)
-    else if (activeDimension === 9) {
-      renderer.clear();
-      const container = document.querySelector(".typo3d-container");
-      if (container) {
-        const ry = scrollMouseX * 35;
-        const rx = -scrollMouseY * 35;
-        container.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
-      }
     }
   }
   
