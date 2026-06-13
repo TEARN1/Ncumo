@@ -1902,3 +1902,286 @@ body.theme-dream .hero__greeting-text { color: #ffc2d3; }
   25% { transform: translateX(-6px); }
   75% { transform: translateX(6px); }
 }
+
+/* =====================================================
+   🌌 3D Scrollverse "Dimensional Sanctuary" Styling
+   ===================================================== */
+.scroll3d-section {
+  position: relative;
+  width: 100%;
+  min-height: 1000vh; /* 10 dimensions, 100vh each */
+  background: transparent;
+}
+
+.scroll3d-sticky {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.scroll3d-viewport {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#scroll3dCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 1;
+  pointer-events: auto;
+}
+
+.scroll3d-css-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Dimension 3: CSS 3D Cube */
+.scene3d {
+  perspective: 1000px;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  margin-right: 25%; /* Shift left to avoid overlapping cards */
+  transition: margin 0.5s ease;
+}
+
+.cube3d {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.1s linear;
+}
+
+.cube3d__face {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  background: rgba(255, 183, 197, 0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 20px;
+  box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.3), 0 8px 32px rgba(242, 123, 155, 0.2);
+  user-select: none;
+}
+
+.cube3d__face--front  { transform: rotateY(  0deg) translateZ(100px); }
+.cube3d__face--back   { transform: rotateY(180deg) translateZ(100px); }
+.cube3d__face--left   { transform: rotateY(-90deg) translateZ(100px); }
+.cube3d__face--right  { transform: rotateY( 90deg) translateZ(100px); }
+.cube3d__face--top    { transform: rotateX( 90deg) translateZ(100px); }
+.cube3d__face--bottom { transform: rotateX(-90deg) translateZ(100px); }
+
+/* Dimension 5: ASCII 3D Console */
+.scroll3d-ascii-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 2;
+}
+
+#scroll3dAsciiPre {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 11px;
+  line-height: 10px;
+  color: #39ff14;
+  text-shadow: 0 0 6px rgba(57, 255, 20, 0.5);
+  background: rgba(5, 12, 5, 0.85);
+  padding: 1.8rem;
+  border-radius: 20px;
+  border: 1px solid rgba(57, 255, 20, 0.35);
+  pointer-events: auto;
+  max-width: 90%;
+  overflow: hidden;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.9), 0 10px 40px rgba(0, 0, 0, 0.5);
+  margin-right: 25%;
+  position: relative;
+  transition: margin 0.5s ease;
+}
+
+/* CRT Screen Scanline Effect for ASCII Terminal */
+#scroll3dAsciiPre::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+  background-size: 100% 4px;
+  z-index: 3;
+  pointer-events: none;
+  border-radius: 20px;
+}
+
+/* Dimension 9: CSS 3D Parallax Typography */
+.typo3d-container {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  display: flex;
+  gap: 1.2rem;
+  pointer-events: auto;
+  margin-right: 25%;
+  transition: margin 0.5s ease;
+}
+
+.typo3d-letter {
+  font-family: var(--display);
+  font-size: 6.5rem;
+  font-weight: 800;
+  color: var(--sakura-deep);
+  text-shadow: 0 12px 35px rgba(90, 29, 50, 0.25);
+  transform: translate3d(0, 0, var(--depth));
+  transition: transform 0.1s ease-out;
+  user-select: none;
+}
+
+/* Scrolling Panels & Cards overlay */
+.scroll3d-panels {
+  position: relative;
+  z-index: 3;
+  pointer-events: none;
+  margin-top: -1000vh;
+}
+
+.scroll3d-panel {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 8%;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.scroll3d-card {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: var(--glass-border);
+  border-radius: 28px;
+  padding: 2.5rem;
+  max-width: 440px;
+  box-shadow: var(--shadow-lg);
+  transform: translateY(40px);
+  opacity: 0;
+  pointer-events: auto;
+  color: var(--ink);
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease;
+  z-index: 4;
+}
+
+body.theme-dream .scroll3d-card {
+  background: rgba(15, 8, 28, 0.45);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+}
+
+.scroll3d-panel.active .scroll3d-card {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.dimension-num {
+  display: block;
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--sakura-deep);
+  margin-bottom: 0.8rem;
+}
+
+.scroll3d-card h3 {
+  font-family: var(--serif);
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.scroll3d-card p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  opacity: 0.85;
+}
+
+/* =====================================================
+   📱 Responsiveness for 3D Sanctuary
+   ===================================================== */
+@media (max-width: 992px) {
+  .scene3d, #scroll3dAsciiPre, .typo3d-container {
+    margin-right: 0;
+    transform: translateY(-80px);
+  }
+  .scroll3d-panel {
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 5vh;
+  }
+  .scroll3d-card {
+    padding: 1.8rem;
+    max-width: 90%;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .scene3d {
+    width: 140px;
+    height: 140px;
+  }
+  .cube3d__face {
+    width: 140px;
+    height: 140px;
+    font-size: 3.5rem;
+  }
+  .cube3d__face--front  { transform: rotateY(  0deg) translateZ(70px); }
+  .cube3d__face--back   { transform: rotateY(180deg) translateZ(70px); }
+  .cube3d__face--left   { transform: rotateY(-90deg) translateZ(70px); }
+  .cube3d__face--right  { transform: rotateY( 90deg) translateZ(70px); }
+  .cube3d__face--top    { transform: rotateX( 90deg) translateZ(70px); }
+  .cube3d__face--bottom { transform: rotateX(-90deg) translateZ(70px); }
+  
+  #scroll3dAsciiPre {
+    font-size: 7px;
+    line-height: 6px;
+    padding: 1rem;
+  }
+  
+  .typo3d-letter {
+    font-size: 3.8rem;
+  }
+}
+

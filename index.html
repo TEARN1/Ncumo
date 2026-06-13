@@ -49,6 +49,7 @@
       <li><a href="#home">Home</a></li>
       <li><a href="#about">Her</a></li>
       <li><a href="#story">Our Story</a></li>
+      <li><a href="#dimensionalSanctuary">3D Sanctuary</a></li>
       <li><a href="#notes">Notes</a></li>
       <li><a href="#games">Games</a></li>
       <li><a href="#bucket">Bucket List</a></li>
@@ -215,6 +216,120 @@
     </div>
   </section>
 
+  <!-- ===== Dimensional Sanctuary (10-Dimensional 3D Scrollverse) ===== -->
+  <section class="scroll3d-section" id="dimensionalSanctuary">
+    <div class="scroll3d-sticky">
+      <div class="scroll3d-viewport">
+        <!-- Main Canvas for WebGL, Point Cloud, Wireframes, Voxels, SBS VR, etc. -->
+        <canvas id="scroll3dCanvas"></canvas>
+        
+        <!-- Container for CSS 3D Cube Carousel -->
+        <div id="scroll3dCssCubeContainer" class="scroll3d-css-container" hidden>
+          <div class="scene3d">
+            <div class="cube3d">
+              <div class="cube3d__face cube3d__face--front">🌸</div>
+              <div class="cube3d__face cube3d__face--back">🌷</div>
+              <div class="cube3d__face cube3d__face--left">💖</div>
+              <div class="cube3d__face cube3d__face--right">✨</div>
+              <div class="cube3d__face cube3d__face--top">☕</div>
+              <div class="cube3d__face cube3d__face--bottom">💌</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Container for ASCII 3D Terminal Console -->
+        <div id="scroll3dAsciiContainer" class="scroll3d-ascii-container" hidden>
+          <pre id="scroll3dAsciiPre"></pre>
+        </div>
+        
+        <!-- Container for CSS 3D Typography Depth -->
+        <div id="scroll3dCssTyposContainer" class="scroll3d-css-container" hidden>
+          <div class="typo3d-container">
+            <div class="typo3d-letter" style="--depth: -120px;">N</div>
+            <div class="typo3d-letter" style="--depth: -60px;">C</div>
+            <div class="typo3d-letter" style="--depth: 0px;">U</div>
+            <div class="typo3d-letter" style="--depth: 60px;">M</div>
+            <div class="typo3d-letter" style="--depth: 120px;">O</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Scrolling cards overlay -->
+    <div class="scroll3d-panels">
+      <div class="scroll3d-panel" data-dimension="1">
+        <div class="scroll3d-card">
+          <span class="dimension-num">01 / 10</span>
+          <h3>Dimension 1: The Glass Core</h3>
+          <p>A WebGL raymarched glass heart that bends light, representing the core of our digital sanctuary. Drag the mouse to rotate the refraction field.</p>
+        </div>
+      </div>
+      <div class="scroll3d-panel" data-dimension="2">
+        <div class="scroll3d-card">
+          <span class="dimension-num">02 / 10</span>
+          <h3>Dimension 2: The Constellation of Us</h3>
+          <p>A 3D particle point cloud made of thousands of stardust nodes swirling together to form a rotating heart. Scrolling faster causes the particles to disperse and reform.</p>
+        </div>
+      </div>
+      <div class="scroll3d-panel" data-dimension="3">
+        <div class="scroll3d-card">
+          <span class="dimension-num">03 / 10</span>
+          <h3>Dimension 3: Memory Carousel</h3>
+          <p>A floating CSS 3D Cube whose faces display polaroids of our memories. As you move the mouse, the perspective shifts, rotating the cube in real physical 3D space.</p>
+        </div>
+      </div>
+      <div class="scroll3d-panel" data-dimension="4">
+        <div class="scroll3d-card">
+          <span class="dimension-num">04 / 10</span>
+          <h3>Dimension 4: The Blueprint of Love</h3>
+          <p>A vector wireframe torus knot projected onto a 3D perspective camera matrix. Drawn with mathematical lines, displaying the pure structure of our bond.</p>
+        </div>
+      </div>
+      <div class="scroll3d-panel" data-dimension="5">
+        <div class="scroll3d-card">
+          <span class="dimension-num">05 / 10</span>
+          <h3>Dimension 5: Lofi Cyber-Sanctuary</h3>
+          <p>An ASCII terminal engine displaying a rotating 3D heart in real-time characters. Bringing retro terminal aesthetics to our cozy romantic universe.</p>
+        </div>
+      </div>
+      <div class="scroll3d-panel" data-dimension="6">
+        <div class="scroll3d-card">
+          <span class="dimension-num">06 / 10</span>
+          <h3>Dimension 6: Pixels & Memories</h3>
+          <p>A 3D Voxel grid assembling small cubes in a volumetric layout. Watch the blocks align to form the shape of a heart, building our story block by block.</p>
+        </div>
+      </div>
+      <div class="scroll3d-panel" data-dimension="7">
+        <div class="scroll3d-card">
+          <span class="dimension-num">07 / 10</span>
+          <h3>Dimension 7: Split-Reality</h3>
+          <p>A red-cyan anaglyph stereoscopic render. Splitting reality into separate spectral dimensions, creating depth when viewed through classic 3D glasses.</p>
+        </div>
+      </div>
+      <div class="scroll3d-panel" data-dimension="8">
+        <div class="scroll3d-card">
+          <span class="dimension-num">08 / 10</span>
+          <h3>Dimension 8: Lenticular Hologram</h3>
+          <p>A holographic card effect with chromatic refraction. Moving the cursor shifts the layers horizontally to simulate a physical lenticular print.</p>
+        </div>
+      </div>
+      <div class="scroll3d-panel" data-dimension="9">
+        <div class="scroll3d-card">
+          <span class="dimension-num">09 / 10</span>
+          <h3>Dimension 9: Floating Sentiments</h3>
+          <p>CSS 3D parallax typography. Letters of "NCUMO" positioned at different Z-depths, creating a deep parallax effect as they tilt with mouse gestures.</p>
+        </div>
+      </div>
+      <div class="scroll3d-panel" data-dimension="10">
+        <div class="scroll3d-card">
+          <span class="dimension-num">10 / 10</span>
+          <h3>Dimension 10: Virtual Sanctuary</h3>
+          <p>Stereoscopic Side-by-Side (SBS) VR viewport. The scene is rendered from two separate eye-cameras, ready to be viewed in virtual reality.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== Love Notes Section ===== -->
   <section class="notes" id="notes">
     <h2 class="section-title reveal">Love Notes</h2>
@@ -230,7 +345,7 @@
       <button class="note reveal" data-note="Your name says it all — Ncumolwakhe. Her smile. The one I think about all week long.">
         <span class="note__seal">♡</span><span class="note__label">Her Smile</span>
       </button>
-      <button class="note reveal" data-note="Ndiyakuthanda, sthandwa sam. From Ivory Park to wherever you are — my heart always finds you.">
+      <button class="note reveal" data-note="Ndiyakuthanda, sthandwa sam. From Commercia, Midrand to wherever you are — my heart always finds you.">
         <span class="note__seal">✿</span><span class="note__label">Ndiyakuthanda</span>
       </button>
     </div>

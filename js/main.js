@@ -648,7 +648,7 @@ async function fetchWeatherAndSetTheme() {
   if (!statusAlerts) return;
   
   try {
-    const response = await fetch("https://api.open-meteo.com/v1/forecast?latitude=-25.9989&longitude=28.1818&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max&current_weather=true&timezone=Africa/Johannesburg");
+    const response = await fetch("https://api.open-meteo.com/v1/forecast?latitude=-25.986&longitude=28.134&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max&current_weather=true&timezone=Africa/Johannesburg");
     if (!response.ok) throw new Error("Failed to fetch weather forecast.");
     weatherData = await response.json();
     
@@ -705,7 +705,7 @@ function evaluateWeatherAlerts(data) {
   const rainProbTomorrow = data.daily.precipitation_probability_max[1];
   
   if (rainProbToday > 40) {
-    injectAlert("🌧️", `It might rain today in Ivory Park (Probability: ${rainProbToday}%). Make sure you carry an umbrella, sthandwa sam! ☔`);
+    injectAlert("🌧️", `It might rain today in Commercia, Midrand (Probability: ${rainProbToday}%). Make sure you carry an umbrella, sthandwa sam! ☔`);
   }
   if (rainProbTomorrow > 50) {
     injectAlert("👕", "Just checked the forecast — rain is coming tomorrow. Better do your laundry today while the sun is out! ☀️👕");
@@ -716,6 +716,7 @@ function evaluateWeatherAlerts(data) {
   
   updateWorkAlerts();
   updateLoadsheddingAlerts();
+  updateWaterAlerts(data);
 }
 
 function evaluateFallbackAlerts() {
@@ -726,6 +727,7 @@ function evaluateFallbackAlerts() {
   }
   updateWorkAlerts();
   updateLoadsheddingAlerts();
+  updateWaterAlerts(null);
 }
 
 function injectAlert(icon, text) {
@@ -738,7 +740,7 @@ function injectAlert(icon, text) {
 }
 
 // =====================================================
-// Loadshedding Ivory Park Block 16 Schedule Simulator
+// Loadshedding Commercia Block 9 Schedule Simulator
 // =====================================================
 function updateLoadsheddingAlerts() {
   const now = new Date();
@@ -746,16 +748,35 @@ function updateLoadsheddingAlerts() {
   
   if (scheduleToday && scheduleToday.slots.length > 0) {
     const slotStr = scheduleToday.slots.join(", ");
-    injectAlert("⚡", `Power Warning (Ivory Park Block 16): Loadshedding is scheduled for today at ${slotStr}. Remember to charge your phone and power bank! ⚡🔋`);
+    injectAlert("⚡", `Power Warning (Commercia Block 9): Loadshedding is scheduled for today at ${slotStr}. Remember to charge your phone and power bank! ⚡🔋`);
   } else {
     const tomorrow = new Date();
     tomorrow.setDate(now.getDate() + 1);
     const scheduleTomorrow = getLoadsheddingSchedule(tomorrow);
     if (scheduleTomorrow && scheduleTomorrow.slots.length > 0) {
-      injectAlert("🔌", `Power Notice: Loadshedding is scheduled for tomorrow (Ivory Park Block 16) at ${scheduleTomorrow.slots.join(", ")}. Keep everything charged! 🔋`);
+      injectAlert("🔌", `Power Notice: Loadshedding is scheduled for tomorrow (Commercia Block 9) at ${scheduleTomorrow.slots.join(", ")}. Keep everything charged! 🔋`);
     } else {
-      injectAlert("💡", "No loadshedding scheduled for Ivory Park Block 16 today or tomorrow. Enjoy the lights! 💡");
+      injectAlert("💡", "No loadshedding scheduled for Commercia Block 9 today or tomorrow. Enjoy the lights! 💡");
     }
+  }
+}
+
+// =====================================================
+// Water Supply & Reservoir Alerts (Rabie Ridge Reservoir)
+// =====================================================
+function updateWaterAlerts(data) {
+  if (data) {
+    const maxTemp = data.daily.temperature_2m_max[0];
+    const rainProb = data.daily.precipitation_probability_max[0];
+    if (maxTemp > 28) {
+      injectAlert("🚰", `Water Warning (Rabie Ridge Reservoir): Reservoir levels are stable. Due to high temperatures (${maxTemp}°C), demand is high. Please use water sparingly in Commercia, sthandwa sam! 💧`);
+    } else if (rainProb > 50) {
+      injectAlert("🚰", `Water Status (Rabie Ridge Tower): Pressure is stable and operations are normal. Stay warm and keep hydrated today! 🌧️💧`);
+    } else {
+      injectAlert("🚰", `Water Status (Rabie Ridge Reservoir): Flow is steady, pressure is normal in Commercia. Keep drinking water and stay glowing! 💧✨`);
+    }
+  } else {
+    injectAlert("🚰", `Water Status (Rabie Ridge Reservoir): Supply is normal for Commercia. Remember to drink water and take care of yourself, sthandwa sam! 💧`);
   }
 }
 
@@ -1812,6 +1833,7 @@ updateGreetingMessage();
 fetchWeatherAndSetTheme();
 initWebGLHeart();
 initLockScreen();
+init3DScrollverse();
 
 // Quote changer
 let currentQuoteIdx = 0;
@@ -2408,4 +2430,574 @@ function initLockScreen() {
   lockInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter") attemptUnlock();
   });
+}
+
+// =====================================================
+// 🌌 10-Dimensional 3D Scrollverse (Dimensional Sanctuary)
+// =====================================================
+function init3DScrollverse() {
+  const scrollCanvas = document.getElementById("scroll3dCanvas");
+  if (!scrollCanvas) return;
+  
+  const THREE = window.THREE;
+  if (!THREE) {
+    console.warn("Three.js not loaded. Cannot start 3D Scrollverse.");
+    return;
+  }
+  
+  let activeDimension = 1;
+  let dimensionProgress = 0;
+  let scrollMouseX = 0;
+  let scrollMouseY = 0;
+  
+  // Track scroll position
+  const panels = document.querySelectorAll(".scroll3d-panel");
+  function handleScroll3d() {
+    const section = document.getElementById("dimensionalSanctuary");
+    if (!section) return;
+    
+    const rect = section.getBoundingClientRect();
+    const sectionHeight = rect.height;
+    const scrolled = -rect.top;
+    
+    const totalPanels = 10;
+    const panelHeight = sectionHeight / totalPanels;
+    
+    let activeIdx = Math.floor(scrolled / panelHeight) + 1;
+    activeIdx = Math.max(1, Math.min(totalPanels, activeIdx));
+    
+    const panelOffset = scrolled % panelHeight;
+    let progress = panelOffset / panelHeight;
+    if (progress < 0) progress = 0;
+    if (progress > 1) progress = 1;
+    
+    activeDimension = activeIdx;
+    dimensionProgress = progress;
+    
+    panels.forEach((panel, idx) => {
+      if (idx + 1 === activeDimension) {
+        panel.classList.add("active");
+      } else {
+        panel.classList.remove("active");
+      }
+    });
+    
+    // Toggle DOM elements
+    const cssCube = document.getElementById("scroll3dCssCubeContainer");
+    const ascii = document.getElementById("scroll3dAsciiContainer");
+    const typo = document.getElementById("scroll3dCssTyposContainer");
+    if (cssCube) cssCube.hidden = (activeDimension !== 3);
+    if (ascii) ascii.hidden = (activeDimension !== 5);
+    if (typo) typo.hidden = (activeDimension !== 9);
+  }
+  window.addEventListener("scroll", handleScroll3d);
+  handleScroll3d(); // run once
+  
+  // Track Mouse movement in 3D section
+  const section = document.getElementById("dimensionalSanctuary");
+  section.addEventListener("mousemove", (e) => {
+    const rect = section.getBoundingClientRect();
+    scrollMouseX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+    scrollMouseY = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
+  });
+  section.addEventListener("touchmove", (e) => {
+    if (e.touches.length > 0) {
+      const rect = section.getBoundingClientRect();
+      scrollMouseX = ((e.touches[0].clientX - rect.left) / rect.width) * 2 - 1;
+      scrollMouseY = -(((e.touches[0].clientY - rect.top) / rect.height) * 2 - 1);
+    }
+  });
+  
+  // Setup Three.js
+  const renderer = new THREE.WebGLRenderer({ canvas: scrollCanvas, alpha: true, antialias: true });
+  renderer.setSize(scrollCanvas.clientWidth, scrollCanvas.clientHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  
+  window.addEventListener("resize", () => {
+    const w = scrollCanvas.clientWidth;
+    const h = scrollCanvas.clientHeight;
+    renderer.setSize(w, h);
+    cameraPersp.aspect = w / h;
+    cameraPersp.updateProjectionMatrix();
+  });
+  
+  // Cameras
+  const cameraOrtho = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+  const cameraPersp = new THREE.PerspectiveCamera(45, scrollCanvas.clientWidth / scrollCanvas.clientHeight, 0.1, 100);
+  cameraPersp.position.z = 5;
+  
+  // Scenes
+  const sceneRaymarch = new THREE.Scene();
+  const sceneThreeD = new THREE.Scene();
+  
+  // Lighting for 3D elements
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.65);
+  sceneThreeD.add(ambientLight);
+  const dirLight = new THREE.DirectionalLight(0xffffff, 0.85);
+  dirLight.position.set(5, 5, 5);
+  sceneThreeD.add(dirLight);
+  
+  // 1. Raymarch Plane Shader Material
+  const uniforms = {
+    u_resolution: { value: new THREE.Vector2(scrollCanvas.clientWidth, scrollCanvas.clientHeight) },
+    u_time: { value: 0 },
+    u_mouse: { value: new THREE.Vector2(0, 0) },
+    u_heartColor: { value: new THREE.Color(0.95, 0.65, 0.73) }, // pinkish
+    u_innerColor: { value: new THREE.Color(1.0, 0.89, 0.91) },
+    u_bgColor1: { value: new THREE.Color(1.0, 0.95, 0.96) },
+    u_bgColor2: { value: new THREE.Color(0.98, 0.93, 0.99) },
+    u_theme: { value: 1.0 }
+  };
+  
+  const shaderMaterial = new THREE.ShaderMaterial({
+    vertexShader: `
+      varying vec2 vUv;
+      void main() {
+        vUv = uv;
+        gl_Position = vec4(position, 1.0);
+      }
+    `,
+    fragmentShader: `
+      varying vec2 vUv;
+      uniform vec2 u_resolution;
+      uniform float u_time;
+      uniform vec2 u_mouse;
+      uniform vec3 u_heartColor;
+      uniform vec3 u_innerColor;
+      uniform vec3 u_bgColor1;
+      uniform vec3 u_bgColor2;
+      uniform float u_theme;
+
+      float sdHeart(vec3 p) {
+        p.x = abs(p.x);
+        p.y += 0.35;
+        float z = p.z;
+        float y = p.y;
+        float x = p.x;
+        float a = x*x + 1.8*y*y + z*z - 0.85;
+        float h = x*x*z*z*z * 0.5;
+        return a*a*a - h;
+      }
+
+      float map(vec3 p) {
+        float pulse = 1.0 + 0.07 * sin(u_time * 4.2);
+        p /= pulse;
+        float rx = u_mouse.y * 0.4;
+        float ry = u_mouse.x * 0.5 + u_time * 0.22;
+        float cy = cos(ry), sy = sin(ry);
+        p.xz = mat2(cy, -sy, sy, cy) * p.xz;
+        float cx = cos(rx), sx = sin(rx);
+        p.yz = mat2(cx, -sx, sx, cx) * p.yz;
+        return sdHeart(p) * 0.25 * pulse;
+      }
+
+      vec3 calcNormal(vec3 p) {
+        vec2 e = vec2(0.001, 0.0);
+        return normalize(vec3(
+          map(p + e.xyy) - map(p - e.xyy),
+          map(p + e.yxy) - map(p - e.yxy),
+          map(p + e.yyx) - map(p - e.yyx)
+        ));
+      }
+
+      void main() {
+        vec2 uv = vUv - 0.5;
+        uv.x *= u_resolution.x / u_resolution.y;
+        vec3 col = vec3(0.0);
+        
+        if (u_theme == 8.0) {
+          float shift = u_mouse.x * 0.04 + sin(u_time * 1.5) * 0.01;
+          
+          // Red
+          vec2 uvR = uv - vec2(shift, 0.0);
+          vec3 roR = vec3(0.0, 0.0, 2.2);
+          vec3 rdR = normalize(vec3(uvR, -1.0));
+          float tR = 0.0;
+          for (int i=0; i<24; i++) {
+            vec3 p = roR + rdR * tR;
+            float d = map(p);
+            if (d < 0.001 || tR > 4.0) break;
+            tR += d;
+          }
+          
+          // Green
+          vec2 uvG = uv;
+          vec3 roG = vec3(0.0, 0.0, 2.2);
+          vec3 rdG = normalize(vec3(uvG, -1.0));
+          float tG = 0.0;
+          for (int i=0; i<24; i++) {
+            vec3 p = roG + rdG * tG;
+            float d = map(p);
+            if (d < 0.001 || tG > 4.0) break;
+            tG += d;
+          }
+          
+          // Blue
+          vec2 uvB = uv + vec2(shift, 0.0);
+          vec3 roB = vec3(0.0, 0.0, 2.2);
+          vec3 rdB = normalize(vec3(uvB, -1.0));
+          float tB = 0.0;
+          for (int i=0; i<24; i++) {
+            vec3 p = roB + rdB * tB;
+            float d = map(p);
+            if (d < 0.001 || tB > 4.0) break;
+            tB += d;
+          }
+          
+          vec3 cBg = mix(u_bgColor1, u_bgColor2, vUv.y);
+          col.r = (tR < 4.0) ? mix(u_heartColor.r, u_innerColor.r, dot(calcNormal(roR + rdR * tR), vec3(0.0,0.0,1.0))) : cBg.r;
+          col.g = (tG < 4.0) ? mix(u_heartColor.g, u_innerColor.g, dot(calcNormal(roG + rdG * tG), vec3(0.0,0.0,1.0))) : cBg.g;
+          col.b = (tB < 4.0) ? mix(u_heartColor.b, u_innerColor.b, dot(calcNormal(roB + rdB * tB), vec3(0.0,0.0,1.0))) : cBg.b;
+        } else {
+          vec3 ro = vec3(0.0, 0.0, 2.2);
+          vec3 rd = normalize(vec3(uv, -1.0));
+          float t = 0.0;
+          for (int i=0; i<24; i++) {
+            vec3 p = ro + rd * t;
+            float d = map(p);
+            if (d < 0.001 || t > 4.0) break;
+            t += d;
+          }
+          
+          col = mix(u_bgColor1, u_bgColor2, vUv.y);
+          
+          if (t < 4.0) {
+            vec3 pos = ro + rd * t;
+            vec3 nor = calcNormal(pos);
+            float diff = max(0.0, dot(nor, normalize(vec3(1.0, 1.0, 1.0))));
+            float spec = pow(max(0.0, dot(reflect(rd, nor), normalize(vec3(1.0,1.0,1.0)))), 16.0);
+            vec3 hCol = mix(u_heartColor, u_innerColor, dot(nor, vec3(0.0,0.0,1.0)) * 0.5 + 0.5);
+            col = hCol * (diff * 0.8 + 0.2) + vec3(1.0) * spec * 0.4;
+          }
+        }
+        gl_FragColor = vec4(col, 1.0);
+      }
+    `,
+    uniforms: uniforms,
+    depthWrite: false,
+    depthTest: false
+  });
+  
+  const planeGeo = new THREE.PlaneGeometry(2, 2);
+  const planeMesh = new THREE.Mesh(planeGeo, shaderMaterial);
+  sceneRaymarch.add(planeMesh);
+  
+  // 2. Point Cloud Particles
+  const pCount = 2000;
+  const pPositions = new Float32Array(pCount * 3);
+  const pOrigPositions = new Float32Array(pCount * 3);
+  const pColors = new Float32Array(pCount * 3);
+  
+  for (let i = 0; i < pCount; i++) {
+    const t = Math.PI * (2 * Math.random() - 1);
+    const p = Math.PI * (Math.random() - 0.5);
+    const scale = 0.2 + 0.8 * Math.random();
+    
+    const x = 16 * Math.pow(Math.sin(t), 3) * scale;
+    const y = (13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t)) * scale;
+    const z = (Math.random() - 0.5) * 12;
+    
+    pOrigPositions[i*3] = x * 0.12;
+    pOrigPositions[i*3+1] = y * 0.12;
+    pOrigPositions[i*3+2] = z * 0.12;
+    
+    pPositions[i*3] = x * 0.12;
+    pPositions[i*3+1] = y * 0.12;
+    pPositions[i*3+2] = z * 0.12;
+    
+    // Gradient pink/rose/violet colors
+    pColors[i*3] = 0.95 + Math.random() * 0.05;
+    pColors[i*3+1] = 0.45 + Math.random() * 0.2;
+    pColors[i*3+2] = 0.6 + Math.random() * 0.25;
+  }
+  
+  const pGeo = new THREE.BufferGeometry();
+  pGeo.setAttribute('position', new THREE.BufferAttribute(pPositions, 3));
+  pGeo.setAttribute('color', new THREE.BufferAttribute(pColors, 3));
+  
+  const pMat = new THREE.PointsMaterial({
+    size: 0.09,
+    vertexColors: true,
+    transparent: true,
+    opacity: 0.9,
+    blending: THREE.AdditiveBlending
+  });
+  const pointCloud = new THREE.Points(pGeo, pMat);
+  sceneThreeD.add(pointCloud);
+  
+  // 4. Torus Knot wireframe mesh
+  const torusGeo = new THREE.TorusKnotGeometry(1.0, 0.28, 100, 12);
+  const torusMat = new THREE.MeshBasicMaterial({ color: 0xff4fac, wireframe: true, transparent: true, opacity: 0.8 });
+  const torusMesh = new THREE.Mesh(torusGeo, torusMat);
+  sceneThreeD.add(torusMesh);
+  
+  // 5. ASCII coordinates setup
+  const asciiPoints = [];
+  for (let t = 0; t < Math.PI * 2; t += 0.12) {
+    for (let p = -Math.PI/2; p < Math.PI/2; p += 0.12) {
+      const x = 16 * Math.pow(Math.sin(t), 3) * Math.cos(p);
+      const y = 13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t);
+      const z = 16 * Math.pow(Math.sin(t), 3) * Math.sin(p);
+      asciiPoints.push({ x: x * 0.1, y: -y * 0.1, z: z * 0.1 });
+    }
+  }
+  
+  // 6. Voxel Grid setup
+  const voxelGroup = new THREE.Group();
+  const boxGeo = new THREE.BoxGeometry(0.16, 0.16, 0.16);
+  const boxMat = new THREE.MeshStandardMaterial({ color: 0xff7c9b, roughness: 0.3, metalness: 0.15 });
+  
+  const vSize = 7;
+  for (let x = -vSize; x <= vSize; x++) {
+    for (let y = -vSize; y <= vSize; y++) {
+      for (let z = -vSize; z <= vSize; z++) {
+        const xF = x / (vSize * 0.85);
+        const yF = y / (vSize * 0.85);
+        const zF = z / (vSize * 0.85);
+        
+        const a = xF*xF + (9/4)*yF*yF + zF*zF - 1.0;
+        const hVal = a*a*a - xF*xF*zF*zF*zF;
+        
+        if (hVal <= 0.0) {
+          const voxel = new THREE.Mesh(boxGeo, boxMat);
+          voxel.position.set(x * 0.22, y * 0.22, z * 0.22);
+          voxelGroup.add(voxel);
+        }
+      }
+    }
+  }
+  sceneThreeD.add(voxelGroup);
+  
+  // Main animation / render loop
+  const clock = new THREE.Clock();
+  
+  function animate3d() {
+    requestAnimationFrame(animate3d);
+    
+    const time = clock.getElapsedTime();
+    
+    // Update theme specific background colors inside uniforms
+    const bodyClass = document.body.className;
+    if (bodyClass.includes("theme-sakura")) {
+      uniforms.u_heartColor.value.set("#ffb7c5");
+      uniforms.u_bgColor1.value.set("#fff2f5");
+      uniforms.u_bgColor2.value.set("#ffefe8");
+    } else if (bodyClass.includes("theme-cafe")) {
+      uniforms.u_heartColor.value.set("#ffaa76");
+      uniforms.u_bgColor1.value.set("#ffefe8");
+      uniforms.u_bgColor2.value.set("#ffe3d5");
+    } else if (bodyClass.includes("theme-dream")) {
+      uniforms.u_heartColor.value.set("#9b72cf");
+      uniforms.u_bgColor1.value.set("#140d21");
+      uniforms.u_bgColor2.value.set("#1f1435");
+    } else if (bodyClass.includes("theme-rain")) {
+      uniforms.u_heartColor.value.set("#4facfe");
+      uniforms.u_bgColor1.value.set("#f0f4f8");
+      uniforms.u_bgColor2.value.set("#d0e1f9");
+    }
+    
+    // Update basic uniforms
+    uniforms.u_time.value = time;
+    // Dampen/smooth mouse coordinates
+    uniforms.u_mouse.value.x += (scrollMouseX - uniforms.u_mouse.value.x) * 0.1;
+    uniforms.u_mouse.value.y += (scrollMouseY - uniforms.u_mouse.value.y) * 0.1;
+    
+    // 1. Raymarch Render (Dimensions 1 and 8)
+    if (activeDimension === 1 || activeDimension === 8) {
+      uniforms.u_theme.value = activeDimension;
+      renderer.render(sceneRaymarch, cameraOrtho);
+    }
+    
+    // 2. Points (Dimension 2 & SBS 10)
+    else if (activeDimension === 2 || activeDimension === 10) {
+      pointCloud.visible = true;
+      torusMesh.visible = false;
+      voxelGroup.visible = false;
+      
+      pointCloud.rotation.y = time * 0.4 + scrollMouseX * 0.6;
+      pointCloud.rotation.x = scrollMouseY * 0.4;
+      
+      // Dispersion behavior
+      const posAttr = pointCloud.geometry.attributes.position;
+      const arr = posAttr.array;
+      for (let i = 0; i < pCount; i++) {
+        const theta = i * 0.15 + time;
+        const dispersionFactor = activeDimension === 2 ? dimensionProgress : 0.0;
+        const dx = Math.sin(theta) * dispersionFactor * 4.5;
+        const dy = Math.cos(theta) * dispersionFactor * 4.5;
+        arr[i*3] = pOrigPositions[i*3] + dx;
+        arr[i*3+1] = pOrigPositions[i*3+1] + dy;
+      }
+      posAttr.needsUpdate = true;
+      
+      if (activeDimension === 2) {
+        renderer.render(sceneThreeD, cameraPersp);
+      } else {
+        // SBS VR Viewport render
+        const w = scrollCanvas.clientWidth;
+        const h = scrollCanvas.clientHeight;
+        
+        // Left Eye
+        renderer.setViewport(0, 0, w / 2, h);
+        renderer.setScissor(0, 0, w / 2, h);
+        renderer.setScissorTest(true);
+        cameraPersp.position.set(-0.25, 0, 5);
+        cameraPersp.lookAt(0, 0, 0);
+        renderer.render(sceneThreeD, cameraPersp);
+        
+        // Right Eye
+        renderer.setViewport(w / 2, 0, w / 2, h);
+        renderer.setScissor(w / 2, 0, w / 2, h);
+        cameraPersp.position.set(0.25, 0, 5);
+        cameraPersp.lookAt(0, 0, 0);
+        renderer.render(sceneThreeD, cameraPersp);
+        
+        // Restore
+        renderer.setScissorTest(false);
+        renderer.setViewport(0, 0, w, h);
+      }
+    }
+    
+    // 3. CSS 3D Cube (Dimension 3)
+    else if (activeDimension === 3) {
+      // Clear renderer frame
+      renderer.clear();
+      const cube = document.querySelector(".cube3d");
+      if (cube) {
+        const ry = time * 25 + scrollMouseX * 45;
+        const rx = scrollMouseY * 35;
+        cube.style.transform = `rotateX(${-rx}deg) rotateY(${ry}deg)`;
+      }
+    }
+    
+    // 4. Wireframe Torus (Dimension 4)
+    else if (activeDimension === 4) {
+      pointCloud.visible = false;
+      torusMesh.visible = true;
+      voxelGroup.visible = false;
+      
+      torusMesh.rotation.y = time * 0.55 + scrollMouseX * 0.7;
+      torusMesh.rotation.x = time * 0.35 - scrollMouseY * 0.5;
+      
+      // Modify opacity slightly with progress
+      torusMat.opacity = 0.3 + 0.7 * (1.0 - dimensionProgress);
+      
+      renderer.render(sceneThreeD, cameraPersp);
+    }
+    
+    // 5. ASCII 3D Console (Dimension 5)
+    else if (activeDimension === 5) {
+      renderer.clear();
+      const pre = document.getElementById("scroll3dAsciiPre");
+      if (pre) {
+        pre.innerHTML = renderAsciiBuffer(time, scrollMouseX, scrollMouseY);
+      }
+    }
+    
+    // 6. Voxel Heart (Dimension 6)
+    else if (activeDimension === 6) {
+      pointCloud.visible = false;
+      torusMesh.visible = false;
+      voxelGroup.visible = true;
+      
+      voxelGroup.rotation.y = time * 0.45 + scrollMouseX * 0.5;
+      voxelGroup.rotation.x = scrollMouseY * 0.4;
+      
+      voxelGroup.children.forEach((vox, idx) => {
+        const scaleVal = Math.max(0.01, Math.min(1.0, (1.2 - idx / voxelGroup.children.length) + (dimensionProgress - 0.5) * 2.0));
+        vox.scale.set(scaleVal, scaleVal, scaleVal);
+      });
+      
+      renderer.render(sceneThreeD, cameraPersp);
+    }
+    
+    // 7. Red-Cyan Anaglyph Voxel Heart (Dimension 7)
+    else if (activeDimension === 7) {
+      pointCloud.visible = false;
+      torusMesh.visible = false;
+      voxelGroup.visible = true;
+      
+      voxelGroup.rotation.y = time * 0.45 + scrollMouseX * 0.5;
+      voxelGroup.rotation.x = scrollMouseY * 0.4;
+      voxelGroup.children.forEach(vox => vox.scale.set(1, 1, 1));
+      
+      // Anaglyph Camera Mask Render
+      renderer.clear();
+      
+      // Left eye (red only)
+      renderer.colorMask(true, false, false, true);
+      cameraPersp.position.set(-0.15, 0, 5);
+      cameraPersp.lookAt(0, 0, 0);
+      renderer.render(sceneThreeD, cameraPersp);
+      
+      // Right eye (cyan: green + blue)
+      renderer.clearDepth();
+      renderer.colorMask(false, true, true, true);
+      cameraPersp.position.set(0.15, 0, 5);
+      cameraPersp.lookAt(0, 0, 0);
+      renderer.render(sceneThreeD, cameraPersp);
+      
+      // Reset color write mask
+      renderer.colorMask(true, true, true, true);
+    }
+    
+    // 9. CSS 3D Parallax Typography (Dimension 9)
+    else if (activeDimension === 9) {
+      renderer.clear();
+      const container = document.querySelector(".typo3d-container");
+      if (container) {
+        const ry = scrollMouseX * 35;
+        const rx = -scrollMouseY * 35;
+        container.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
+      }
+    }
+  }
+  
+  // Custom ASCII screen-buffer logic
+  function renderAsciiBuffer(time, mx, my) {
+    const width = 50;
+    const height = 24;
+    const buffer = Array(width * height).fill(" ");
+    const zBuffer = Array(width * height).fill(-Infinity);
+    
+    const cosX = Math.cos(time * 0.65 + mx * 1.5);
+    const sinX = Math.sin(time * 0.65 + mx * 1.5);
+    const cosY = Math.cos(time * 0.45 + my * 1.5);
+    const sinY = Math.sin(time * 0.45 + my * 1.5);
+    
+    asciiPoints.forEach(p => {
+      // Rotation
+      let y1 = p.y * cosX - p.z * sinX;
+      let z1 = p.y * sinX + p.z * cosX;
+      let x2 = p.x * cosY + z1 * sinY;
+      let z2 = -p.x * sinY + z1 * cosY;
+      
+      const dist = 10;
+      const ooz = 1 / (z2 + dist);
+      
+      const xp = Math.floor(width / 2 + x2 * ooz * 32 * 2);
+      const yp = Math.floor(height / 2 + y1 * ooz * 16);
+      
+      if (xp >= 0 && xp < width && yp >= 0 && yp < height) {
+        const idx = xp + yp * width;
+        if (z2 > zBuffer[idx]) {
+          zBuffer[idx] = z2;
+          const chars = ".,-~:;=!*#$@";
+          const charIdx = Math.floor(Math.max(0, Math.min(chars.length - 1, (z2 + 3) * 2.2)));
+          buffer[idx] = chars[charIdx];
+        }
+      }
+    });
+    
+    let output = "";
+    for (let y = 0; y < height; y++) {
+      for (let x = 0; x < width; x++) {
+        output += buffer[x + y * width];
+      }
+      output += "\n";
+    }
+    return output;
+  }
+  
+  animate3d();
 }
