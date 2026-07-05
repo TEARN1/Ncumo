@@ -3037,7 +3037,7 @@ function init3DScrollverse() {
       const yp = Math.floor(height / 2 + y1 * ooz * 16);
       
       if (xp >= 0 && xp < width && yp >= 0 && yp < height) {
-        const idx = xp + yp * width;
+const idx = xp + yp * width;
         if (z2 > zBuffer[idx]) {
           zBuffer[idx] = z2;
           const chars = ".,-~:;=!*#$@";
@@ -3092,7 +3092,7 @@ const CALC_MODULES = [
     conceptText: "In Calculus, a limit is the value a function approaches as the input gets closer and closer to some number. Even if the function is undefined at that exact spot, the limit can still exist! It is about the journey, not the destination. Just like how two hearts can align closer and closer until they beat as one.",
     realWorldTitle: "GPS Velocity tracking",
     realWorldText: "To calculate your exact speed at a specific instant (instantaneous velocity), a GPS device cannot divide by zero elapsed time. Instead, it takes the limit of your average velocity as the time interval approaches 0.",
-    mathFormula: "\\lim_{x \\to a} f(x) = L",
+    mathFormula: "\\lim_{x \\to 3} \\frac{x^2 - 9}{x - 3} = 6",
     chalkMotivation: "Limits are like standing on a balcony together, leaning in closer and closer... but never stepping off. Mathematics is all about finding the beauty in closeness.",
     challengeQuestion: "Evaluate the limit algebraically:<br><strong>$$\\lim_{x \\to 3} \\frac{x^2 - 9}{x - 3}$$</strong>",
     correctAnswer: "6",
@@ -3104,11 +3104,11 @@ const CALC_MODULES = [
       "You are left with (x + 3). Now plug x = 3 directly into this simplified expression: 3 + 3 = ?"
     ],
     solutionSteps: [
-      "Directly substituting <strong>x = 3</strong> yields <strong>(3^2 - 9)/(3 - 3) = 0/0</strong>, which is undefined (indeterminate form).",
-      "Factor the numerator using the difference of squares rule: <strong>x^2 - 9 = (x - 3)(x + 3)</strong>.",
-      "Substitute this factorization back into the limit: <strong>&lim;_{x &rarr; 3} [(x - 3)(x + 3)] / (x - 3)</strong>.",
-      "Cancel the common factor <strong>(x - 3)</strong> since x approaches 3 but is not exactly 3: <strong>&lim;_{x &rarr; 3} (x + 3)</strong>.",
-      "Substitute <strong>x = 3</strong> into the remaining simplified expression: <strong>3 + 3 = 6</strong>."
+      "Directly substituting $x = 3$ yields $(3^2 - 9)/(3 - 3) = 0/0$, which is undefined (indeterminate form).",
+      "Factor the numerator using the difference of squares rule: $x^2 - 9 = (x - 3)(x + 3)$.",
+      "Substitute this factorization back into the limit: $\\lim_{x \\to 3} \\frac{(x - 3)(x + 3)}{x - 3}$.",
+      "Cancel the common factor $(x - 3)$ since $x \\neq 3$ in the limit context: $\\lim_{x \\to 3} (x + 3)$.",
+      "Substitute $x = 3$ into the remaining simplified expression: $3 + 3 = 6$."
     ]
   },
   {
@@ -3130,12 +3130,12 @@ const CALC_MODULES = [
       "Take the limit as h goes to 0: 4x + 2(0) = 4x. Now evaluate 4x at x = 3. What is 4 * 3?"
     ],
     solutionSteps: [
-      "Apply the definition of the derivative from first principles: <strong>f'(x) = &lim;_{h &rarr; 0} [f(x+h) - f(x)] / h</strong>.",
-      "Evaluate <strong>f(x+h)</strong>: <strong>f(x+h) = 2(x+h)^2 = 2(x^2 + 2xh + h^2) = 2x^2 + 4xh + 2h^2</strong>.",
-      "Subtract <strong>f(x) = 2x^2</strong>: <strong>f(x+h) - f(x) = 2x^2 + 4xh + 2h^2 - 2x^2 = 4xh + 2h^2</strong>.",
-      "Divide by <strong>h</strong>: <strong>(4xh + 2h^2) / h = h(4x + 2h) / h = 4x + 2h</strong>.",
-      "Evaluate the limit as <strong>h &rarr; 0</strong>: <strong>&lim;_{h &rarr; 0} (4x + 2h) = 4x</strong>.",
-      "Substitute <strong>x = 3</strong> to get the final slope: <strong>f'(3) = 4(3) = 12</strong>."
+      "Apply the definition of the derivative from first principles: $f'(x) = \\lim_{h \\to 0} \\frac{f(x+h) - f(x)}{h}$.",
+      "Evaluate $f(x+h)$: $f(x+h) = 2(x+h)^2 = 2(x^2 + 2xh + h^2) = 2x^2 + 4xh + 2h^2$.",
+      "Subtract $f(x) = 2x^2$: $f(x+h) - f(x) = 2x^2 + 4xh + 2h^2 - 2x^2 = 4xh + 2h^2$.",
+      "Divide by $h$: $\\frac{4xh + 2h^2}{h} = \\frac{h(4x + 2h)}{h} = 4x + 2h$.",
+      "Evaluate the limit as $h \\to 0$: $\\lim_{h \\to 0} (4x + 2h) = 4x$.",
+      "Substitute $x = 3$ to get the final slope: $f'(3) = 4(3) = 12$."
     ]
   },
   {
@@ -3157,12 +3157,12 @@ const CALC_MODULES = [
       "Substitute x = 1: f'(1) = 24(1) * (3(1)^2 + 2)^3 = 24 * 5^3. Solve 24 * 125."
     ],
     solutionSteps: [
-      "Identify the outer function <strong>f(u) = u^4</strong> and the inner function <strong>u = g(x) = 3x^2 + 2</strong>.",
-      "Differentiate the outer function: <strong>f'(u) = 4u^3 = 4(3x^2 + 2)^3</strong>.",
-      "Differentiate the inner function: <strong>g'(x) = 6x</strong>.",
-      "Apply the Chain Rule: <strong>f'(x) = 4(3x^2 + 2)^3 &middot; 6x = 24x(3x^2 + 2)^3</strong>.",
-      "Substitute <strong>x = 1</strong>: <strong>f'(1) = 24(1)(3(1)^2 + 2)^3 = 24 &middot; (5)^3</strong>.",
-      "Calculate <strong>5^3 = 125</strong>, then multiply: <strong>24 &middot; 125 = 3000</strong>."
+      "Identify the outer function $f(u) = u^4$ and the inner function $u = g(x) = 3x^2 + 2$.",
+      "Differentiate the outer function: $f'(u) = 4u^3 = 4(3x^2 + 2)^3$.",
+      "Differentiate the inner function: $g'(x) = 6x$.",
+      "Apply the Chain Rule: $f'(x) = 4(3x^2 + 2)^3 \\cdot 6x = 24x(3x^2 + 2)^3$.",
+      "Substitute $x = 1$: $f'(1) = 24(1)(3(1)^2 + 2)^3 = 24 \\cdot (5)^3$.",
+      "Calculate $5^3 = 125$, then multiply: $24 \\cdot 125 = 3000$."
     ]
   },
   {
@@ -3184,13 +3184,13 @@ const CALC_MODULES = [
       "Solve for x: 4x = 40, so x = 10. Calculate the maximum area A(10) = 40(10) - 2(10)^2."
     ],
     solutionSteps: [
-      "Define the dimensions: Let <strong>x</strong> be the sides perpendicular to the wall, and <strong>y</strong> be the side parallel to the wall.",
-      "Set up the fence length constraint: <strong>2x + y = 40 &rArr; y = 40 - 2x</strong>.",
-      "Write the area function: <strong>Area (A) = x &middot; y = x(40 - 2x) = 40x - 2x^2</strong>.",
-      "Find the derivative of the area function: <strong>A'(x) = 40 - 4x</strong>.",
-      "Set the derivative to zero for local extreme values: <strong>40 - 4x = 0 &rArr; 4x = 40 &rArr; x = 10</strong>.",
-      "Confirm it is a maximum: The second derivative is <strong>A''(x) = -4</strong> (negative, so it is a local maximum).",
-      "Calculate the maximum area: <strong>A(10) = 10 &middot; (40 - 2(10)) = 10 &middot; 20 = 200 square meters</strong>."
+      "Define the dimensions: Let $x$ be the sides perpendicular to the wall, and $y$ be the side parallel to the wall.",
+      "Set up the fence length constraint: $2x + y = 40 \\implies y = 40 - 2x$.",
+      "Write the area function: $Area (A) = x \\cdot y = x(40 - 2x) = 40x - 2x^2$.",
+      "Find the derivative of the area function: $A'(x) = 40 - 4x$.",
+      "Set the derivative to zero for local extreme values: $40 - 4x = 0 \\implies 4x = 40 \\implies x = 10$.",
+      "Confirm it is a maximum: The second derivative is $A''(x) = -4$ (negative, so it is a local maximum).",
+      "Calculate the maximum area: $A(10) = 10 \\cdot (40 - 2(10)) = 10 \\cdot 20 = 200\\text{ square meters}$."
     ]
   },
   {
@@ -3200,7 +3200,7 @@ const CALC_MODULES = [
     conceptText: "If differentiation splits a curve into tiny pieces, integration gathers those pieces back together. By summing up infinite infinitely thin rectangles (Riemann sums), we can calculate the exact area under any curve. Integration accumulates change over time.",
     realWorldTitle: "Tesla Battery Range",
     realWorldText: "Electric cars continuously change speed. The car's computer integrates the varying velocity curve over elapsed time to calculate the exact distance travelled and predict remaining battery range.",
-    mathFormula: "\\int x^n dx = \\frac{x^{n+1}}{n+1} + C",
+    mathFormula: "\\int_{1}^{3} 3x^2 dx = [x^3]_{1}^{3} = 26",
     chalkMotivation: "Integration sums up every tiny moment. Every single second spent together accumulates into a lifetime of memories.",
     challengeQuestion: "Find the exact area under the curve <strong>f(x) = 3x^2</strong> from <strong>x = 1</strong> to <strong>x = 3</strong>.",
     correctAnswer: "26",
@@ -3212,15 +3212,165 @@ const CALC_MODULES = [
       "Calculate 3^3 = 27 and 1^3 = 1. What is 27 - 1?"
     ],
     solutionSteps: [
-      "Formulate the definite integral representing the area: <strong>Area = &int;_{1}^{3} 3x^2 dx</strong>.",
-      "Find the antiderivative: <strong>&int; 3x^2 dx = 3 &middot; (x^3 / 3) = x^3</strong>.",
-      "Apply the Fundamental Theorem of Calculus: <strong>Area = [x^3]_{1}^{3} = F(3) - F(1)</strong>.",
-      "Calculate the upper bound value: <strong>3^3 = 27</strong>.",
-      "Calculate the lower bound value: <strong>1^3 = 1</strong>.",
-      "Perform the subtraction: <strong>27 - 1 = 26</strong>."
+      "Formulate the definite integral representing the area: $Area = \\int_{1}^{3} 3x^2 dx$.",
+      "Find the antiderivative: $\\int 3x^2 dx = 3 \\cdot (x^3 / 3) = x^3$.",
+      "Apply the Fundamental Theorem of Calculus: $Area = [x^3]_{1}^{3} = F(3) - F(1)$.",
+      "Calculate the upper bound value: $3^3 = 27$.",
+      "Calculate the lower bound value: $1^3 = 1$.",
+      "Perform the subtraction: $27 - 1 = 26$."
     ]
   }
 ];
+
+// Chalk Audio Synthesizer Context
+let calcAudioCtx = null;
+function getCalcAudioCtx() {
+  if (!calcAudioCtx) {
+    calcAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  return calcAudioCtx;
+}
+
+function playChalkSound(type) {
+  try {
+    const ctx = getCalcAudioCtx();
+    if (!ctx) return;
+    if (ctx.state === "suspended") {
+      ctx.resume();
+    }
+    
+    const osc = ctx.createOscillator();
+    const gainNode = ctx.createGain();
+    osc.connect(gainNode);
+    gainNode.connect(ctx.destination);
+    
+    const now = ctx.currentTime;
+    
+    if (type === 'write') {
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(2200, now);
+      osc.frequency.exponentialRampToValueAtTime(120, now + 0.08);
+      gainNode.gain.setValueAtTime(0.012, now);
+      gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.08);
+      osc.start(now);
+      osc.stop(now + 0.08);
+    } else if (type === 'click') {
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(900, now);
+      gainNode.gain.setValueAtTime(0.02, now);
+      gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.04);
+      osc.start(now);
+      osc.stop(now + 0.04);
+    } else if (type === 'success') {
+      const freqs = [329.63, 392.00, 523.25, 659.25]; // C major harmony
+      freqs.forEach((f, i) => {
+        const oscNode = ctx.createOscillator();
+        const gNode = ctx.createGain();
+        oscNode.type = 'sine';
+        oscNode.frequency.setValueAtTime(f, now + i * 0.08);
+        gNode.gain.setValueAtTime(0, now);
+        gNode.gain.linearRampToValueAtTime(0.015, now + i * 0.08 + 0.02);
+        gNode.gain.exponentialRampToValueAtTime(0.0001, now + 1.0);
+        oscNode.connect(gNode);
+        gNode.connect(ctx.destination);
+        oscNode.start(now);
+        oscNode.stop(now + 1.1);
+      });
+    } else if (type === 'eraser') {
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(75, now);
+      osc.frequency.linearRampToValueAtTime(130, now + 0.6);
+      
+      const filter = ctx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.value = 130;
+      
+      osc.disconnect(gainNode);
+      osc.connect(filter);
+      filter.connect(gainNode);
+      
+      gainNode.gain.setValueAtTime(0, now);
+      gainNode.gain.linearRampToValueAtTime(0.06, now + 0.15);
+      gainNode.gain.linearRampToValueAtTime(0.06, now + 0.45);
+      gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.7);
+      
+      osc.start(now);
+      osc.stop(now + 0.75);
+    }
+  } catch (e) {
+    console.warn("Web Audio not allowed or error:", e);
+  }
+}
+
+// Background Chalk Dust Particles
+let chalkDustCanvas = null;
+let chalkDustCtx = null;
+let chalkParticles = [];
+let chalkAnimationId = null;
+
+function initChalkParticles() {
+  chalkDustCanvas = document.getElementById("chalkDustCanvas");
+  if (!chalkDustCanvas) return;
+  chalkDustCtx = chalkDustCanvas.getContext("2d");
+  
+  function resizeDustCanvas() {
+    const parent = chalkDustCanvas.parentElement;
+    if (parent) {
+      chalkDustCanvas.width = parent.clientWidth;
+      chalkDustCanvas.height = parent.clientHeight;
+    }
+  }
+  resizeDustCanvas();
+  window.addEventListener("resize", resizeDustCanvas);
+  
+  const symbols = ["\u222B", "dx", "lim", "\u03B8", "f(x)", "y=x\u00B2", "\u221E", "\u03A3", "\u03C0", "dy/dx", "x\u2192a", "f'(x)"];
+  chalkParticles = [];
+  const numParticles = 28;
+  for (let i = 0; i < numParticles; i++) {
+    chalkParticles.push({
+      x: Math.random() * chalkDustCanvas.width,
+      y: Math.random() * chalkDustCanvas.height,
+      text: symbols[Math.floor(Math.random() * symbols.length)],
+      size: 11 + Math.random() * 11,
+      vx: (Math.random() - 0.5) * 0.35,
+      vy: (Math.random() - 0.5) * 0.35,
+      opacity: 0.08 + Math.random() * 0.35
+    });
+  }
+  
+  function animateDust() {
+    if (!chalkDustCtx || !chalkDustCanvas) return;
+    chalkDustCtx.clearRect(0, 0, chalkDustCanvas.width, chalkDustCanvas.height);
+    
+    chalkParticles.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+      
+      if (p.x < -50) p.x = chalkDustCanvas.width + 50;
+      if (p.x > chalkDustCanvas.width + 50) p.x = -50;
+      if (p.y < -50) p.y = chalkDustCanvas.height + 50;
+      if (p.y > chalkDustCanvas.height + 50) p.y = -50;
+      
+      chalkDustCtx.save();
+      chalkDustCtx.globalAlpha = p.opacity;
+      chalkDustCtx.fillStyle = "#ffffff";
+      chalkDustCtx.font = `${p.size}px 'Courier New', Courier, monospace`;
+      chalkDustCtx.fillText(p.text, p.x, p.y);
+      chalkDustCtx.restore();
+    });
+    
+    chalkAnimationId = requestAnimationFrame(animateDust);
+  }
+  
+  animateDust();
+}
+
+function stopChalkParticles() {
+  if (chalkAnimationId) {
+    cancelAnimationFrame(chalkAnimationId);
+    chalkAnimationId = null;
+  }
+}
 
 let calcState = {
   activeStep: 1,
@@ -3228,6 +3378,15 @@ let calcState = {
   hintsUnlocked: 0,
   completed: [false, false, false, false, false]
 };
+
+let lastChalkSoundTime = 0;
+function playThrottledWriteSound() {
+  const now = Date.now();
+  if (now - lastChalkSoundTime > 140) {
+    playChalkSound("write");
+    lastChalkSoundTime = now;
+  }
+}
 
 function initCalculusAcademy() {
   const portal = document.getElementById("calcAcademyPortal");
@@ -3248,7 +3407,6 @@ function initCalculusAcademy() {
   const solutionBox = document.getElementById("chalkSolutionBox");
   const motivationText = document.getElementById("chalkMotivationText");
   
-  // Calculator Elements
   const calcScreen = document.getElementById("chalkCalcScreen");
   const modeArithmetic = document.getElementById("modeArithmetic");
   const modeAlgebraic = document.getElementById("modeAlgebraic");
@@ -3264,32 +3422,55 @@ function initCalculusAcademy() {
 
   if (!portal || !launchBtn) return;
 
-  // Load saved progress
   const savedCompleted = localStorage.getItem("ncumoCalcCompleted");
   if (savedCompleted) {
     calcState.completed = JSON.parse(savedCompleted);
   }
 
-  // Open Portal
   launchBtn.addEventListener("click", () => {
+    playChalkSound("click");
     portal.hidden = false;
     setTimeout(() => {
       portal.classList.add("active");
+      initChalkParticles();
       renderActiveStep();
     }, 10);
   });
 
-  // Close Portal
   exitBtn.addEventListener("click", () => {
+    playChalkSound("click");
     portal.classList.remove("active");
+    stopChalkParticles();
     setTimeout(() => {
       portal.hidden = true;
     }, 500);
   });
 
-  // Switch tabs
+  function triggerEraserSwipe(callback) {
+    const eraser = document.getElementById("chalkboardEraser");
+    if (!eraser) {
+      callback();
+      return;
+    }
+    eraser.hidden = false;
+    eraser.classList.remove("swiping");
+    void eraser.offsetWidth;
+    eraser.classList.add("swiping");
+    playChalkSound("eraser");
+    
+    setTimeout(() => {
+      callback();
+    }, 500);
+    
+    setTimeout(() => {
+      eraser.hidden = true;
+      eraser.classList.remove("swiping");
+    }, 1000);
+  }
+
   tabs.forEach(tab => {
     tab.addEventListener("click", () => {
+      playChalkSound("click");
       const step = parseInt(tab.getAttribute("data-step"));
       let canAccess = true;
       for (let i = 0; i < step - 1; i++) {
@@ -3300,11 +3481,13 @@ function initCalculusAcademy() {
       }
       
       if (canAccess) {
-        calcState.activeStep = step;
-        calcState.hintsUnlocked = 0;
         tabs.forEach(t => t.classList.remove("active"));
         tab.classList.add("active");
-        renderActiveStep();
+        triggerEraserSwipe(() => {
+          calcState.activeStep = step;
+          calcState.hintsUnlocked = 0;
+          renderActiveStep();
+        });
       } else {
         feedbackText.hidden = false;
         feedbackText.className = "chalk-feedback error";
@@ -3316,11 +3499,9 @@ function initCalculusAcademy() {
     });
   });
 
-  // Render Step Content
   function renderActiveStep() {
     const mod = CALC_MODULES[calcState.activeStep - 1];
     
-    // Theory Markup
     theoryCard.innerHTML = `
       <h4 class="chalk-theory-title">${mod.conceptTitle}</h4>
       <p>${mod.conceptText}</p>
@@ -3328,35 +3509,55 @@ function initCalculusAcademy() {
         <strong>Real-World Application (${mod.realWorldTitle}):</strong><br>
         ${mod.realWorldText}
       </div>
-      <div class="chalk-theory-math">
-        $$\\text{Formula: } ${mod.mathFormula}$$
-      </div>
+      <div class="chalk-theory-math"></div>
     `;
 
-    theoryCard.innerHTML = theoryCard.innerHTML.replace(/\$\$(.*?)\$\$/g, '<code style="font-size: 1.1rem; color: #ebcb8b;">$1</code>');
+    const formulaEl = theoryCard.querySelector(".chalk-theory-math");
+    if (formulaEl) {
+      if (window.katex) {
+        try {
+          katex.render(mod.mathFormula, formulaEl, { throwOnError: false, displayMode: true });
+        } catch (e) {
+          formulaEl.innerHTML = mod.mathFormula;
+        }
+      } else {
+        formulaEl.innerHTML = `<code>${mod.mathFormula}</code>`;
+      }
+    }
 
-    // Motivation Tips
     motivationText.textContent = mod.chalkMotivation;
 
-    // Challenge Text
-    questionText.innerHTML = mod.challengeQuestion;
+    if (window.katex) {
+      try {
+        let questionHtml = mod.challengeQuestion;
+        const matches = questionHtml.match(/\$\$(.*?)\$\$/g);
+        if (matches) {
+          matches.forEach(m => {
+            const math = m.replace(/\$\$/g, "");
+            const tempSpan = document.createElement("span");
+            katex.render(math, tempSpan, { throwOnError: false, displayMode: false });
+            questionHtml = questionHtml.replace(m, tempSpan.outerHTML);
+          });
+        }
+        questionText.innerHTML = questionHtml;
+      } catch (err) {
+        questionText.innerHTML = mod.challengeQuestion.replace(/\$\$(.*?)\$\$/g, '<code>$1</code>');
+      }
+    } else {
+      questionText.innerHTML = mod.challengeQuestion.replace(/\$\$(.*?)\$\$/g, '<code>$1</code>');
+    }
+
     inputEl.value = "";
     feedbackText.hidden = true;
     hintText.hidden = true;
     solutionBox.hidden = true;
     showSolutionBtn.hidden = true;
 
-    // Reset hints interface
     updateHintDots();
-
-    // Generate Custom Slider based on step
     setupSlider(mod.step);
-
-    // Initial canvas draw
     drawCalcVisualizer();
   }
 
-  // Setup slider details
   function setupSlider(step) {
     sliderContainer.innerHTML = "";
     let min = 0, max = 100, val = 50, label = "Slider";
@@ -3386,6 +3587,7 @@ function initCalculusAcademy() {
     const slider = document.getElementById("chalkSlider");
     slider.addEventListener("input", (e) => {
       calcState.sliderVal = parseFloat(e.target.value);
+      playThrottledWriteSound();
       let displayVal = calcState.sliderVal;
       if (step === 1) {
         displayVal = (calcState.sliderVal < 50) ? (0.5 + 1.45 * (calcState.sliderVal / 50)).toFixed(2) : (3.5 - 1.45 * ((calcState.sliderVal - 50) / 50)).toFixed(2);
@@ -3403,56 +3605,57 @@ function initCalculusAcademy() {
     });
   }
 
-  // Draw Visualizer
   function drawCalcVisualizer() {
+    const rect = canvas.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    
     const ctx = canvas.getContext("2d");
+    ctx.scale(dpr, dpr);
+    
     const step = calcState.activeStep;
     const sVal = calcState.sliderVal;
     
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, rect.width, rect.height);
     
-    // Draw chalkboard grid
     ctx.strokeStyle = "rgba(255, 255, 255, 0.05)";
     ctx.lineWidth = 1;
-    for (let x = 0; x < canvas.width; x += 30) {
+    for (let x = 0; x < rect.width; x += 30) {
       ctx.beginPath();
       ctx.moveTo(x, 0);
-      ctx.lineTo(x, canvas.height);
+      ctx.lineTo(x, rect.height);
       ctx.stroke();
     }
-    for (let y = 0; y < canvas.height; y += 30) {
+    for (let y = 0; y < rect.height; y += 30) {
       ctx.beginPath();
       ctx.moveTo(0, y);
-      ctx.lineTo(canvas.width, y);
+      ctx.lineTo(rect.width, y);
       ctx.stroke();
     }
 
     if (step === 1) {
-      // Limits visualizer
       const originX = 160;
       const originY = 180;
       const scale = 30;
 
-      // Draw axis
-      drawAxes(ctx, originX, originY, "x", "y");
+      drawAxes(ctx, originX, originY, "x", "y", rect);
 
-      // Draw line f(x) = x + 2 (with hole at 2,4)
       ctx.strokeStyle = "#a3be8c";
       ctx.lineWidth = 3;
       ctx.beginPath();
       ctx.moveTo(originX - 3 * scale, originY - (-1) * scale);
-      ctx.lineTo(originX + 1.9 * scale, originY - 3.9 * scale);
+      ctx.lineTo(originX + 1.95 * scale, originY - 3.95 * scale);
       ctx.stroke();
 
       ctx.beginPath();
-      ctx.moveTo(originX + 2.1 * scale, originY - 4.1 * scale);
+      ctx.moveTo(originX + 2.05 * scale, originY - 4.05 * scale);
       ctx.lineTo(originX + 5 * scale, originY - 7 * scale);
       ctx.stroke();
 
-      // Draw Hole at (2, 4)
       const hX = originX + 2 * scale;
       const hY = originY - 4 * scale;
-      ctx.fillStyle = "#13171f";
+      ctx.fillStyle = "#1e222a";
       ctx.strokeStyle = "#ff9ebb";
       ctx.lineWidth = 2;
       ctx.beginPath();
@@ -3460,7 +3663,6 @@ function initCalculusAcademy() {
       ctx.fill();
       ctx.stroke();
 
-      // Current approached point
       let x = 0;
       if (sVal < 50) {
         x = 0.5 + 1.45 * (sVal / 50);
@@ -3471,7 +3673,6 @@ function initCalculusAcademy() {
       const ptX = originX + x * scale;
       const ptY = originY - y * scale;
 
-      // Projection lines
       ctx.strokeStyle = "rgba(255, 255, 255, 0.25)";
       ctx.setLineDash([4, 4]);
       ctx.beginPath();
@@ -3482,31 +3683,27 @@ function initCalculusAcademy() {
       ctx.stroke();
       ctx.setLineDash([]);
 
-      // Glow Dot
       ctx.fillStyle = "#ebcb8b";
       ctx.beginPath();
       ctx.arc(ptX, ptY, 6, 0, Math.PI * 2);
       ctx.fill();
 
-      // Labels
       ctx.fillStyle = "#eceff4";
       ctx.font = "12px Courier New";
-      ctx.fillText(`L = 4 (Limit)`, originX - 90, hY + 4);
-      ctx.fillText(`a = 2`, hX - 18, originY + 15);
+      ctx.fillText(`L = 6 (Limit)`, originX - 90, hY + 4);
+      ctx.fillText(`a = 3`, hX - 18, originY + 15);
       
       ctx.fillStyle = "#ebcb8b";
       ctx.fillText(`x: ${x.toFixed(2)}`, ptX - 25, originY - 5);
       ctx.fillText(`y: ${y.toFixed(2)}`, originX + 5, ptY - 5);
 
     } else if (step === 2) {
-      // First Principles Parabola f(x) = 0.3x^2
       const originX = 150;
       const originY = 220;
       const scale = 40;
 
-      drawAxes(ctx, originX, originY, "x", "y");
+      drawAxes(ctx, originX, originY, "x", "y", rect);
 
-      // Draw Parabola
       ctx.strokeStyle = "#88c0d0";
       ctx.lineWidth = 3;
       ctx.beginPath();
@@ -3519,23 +3716,19 @@ function initCalculusAcademy() {
       }
       ctx.stroke();
 
-      // Point A at x = 1.5
       const ax = 1.5;
       const ay = 0.3 * ax * ax;
       const aX = originX + ax * scale;
       const aY = originY - ay * scale;
 
-      // Point B at x = 1.5 + h
       const h = 0.05 + 2.45 * (sVal / 100);
       const bx = ax + h;
       const by = 0.3 * bx * bx;
       const bX = originX + bx * scale;
       const bY = originY - by * scale;
 
-      // Secant Line slope
       const m = (by - ay) / (bx - ax);
 
-      // Draw Secant Line
       ctx.strokeStyle = "#ebcb8b";
       ctx.lineWidth = 2;
       ctx.beginPath();
@@ -3547,7 +3740,6 @@ function initCalculusAcademy() {
       ctx.lineTo(originX + endX * scale, originY - endY * scale);
       ctx.stroke();
 
-      // Draw Tangent Line at A (Slope = 0.6 * ax = 0.9)
       const tangentM = 0.6 * ax;
       ctx.strokeStyle = "#ff9ebb";
       ctx.setLineDash([3, 3]);
@@ -3561,7 +3753,6 @@ function initCalculusAcademy() {
       ctx.stroke();
       ctx.setLineDash([]);
 
-      // Draw dots
       ctx.fillStyle = "#a3be8c";
       ctx.beginPath();
       ctx.arc(aX, aY, 6, 0, Math.PI * 2);
@@ -3572,7 +3763,6 @@ function initCalculusAcademy() {
       ctx.arc(bX, bY, 6, 0, Math.PI * 2);
       ctx.fill();
 
-      // Text info
       ctx.fillStyle = "#eceff4";
       ctx.font = "12px Courier New";
       ctx.fillText(`Point A(x)`, aX - 10, aY - 12);
@@ -3584,14 +3774,12 @@ function initCalculusAcademy() {
       ctx.fillText(`Tangent Slope (Instant): ${tangentM.toFixed(2)}`, 20, 50);
 
     } else if (step === 3) {
-      // Differentiation Rules: Graphing derivative alongside original
       const originX = 240;
       const originY = 130;
       const scale = 35;
 
-      drawAxes(ctx, originX, originY, "x", "y");
+      drawAxes(ctx, originX, originY, "x", "y", rect);
 
-      // Draw Original f(x) in green
       ctx.strokeStyle = "#a3be8c";
       ctx.lineWidth = 3;
       ctx.beginPath();
@@ -3604,7 +3792,6 @@ function initCalculusAcademy() {
       }
       ctx.stroke();
 
-      // Draw Derivative f'(x) in pink
       ctx.strokeStyle = "rgba(255, 158, 187, 0.4)";
       ctx.lineWidth = 2;
       ctx.beginPath();
@@ -3617,7 +3804,6 @@ function initCalculusAcademy() {
       }
       ctx.stroke();
 
-      // Scan point
       const x = sVal / 10;
       const y = 0.1 * x * x * x - 1.2 * x;
       const dy = 0.3 * x * x - 1.2;
@@ -3626,7 +3812,6 @@ function initCalculusAcademy() {
       const ptY = originY - y * scale;
       const dPtY = originY - dy * scale;
 
-      // Draw tangent line at f(x)
       ctx.strokeStyle = "#ebcb8b";
       ctx.lineWidth = 1.5;
       ctx.beginPath();
@@ -3638,16 +3823,14 @@ function initCalculusAcademy() {
       ctx.lineTo(originX + lx2 * scale, originY - ly2 * scale);
       ctx.stroke();
 
-      // Scan bar vertical line
       ctx.strokeStyle = "rgba(255, 255, 255, 0.15)";
       ctx.setLineDash([2, 2]);
       ctx.beginPath();
       ctx.moveTo(ptX, 0);
-      ctx.lineTo(ptX, canvas.height);
+      ctx.lineTo(ptX, rect.height);
       ctx.stroke();
       ctx.setLineDash([]);
 
-      // Draw dots
       ctx.fillStyle = "#a3be8c";
       ctx.beginPath();
       ctx.arc(ptX, ptY, 5, 0, Math.PI * 2);
@@ -3658,7 +3841,6 @@ function initCalculusAcademy() {
       ctx.arc(ptX, dPtY, 5, 0, Math.PI * 2);
       ctx.fill();
 
-      // Labels
       ctx.fillStyle = "#eceff4";
       ctx.font = "11px Courier New";
       ctx.fillText(`f(x) = 0.1x³ - 1.2x (Function)`, 15, 220);
@@ -3671,7 +3853,6 @@ function initCalculusAcademy() {
       ctx.fillText(`Derivative Height = ${dy.toFixed(2)}`, ptX + 8, dPtY + 15);
 
     } else if (step === 4) {
-      // Optimization: Left side drawing garden box, Right side plotting Area
       const xVal = sVal;
       const yVal = 40 - 2 * xVal;
       const area = xVal * yVal;
@@ -3710,7 +3891,7 @@ function initCalculusAcademy() {
       const graphScaleX = 10;
       const graphScaleY = 0.7;
 
-      drawAxes(ctx, graphOriginX, graphOriginY, "x", "Area");
+      drawAxes(ctx, graphOriginX, graphOriginY, "x", "Area", rect);
 
       ctx.strokeStyle = "#88c0d0";
       ctx.lineWidth = 2.5;
@@ -3751,13 +3932,12 @@ function initCalculusAcademy() {
       ctx.fillText(`Current Area: ${area.toFixed(0)}m²`, graphOriginX + 50, curY - 15);
 
     } else if (step === 5) {
-      // Integration Riemann Sums: Curve f(x) = 0.4x^2 from x = 1 to x = 3
       const originX = 120;
       const originY = 220;
       const scaleX = 80;
       const scaleY = 40;
 
-      drawAxes(ctx, originX, originY, "x", "y");
+      drawAxes(ctx, originX, originY, "x", "y", rect);
 
       ctx.strokeStyle = "#a3be8c";
       ctx.lineWidth = 3;
@@ -3819,27 +3999,26 @@ function initCalculusAcademy() {
     }
   }
 
-  function drawAxes(ctx, ox, oy, xLabel, yLabel) {
+  function drawAxes(ctx, ox, oy, xLabel, yLabel, rect) {
     ctx.strokeStyle = "rgba(255, 255, 255, 0.3)";
     ctx.lineWidth = 1.5;
     
     ctx.beginPath();
     ctx.moveTo(10, oy);
-    ctx.lineTo(canvas.width - 10, oy);
+    ctx.lineTo(rect.width - 10, oy);
     ctx.stroke();
 
     ctx.beginPath();
     ctx.moveTo(ox, 10);
-    ctx.lineTo(ox, canvas.height - 10);
+    ctx.lineTo(ox, rect.height - 10);
     ctx.stroke();
 
     ctx.fillStyle = "rgba(255, 255, 255, 0.6)";
     ctx.font = "10px monospace";
-    ctx.fillText(xLabel, canvas.width - 20, oy - 8);
+    ctx.fillText(xLabel, rect.width - 20, oy - 8);
     ctx.fillText(yLabel, ox + 8, 20);
   }
 
-  // Check Challenge Answer
   checkBtn.addEventListener("click", () => {
     const mod = CALC_MODULES[calcState.activeStep - 1];
     const ans = inputEl.value.trim().replace(/\s+/g, '');
@@ -3852,8 +4031,8 @@ function initCalculusAcademy() {
       calcState.completed[calcState.activeStep - 1] = true;
       localStorage.setItem("ncumoCalcCompleted", JSON.stringify(calcState.completed));
 
+      playChalkSound("success");
       if (typeof triggerWinConfetti === "function") triggerWinConfetti();
-      if (typeof initAudio === "function") initAudio();
       
       const rect = checkBtn.getBoundingClientRect();
       if (typeof spawnSparklesAt === "function") {
@@ -3868,6 +4047,7 @@ function initCalculusAcademy() {
 
       showSolutionBtn.hidden = false;
     } else {
+      playChalkSound("click");
       feedbackText.hidden = false;
       feedbackText.className = "chalk-feedback error";
       feedbackText.textContent = "Almost there! Double-check your math, sthandwa sam, or reveal a hint if you need a guide! 🌸";
@@ -3875,8 +4055,8 @@ function initCalculusAcademy() {
     }
   });
 
-  // Reveal Hints
   revealHintBtn.addEventListener("click", () => {
+    playChalkSound("click");
     const mod = CALC_MODULES[calcState.activeStep - 1];
     if (calcState.hintsUnlocked < 5) {
       calcState.hintsUnlocked++;
@@ -3908,13 +4088,27 @@ function initCalculusAcademy() {
     }
   }
 
-  // Show Step-by-Step Solution Proof
   showSolutionBtn.addEventListener("click", () => {
+    playChalkSound("click");
     const mod = CALC_MODULES[calcState.activeStep - 1];
     solutionBox.hidden = false;
     
     let stepsHtml = mod.solutionSteps.map((stepText, idx) => {
-      return `<li>${stepText}</li>`;
+      let text = stepText;
+      if (window.katex) {
+        const matches = text.match(/\$(.*?)\$/g);
+        if (matches) {
+          matches.forEach(m => {
+            const math = m.replace(/\$/g, "");
+            try {
+              const tempSpan = document.createElement("span");
+              katex.render(math, tempSpan, { throwOnError: false });
+              text = text.replace(m, tempSpan.outerHTML);
+            } catch (err) {}
+          });
+        }
+      }
+      return `<li>${text}</li>`;
     }).join("");
 
     solutionBox.innerHTML = `
@@ -3928,11 +4122,8 @@ function initCalculusAcademy() {
     solutionBox.scrollIntoView({ behavior: "smooth", block: "nearest" });
   });
 
-  // =====================================================
-  // 🧮 Embedded Chalkboard Calculator Logic
-  // =====================================================
-  
   modeArithmetic.addEventListener("click", () => {
+    playChalkSound("click");
     modeArithmetic.classList.add("active");
     modeAlgebraic.classList.remove("active");
     arithmeticPad.hidden = false;
@@ -3940,6 +4131,7 @@ function initCalculusAcademy() {
   });
 
   modeAlgebraic.addEventListener("click", () => {
+    playChalkSound("click");
     modeAlgebraic.classList.add("active");
     modeArithmetic.classList.remove("active");
     arithmeticPad.hidden = true;
@@ -3948,6 +4140,7 @@ function initCalculusAcademy() {
 
   keys.forEach(key => {
     key.addEventListener("click", () => {
+      playChalkSound("click");
       const val = key.textContent;
       if (val === "=" || val === "C") return;
       
@@ -3960,10 +4153,12 @@ function initCalculusAcademy() {
   });
 
   clearKey.addEventListener("click", () => {
+    playChalkSound("click");
     calcScreen.textContent = "0";
   });
 
   equalKey.addEventListener("click", () => {
+    playChalkSound("click");
     const expr = calcScreen.textContent;
     const cleanExpr = expr.replace(/[^0-9+\-*/.]/g, "");
     try {
@@ -3979,12 +4174,14 @@ function initCalculusAcademy() {
   });
 
   diffBtn.addEventListener("click", () => {
+    playChalkSound("write");
     const expr = polyInput.value;
     const res = differentiatePolynomial(expr);
     calcScreen.textContent = "d/dx = " + res;
   });
 
   evalBtn.addEventListener("click", () => {
+    playChalkSound("write");
     const expr = polyInput.value;
     const xVal = parseFloat(evalXInput.value);
     if (isNaN(xVal)) {
@@ -4072,6 +4269,4 @@ function initCalculusAcademy() {
   }
 }
 
-// Initialize on load
 initCalculusAcademy();
-

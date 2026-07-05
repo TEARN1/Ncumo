@@ -2321,6 +2321,44 @@ body.theme-dream .sorry__letter { background: rgba(38, 23, 61, 0.45); }
   pointer-events: auto;
 }
 
+/* Background Math Dust Canvas & Eraser Sweep */
+.chalkboard-eraser {
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 120%;
+  height: 100%;
+  background: linear-gradient(to right, transparent 0%, rgba(255, 255, 255, 0.08) 50%, #4c566a 90%, #2e3440 98%, transparent 100%);
+  z-index: 100;
+  pointer-events: none;
+  box-shadow: 0 0 100px rgba(0, 0, 0, 0.8);
+}
+.chalkboard-eraser.swiping {
+  animation: eraserSweep 1.0s cubic-bezier(0.645, 0.045, 0.355, 1) forwards;
+}
+@keyframes eraserSweep {
+  0% { left: -120%; }
+  100% { left: 120%; }
+}
+
+.calc-portal__body {
+  position: relative;
+  z-index: 2;
+}
+
+/* Custom KaTeX typesetting adjustments for chalkboard */
+.calc-portal .katex-display {
+  margin: 0.4em 0 !important;
+}
+.calc-portal .katex {
+  font-size: 1.25rem !important;
+  color: #ebcb8b;
+  text-shadow: 0 0 8px rgba(235, 203, 139, 0.3);
+}
+.calc-portal .katex .mathnormal {
+  font-family: 'Times New Roman', Times, serif;
+}
+
 .calc-portal__header {
   display: flex;
   justify-content: space-between;
