@@ -48,10 +48,12 @@
     <ul class="nav__links" id="navLinks">
       <li><a href="#home">Home</a></li>
       <li><a href="#about">Her</a></li>
+      <li><a href="#sorry">I'm Sorry</a></li>
       <li><a href="#story">Our Story</a></li>
       <li><a href="#dimensionalSanctuary">3D Sanctuary</a></li>
       <li><a href="#notes">Notes</a></li>
       <li><a href="#games">Games</a></li>
+      <li><a href="#calculusGateSection">Calculus 🎓</a></li>
       <li><a href="#bucket">Bucket List</a></li>
       <li><a href="#moments">Moments</a></li>
     </ul>
@@ -95,6 +97,26 @@
       <span>💖</span><span>🌸</span><span>✨</span>
     </div>
   </header>
+
+  <!-- ===== Apology Section ===== -->
+  <section class="sorry" id="sorry">
+    <div class="glass-panel sorry__card reveal">
+      <span class="sorry__icon">🥺💐</span>
+      <h2 class="sorry__title">I'm Really Sorry, Ziyanda</h2>
+      <p class="sorry__lead">This morning I made a mistake — I left for work without waking you up and kissing you goodbye. I'm so sorry, sthandwa sam. 💔</p>
+
+      <div class="sorry__letter">
+        <p>You deserve to start every single day feeling loved, and this morning I robbed you of that little moment that's ours. I was rushing, but that's no excuse — you should always come first.</p>
+        <p>Waking up next to you is a blessing I never want to take for granted. I promise to do better: <strong>no more leaving without a kiss, a hug, and an "I love you," no matter how early or how busy I am.</strong></p>
+        <p>You are the first thing I want to think about in the morning and the last at night. Forgive me, my love. I'll make it up to you this weekend, and every day after. 🌹</p>
+      </div>
+
+      <p class="sorry__signature">Forever yours, with all my heart —<br><span>TEARN ♡</span></p>
+
+      <button class="btn sorry__btn" id="forgiveBtn">I forgive you ♡</button>
+      <p class="sorry__reply" id="forgiveReply" hidden>Thank you, my love. I promise to never let that morning happen again. 💖🌸</p>
+    </div>
+  </section>
 
   <!-- ===== About Her Section ===== -->
   <section class="about" id="about">
@@ -464,6 +486,18 @@
     </div>
   </section>
 
+  <!-- ===== Calculus Academy Gate ===== -->
+  <section class="games" id="calculusGateSection">
+    <div class="glass-panel calc-gate-card reveal">
+      <div class="calc-gate-content">
+        <span class="calc-gate-icon">🎓</span>
+        <h3>Calculus Academy</h3>
+        <p>Step into an immersive, chalk-scribed learning sanctuary. Master limits, derivatives, and integrals with interactive graphs and real-world tools. Let's explore together, sthandwa sam ♡</p>
+        <button class="btn" id="launchCalcBtn">Enter Academy 🚪✨</button>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== Achievements Badges ===== -->
   <section class="games" id="achievements">
     <h2 class="section-title reveal">🏆 Badges</h2>
@@ -518,6 +552,121 @@
       <div class="weekend-clean-btns" id="weekendCleanBtns" style="display: flex; flex-direction: column; gap: 0.8rem;">
         <!-- Dynamic response buttons injected here -->
       </div>
+    </div>
+  </div>
+
+  <!-- ===== Full-Screen Calculus Academy Portal ===== -->
+  <div class="calc-portal" id="calcAcademyPortal" hidden>
+    <div class="calc-portal__header">
+      <div class="calc-portal__brand">
+        <span class="calc-portal__chalk-icon">✏️</span>
+        <h2>Calculus Chalkboard Sanctuary</h2>
+      </div>
+      <button class="btn btn--small btn--ghost calc-portal__exit" id="exitCalcBtn">Return to Sanctuary 🚪</button>
+    </div>
+    
+    <div class="calc-portal__body">
+      <!-- Left side: The Lesson Room -->
+      <div class="calc-portal__lesson-room">
+        <!-- Dashboard Tabs -->
+        <div class="calc-chalk-tabs">
+          <button class="calc-chalk-tab active" data-step="1">1. Limits 🔗</button>
+          <button class="calc-chalk-tab" data-step="2">2. First Principles 📈</button>
+          <button class="calc-chalk-tab" data-step="3">3. Rules ⚡</button>
+          <button class="calc-chalk-tab" data-step="4">4. Optimization 🎯</button>
+          <button class="calc-chalk-tab" data-step="5">5. Integration 💖</button>
+        </div>
+        
+        <!-- Lesson Theory Card -->
+        <div class="chalk-card" id="chalkTheoryCard">
+          <!-- Dynamically populated -->
+        </div>
+
+        <!-- Visualizer Board -->
+        <div class="chalk-card chalk-visualizer-card">
+          <h3>📐 Interactive Geometric Board</h3>
+          <canvas id="calcPortalCanvas" width="480" height="260"></canvas>
+          <div class="chalk-slider-container" id="chalkSliderContainer">
+            <!-- Dynamically populated slider -->
+          </div>
+        </div>
+
+        <!-- Challenge Board -->
+        <div class="chalk-card chalk-challenge-card">
+          <h3>📝 FreeCodeCamp Challenge</h3>
+          <p class="chalk-question" id="chalkQuestionText"></p>
+          
+          <!-- Interactive Hints Assistant -->
+          <div class="chalk-hints-box">
+            <div class="chalk-hints-status">
+              <span>Hints:</span>
+              <div class="chalk-hint-dots" id="chalkHintDots">
+                <span class="hint-dot"></span>
+                <span class="hint-dot"></span>
+                <span class="hint-dot"></span>
+                <span class="hint-dot"></span>
+                <span class="hint-dot"></span>
+              </div>
+            </div>
+            <button class="btn btn--small btn--ghost" id="revealHintBtn">Unlock Hint 💡</button>
+            <div class="chalk-hint-text" id="chalkHintText" hidden></div>
+          </div>
+
+          <div class="chalk-input-group">
+            <input type="text" id="chalkAnswerInput" class="chalk-input" placeholder="Enter answer value..." autocomplete="off">
+            <button id="chalkCheckBtn" class="btn">Check Answer 🌟</button>
+          </div>
+          <p id="chalkFeedbackText" class="chalk-feedback" hidden></p>
+          
+          <button id="chalkShowSolutionBtn" class="btn btn--small btn--ghost" style="margin-top: 1.5rem;" hidden>Show Step-by-Step Proof 📖</button>
+          <div id="chalkSolutionBox" class="chalk-solution-box" hidden></div>
+        </div>
+      </div>
+      
+      <!-- Right side: The Formula Assistant (Calculator) -->
+      <aside class="calc-portal__sidebar">
+        <div class="chalk-card chalk-calculator-card">
+          <h3>🧮 Chalkboard Calculator</h3>
+          <div class="chalk-calc-screen" id="chalkCalcScreen">0</div>
+          
+          <div class="chalk-calc-mode-select">
+            <button class="calc-mode-btn active" id="modeArithmetic">Arithmetic</button>
+            <button class="calc-mode-btn" id="modeAlgebraic">Calculus Tools</button>
+          </div>
+
+          <!-- Arithmetic Pad -->
+          <div class="chalk-calc-pad" id="calcArithmeticPad">
+            <button class="calc-key">7</button><button class="calc-key">8</button><button class="calc-key">9</button><button class="calc-key calc-key--op">/</button>
+            <button class="calc-key">4</button><button class="calc-key">5</button><button class="calc-key">6</button><button class="calc-key calc-key--op">*</button>
+            <button class="calc-key">1</button><button class="calc-key">2</button><button class="calc-key">3</button><button class="calc-key calc-key--op">-</button>
+            <button class="calc-key">0</button><button class="calc-key">.</button><button class="calc-key calc-key--op" id="calcClear">C</button><button class="calc-key calc-key--op">+</button>
+            <button class="calc-key calc-key--equal" id="calcEqual" style="grid-column: span 4;">=</button>
+          </div>
+
+          <!-- Calculus Tools Pad -->
+          <div class="chalk-calc-pad" id="calcAlgebraicPad" hidden>
+            <div class="calc-algebraic-input-group">
+              <label for="calcPolyInput">Function f(x):</label>
+              <input type="text" id="calcPolyInput" class="chalk-input" placeholder="e.g. 3x^2 + 5x" value="3x^2 + 5x">
+            </div>
+            
+            <div class="calc-algebraic-actions">
+              <button class="btn btn--small" id="calcDifferentiateBtn">Differentiate ⚡</button>
+              <button class="btn btn--small" id="calcEvaluateBtn">Evaluate at x = 2 📈</button>
+            </div>
+            
+            <div class="calc-algebraic-eval-x">
+              <label for="calcEvalXInput">Evaluate at x =:</label>
+              <input type="number" id="calcEvalXInput" class="chalk-input" value="2" style="max-width: 80px;">
+            </div>
+          </div>
+        </div>
+
+        <div class="chalk-card chalk-motivation-card">
+          <h3>💡 Study Tip</h3>
+          <p id="chalkMotivationText">Limits are like standing at a balcony together, leaning in closer and closer... but never quite stepping off. Mathematics is all about finding the beauty in closeness.</p>
+        </div>
+      </aside>
     </div>
   </div>
 

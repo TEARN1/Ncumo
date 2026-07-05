@@ -133,7 +133,8 @@ const ACHIEVEMENTS = [
   { id: "hearts_50", icon: "💝", label: "50 Hearts" },
   { id: "hearts_100", icon: "💌", label: "100 Hearts" },
   { id: "question_yes", icon: "💖", label: "Said Yes" },
-  { id: "fortune_draw", icon: "🎴", label: "Fortune Seeker" }
+  { id: "fortune_draw", icon: "🎴", label: "Fortune Seeker" },
+  { id: "calculus_master", icon: "🎓", label: "Calculus Guru" }
 ];
 
 const DEFAULT_BUCKET_ITEMS = [
@@ -3055,6 +3056,1022 @@ function init3DScrollverse() {
     }
     return output;
   }
-  
+
   animate3d();
 }
+
+// =====================================================
+// Apology Section: "I forgive you" button
+// =====================================================
+const forgiveBtn = document.getElementById("forgiveBtn");
+const forgiveReply = document.getElementById("forgiveReply");
+if (forgiveBtn) {
+  forgiveBtn.addEventListener("click", () => {
+    forgiveReply.hidden = false;
+    forgiveBtn.disabled = true;
+    forgiveBtn.style.opacity = "0.6";
+    forgiveBtn.textContent = "Thank you, my love ♡";
+    if (typeof initAudio === "function") initAudio();
+    if (typeof triggerWinConfetti === "function") triggerWinConfetti();
+    const rect = forgiveBtn.getBoundingClientRect();
+    if (typeof spawnSparklesAt === "function") {
+      spawnSparklesAt(rect.left + rect.width / 2, rect.top, 14, ["💖", "🌹", "🌸", "✨", "💐"]);
+    }
+  });
+}
+
+// =====================================================
+// 🎓 Calculus Academy Portal Logic
+// =====================================================
+
+const CALC_MODULES = [
+  {
+    step: 1,
+    title: "1. Limits 🔗",
+    conceptTitle: "The Heartbeat of Limits: Infinite Closeness",
+    conceptText: "In Calculus, a limit is the value a function approaches as the input gets closer and closer to some number. Even if the function is undefined at that exact spot, the limit can still exist! It is about the journey, not the destination. Just like how two hearts can align closer and closer until they beat as one.",
+    realWorldTitle: "GPS Velocity tracking",
+    realWorldText: "To calculate your exact speed at a specific instant (instantaneous velocity), a GPS device cannot divide by zero elapsed time. Instead, it takes the limit of your average velocity as the time interval approaches 0.",
+    mathFormula: "\\lim_{x \\to a} f(x) = L",
+    chalkMotivation: "Limits are like standing on a balcony together, leaning in closer and closer... but never stepping off. Mathematics is all about finding the beauty in closeness.",
+    challengeQuestion: "Evaluate the limit algebraically:<br><strong>$$\\lim_{x \\to 3} \\frac{x^2 - 9}{x - 3}$$</strong>",
+    correctAnswer: "6",
+    hints: [
+      "Direct substitution of x = 3 gives 0/0, which is indeterminate. We must factor the numerator first!",
+      "The numerator is a difference of squares: x^2 - 9. How do you factor that?",
+      "x^2 - 9 factors into (x - 3)(x + 3). Write out the limit expression with this factored form.",
+      "Cancel out the common term (x - 3) from the top and bottom. What function remains?",
+      "You are left with (x + 3). Now plug x = 3 directly into this simplified expression: 3 + 3 = ?"
+    ],
+    solutionSteps: [
+      "Directly substituting <strong>x = 3</strong> yields <strong>(3^2 - 9)/(3 - 3) = 0/0</strong>, which is undefined (indeterminate form).",
+      "Factor the numerator using the difference of squares rule: <strong>x^2 - 9 = (x - 3)(x + 3)</strong>.",
+      "Substitute this factorization back into the limit: <strong>&lim;_{x &rarr; 3} [(x - 3)(x + 3)] / (x - 3)</strong>.",
+      "Cancel the common factor <strong>(x - 3)</strong> since x approaches 3 but is not exactly 3: <strong>&lim;_{x &rarr; 3} (x + 3)</strong>.",
+      "Substitute <strong>x = 3</strong> into the remaining simplified expression: <strong>3 + 3 = 6</strong>."
+    ]
+  },
+  {
+    step: 2,
+    title: "2. First Principles 📈",
+    conceptTitle: "First Principles: Finding the Slope at a Single Point",
+    conceptText: "A secant line measures the average slope between two points. If we drag those points closer and closer together until the distance between them (h) approaches 0, the secant line morphs into a tangent line. The slope of this tangent line is the derivative, calculated from first principles.",
+    realWorldTitle: "Rocket Science",
+    realWorldText: "When tracking a rocket launch, sensors measure its distance at different points. To find the exact acceleration or velocity at exactly t = 5 seconds, engineers apply first principles over shrinking intervals of time.",
+    mathFormula: "f'(x) = \\lim_{h \\to 0} \\frac{f(x+h) - f(x)}{h}",
+    chalkMotivation: "First principles is the language of change. It tells us how fast we are growing at this exact millisecond.",
+    challengeQuestion: "Using the definition from first principles, find the derivative value of <strong>f(x) = 2x^2</strong> at <strong>x = 3</strong>.",
+    correctAnswer: "12",
+    hints: [
+      "First, write down the formula: f'(x) = &lim;_{h &rarr; 0} [f(x+h) - f(x)] / h.",
+      "Evaluate f(x+h) for f(x) = 2x^2: f(x+h) = 2(x+h)^2 = 2(x^2 + 2xh + h^2) = 2x^2 + 4xh + 2h^2.",
+      "Subtract f(x): f(x+h) - f(x) = (2x^2 + 4xh + 2h^2) - 2x^2 = 4xh + 2h^2.",
+      "Divide the result by h to simplify: (4xh + 2h^2) / h = 4x + 2h.",
+      "Take the limit as h goes to 0: 4x + 2(0) = 4x. Now evaluate 4x at x = 3. What is 4 * 3?"
+    ],
+    solutionSteps: [
+      "Apply the definition of the derivative from first principles: <strong>f'(x) = &lim;_{h &rarr; 0} [f(x+h) - f(x)] / h</strong>.",
+      "Evaluate <strong>f(x+h)</strong>: <strong>f(x+h) = 2(x+h)^2 = 2(x^2 + 2xh + h^2) = 2x^2 + 4xh + 2h^2</strong>.",
+      "Subtract <strong>f(x) = 2x^2</strong>: <strong>f(x+h) - f(x) = 2x^2 + 4xh + 2h^2 - 2x^2 = 4xh + 2h^2</strong>.",
+      "Divide by <strong>h</strong>: <strong>(4xh + 2h^2) / h = h(4x + 2h) / h = 4x + 2h</strong>.",
+      "Evaluate the limit as <strong>h &rarr; 0</strong>: <strong>&lim;_{h &rarr; 0} (4x + 2h) = 4x</strong>.",
+      "Substitute <strong>x = 3</strong> to get the final slope: <strong>f'(3) = 4(3) = 12</strong>."
+    ]
+  },
+  {
+    step: 3,
+    title: "3. Rules ⚡",
+    conceptTitle: "The Quick Rules: Unleashing Derivatives",
+    conceptText: "First principles is beautiful, but algebraic shortcuts make calculations instant. The Power Rule, Product Rule, Quotient Rule, and Chain Rule are the keys to unlocking derivatives of any complex function.",
+    realWorldTitle: "Business Marginal Cost",
+    realWorldText: "Finance analysts model revenue and cost as equations. They use derivative shortcuts to instantly calculate 'marginal cost' (the cost of producing one more unit) to determine maximum profit margins.",
+    mathFormula: "\\frac{d}{dx}[x^n] = n x^{n-1}",
+    chalkMotivation: "Rules give us the speed to solve complex systems. With a few simple steps, we can differentiate anything.",
+    challengeQuestion: "Differentiate <strong>f(x) = (3x^2 + 2)^4</strong> using the Chain Rule, and find the value of <strong>f'(1)</strong>.",
+    correctAnswer: "3000",
+    hints: [
+      "This requires the Chain Rule: dy/dx = f'(g(x)) * g'(x). Here, the outer function is u^4, and the inner function is u = 3x^2 + 2.",
+      "Differentiate the outer function with respect to u: d/du [u^4] = 4u^3. This gives 4(3x^2 + 2)^3.",
+      "Differentiate the inner function: d/dx [3x^2 + 2] = 6x.",
+      "Multiply them: f'(x) = 4(3x^2 + 2)^3 * 6x = 24x(3x^2 + 2)^3.",
+      "Substitute x = 1: f'(1) = 24(1) * (3(1)^2 + 2)^3 = 24 * 5^3. Solve 24 * 125."
+    ],
+    solutionSteps: [
+      "Identify the outer function <strong>f(u) = u^4</strong> and the inner function <strong>u = g(x) = 3x^2 + 2</strong>.",
+      "Differentiate the outer function: <strong>f'(u) = 4u^3 = 4(3x^2 + 2)^3</strong>.",
+      "Differentiate the inner function: <strong>g'(x) = 6x</strong>.",
+      "Apply the Chain Rule: <strong>f'(x) = 4(3x^2 + 2)^3 &middot; 6x = 24x(3x^2 + 2)^3</strong>.",
+      "Substitute <strong>x = 1</strong>: <strong>f'(1) = 24(1)(3(1)^2 + 2)^3 = 24 &middot; (5)^3</strong>.",
+      "Calculate <strong>5^3 = 125</strong>, then multiply: <strong>24 &middot; 125 = 3000</strong>."
+    ]
+  },
+  {
+    step: 4,
+    title: "4. Optimization 🎯",
+    conceptTitle: "Optimization: Finding the Absolute Best",
+    conceptText: "By setting a function's derivative to zero (f'(x) = 0), we find the critical turning points. These points represent local maximums (peaks) or local minimums (valleys). Optimization is the art of mathematically finding the absolute best solution under constraints.",
+    realWorldTitle: "Product Design",
+    realWorldText: "Companies optimize product sizing. To pack 330ml of liquid into a metal can using the minimum amount of metal (minimizing surface area and costs), engineers set the derivative of surface area with respect to radius to zero.",
+    mathFormula: "f'(x) = 0 \\implies \\text{Critical Points}",
+    chalkMotivation: "Optimization finds the perfect balance. It is about choosing the best path out of infinite possibilities.",
+    challengeQuestion: "A rectangular garden is built against a wall, requiring fencing on three sides. If you have <strong>40 meters</strong> of fencing, what is the maximum area of the garden (in square meters)?",
+    correctAnswer: "200",
+    hints: [
+      "Let the side perpendicular to the wall be x, and the side parallel to the wall be y.",
+      "The total fence length is 2x + y = 40. This means y = 40 - 2x.",
+      "The area is A = x * y. Substitute y: A(x) = x(40 - 2x) = 40x - 2x^2.",
+      "To maximize area, take the derivative and set it to 0: A'(x) = 40 - 4x = 0.",
+      "Solve for x: 4x = 40, so x = 10. Calculate the maximum area A(10) = 40(10) - 2(10)^2."
+    ],
+    solutionSteps: [
+      "Define the dimensions: Let <strong>x</strong> be the sides perpendicular to the wall, and <strong>y</strong> be the side parallel to the wall.",
+      "Set up the fence length constraint: <strong>2x + y = 40 &rArr; y = 40 - 2x</strong>.",
+      "Write the area function: <strong>Area (A) = x &middot; y = x(40 - 2x) = 40x - 2x^2</strong>.",
+      "Find the derivative of the area function: <strong>A'(x) = 40 - 4x</strong>.",
+      "Set the derivative to zero for local extreme values: <strong>40 - 4x = 0 &rArr; 4x = 40 &rArr; x = 10</strong>.",
+      "Confirm it is a maximum: The second derivative is <strong>A''(x) = -4</strong> (negative, so it is a local maximum).",
+      "Calculate the maximum area: <strong>A(10) = 10 &middot; (40 - 2(10)) = 10 &middot; 20 = 200 square meters</strong>."
+    ]
+  },
+  {
+    step: 5,
+    title: "5. Integration 💖",
+    conceptTitle: "Integration: The Power of Accumulation",
+    conceptText: "If differentiation splits a curve into tiny pieces, integration gathers those pieces back together. By summing up infinite infinitely thin rectangles (Riemann sums), we can calculate the exact area under any curve. Integration accumulates change over time.",
+    realWorldTitle: "Tesla Battery Range",
+    realWorldText: "Electric cars continuously change speed. The car's computer integrates the varying velocity curve over elapsed time to calculate the exact distance travelled and predict remaining battery range.",
+    mathFormula: "\\int x^n dx = \\frac{x^{n+1}}{n+1} + C",
+    chalkMotivation: "Integration sums up every tiny moment. Every single second spent together accumulates into a lifetime of memories.",
+    challengeQuestion: "Find the exact area under the curve <strong>f(x) = 3x^2</strong> from <strong>x = 1</strong> to <strong>x = 3</strong>.",
+    correctAnswer: "26",
+    hints: [
+      "To find the area, evaluate the definite integral: &int;_{1}^{3} 3x^2 dx.",
+      "Find the indefinite integral (antiderivative) of 3x^2.",
+      "The antiderivative of 3x^2 is x^3, because the derivative of x^3 is 3x^2.",
+      "Apply the Fundamental Theorem of Calculus: [x^3] from 1 to 3 = (3^3) - (1^3).",
+      "Calculate 3^3 = 27 and 1^3 = 1. What is 27 - 1?"
+    ],
+    solutionSteps: [
+      "Formulate the definite integral representing the area: <strong>Area = &int;_{1}^{3} 3x^2 dx</strong>.",
+      "Find the antiderivative: <strong>&int; 3x^2 dx = 3 &middot; (x^3 / 3) = x^3</strong>.",
+      "Apply the Fundamental Theorem of Calculus: <strong>Area = [x^3]_{1}^{3} = F(3) - F(1)</strong>.",
+      "Calculate the upper bound value: <strong>3^3 = 27</strong>.",
+      "Calculate the lower bound value: <strong>1^3 = 1</strong>.",
+      "Perform the subtraction: <strong>27 - 1 = 26</strong>."
+    ]
+  }
+];
+
+let calcState = {
+  activeStep: 1,
+  sliderVal: 50,
+  hintsUnlocked: 0,
+  completed: [false, false, false, false, false]
+};
+
+function initCalculusAcademy() {
+  const portal = document.getElementById("calcAcademyPortal");
+  const launchBtn = document.getElementById("launchCalcBtn");
+  const exitBtn = document.getElementById("exitCalcBtn");
+  const tabs = document.querySelectorAll(".calc-chalk-tab");
+  const theoryCard = document.getElementById("chalkTheoryCard");
+  const canvas = document.getElementById("calcPortalCanvas");
+  const sliderContainer = document.getElementById("chalkSliderContainer");
+  const questionText = document.getElementById("chalkQuestionText");
+  const inputEl = document.getElementById("chalkAnswerInput");
+  const checkBtn = document.getElementById("chalkCheckBtn");
+  const feedbackText = document.getElementById("chalkFeedbackText");
+  const hintDots = document.getElementById("chalkHintDots");
+  const revealHintBtn = document.getElementById("revealHintBtn");
+  const hintText = document.getElementById("chalkHintText");
+  const showSolutionBtn = document.getElementById("chalkShowSolutionBtn");
+  const solutionBox = document.getElementById("chalkSolutionBox");
+  const motivationText = document.getElementById("chalkMotivationText");
+  
+  // Calculator Elements
+  const calcScreen = document.getElementById("chalkCalcScreen");
+  const modeArithmetic = document.getElementById("modeArithmetic");
+  const modeAlgebraic = document.getElementById("modeAlgebraic");
+  const arithmeticPad = document.getElementById("calcArithmeticPad");
+  const algebraicPad = document.getElementById("calcAlgebraicPad");
+  const polyInput = document.getElementById("calcPolyInput");
+  const evalXInput = document.getElementById("calcEvalXInput");
+  const diffBtn = document.getElementById("calcDifferentiateBtn");
+  const evalBtn = document.getElementById("calcEvaluateBtn");
+  const keys = document.querySelectorAll(".calc-key");
+  const clearKey = document.getElementById("calcClear");
+  const equalKey = document.getElementById("calcEqual");
+
+  if (!portal || !launchBtn) return;
+
+  // Load saved progress
+  const savedCompleted = localStorage.getItem("ncumoCalcCompleted");
+  if (savedCompleted) {
+    calcState.completed = JSON.parse(savedCompleted);
+  }
+
+  // Open Portal
+  launchBtn.addEventListener("click", () => {
+    portal.hidden = false;
+    setTimeout(() => {
+      portal.classList.add("active");
+      renderActiveStep();
+    }, 10);
+  });
+
+  // Close Portal
+  exitBtn.addEventListener("click", () => {
+    portal.classList.remove("active");
+    setTimeout(() => {
+      portal.hidden = true;
+    }, 500);
+  });
+
+  // Switch tabs
+  tabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+      const step = parseInt(tab.getAttribute("data-step"));
+      let canAccess = true;
+      for (let i = 0; i < step - 1; i++) {
+        if (!calcState.completed[i]) {
+          canAccess = false;
+          break;
+        }
+      }
+      
+      if (canAccess) {
+        calcState.activeStep = step;
+        calcState.hintsUnlocked = 0;
+        tabs.forEach(t => t.classList.remove("active"));
+        tab.classList.add("active");
+        renderActiveStep();
+      } else {
+        feedbackText.hidden = false;
+        feedbackText.className = "chalk-feedback error";
+        feedbackText.textContent = "Complete the previous challenges to unlock this module! 🌸";
+        setTimeout(() => {
+          feedbackText.hidden = true;
+        }, 3000);
+      }
+    });
+  });
+
+  // Render Step Content
+  function renderActiveStep() {
+    const mod = CALC_MODULES[calcState.activeStep - 1];
+    
+    // Theory Markup
+    theoryCard.innerHTML = `
+      <h4 class="chalk-theory-title">${mod.conceptTitle}</h4>
+      <p>${mod.conceptText}</p>
+      <div class="chalk-theory-context">
+        <strong>Real-World Application (${mod.realWorldTitle}):</strong><br>
+        ${mod.realWorldText}
+      </div>
+      <div class="chalk-theory-math">
+        $$\\text{Formula: } ${mod.mathFormula}$$
+      </div>
+    `;
+
+    theoryCard.innerHTML = theoryCard.innerHTML.replace(/\$\$(.*?)\$\$/g, '<code style="font-size: 1.1rem; color: #ebcb8b;">$1</code>');
+
+    // Motivation Tips
+    motivationText.textContent = mod.chalkMotivation;
+
+    // Challenge Text
+    questionText.innerHTML = mod.challengeQuestion;
+    inputEl.value = "";
+    feedbackText.hidden = true;
+    hintText.hidden = true;
+    solutionBox.hidden = true;
+    showSolutionBtn.hidden = true;
+
+    // Reset hints interface
+    updateHintDots();
+
+    // Generate Custom Slider based on step
+    setupSlider(mod.step);
+
+    // Initial canvas draw
+    drawCalcVisualizer();
+  }
+
+  // Setup slider details
+  function setupSlider(step) {
+    sliderContainer.innerHTML = "";
+    let min = 0, max = 100, val = 50, label = "Slider";
+    
+    if (step === 1) {
+      min = 0; max = 100; val = 15; label = "Approach Point x (Drag towards 50)";
+    } else if (step === 2) {
+      min = 1; max = 100; val = 90; label = "Distance h (Drag to 0 to find tangent slope)";
+    } else if (step === 3) {
+      min = -30; max = 30; val = 10; label = "Scan Point x";
+    } else if (step === 4) {
+      min = 2; max = 18; val = 4; label = "Fenced Cutout side x (m) (Maximize Area!)";
+    } else if (step === 5) {
+      min = 2; max = 30; val = 4; label = "Number of Riemann Sum Rectangle Slices (N)";
+    }
+
+    calcState.sliderVal = val;
+
+    sliderContainer.innerHTML = `
+      <div class="chalk-slider-label">
+        <span>${label}</span>
+        <span id="chalkSliderValText"><strong>${val}</strong></span>
+      </div>
+      <input type="range" class="calc-slider" id="chalkSlider" min="${min}" max="${max}" value="${val}">
+    `;
+
+    const slider = document.getElementById("chalkSlider");
+    slider.addEventListener("input", (e) => {
+      calcState.sliderVal = parseFloat(e.target.value);
+      let displayVal = calcState.sliderVal;
+      if (step === 1) {
+        displayVal = (calcState.sliderVal < 50) ? (0.5 + 1.45 * (calcState.sliderVal / 50)).toFixed(2) : (3.5 - 1.45 * ((calcState.sliderVal - 50) / 50)).toFixed(2);
+      } else if (step === 2) {
+        displayVal = (0.05 + 2.45 * (calcState.sliderVal / 100)).toFixed(2);
+      } else if (step === 3) {
+        displayVal = (calcState.sliderVal / 10).toFixed(1);
+      } else if (step === 4) {
+        displayVal = calcState.sliderVal.toFixed(1) + "m";
+      } else if (step === 5) {
+        displayVal = calcState.sliderVal;
+      }
+      document.getElementById("chalkSliderValText").innerHTML = `<strong>${displayVal}</strong>`;
+      drawCalcVisualizer();
+    });
+  }
+
+  // Draw Visualizer
+  function drawCalcVisualizer() {
+    const ctx = canvas.getContext("2d");
+    const step = calcState.activeStep;
+    const sVal = calcState.sliderVal;
+    
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    // Draw chalkboard grid
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.05)";
+    ctx.lineWidth = 1;
+    for (let x = 0; x < canvas.width; x += 30) {
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, canvas.height);
+      ctx.stroke();
+    }
+    for (let y = 0; y < canvas.height; y += 30) {
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.lineTo(canvas.width, y);
+      ctx.stroke();
+    }
+
+    if (step === 1) {
+      // Limits visualizer
+      const originX = 160;
+      const originY = 180;
+      const scale = 30;
+
+      // Draw axis
+      drawAxes(ctx, originX, originY, "x", "y");
+
+      // Draw line f(x) = x + 2 (with hole at 2,4)
+      ctx.strokeStyle = "#a3be8c";
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(originX - 3 * scale, originY - (-1) * scale);
+      ctx.lineTo(originX + 1.9 * scale, originY - 3.9 * scale);
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(originX + 2.1 * scale, originY - 4.1 * scale);
+      ctx.lineTo(originX + 5 * scale, originY - 7 * scale);
+      ctx.stroke();
+
+      // Draw Hole at (2, 4)
+      const hX = originX + 2 * scale;
+      const hY = originY - 4 * scale;
+      ctx.fillStyle = "#13171f";
+      ctx.strokeStyle = "#ff9ebb";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.arc(hX, hY, 6, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.stroke();
+
+      // Current approached point
+      let x = 0;
+      if (sVal < 50) {
+        x = 0.5 + 1.45 * (sVal / 50);
+      } else {
+        x = 3.5 - 1.45 * ((sVal - 50) / 50);
+      }
+      const y = x + 2;
+      const ptX = originX + x * scale;
+      const ptY = originY - y * scale;
+
+      // Projection lines
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.25)";
+      ctx.setLineDash([4, 4]);
+      ctx.beginPath();
+      ctx.moveTo(ptX, ptY);
+      ctx.lineTo(ptX, originY);
+      ctx.moveTo(ptX, ptY);
+      ctx.lineTo(originX, ptY);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Glow Dot
+      ctx.fillStyle = "#ebcb8b";
+      ctx.beginPath();
+      ctx.arc(ptX, ptY, 6, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Labels
+      ctx.fillStyle = "#eceff4";
+      ctx.font = "12px Courier New";
+      ctx.fillText(`L = 4 (Limit)`, originX - 90, hY + 4);
+      ctx.fillText(`a = 2`, hX - 18, originY + 15);
+      
+      ctx.fillStyle = "#ebcb8b";
+      ctx.fillText(`x: ${x.toFixed(2)}`, ptX - 25, originY - 5);
+      ctx.fillText(`y: ${y.toFixed(2)}`, originX + 5, ptY - 5);
+
+    } else if (step === 2) {
+      // First Principles Parabola f(x) = 0.3x^2
+      const originX = 150;
+      const originY = 220;
+      const scale = 40;
+
+      drawAxes(ctx, originX, originY, "x", "y");
+
+      // Draw Parabola
+      ctx.strokeStyle = "#88c0d0";
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      for (let px = -1; px <= 4.2; px += 0.1) {
+        const py = 0.3 * px * px;
+        const cx = originX + px * scale;
+        const cy = originY - py * scale;
+        if (px === -1) ctx.moveTo(cx, cy);
+        else ctx.lineTo(cx, cy);
+      }
+      ctx.stroke();
+
+      // Point A at x = 1.5
+      const ax = 1.5;
+      const ay = 0.3 * ax * ax;
+      const aX = originX + ax * scale;
+      const aY = originY - ay * scale;
+
+      // Point B at x = 1.5 + h
+      const h = 0.05 + 2.45 * (sVal / 100);
+      const bx = ax + h;
+      const by = 0.3 * bx * bx;
+      const bX = originX + bx * scale;
+      const bY = originY - by * scale;
+
+      // Secant Line slope
+      const m = (by - ay) / (bx - ax);
+
+      // Draw Secant Line
+      ctx.strokeStyle = "#ebcb8b";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      const startX = ax - 1.2;
+      const startY = m * (startX - ax) + ay;
+      const endX = bx + 1.2;
+      const endY = m * (endX - ax) + ay;
+      ctx.moveTo(originX + startX * scale, originY - startY * scale);
+      ctx.lineTo(originX + endX * scale, originY - endY * scale);
+      ctx.stroke();
+
+      // Draw Tangent Line at A (Slope = 0.6 * ax = 0.9)
+      const tangentM = 0.6 * ax;
+      ctx.strokeStyle = "#ff9ebb";
+      ctx.setLineDash([3, 3]);
+      ctx.beginPath();
+      const tStartX = ax - 1.5;
+      const tStartY = tangentM * (tStartX - ax) + ay;
+      const tEndX = ax + 2.0;
+      const tEndY = tangentM * (tEndX - ax) + ay;
+      ctx.moveTo(originX + tStartX * scale, originY - tStartY * scale);
+      ctx.lineTo(originX + tEndX * scale, originY - tEndY * scale);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Draw dots
+      ctx.fillStyle = "#a3be8c";
+      ctx.beginPath();
+      ctx.arc(aX, aY, 6, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = "#ff9ebb";
+      ctx.beginPath();
+      ctx.arc(bX, bY, 6, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Text info
+      ctx.fillStyle = "#eceff4";
+      ctx.font = "12px Courier New";
+      ctx.fillText(`Point A(x)`, aX - 10, aY - 12);
+      ctx.fillText(`Point B(x+h)`, bX - 10, bY - 12);
+      ctx.fillText(`h: ${h.toFixed(2)}`, bX + 10, bY + 12);
+      ctx.fillStyle = "#ebcb8b";
+      ctx.fillText(`Secant Slope (Average Rate): ${m.toFixed(2)}`, 20, 30);
+      ctx.fillStyle = "#ff9ebb";
+      ctx.fillText(`Tangent Slope (Instant): ${tangentM.toFixed(2)}`, 20, 50);
+
+    } else if (step === 3) {
+      // Differentiation Rules: Graphing derivative alongside original
+      const originX = 240;
+      const originY = 130;
+      const scale = 35;
+
+      drawAxes(ctx, originX, originY, "x", "y");
+
+      // Draw Original f(x) in green
+      ctx.strokeStyle = "#a3be8c";
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      for (let px = -3.5; px <= 3.5; px += 0.1) {
+        const py = 0.1 * px * px * px - 1.2 * px;
+        const cx = originX + px * scale;
+        const cy = originY - py * scale;
+        if (px === -3.5) ctx.moveTo(cx, cy);
+        else ctx.lineTo(cx, cy);
+      }
+      ctx.stroke();
+
+      // Draw Derivative f'(x) in pink
+      ctx.strokeStyle = "rgba(255, 158, 187, 0.4)";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      for (let px = -3.5; px <= 3.5; px += 0.1) {
+        const py = 0.3 * px * px - 1.2;
+        const cx = originX + px * scale;
+        const cy = originY - py * scale;
+        if (px === -3.5) ctx.moveTo(cx, cy);
+        else ctx.lineTo(cx, cy);
+      }
+      ctx.stroke();
+
+      // Scan point
+      const x = sVal / 10;
+      const y = 0.1 * x * x * x - 1.2 * x;
+      const dy = 0.3 * x * x - 1.2;
+
+      const ptX = originX + x * scale;
+      const ptY = originY - y * scale;
+      const dPtY = originY - dy * scale;
+
+      // Draw tangent line at f(x)
+      ctx.strokeStyle = "#ebcb8b";
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      const lx1 = x - 1.5;
+      const ly1 = dy * (lx1 - x) + y;
+      const lx2 = x + 1.5;
+      const ly2 = dy * (lx2 - x) + y;
+      ctx.moveTo(originX + lx1 * scale, originY - ly1 * scale);
+      ctx.lineTo(originX + lx2 * scale, originY - ly2 * scale);
+      ctx.stroke();
+
+      // Scan bar vertical line
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.15)";
+      ctx.setLineDash([2, 2]);
+      ctx.beginPath();
+      ctx.moveTo(ptX, 0);
+      ctx.lineTo(ptX, canvas.height);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Draw dots
+      ctx.fillStyle = "#a3be8c";
+      ctx.beginPath();
+      ctx.arc(ptX, ptY, 5, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = "#ff9ebb";
+      ctx.beginPath();
+      ctx.arc(ptX, dPtY, 5, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Labels
+      ctx.fillStyle = "#eceff4";
+      ctx.font = "11px Courier New";
+      ctx.fillText(`f(x) = 0.1x³ - 1.2x (Function)`, 15, 220);
+      ctx.fillStyle = "#ff9ebb";
+      ctx.fillText(`f'(x) = 0.3x² - 1.2 (Derivative)`, 15, 240);
+
+      ctx.fillStyle = "#ebcb8b";
+      ctx.fillText(`Scan x: ${x.toFixed(1)}`, ptX + 8, originY + 15);
+      ctx.fillText(`Slope of tangent = ${dy.toFixed(2)}`, ptX + 8, ptY - 10);
+      ctx.fillText(`Derivative Height = ${dy.toFixed(2)}`, ptX + 8, dPtY + 15);
+
+    } else if (step === 4) {
+      // Optimization: Left side drawing garden box, Right side plotting Area
+      const xVal = sVal;
+      const yVal = 40 - 2 * xVal;
+      const area = xVal * yVal;
+
+      ctx.fillStyle = "#2e3440";
+      ctx.fillRect(20, 60, 15, 140);
+
+      ctx.fillStyle = "#a3be8c";
+      ctx.font = "11px Courier New";
+      ctx.fillText("WALL", 18, 50);
+
+      const rectScale = 3;
+      const rectW = yVal * rectScale;
+      const rectH = xVal * rectScale;
+      
+      ctx.strokeStyle = "#ff9ebb";
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(35, 130 - rectW / 2);
+      ctx.lineTo(35 + rectH, 130 - rectW / 2);
+      ctx.lineTo(35 + rectH, 130 + rectW / 2);
+      ctx.lineTo(35, 130 + rectW / 2);
+      ctx.stroke();
+
+      ctx.fillStyle = "rgba(163, 190, 140, 0.15)";
+      ctx.fillRect(35, 130 - rectW / 2, rectH, rectW);
+
+      ctx.fillStyle = "#d8dee9";
+      ctx.fillText(`x = ${xVal.toFixed(1)}m`, 30 + rectH / 2, 115 - rectW / 2);
+      ctx.fillText(`y = ${yVal.toFixed(1)}m`, 40 + rectH, 134);
+      ctx.fillStyle = "#ebcb8b";
+      ctx.fillText(`Area: ${area.toFixed(0)}m²`, 45, 130);
+
+      const graphOriginX = 240;
+      const graphOriginY = 200;
+      const graphScaleX = 10;
+      const graphScaleY = 0.7;
+
+      drawAxes(ctx, graphOriginX, graphOriginY, "x", "Area");
+
+      ctx.strokeStyle = "#88c0d0";
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      for (let gx = 0; gx <= 20; gx += 0.5) {
+        const ga = 40 * gx - 2 * gx * gx;
+        const cx = graphOriginX + gx * graphScaleX;
+        const cy = graphOriginY - ga * graphScaleY;
+        if (gx === 0) ctx.moveTo(cx, cy);
+        else ctx.lineTo(cx, cy);
+      }
+      ctx.stroke();
+
+      const peakX = graphOriginX + 10 * graphScaleX;
+      const peakY = graphOriginY - 200 * graphScaleY;
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.2)";
+      ctx.setLineDash([2, 2]);
+      ctx.beginPath();
+      ctx.moveTo(peakX, peakY);
+      ctx.lineTo(peakX, graphOriginY);
+      ctx.lineTo(graphOriginX, peakY);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = "#ff9ebb";
+      ctx.beginPath();
+      ctx.arc(peakX, peakY, 4, 0, Math.PI * 2);
+      ctx.fill();
+
+      const curX = graphOriginX + xVal * graphScaleX;
+      const curY = graphOriginY - area * graphScaleY;
+      ctx.fillStyle = "#ebcb8b";
+      ctx.beginPath();
+      ctx.arc(curX, curY, 6, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.font = "11px Courier New";
+      ctx.fillText(`Peak: 200m² at x=10m`, graphOriginX + 50, peakY - 5);
+      ctx.fillText(`Current Area: ${area.toFixed(0)}m²`, graphOriginX + 50, curY - 15);
+
+    } else if (step === 5) {
+      // Integration Riemann Sums: Curve f(x) = 0.4x^2 from x = 1 to x = 3
+      const originX = 120;
+      const originY = 220;
+      const scaleX = 80;
+      const scaleY = 40;
+
+      drawAxes(ctx, originX, originY, "x", "y");
+
+      ctx.strokeStyle = "#a3be8c";
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      for (let px = 0; px <= 3.4; px += 0.05) {
+        const py = 0.4 * px * px;
+        const cx = originX + px * scaleX;
+        const cy = originY - py * scaleY;
+        if (px === 0) ctx.moveTo(cx, cy);
+        else ctx.lineTo(cx, cy);
+      }
+      ctx.stroke();
+
+      const n = Math.floor(sVal);
+      const startX = 1;
+      const endX = 3;
+      const width = (endX - startX) / n;
+      let areaSum = 0;
+
+      ctx.fillStyle = "rgba(136, 192, 208, 0.25)";
+      ctx.strokeStyle = "#88c0d0";
+      ctx.lineWidth = 1;
+
+      for (let i = 0; i < n; i++) {
+        const rx = startX + i * width;
+        const ry = 0.4 * rx * rx;
+        const rectW = width * scaleX;
+        const rectH = ry * scaleY;
+        const rxCanvas = originX + rx * scaleX;
+        const ryCanvas = originY - rectH;
+
+        ctx.fillRect(rxCanvas, ryCanvas, rectW, rectH);
+        ctx.strokeRect(rxCanvas, ryCanvas, rectW, rectH);
+
+        areaSum += ry * width;
+      }
+
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.4)";
+      ctx.lineWidth = 1;
+      ctx.setLineDash([3, 3]);
+      ctx.beginPath();
+      ctx.moveTo(originX + 1 * scaleX, 0);
+      ctx.lineTo(originX + 1 * scaleX, originY);
+      ctx.moveTo(originX + 3 * scaleX, 0);
+      ctx.lineTo(originX + 3 * scaleX, originY);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      ctx.fillStyle = "#eceff4";
+      ctx.font = "12px Courier New";
+      ctx.fillText(`Slices N: ${n}`, 260, 40);
+      ctx.fillStyle = "#88c0d0";
+      ctx.fillText(`Riemann Area Sum: ${(areaSum * (26 / 3.4667)).toFixed(2)}`, 260, 60);
+      ctx.fillStyle = "#a3be8c";
+      ctx.fillText(`Exact Definite Area: 26.00`, 260, 80);
+      ctx.fillStyle = "#d8dee9";
+      ctx.fillText(`x=1`, originX + 1 * scaleX - 10, originY + 15);
+      ctx.fillText(`x=3`, originX + 3 * scaleX - 10, originY + 15);
+    }
+  }
+
+  function drawAxes(ctx, ox, oy, xLabel, yLabel) {
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.3)";
+    ctx.lineWidth = 1.5;
+    
+    ctx.beginPath();
+    ctx.moveTo(10, oy);
+    ctx.lineTo(canvas.width - 10, oy);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(ox, 10);
+    ctx.lineTo(ox, canvas.height - 10);
+    ctx.stroke();
+
+    ctx.fillStyle = "rgba(255, 255, 255, 0.6)";
+    ctx.font = "10px monospace";
+    ctx.fillText(xLabel, canvas.width - 20, oy - 8);
+    ctx.fillText(yLabel, ox + 8, 20);
+  }
+
+  // Check Challenge Answer
+  checkBtn.addEventListener("click", () => {
+    const mod = CALC_MODULES[calcState.activeStep - 1];
+    const ans = inputEl.value.trim().replace(/\s+/g, '');
+    
+    if (ans === mod.correctAnswer) {
+      feedbackText.hidden = false;
+      feedbackText.className = "chalk-feedback success";
+      feedbackText.innerHTML = `Amazing job, sthandwa sam! You got it right! 🌟<br>Derivative checked and verified.`;
+      
+      calcState.completed[calcState.activeStep - 1] = true;
+      localStorage.setItem("ncumoCalcCompleted", JSON.stringify(calcState.completed));
+
+      if (typeof triggerWinConfetti === "function") triggerWinConfetti();
+      if (typeof initAudio === "function") initAudio();
+      
+      const rect = checkBtn.getBoundingClientRect();
+      if (typeof spawnSparklesAt === "function") {
+        spawnSparklesAt(rect.left + rect.width / 2, rect.top, 15, ["🎓", "✨", "🌸", "💖", "✏️"]);
+      }
+
+      const allCompleted = calcState.completed.every(c => c === true);
+      if (allCompleted) {
+        unlockAchievement("calculus_master");
+        feedbackText.innerHTML += `<br><strong>🎉 Curriculum Mastered! You unlocked the 'Calculus Guru' badge! 🏆</strong>`;
+      }
+
+      showSolutionBtn.hidden = false;
+    } else {
+      feedbackText.hidden = false;
+      feedbackText.className = "chalk-feedback error";
+      feedbackText.textContent = "Almost there! Double-check your math, sthandwa sam, or reveal a hint if you need a guide! 🌸";
+      showSolutionBtn.hidden = false;
+    }
+  });
+
+  // Reveal Hints
+  revealHintBtn.addEventListener("click", () => {
+    const mod = CALC_MODULES[calcState.activeStep - 1];
+    if (calcState.hintsUnlocked < 5) {
+      calcState.hintsUnlocked++;
+      updateHintDots();
+      
+      hintText.hidden = false;
+      hintText.innerHTML = `<strong>Hint ${calcState.hintsUnlocked}:</strong> ${mod.hints[calcState.hintsUnlocked - 1]}`;
+    }
+  });
+
+  function updateHintDots() {
+    const dots = hintDots.querySelectorAll(".hint-dot");
+    dots.forEach((dot, idx) => {
+      if (idx < calcState.hintsUnlocked) {
+        dot.classList.add("unlocked");
+      } else {
+        dot.classList.remove("unlocked");
+      }
+    });
+
+    if (calcState.hintsUnlocked >= 5) {
+      revealHintBtn.disabled = true;
+      revealHintBtn.style.opacity = "0.5";
+      revealHintBtn.textContent = "All Hints Unlocked 💡";
+    } else {
+      revealHintBtn.disabled = false;
+      revealHintBtn.style.opacity = "1";
+      revealHintBtn.textContent = `Unlock Hint (${calcState.hintsUnlocked}/5) 💡`;
+    }
+  }
+
+  // Show Step-by-Step Solution Proof
+  showSolutionBtn.addEventListener("click", () => {
+    const mod = CALC_MODULES[calcState.activeStep - 1];
+    solutionBox.hidden = false;
+    
+    let stepsHtml = mod.solutionSteps.map((stepText, idx) => {
+      return `<li>${stepText}</li>`;
+    }).join("");
+
+    solutionBox.innerHTML = `
+      <h4>📖 Mathematical Step-by-Step Proof</h4>
+      <ol>${stepsHtml}</ol>
+      <p style="margin-top: 0.8rem; font-size: 0.78rem; opacity: 0.8; font-style: italic; color: #ff9ebb;">
+        Verified Solution · Grade 12 to Higher Certificate Standard.
+      </p>
+    `;
+    
+    solutionBox.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  });
+
+  // =====================================================
+  // 🧮 Embedded Chalkboard Calculator Logic
+  // =====================================================
+  
+  modeArithmetic.addEventListener("click", () => {
+    modeArithmetic.classList.add("active");
+    modeAlgebraic.classList.remove("active");
+    arithmeticPad.hidden = false;
+    algebraicPad.hidden = true;
+  });
+
+  modeAlgebraic.addEventListener("click", () => {
+    modeAlgebraic.classList.add("active");
+    modeArithmetic.classList.remove("active");
+    arithmeticPad.hidden = true;
+    algebraicPad.hidden = false;
+  });
+
+  keys.forEach(key => {
+    key.addEventListener("click", () => {
+      const val = key.textContent;
+      if (val === "=" || val === "C") return;
+      
+      if (calcScreen.textContent === "0" || calcScreen.textContent === "Error" || calcScreen.textContent.startsWith("d/dx") || calcScreen.textContent.startsWith("f(")) {
+        calcScreen.textContent = val;
+      } else {
+        calcScreen.textContent += val;
+      }
+    });
+  });
+
+  clearKey.addEventListener("click", () => {
+    calcScreen.textContent = "0";
+  });
+
+  equalKey.addEventListener("click", () => {
+    const expr = calcScreen.textContent;
+    const cleanExpr = expr.replace(/[^0-9+\-*/.]/g, "");
+    try {
+      if (cleanExpr === "") {
+        calcScreen.textContent = "0";
+        return;
+      }
+      const res = eval(cleanExpr);
+      calcScreen.textContent = Number.isInteger(res) ? res : res.toFixed(4);
+    } catch (e) {
+      calcScreen.textContent = "Error";
+    }
+  });
+
+  diffBtn.addEventListener("click", () => {
+    const expr = polyInput.value;
+    const res = differentiatePolynomial(expr);
+    calcScreen.textContent = "d/dx = " + res;
+  });
+
+  evalBtn.addEventListener("click", () => {
+    const expr = polyInput.value;
+    const xVal = parseFloat(evalXInput.value);
+    if (isNaN(xVal)) {
+      calcScreen.textContent = "Error: Input x";
+      return;
+    }
+    const res = evaluatePolynomial(expr, xVal);
+    calcScreen.textContent = `f(${xVal}) = ` + (Number.isInteger(res) ? res : res.toFixed(4));
+  });
+
+  function differentiatePolynomial(expr) {
+    expr = expr.replace(/\s+/g, '').replace(/-/g, '+-');
+    const terms = expr.split('+').filter(t => t.length > 0);
+    let derTerms = [];
+    
+    terms.forEach(term => {
+      const axnMatch = term.match(/^([+-]?\d*(?:\.\d+)?)?x\^([+-]?\d+)$/);
+      const axMatch = term.match(/^([+-]?\d*(?:\.\d+)?)?x$/);
+      
+      if (axnMatch) {
+        let coefStr = axnMatch[1];
+        let coef = 1;
+        if (coefStr === "+") coef = 1;
+        else if (coefStr === "-") coef = -1;
+        else if (coefStr !== undefined && coefStr !== "") coef = parseFloat(coefStr);
+        
+        let exp = parseInt(axnMatch[2]);
+        let newCoef = coef * exp;
+        let newExp = exp - 1;
+        
+        if (newExp === 0) {
+          derTerms.push(`${newCoef}`);
+        } else if (newExp === 1) {
+          derTerms.push(`${newCoef}x`);
+        } else {
+          derTerms.push(`${newCoef}x^${newExp}`);
+        }
+      } else if (axMatch) {
+        let coefStr = axMatch[1];
+        let coef = 1;
+        if (coefStr === "+") coef = 1;
+        else if (coefStr === "-") coef = -1;
+        else if (coefStr !== undefined && coefStr !== "") coef = parseFloat(coefStr);
+        derTerms.push(`${coef}`);
+      }
+    });
+    
+    if (derTerms.length === 0) return "0";
+    let result = derTerms.join('+').replace(/\+-/g, '-').replace(/^\+/, '');
+    return result;
+  }
+
+  function evaluatePolynomial(expr, xVal) {
+    expr = expr.replace(/\s+/g, '').replace(/-/g, '+-');
+    const terms = expr.split('+').filter(t => t.length > 0);
+    let sum = 0;
+    
+    terms.forEach(term => {
+      const axnMatch = term.match(/^([+-]?\d*(?:\.\d+)?)?x\^([+-]?\d+)$/);
+      const axMatch = term.match(/^([+-]?\d*(?:\.\d+)?)?x$/);
+      const cMatch = term.match(/^([+-]?\d+(?:\.\d+)?)$/);
+      
+      if (axnMatch) {
+        let coefStr = axnMatch[1];
+        let coef = 1;
+        if (coefStr === "+") coef = 1;
+        else if (coefStr === "-") coef = -1;
+        else if (coefStr !== undefined && coefStr !== "") coef = parseFloat(coefStr);
+        
+        let exp = parseInt(axnMatch[2]);
+        sum += coef * Math.pow(xVal, exp);
+      } else if (axMatch) {
+        let coefStr = axMatch[1];
+        let coef = 1;
+        if (coefStr === "+") coef = 1;
+        else if (coefStr === "-") coef = -1;
+        else if (coefStr !== undefined && coefStr !== "") coef = parseFloat(coefStr);
+        sum += coef * xVal;
+      } else if (cMatch) {
+        sum += parseFloat(cMatch[1]);
+      }
+    });
+    
+    return sum;
+  }
+}
+
+// Initialize on load
+initCalculusAcademy();
+
