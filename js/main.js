@@ -3376,7 +3376,9 @@ let calcState = {
   activeStep: 1,
   sliderVal: 50,
   hintsUnlocked: 0,
-  completed: [false, false, false, false, false]
+  completed: [false, false, false, false, false],
+  isSandboxMode: false,
+  sandboxExpr: ""
 };
 
 let lastChalkSoundTime = 0;
@@ -3416,6 +3418,7 @@ function initCalculusAcademy() {
   const evalXInput = document.getElementById("calcEvalXInput");
   const diffBtn = document.getElementById("calcDifferentiateBtn");
   const evalBtn = document.getElementById("calcEvaluateBtn");
+  const graphBtn = document.getElementById("calcGraphBtn");
   const keys = document.querySelectorAll(".calc-key");
   const clearKey = document.getElementById("calcClear");
   const equalKey = document.getElementById("calcEqual");
@@ -3441,6 +3444,7 @@ function initCalculusAcademy() {
     playChalkSound("click");
     portal.classList.remove("active");
     stopChalkParticles();
+    calcState.isSandboxMode = false;
     setTimeout(() => {
       portal.hidden = true;
     }, 500);
@@ -3484,6 +3488,7 @@ function initCalculusAcademy() {
         tabs.forEach(t => t.classList.remove("active"));
         tab.classList.add("active");
         triggerEraserSwipe(() => {
+          calcState.isSandboxMode = false;
           calcState.activeStep = step;
           calcState.hintsUnlocked = 0;
           renderActiveStep();
@@ -3501,6 +3506,7 @@ function initCalculusAcademy() {
 
   function renderActiveStep() {
     const mod = CALC_MODULES[calcState.activeStep - 1];
+    calcState.isSandboxMode = false;
     
     theoryCard.innerHTML = `
       <h4 class="chalk-theory-title">${mod.conceptTitle}</h4>
@@ -3590,11 +3596,11 @@ function initCalculusAcademy() {
       playThrottledWriteSound();
       let displayVal = calcState.sliderVal;
       if (step === 1) {
-        displayVal = (calcState.sliderVal < 50) ? (0.5 + 1.45 * (calcState.sliderVal / 50)).toFixed(2) : (3.5 - 1.45 * ((calcState.sliderVal - 50) / 50)).toFixed(2);
+        displayVal = (calcState.sliderVal < 50) ? (1.0 + 1.9 * (calcState.sliderVal / 50)).toFixed(2) : (5.0 - 1.9 * ((calcState.sliderVal - 50) / 50)).toFixed(2);
       } else if (step === 2) {
-        displayVal = (0.05 + 2.45 * (calcState.sliderVal / 100)).toFixed(2);
+        displayVal = (0.05 + 1.45 * (calcState.sliderVal / 100)).toFixed(2);
       } else if (step === 3) {
-        displayVal = (calcState.sliderVal / 10).toFixed(1);
+        displayVal = (calcState.sliderVal / 15).toFixed(2);
       } else if (step === 4) {
         displayVal = calcState.sliderVal.toFixed(1) + "m";
       } else if (step === 5) {
@@ -3634,9 +3640,105 @@ function initCalculusAcademy() {
       ctx.stroke();
     }
 
+    if (calcState.isSandboxMode) {
+      const originX = rect.width / 2;
+      const originY = rect.height / 2;
+      const scale = 25;
+
+      drawAxes(ctx, originX, originY, "x", "y", rect);
+
+      ctx.strokeStyle = "#a3be8c";
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      let first = true;
+      for (let px = -5; px <= 5; px += 0.1) {
+        try {
+          const py = evaluatePolynomial(calcState.sandboxExpr, px);
+          if (isNaN(py)) continue;
+          const cx = originX + px * scale;
+          const cy = originY - py * scale;
+          if (cx >= 0 && cx <= rect.width && cy >= 0 && cy <= rect.height) {
+            if (first) { ctx.moveTo(cx, cy); first = false; }
+            else ctx.lineTo(cx, cy);
+          }
+        } catch (err) {}
+      }
+      ctx.stroke();
+
+      const diffExpr = differentiatePolynomial(calcState.sandboxExpr);
+      ctx.strokeStyle = "rgba(255, 158, 187, 0.5)";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      first = true;
+      for (let px = -5; px <= 5; px += 0.1) {
+        try {
+          const py = evaluatePolynomial(diffExpr, px);
+          if (isNaN(py)) continue;
+          const cx = originX + px * scale;
+          const cy = originY - py * scale;
+          if (cx >= 0 && cx <= rect.width && cy >= 0 && cy <= rect.height) {
+            if (first) { ctx.moveTo(cx, cy); first = false; }
+            else ctx.lineTo(cx, cy);
+          }
+        } catch (err) {}
+      }
+      ctx.stroke();
+
+      const x = sVal / 10;
+      try {
+        const y = evaluatePolynomial(calcState.sandboxExpr, x);
+        const dy = evaluatePolynomial(diffExpr, x);
+
+        const ptX = originX + x * scale;
+        const ptY = originY - y * scale;
+        const dPtY = originY - dy * scale;
+
+        ctx.strokeStyle = "#ebcb8b";
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        const lx1 = x - 1.5;
+        const ly1 = dy * (lx1 - x) + y;
+        const lx2 = x + 1.5;
+        const ly2 = dy * (lx2 - x) + y;
+        ctx.moveTo(originX + lx1 * scale, originY - ly1 * scale);
+        ctx.lineTo(originX + lx2 * scale, originY - ly2 * scale);
+        ctx.stroke();
+
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.15)";
+        ctx.setLineDash([2, 2]);
+        ctx.beginPath();
+        ctx.moveTo(ptX, 0);
+        ctx.lineTo(ptX, rect.height);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        ctx.fillStyle = "#a3be8c";
+        ctx.beginPath();
+        ctx.arc(ptX, ptY, 5, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = "#ff9ebb";
+        ctx.beginPath();
+        ctx.arc(ptX, dPtY, 5, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = "#eceff4";
+        ctx.font = "11px Courier New";
+        ctx.fillText(`f(x) = ${calcState.sandboxExpr}`, 15, 215);
+        ctx.fillStyle = "#ff9ebb";
+        ctx.fillText(`f'(x) = ${diffExpr}`, 15, 235);
+
+        ctx.fillStyle = "#ebcb8b";
+        ctx.fillText(`Scan x: ${x.toFixed(1)}`, ptX + 8, originY + 15);
+        ctx.fillText(`Slope = ${dy.toFixed(2)}`, ptX + 8, ptY - 10);
+      } catch (err) {}
+      
+      return;
+    }
+
     if (step === 1) {
-      const originX = 160;
-      const originY = 180;
+      const originX = 140;
+      const originY = 220;
       const scale = 30;
 
       drawAxes(ctx, originX, originY, "x", "y", rect);
@@ -3644,17 +3746,17 @@ function initCalculusAcademy() {
       ctx.strokeStyle = "#a3be8c";
       ctx.lineWidth = 3;
       ctx.beginPath();
-      ctx.moveTo(originX - 3 * scale, originY - (-1) * scale);
-      ctx.lineTo(originX + 1.95 * scale, originY - 3.95 * scale);
+      ctx.moveTo(originX - 3 * scale, originY - 0 * scale);
+      ctx.lineTo(originX + 2.9 * scale, originY - 5.9 * scale);
       ctx.stroke();
 
       ctx.beginPath();
-      ctx.moveTo(originX + 2.05 * scale, originY - 4.05 * scale);
-      ctx.lineTo(originX + 5 * scale, originY - 7 * scale);
+      ctx.moveTo(originX + 3.1 * scale, originY - 6.1 * scale);
+      ctx.lineTo(originX + 5 * scale, originY - 8 * scale);
       ctx.stroke();
 
-      const hX = originX + 2 * scale;
-      const hY = originY - 4 * scale;
+      const hX = originX + 3 * scale;
+      const hY = originY - 6 * scale;
       ctx.fillStyle = "#1e222a";
       ctx.strokeStyle = "#ff9ebb";
       ctx.lineWidth = 2;
@@ -3665,11 +3767,11 @@ function initCalculusAcademy() {
 
       let x = 0;
       if (sVal < 50) {
-        x = 0.5 + 1.45 * (sVal / 50);
+        x = 1.0 + 1.9 * (sVal / 50);
       } else {
-        x = 3.5 - 1.45 * ((sVal - 50) / 50);
+        x = 5.0 - 1.9 * ((sVal - 50) / 50);
       }
-      const y = x + 2;
+      const y = x + 3;
       const ptX = originX + x * scale;
       const ptY = originY - y * scale;
 
@@ -3698,58 +3800,59 @@ function initCalculusAcademy() {
       ctx.fillText(`y: ${y.toFixed(2)}`, originX + 5, ptY - 5);
 
     } else if (step === 2) {
-      const originX = 150;
-      const originY = 220;
-      const scale = 40;
+      const originX = 90;
+      const originY = 240;
+      const scaleX = 40;
+      const scaleY = 10;
 
       drawAxes(ctx, originX, originY, "x", "y", rect);
 
       ctx.strokeStyle = "#88c0d0";
       ctx.lineWidth = 3;
       ctx.beginPath();
-      for (let px = -1; px <= 4.2; px += 0.1) {
-        const py = 0.3 * px * px;
-        const cx = originX + px * scale;
-        const cy = originY - py * scale;
-        if (px === -1) ctx.moveTo(cx, cy);
+      for (let px = 0; px <= 4.2; px += 0.1) {
+        const py = 2 * px * px;
+        const cx = originX + px * scaleX;
+        const cy = originY - py * scaleY;
+        if (px === 0) ctx.moveTo(cx, cy);
         else ctx.lineTo(cx, cy);
       }
       ctx.stroke();
 
-      const ax = 1.5;
-      const ay = 0.3 * ax * ax;
-      const aX = originX + ax * scale;
-      const aY = originY - ay * scale;
+      const ax = 3.0;
+      const ay = 18.0;
+      const aX = originX + ax * scaleX;
+      const aY = originY - ay * scaleY;
 
-      const h = 0.05 + 2.45 * (sVal / 100);
+      const h = 0.05 + 1.45 * (sVal / 100);
       const bx = ax + h;
-      const by = 0.3 * bx * bx;
-      const bX = originX + bx * scale;
-      const bY = originY - by * scale;
+      const by = 2 * bx * bx;
+      const bX = originX + bx * scaleX;
+      const bY = originY - by * scaleY;
 
       const m = (by - ay) / (bx - ax);
 
       ctx.strokeStyle = "#ebcb8b";
       ctx.lineWidth = 2;
       ctx.beginPath();
-      const startX = ax - 1.2;
+      const startX = 1.5;
       const startY = m * (startX - ax) + ay;
-      const endX = bx + 1.2;
+      const endX = bx + 0.8;
       const endY = m * (endX - ax) + ay;
-      ctx.moveTo(originX + startX * scale, originY - startY * scale);
-      ctx.lineTo(originX + endX * scale, originY - endY * scale);
+      ctx.moveTo(originX + startX * scaleX, originY - startY * scaleY);
+      ctx.lineTo(originX + endX * scaleX, originY - endY * scaleY);
       ctx.stroke();
 
-      const tangentM = 0.6 * ax;
+      const tangentM = 12.0;
       ctx.strokeStyle = "#ff9ebb";
       ctx.setLineDash([3, 3]);
       ctx.beginPath();
-      const tStartX = ax - 1.5;
+      const tStartX = 1.5;
       const tStartY = tangentM * (tStartX - ax) + ay;
-      const tEndX = ax + 2.0;
+      const tEndX = 4.2;
       const tEndY = tangentM * (tEndX - ax) + ay;
-      ctx.moveTo(originX + tStartX * scale, originY - tStartY * scale);
-      ctx.lineTo(originX + tEndX * scale, originY - tEndY * scale);
+      ctx.moveTo(originX + tStartX * scaleX, originY - tStartY * scaleY);
+      ctx.lineTo(originX + tEndX * scaleX, originY - tEndY * scaleY);
       ctx.stroke();
       ctx.setLineDash([]);
 
@@ -3765,8 +3868,8 @@ function initCalculusAcademy() {
 
       ctx.fillStyle = "#eceff4";
       ctx.font = "12px Courier New";
-      ctx.fillText(`Point A(x)`, aX - 10, aY - 12);
-      ctx.fillText(`Point B(x+h)`, bX - 10, bY - 12);
+      ctx.fillText(`Point A(3, 18)`, aX - 10, aY - 12);
+      ctx.fillText(`Point B(3+h, f(3+h))`, bX - 10, bY - 12);
       ctx.fillText(`h: ${h.toFixed(2)}`, bX + 10, bY + 12);
       ctx.fillStyle = "#ebcb8b";
       ctx.fillText(`Secant Slope (Average Rate): ${m.toFixed(2)}`, 20, 30);
@@ -3774,53 +3877,54 @@ function initCalculusAcademy() {
       ctx.fillText(`Tangent Slope (Instant): ${tangentM.toFixed(2)}`, 20, 50);
 
     } else if (step === 3) {
-      const originX = 240;
-      const originY = 130;
-      const scale = 35;
+      const originX = 140;
+      const originY = 230;
+      const scaleX = 45;
+      const scaleY = 10;
 
       drawAxes(ctx, originX, originY, "x", "y", rect);
 
       ctx.strokeStyle = "#a3be8c";
       ctx.lineWidth = 3;
       ctx.beginPath();
-      for (let px = -3.5; px <= 3.5; px += 0.1) {
-        const py = 0.1 * px * px * px - 1.2 * px;
-        const cx = originX + px * scale;
-        const cy = originY - py * scale;
-        if (px === -3.5) ctx.moveTo(cx, cy);
+      for (let px = -2; px <= 2.2; px += 0.1) {
+        const py = 3 * px * px + 2;
+        const cx = originX + px * scaleX;
+        const cy = originY - py * scaleY;
+        if (px === -2) ctx.moveTo(cx, cy);
         else ctx.lineTo(cx, cy);
       }
       ctx.stroke();
 
-      ctx.strokeStyle = "rgba(255, 158, 187, 0.4)";
-      ctx.lineWidth = 2;
+      ctx.strokeStyle = "rgba(255, 158, 187, 0.55)";
+      ctx.lineWidth = 2.5;
       ctx.beginPath();
-      for (let px = -3.5; px <= 3.5; px += 0.1) {
-        const py = 0.3 * px * px - 1.2;
-        const cx = originX + px * scale;
-        const cy = originY - py * scale;
-        if (px === -3.5) ctx.moveTo(cx, cy);
+      for (let px = -2; px <= 2.2; px += 0.1) {
+        const py = 6 * px;
+        const cx = originX + px * scaleX;
+        const cy = originY - py * scaleY;
+        if (px === -2) ctx.moveTo(cx, cy);
         else ctx.lineTo(cx, cy);
       }
       ctx.stroke();
 
-      const x = sVal / 10;
-      const y = 0.1 * x * x * x - 1.2 * x;
-      const dy = 0.3 * x * x - 1.2;
+      const x = sVal / 15;
+      const y = 3 * x * x + 2;
+      const dy = 6 * x;
 
-      const ptX = originX + x * scale;
-      const ptY = originY - y * scale;
-      const dPtY = originY - dy * scale;
+      const ptX = originX + x * scaleX;
+      const ptY = originY - y * scaleY;
+      const dPtY = originY - dy * scaleY;
 
       ctx.strokeStyle = "#ebcb8b";
       ctx.lineWidth = 1.5;
       ctx.beginPath();
-      const lx1 = x - 1.5;
+      const lx1 = x - 0.8;
       const ly1 = dy * (lx1 - x) + y;
-      const lx2 = x + 1.5;
+      const lx2 = x + 0.8;
       const ly2 = dy * (lx2 - x) + y;
-      ctx.moveTo(originX + lx1 * scale, originY - ly1 * scale);
-      ctx.lineTo(originX + lx2 * scale, originY - ly2 * scale);
+      ctx.moveTo(originX + lx1 * scaleX, originY - ly1 * scaleY);
+      ctx.lineTo(originX + lx2 * scaleX, originY - ly2 * scaleY);
       ctx.stroke();
 
       ctx.strokeStyle = "rgba(255, 255, 255, 0.15)";
@@ -3843,9 +3947,9 @@ function initCalculusAcademy() {
 
       ctx.fillStyle = "#eceff4";
       ctx.font = "11px Courier New";
-      ctx.fillText(`f(x) = 0.1x³ - 1.2x (Function)`, 15, 220);
+      ctx.fillText(`g(x) = 3x² + 2 (Function)`, 15, 220);
       ctx.fillStyle = "#ff9ebb";
-      ctx.fillText(`f'(x) = 0.3x² - 1.2 (Derivative)`, 15, 240);
+      ctx.fillText(`g'(x) = 6x (Derivative)`, 15, 240);
 
       ctx.fillStyle = "#ebcb8b";
       ctx.fillText(`Scan x: ${x.toFixed(1)}`, ptX + 8, originY + 15);
@@ -3932,18 +4036,18 @@ function initCalculusAcademy() {
       ctx.fillText(`Current Area: ${area.toFixed(0)}m²`, graphOriginX + 50, curY - 15);
 
     } else if (step === 5) {
-      const originX = 120;
-      const originY = 220;
-      const scaleX = 80;
-      const scaleY = 40;
+      const originX = 90;
+      const originY = 230;
+      const scaleX = 60;
+      const scaleY = 6;
 
       drawAxes(ctx, originX, originY, "x", "y", rect);
 
       ctx.strokeStyle = "#a3be8c";
       ctx.lineWidth = 3;
       ctx.beginPath();
-      for (let px = 0; px <= 3.4; px += 0.05) {
-        const py = 0.4 * px * px;
+      for (let px = 0; px <= 3.3; px += 0.1) {
+        const py = 3 * px * px;
         const cx = originX + px * scaleX;
         const cy = originY - py * scaleY;
         if (px === 0) ctx.moveTo(cx, cy);
@@ -3963,7 +4067,7 @@ function initCalculusAcademy() {
 
       for (let i = 0; i < n; i++) {
         const rx = startX + i * width;
-        const ry = 0.4 * rx * rx;
+        const ry = 3 * rx * rx;
         const rectW = width * scaleX;
         const rectH = ry * scaleY;
         const rxCanvas = originX + rx * scaleX;
@@ -3990,7 +4094,7 @@ function initCalculusAcademy() {
       ctx.font = "12px Courier New";
       ctx.fillText(`Slices N: ${n}`, 260, 40);
       ctx.fillStyle = "#88c0d0";
-      ctx.fillText(`Riemann Area Sum: ${(areaSum * (26 / 3.4667)).toFixed(2)}`, 260, 60);
+      ctx.fillText(`Riemann Area Sum: ${areaSum.toFixed(2)}`, 260, 60);
       ctx.fillStyle = "#a3be8c";
       ctx.fillText(`Exact Definite Area: 26.00`, 260, 80);
       ctx.fillStyle = "#d8dee9";
@@ -4144,7 +4248,7 @@ function initCalculusAcademy() {
       const val = key.textContent;
       if (val === "=" || val === "C") return;
       
-      if (calcScreen.textContent === "0" || calcScreen.textContent === "Error" || calcScreen.textContent.startsWith("d/dx") || calcScreen.textContent.startsWith("f(")) {
+      if (calcScreen.textContent === "0" || calcScreen.textContent === "Error" || calcScreen.textContent.startsWith("d/dx") || calcScreen.textContent.startsWith("f(") || calcScreen.textContent === "Sandbox Mode Active") {
         calcScreen.textContent = val;
       } else {
         calcScreen.textContent += val;
@@ -4191,6 +4295,40 @@ function initCalculusAcademy() {
     const res = evaluatePolynomial(expr, xVal);
     calcScreen.textContent = `f(${xVal}) = ` + (Number.isInteger(res) ? res : res.toFixed(4));
   });
+
+  if (graphBtn) {
+    graphBtn.addEventListener("click", () => {
+      playChalkSound("write");
+      const expr = polyInput.value;
+      if (!expr || expr.trim() === "") {
+        calcScreen.textContent = "Error: Input f(x)";
+        return;
+      }
+      calcState.sandboxExpr = expr;
+      calcState.isSandboxMode = true;
+      
+      sliderContainer.innerHTML = `
+        <div class="chalk-slider-label">
+          <span>Sandbox Scan Point x</span>
+          <span id="chalkSliderValText"><strong>1.0</strong></span>
+        </div>
+        <input type="range" class="calc-slider" id="chalkSlider" min="-40" max="40" value="10">
+      `;
+      calcState.sliderVal = 10;
+      
+      const slider = document.getElementById("chalkSlider");
+      slider.addEventListener("input", (e) => {
+        calcState.sliderVal = parseFloat(e.target.value);
+        playThrottledWriteSound();
+        const displayVal = (calcState.sliderVal / 10).toFixed(1);
+        document.getElementById("chalkSliderValText").innerHTML = `<strong>${displayVal}</strong>`;
+        drawCalcVisualizer();
+      });
+      
+      calcScreen.textContent = "Sandbox Mode Active";
+      drawCalcVisualizer();
+    });
+  }
 
   function differentiatePolynomial(expr) {
     expr = expr.replace(/\s+/g, '').replace(/-/g, '+-');
