@@ -3511,14 +3511,226 @@ function initCalculusAcademy() {
     calcState.completed = JSON.parse(savedCompleted);
   }
 
-  launchBtn.addEventListener("click", () => {
+  // Mobile UI controls
+  const calcSidebar = document.getElementById("calcSidebar");
+  const closeCalcSidebarBtn = document.getElementById("closeCalcSidebarBtn");
+  const mobileCalcToggle = document.getElementById("mobileCalcToggle");
+
+  if (mobileCalcToggle && calcSidebar) {
+    mobileCalcToggle.addEventListener("click", () => {
+      playChalkSound("click");
+      calcSidebar.classList.toggle("open");
+    });
+  }
+  if (closeCalcSidebarBtn && calcSidebar) {
+    closeCalcSidebarBtn.addEventListener("click", () => {
+      playChalkSound("click");
+      calcSidebar.classList.remove("open");
+    });
+  }
+
+  // Inject Extra Resources links dynamically
+  CALC_MODULES[0].links = [
+    { text: "Intro to Limits (LibreTexts)", url: "https://math.libretexts.org/Bookshelves/Calculus/Calculus_(Apex)/01%3A_Limits" },
+    { text: "Paul's Notes on Limits", url: "https://tutorial.math.lamar.edu/classes/calcI/LimitsIntro.aspx" }
+  ];
+  CALC_MODULES[1].links = [
+    { text: "Derivative Definition (Paul's Notes)", url: "https://tutorial.math.lamar.edu/Classes/CalcI/DefnOfDerivative.aspx" }
+  ];
+  CALC_MODULES[2].links = [
+    { text: "Differentiation Rules Table", url: "https://tutorial.math.lamar.edu/Classes/CalcI/DiffRules.aspx" }
+  ];
+  CALC_MODULES[3].links = [
+    { text: "Optimization Guide", url: "https://tutorial.math.lamar.edu/Classes/CalcI/Optimization.aspx" }
+  ];
+  CALC_MODULES[4].links = [
+    { text: "Definite Integrals (Paul's Notes)", url: "https://tutorial.math.lamar.edu/Classes/CalcI/DefnOfDefiniteIntegral.aspx" }
+  ];
+  CALC_MODULES[5].links = [
+    { text: "Chain Rule Tutorial", url: "https://tutorial.math.lamar.edu/Classes/CalcI/ChainRule.aspx" }
+  ];
+  CALC_MODULES[6].links = [
+    { text: "Related Rates step-by-step", url: "https://tutorial.math.lamar.edu/Classes/CalcI/RelatedRates.aspx" }
+  ];
+  CALC_MODULES[7].links = [
+    { text: "Fundamental Theorem of Calculus", url: "https://tutorial.math.lamar.edu/Classes/CalcI/FTC.aspx" }
+  ];
+
+  // Gatekeeper Challenge Modal
+  const gatewayModal = document.getElementById("calcGatewayModal");
+  const gatewayQ = document.getElementById("gatewayQuestionText");
+  const gatewayOpts = document.getElementById("gatewayOptionsGrid");
+  const gatewayFeedback = document.getElementById("gatewayFeedback");
+  const gatewayHintBtn = document.getElementById("gatewayHintBtn");
+  const gatewayHintText = document.getElementById("gatewayHintText");
+  const gatewayCalcBtn = document.getElementById("gatewayCalcToggleBtn");
+  const gatewayMiniCalc = document.getElementById("gatewayMiniCalc");
+  const gatewayCloseBtn = document.getElementById("gatewayCloseBtn");
+
+  const GATEWAY_QUESTIONS = [
+    {
+      question: "Which of the following describes the derivative of a function?",
+      choices: [
+        "The exact area accumulated under the curve",
+        "The instantaneous rate of change (slope of the tangent line)",
+        "The height of the horizontal asymptote",
+        "The average value of the function over a closed interval"
+      ],
+      correctIndex: 1,
+      hint: "Think about the slope of a curve at a single, precise instant!"
+    },
+    {
+      question: "Evaluate the derivative of $$f(x) = 5x^2 - 3x + 2$$ at $$x = 2$$.",
+      choices: [
+        "10",
+        "17",
+        "20",
+        "7"
+      ],
+      correctIndex: 1,
+      hint: "Differentiate each term using the Power Rule: f'(x) = 10x - 3. Then plug in x = 2!"
+    },
+    {
+      question: "What mathematical theorem connects integration and differentiation as inverse operations?",
+      choices: [
+        "The Intermediate Value Theorem",
+        "The Mean Value Theorem",
+        "The Fundamental Theorem of Calculus",
+        "Rolle's Theorem"
+      ],
+      correctIndex: 2,
+      hint: "It is the most 'fundamental' bridge in all of calculus!"
+    }
+  ];
+
+  function startGatewayChallenge() {
+    gatewayModal.hidden = false;
+    gatewayFeedback.hidden = true;
+    gatewayHintText.hidden = true;
+    gatewayMiniCalc.hidden = true;
+    
+    const qObj = GATEWAY_QUESTIONS[Math.floor(Math.random() * GATEWAY_QUESTIONS.length)];
+    
+    if (window.katex && qObj.question.includes("$$")) {
+      try {
+        let questionHtml = qObj.question;
+        const matches = questionHtml.match(/\$\$(.*?)\$\$/g);
+        if (matches) {
+          matches.forEach(m => {
+            const math = m.replace(/\$\$/g, "");
+            const tempSpan = document.createElement("span");
+            katex.render(math, tempSpan, { throwOnError: false });
+            questionHtml = questionHtml.replace(m, tempSpan.outerHTML);
+          });
+        }
+        gatewayQ.innerHTML = questionHtml;
+      } catch (err) {
+        gatewayQ.textContent = qObj.question.replace(/\$\$/g, "");
+      }
+    } else {
+      gatewayQ.textContent = qObj.question;
+    }
+
+    gatewayOpts.innerHTML = qObj.choices.map((choiceText, idx) => {
+      return `<button class="btn btn--small btn--ghost gateway-option-btn" data-index="${idx}" style="text-align: left; width: 100%; text-transform: none; height: auto; padding: 0.6rem 1rem; border-color: rgba(255,255,255,0.2); font-size: 0.82rem;">${choiceText}</button>`;
+    }).join("");
+
+    const optionBtns = gatewayOpts.querySelectorAll(".gateway-option-btn");
+    optionBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const selIdx = parseInt(btn.getAttribute("data-index"));
+        if (selIdx === qObj.correctIndex) {
+          playChalkSound("success");
+          if (typeof triggerWinConfetti === "function") triggerWinConfetti();
+          gatewayFeedback.hidden = false;
+          gatewayFeedback.className = "chalk-feedback success";
+          gatewayFeedback.innerHTML = "Correct! Welcome to the sanctuary, sthandwa sam! 💖";
+          
+          setTimeout(() => {
+            gatewayModal.hidden = true;
+            openCalculusAcademyPortal();
+          }, 1200);
+        } else {
+          playChalkSound("click");
+          gatewayFeedback.hidden = false;
+          gatewayFeedback.className = "chalk-feedback error";
+          gatewayFeedback.textContent = "Almost! Try again, sthandwa sam, or reveal the hint if you need a guide! 🌸";
+        }
+      });
+    });
+
+    gatewayHintBtn.onclick = () => {
+      playChalkSound("click");
+      gatewayHintText.hidden = !gatewayHintText.hidden;
+      gatewayHintText.textContent = qObj.hint;
+    };
+  }
+
+  const gatewayCalcScreen = document.getElementById("gatewayCalcScreen");
+  const gatewayKeys = document.querySelectorAll(".gateway-calc-key");
+  const gatewayClear = document.getElementById("gatewayCalcClear");
+  const gatewayEqual = document.getElementById("gatewayCalcEqual");
+
+  gatewayCalcBtn.onclick = () => {
     playChalkSound("click");
+    gatewayMiniCalc.hidden = !gatewayMiniCalc.hidden;
+  };
+
+  gatewayKeys.forEach(key => {
+    key.addEventListener("click", () => {
+      playChalkSound("click");
+      const val = key.textContent;
+      if (val === "=" || val === "C") return;
+      if (gatewayCalcScreen.textContent === "0" || gatewayCalcScreen.textContent === "Error") {
+        gatewayCalcScreen.textContent = val;
+      } else {
+        gatewayCalcScreen.textContent += val;
+      }
+    });
+  });
+
+  if (gatewayClear) {
+    gatewayClear.onclick = () => {
+      playChalkSound("click");
+      gatewayCalcScreen.textContent = "0";
+    };
+  }
+
+  if (gatewayEqual) {
+    gatewayEqual.onclick = () => {
+      playChalkSound("click");
+      const expr = gatewayCalcScreen.textContent;
+      const cleanExpr = expr.replace(/[^0-9+\-*/.]/g, "");
+      try {
+        if (cleanExpr === "") {
+          gatewayCalcScreen.textContent = "0";
+          return;
+        }
+        const res = eval(cleanExpr);
+        gatewayCalcScreen.textContent = Number.isInteger(res) ? res : res.toFixed(4);
+      } catch (e) {
+        gatewayCalcScreen.textContent = "Error";
+      }
+    };
+  }
+
+  gatewayCloseBtn.onclick = () => {
+    playChalkSound("click");
+    gatewayModal.hidden = true;
+  };
+
+  function openCalculusAcademyPortal() {
     portal.hidden = false;
     setTimeout(() => {
       portal.classList.add("active");
       initChalkParticles();
       renderActiveStep();
     }, 10);
+  }
+
+  launchBtn.addEventListener("click", () => {
+    playChalkSound("click");
+    startGatewayChallenge();
   });
 
   exitBtn.addEventListener("click", () => {
@@ -3526,6 +3738,7 @@ function initCalculusAcademy() {
     portal.classList.remove("active");
     stopChalkParticles();
     calcState.isSandboxMode = false;
+    if (calcSidebar) calcSidebar.classList.remove("open");
     setTimeout(() => {
       portal.hidden = true;
     }, 500);
@@ -3589,6 +3802,16 @@ function initCalculusAcademy() {
     const mod = CALC_MODULES[calcState.activeStep - 1];
     calcState.isSandboxMode = false;
     
+    let linksHtml = "";
+    if (mod.links && mod.links.length > 0) {
+      linksHtml = `
+        <div class="chalk-theory-links" style="margin-top: 1rem; padding-top: 0.8rem; border-top: 1px dashed rgba(255,255,255,0.15); font-size: 0.8rem;">
+          <strong>📖 Study Resources:</strong><br>
+          ${mod.links.map(lnk => `<a href="${lnk.url}" target="_blank" style="color: #88c0d0; text-decoration: underline; margin-right: 1.25rem; display: inline-block;">${lnk.text}</a>`).join("")}
+        </div>
+      `;
+    }
+
     theoryCard.innerHTML = `
       <h4 class="chalk-theory-title">${mod.conceptTitle}</h4>
       <p>${mod.conceptText}</p>
@@ -3597,6 +3820,7 @@ function initCalculusAcademy() {
         ${mod.realWorldText}
       </div>
       <div class="chalk-theory-math"></div>
+      ${linksHtml}
     `;
 
     const formulaEl = theoryCard.querySelector(".chalk-theory-math");

@@ -2761,3 +2761,102 @@ body.theme-dream .sorry__letter { background: rgba(38, 23, 61, 0.45); }
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* Gateway Modal */
+.calc-gateway-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 17, 23, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 1rem;
+  transition: opacity 0.3s ease;
+}
+.calc-gateway-content {
+  max-width: 440px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+  animation: gatewayFadeIn 0.3s cubic-bezier(0.1, 0.9, 0.2, 1);
+}
+@keyframes gatewayFadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Floating mobile calc toggle and drawer styles */
+.floating-calc-btn {
+  display: none;
+}
+.calc-sidebar-close {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .floating-calc-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 998;
+    background: #88c0d0;
+    color: #2e3440;
+    border: 2px solid #eceff4;
+    padding: 0.75rem 1.25rem;
+    border-radius: 50px;
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 0.9rem;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5), 0 0 10px rgba(136, 192, 208, 0.4);
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+  .floating-calc-btn:active {
+    transform: scale(0.9);
+  }
+  
+  .calc-portal__sidebar {
+    position: fixed;
+    bottom: -100vh;
+    left: 0;
+    right: 0;
+    height: 80vh;
+    z-index: 999;
+    background: #1e222b !important;
+    padding: 1.5rem 1rem !important;
+    border-top: 3px dashed #88c0d0;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    overflow-y: auto;
+    box-shadow: 0 -10px 30px rgba(0,0,0,0.6);
+    transition: bottom 0.4s cubic-bezier(0.1, 0.9, 0.2, 1);
+  }
+  .calc-portal__sidebar.open {
+    bottom: 0 !important;
+  }
+  
+  .calc-sidebar-close {
+    display: block;
+    float: right;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px dashed rgba(255, 255, 255, 0.3);
+    color: #ff9ebb;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.8rem;
+    cursor: pointer;
+    margin-bottom: 0.5rem;
+    transition: background 0.2s ease;
+  }
+  .calc-sidebar-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+

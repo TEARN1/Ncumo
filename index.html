@@ -559,6 +559,63 @@
     </div>
   </div>
 
+  <!-- ===== Gatekeeper Calculus Challenge Modal ===== -->
+  <div class="calc-gateway-modal" id="calcGatewayModal" hidden>
+    <div class="calc-gateway-content chalk-card">
+      <h3 style="text-align: center; color: #88c0d0; margin-bottom: 1.5rem; border-bottom: 1px dashed rgba(136, 192, 208, 0.4); padding-bottom: 0.5rem;">🔑 Academy Entrance Challenge</h3>
+      <p style="font-size: 0.85rem; opacity: 0.85; margin-bottom: 1.2rem; text-align: center;">
+        Solve this quick calculus check to unlock the chalkboard sanctuary, sthandwa sam! 🌸
+      </p>
+      
+      <!-- The Question -->
+      <div class="gateway-question-box" style="background: rgba(0,0,0,0.2); padding: 0.8rem; border-radius: 8px; border: 1px dashed rgba(255,255,255,0.1); margin-bottom: 1.2rem; text-align: center; min-height: 50px; display: flex; align-items: center; justify-content: center;">
+        <p id="gatewayQuestionText" class="chalk-question" style="font-family: inherit; font-size: 0.95rem; margin: 0;"></p>
+      </div>
+
+      <!-- Multiple Choice Options -->
+      <div class="gateway-options-grid" id="gatewayOptionsGrid" style="display: grid; grid-template-columns: 1fr; gap: 0.6rem; margin-bottom: 1rem;">
+        <!-- Dynamically populated buttons -->
+      </div>
+
+      <div id="gatewayFeedback" class="chalk-feedback" style="margin-top: 0.8rem; text-align: center; font-size: 0.85rem;" hidden></div>
+
+      <!-- Utility Actions -->
+      <div class="gateway-utility-actions" style="margin-top: 1.2rem; display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap;">
+        <button class="btn btn--small btn--ghost" id="gatewayHintBtn">Reveal Hint 💡</button>
+        <button class="btn btn--small btn--ghost" id="gatewayCalcToggleBtn">Show Helper Calculator 🧮</button>
+      </div>
+
+      <div id="gatewayHintText" class="chalk-hint-text" style="margin-top: 0.8rem; text-align: center; font-size: 0.82rem; color: #ebcb8b; border: 1px dashed rgba(235, 203, 139, 0.3); padding: 0.5rem; border-radius: 4px;" hidden></div>
+
+      <!-- Embedded Mini-Calculator -->
+      <div id="gatewayMiniCalc" class="gateway-mini-calc chalk-card" style="margin-top: 1rem; background: #1e222b; border: 1px dashed rgba(255,255,255,0.15); padding: 0.8rem;" hidden>
+        <div class="chalk-calc-screen" id="gatewayCalcScreen" style="font-size: 1.1rem; padding: 0.5rem; margin-bottom: 0.5rem; background: rgba(0,0,0,0.3); border-radius: 4px; text-align: right; font-family: monospace;">0</div>
+        <div class="chalk-calc-pad" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; font-size: 0.8rem; padding: 0;">
+          <button class="gateway-calc-key calc-key" style="height:32px; padding:0;">7</button>
+          <button class="gateway-calc-key calc-key" style="height:32px; padding:0;">8</button>
+          <button class="gateway-calc-key calc-key" style="height:32px; padding:0;">9</button>
+          <button class="gateway-calc-key calc-key calc-key--op" style="height:32px; padding:0;">/</button>
+          <button class="gateway-calc-key calc-key" style="height:32px; padding:0;">4</button>
+          <button class="gateway-calc-key calc-key" style="height:32px; padding:0;">5</button>
+          <button class="gateway-calc-key calc-key" style="height:32px; padding:0;">6</button>
+          <button class="gateway-calc-key calc-key calc-key--op" style="height:32px; padding:0;">*</button>
+          <button class="gateway-calc-key calc-key" style="height:32px; padding:0;">1</button>
+          <button class="gateway-calc-key calc-key" style="height:32px; padding:0;">2</button>
+          <button class="gateway-calc-key calc-key" style="height:32px; padding:0;">3</button>
+          <button class="gateway-calc-key calc-key calc-key--op" style="height:32px; padding:0;">-</button>
+          <button class="gateway-calc-key calc-key" style="height:32px; padding:0;">0</button>
+          <button class="gateway-calc-key calc-key" style="height:32px; padding:0;">.</button>
+          <button class="gateway-calc-key calc-key calc-key--op" id="gatewayCalcClear" style="height:32px; padding:0;">C</button>
+          <button class="gateway-calc-key calc-key calc-key--op" style="height:32px; padding:0;">+</button>
+          <button class="gateway-calc-key calc-key calc-key--equal" id="gatewayCalcEqual" style="grid-column: span 4; height: 32px; padding:0;">=</button>
+        </div>
+      </div>
+      
+      <!-- Close/Exit button for gateway -->
+      <button class="btn btn--small btn--ghost" id="gatewayCloseBtn" style="margin-top: 1.2rem; width: 100%; border-color: rgba(255,255,255,0.15); height: 36px; padding: 0;">Cancel 🚪</button>
+    </div>
+  </div>
+
   <!-- ===== Full-Screen Calculus Academy Portal ===== -->
   <div class="calc-portal" id="calcAcademyPortal" hidden>
     <!-- Background Math Dust Canvas -->
@@ -637,8 +694,9 @@
       </div>
       
       <!-- Right side: The Formula Assistant (Calculator) -->
-      <aside class="calc-portal__sidebar">
+      <aside class="calc-portal__sidebar" id="calcSidebar">
         <div class="chalk-card chalk-calculator-card">
+          <button class="calc-sidebar-close" id="closeCalcSidebarBtn" style="display: none;">Close ❌</button>
           <h3>🧮 Chalkboard Calculator</h3>
           <div class="chalk-calc-screen" id="chalkCalcScreen">0</div>
           
@@ -682,6 +740,8 @@
         </div>
       </aside>
     </div>
+    <!-- Floating Mobile Calculator Button -->
+    <button id="mobileCalcToggle" class="floating-calc-btn">🧮 Calculator</button>
   </div>
 
   <script src="js/main.js"></script>
