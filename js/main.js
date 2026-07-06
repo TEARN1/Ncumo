@@ -3219,6 +3219,87 @@ const CALC_MODULES = [
       "Calculate the lower bound value: $1^3 = 1$.",
       "Perform the subtraction: $27 - 1 = 26$."
     ]
+  },
+  {
+    step: 6,
+    title: "6. Chain Rule ⛓️",
+    conceptTitle: "The Chain Rule: Composites and Inner Connections",
+    conceptText: "Functions can be nested inside one another, like g(x) inside f(x). The Chain Rule tells us that to find the rate of change of the whole compound system, we differentiate the outer layer with respect to the inner, and multiply it by the rate of change of the inner layer.",
+    realWorldTitle: "Atmospheric pressure during balloon flight",
+    realWorldText: "As a high-altitude weather balloon rises, its altitude changes with time, and the atmospheric pressure changes with altitude. The rate of change of pressure with respect to time is calculated by multiplying the rate of change of pressure with respect to altitude by the rate of change of altitude with respect to time.",
+    mathFormula: "\\frac{d}{dx}[f(g(x))] = f'(g(x)) \\cdot g'(x)",
+    chalkMotivation: "In calculus as in life, our actions chain together. A small change in one area scales and ripples through all the layers connected to it.",
+    challengeQuestion: "Differentiate the nested composite function <strong>f(x) = (2x^2 + 5)^3</strong> and find the value of <strong>f'(1)</strong>.",
+    correctAnswer: "588",
+    hints: [
+      "This requires the Chain Rule: dy/dx = f'(g(x)) * g'(x). Here, g(x) = 2x^2 + 5, and f(g) = g^3.",
+      "First, differentiate the outer power function: d/dg [g^3] = 3g^2. That gives 3(2x^2 + 5)^2.",
+      "Next, differentiate the inner function: d/dx [2x^2 + 5] = 4x.",
+      "Multiply the outer and inner derivatives: f'(x) = 3(2x^2 + 5)^2 * 4x = 12x(2x^2 + 5)^2.",
+      "Finally, plug in x = 1: f'(1) = 12(1) * (2(1)^2 + 5)^2 = 12 * 7^2 = 12 * 49. Calculate 12 * 49."
+    ],
+    solutionSteps: [
+      "Identify the outer function $f(u) = u^3$ and the inner function $u = g(x) = 2x^2 + 5$.",
+      "Differentiate the outer function with respect to $u$: $f'(u) = 3u^2 = 3(2x^2 + 5)^2$.",
+      "Differentiate the inner function with respect to $x$: $g'(x) = 4x$.",
+      "Combine them using the Chain Rule: $f'(x) = 3(2x^2+5)^2 \\cdot 4x = 12x(2x^2+5)^2$.",
+      "Substitute $x = 1$ into the derivative: $f'(1) = 12(1)(2(1)^2+5)^2 = 12 \\cdot 7^2$.",
+      "Perform the multiplication: $12 \\cdot 49 = 588$."
+    ]
+  },
+  {
+    step: 7,
+    title: "7. Related Rates 🎈",
+    conceptTitle: "Related Rates: Linked Quantities in Motion",
+    conceptText: "If two variables are related by an equation, their rates of change with respect to time are also related. By differentiating the equation implicitly with respect to time (t), we can calculate how fast one variable is changing if we know the rate of the other.",
+    realWorldTitle: "Volume Expansion of Inflating Spheres",
+    realWorldText: "When inflating a sphere, like a round hot-air balloon, we can't easily measure volume rate directly, but we can measure the radius expansion. We use related rates to compute volume flow from the radius growth rate.",
+    mathFormula: "\\frac{dV}{dt} = 4\\pi r^2 \\frac{dr}{dt}",
+    chalkMotivation: "As we grow, the space we build together expands in ways that depend directly on every small step we take.",
+    challengeQuestion: "A spherical balloon is inflating. Its radius is expanding at a constant rate of <strong>2 cm/s</strong>. Find the rate of change of the volume (in cm³/s) when the radius is <strong>5 cm</strong>. (Use &pi; &approx; 3.14 and round to the nearest integer).",
+    correctAnswer: "628",
+    hints: [
+      "Write down the volume of a sphere formula: V = (4/3)*pi*r^3.",
+      "Differentiate both sides with respect to time t: dV/dt = d/dt [ (4/3)*pi*r^3 ].",
+      "Use the Chain Rule on the right side: dV/dt = 4 * pi * r^2 * (dr/dt).",
+      "We are given dr/dt = 2 cm/s, and r = 5 cm. Plug these numbers into the formula.",
+      "Evaluate dV/dt = 4 * 3.14 * (5^2) * 2 = 8 * 3.14 * 25 = 200 * 3.14 = ?"
+    ],
+    solutionSteps: [
+      "Recall the volume formula for a sphere: $V = \\frac{4}{3}\\pi r^3$.",
+      "Differentiate both sides with respect to time $t$ using the Chain Rule: $\\frac{dV}{dt} = 4\\pi r^2 \\frac{dr}{dt}$.",
+      "Identify the given values: radius expansion rate $\\frac{dr}{dt} = 2\\text{ cm/s}$ and target radius $r = 5\\text{ cm}$.",
+      "Substitute the values into the differentiated formula: $\\frac{dV}{dt} = 4\\pi (5)^2 (2)$.",
+      "Simplify the product: $\\frac{dV}{dt} = 4 \\cdot \\pi \\cdot 25 \\cdot 2 = 200\\pi$.",
+      "Substitute $\\pi \\approx 3.14$: $200 \\cdot 3.14 = 628\\text{ cm}^3/\\text{s}$."
+    ]
+  },
+  {
+    step: 8,
+    title: "8. FTC Theorem 📖",
+    conceptTitle: "The Fundamental Theorem of Calculus: The Ultimate Link",
+    conceptText: "The Fundamental Theorem of Calculus (FTC) bridges the gap between differentiation and integration. Part 1 states that the derivative of an accumulation integral from a constant to x of f(t) dt is simply f(x) itself. Differentiating an integral unwraps it!",
+    realWorldTitle: "Continuous accumulation rates",
+    realWorldText: "If an engine consumes fuel at a rate given by a function f(t), the total fuel consumed is the integral of f(t). The rate at which this total consumption accumulates at any second is exactly the current fuel rate f(t).",
+    mathFormula: "\\frac{d}{dx} \\left[ \\int_{a}^{x} f(t) dt \\right] = f(x)",
+    chalkMotivation: "Integration accumulates, differentiation reveals. They are two sides of the same coin, balancing each other perfectly.",
+    challengeQuestion: "Find the derivative of the accumulation function <strong>g(x) = &int;_{0}^{x} (3t^2 - 4t + 5) dt</strong> evaluated at <strong>x = 3</strong>.",
+    correctAnswer: "20",
+    hints: [
+      "By the Fundamental Theorem of Calculus Part 1, the derivative of the integral from a to x of f(t) dt is just f(x).",
+      "Therefore, g'(x) is simply the integrand evaluated at x. What is that expression?",
+      "Yes, g'(x) = 3x^2 - 4x + 5. You do not need to perform any integration!",
+      "Now, evaluate g'(x) at x = 3 by plugging 3 in place of x.",
+      "Calculate 3(3^2) - 4(3) + 5 = 3(9) - 12 + 5 = 27 - 12 + 5 = ?"
+    ],
+    solutionSteps: [
+      "Apply the Fundamental Theorem of Calculus Part 1: $\\frac{d}{dx} \\left[ \\int_{a}^{x} f(t) dt \\right] = f(x)$.",
+      "Set the integrand $f(t) = 3t^2 - 4t + 5$.",
+      "State the derivative function: $g'(x) = 3x^2 - 4x + 5$.",
+      "Substitute $x = 3$ directly into the derivative: $g'(3) = 3(3)^2 - 4(3) + 5$.",
+      "Calculate the values: $3(9) = 27$ and $4(3) = 12$.",
+      "Perform the arithmetic: $27 - 12 + 5 = 20$."
+    ]
   }
 ];
 
@@ -3376,7 +3457,7 @@ let calcState = {
   activeStep: 1,
   sliderVal: 50,
   hintsUnlocked: 0,
-  completed: [false, false, false, false, false],
+  completed: [false, false, false, false, false, false, false, false],
   isSandboxMode: false,
   sandboxExpr: ""
 };
@@ -3578,6 +3659,12 @@ function initCalculusAcademy() {
       min = 2; max = 18; val = 4; label = "Fenced Cutout side x (m) (Maximize Area!)";
     } else if (step === 5) {
       min = 2; max = 30; val = 4; label = "Number of Riemann Sum Rectangle Slices (N)";
+    } else if (step === 6) {
+      min = -30; max = 30; val = 10; label = "Scan Point x";
+    } else if (step === 7) {
+      min = 10; max = 100; val = 50; label = "Balloon Radius r (cm)";
+    } else if (step === 8) {
+      min = 0; max = 50; val = 30; label = "Integration Limit x";
     }
 
     calcState.sliderVal = val;
@@ -3605,6 +3692,12 @@ function initCalculusAcademy() {
         displayVal = calcState.sliderVal.toFixed(1) + "m";
       } else if (step === 5) {
         displayVal = calcState.sliderVal;
+      } else if (step === 6) {
+        displayVal = (calcState.sliderVal / 10).toFixed(2);
+      } else if (step === 7) {
+        displayVal = (calcState.sliderVal / 10).toFixed(1) + " cm";
+      } else if (step === 8) {
+        displayVal = (calcState.sliderVal / 10).toFixed(2);
       }
       document.getElementById("chalkSliderValText").innerHTML = `<strong>${displayVal}</strong>`;
       drawCalcVisualizer();
@@ -4100,6 +4193,182 @@ function initCalculusAcademy() {
       ctx.fillStyle = "#d8dee9";
       ctx.fillText(`x=1`, originX + 1 * scaleX - 10, originY + 15);
       ctx.fillText(`x=3`, originX + 3 * scaleX - 10, originY + 15);
+    } else if (step === 6) {
+      const originX = rect.width / 2;
+      const originY = 225;
+      const scaleX = 70;
+      const scaleY = 12;
+
+      drawAxes(ctx, originX, originY, "x", "y", rect);
+
+      ctx.strokeStyle = "#a3be8c";
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      for (let px = -2; px <= 2; px += 0.05) {
+        const py = 0.1 * Math.pow(px * px + 1, 2);
+        const cx = originX + px * scaleX;
+        const cy = originY - py * scaleY;
+        if (px === -2) ctx.moveTo(cx, cy);
+        else ctx.lineTo(cx, cy);
+      }
+      ctx.stroke();
+
+      const x = sVal / 10;
+      const px = Math.max(-1.8, Math.min(1.8, x));
+      const py = 0.1 * Math.pow(px * px + 1, 2);
+      const dy = 0.4 * px * (px * px + 1);
+
+      const ptX = originX + px * scaleX;
+      const ptY = originY - py * scaleY;
+
+      ctx.strokeStyle = "#ebcb8b";
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      const lx1 = px - 0.7;
+      const ly1 = dy * (lx1 - px) + py;
+      const lx2 = px + 0.7;
+      const ly2 = dy * (lx2 - px) + py;
+      ctx.moveTo(originX + lx1 * scaleX, originY - ly1 * scaleY);
+      ctx.lineTo(originX + lx2 * scaleX, originY - ly2 * scaleY);
+      ctx.stroke();
+
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.15)";
+      ctx.setLineDash([2, 2]);
+      ctx.beginPath();
+      ctx.moveTo(ptX, 0);
+      ctx.lineTo(ptX, rect.height);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      ctx.fillStyle = "#ebcb8b";
+      ctx.beginPath();
+      ctx.arc(ptX, ptY, 5, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = "#eceff4";
+      ctx.font = "11px Courier New";
+      ctx.fillText(`f(x) = (2x² + 5)³`, 15, 220);
+      ctx.fillText(`Scan x: ${x.toFixed(2)}`, ptX + 8, originY + 15);
+      ctx.fillText(`Local Slope = ${(dy * 50).toFixed(1)}`, ptX + 8, ptY - 10);
+
+    } else if (step === 7) {
+      const ox = 120;
+      const oy = 130;
+      const r = sVal / 10;
+      const drawRadius = r * 11;
+      
+      ctx.strokeStyle = "#88c0d0";
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.arc(ox, oy, drawRadius, 0, Math.PI * 2);
+      ctx.stroke();
+
+      ctx.strokeStyle = "rgba(136, 192, 208, 0.35)";
+      ctx.setLineDash([3, 3]);
+      ctx.beginPath();
+      ctx.ellipse(ox, oy, drawRadius, drawRadius * 0.35, 0, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.ellipse(ox, oy, drawRadius * 0.35, drawRadius, 0, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      ctx.strokeStyle = "#d8dee9";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(ox, oy + drawRadius);
+      ctx.lineTo(ox - 5, oy + drawRadius + 8);
+      ctx.lineTo(ox + 5, oy + drawRadius + 8);
+      ctx.closePath();
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(ox, oy + drawRadius + 8);
+      ctx.bezierCurveTo(ox, oy + drawRadius + 30, ox - 15, oy + drawRadius + 45, ox - 10, oy + drawRadius + 60);
+      ctx.stroke();
+
+      const vol = (4 / 3) * Math.PI * Math.pow(r, 3);
+      const dv = 4 * Math.PI * r * r * 2.0;
+
+      ctx.fillStyle = "#eceff4";
+      ctx.font = "12px Courier New";
+      ctx.fillText(`Spherical Balloon`, 255, 50);
+      
+      ctx.fillStyle = "#88c0d0";
+      ctx.fillText(`Radius r : ${r.toFixed(2)} cm`, 255, 80);
+      ctx.fillText(`dr/dt    : 2.00 cm/s`, 255, 100);
+      
+      ctx.fillStyle = "#a3be8c";
+      ctx.fillText(`Volume V : ${vol.toFixed(1)} cm³`, 255, 130);
+      
+      ctx.fillStyle = "#ff9ebb";
+      ctx.fillText(`dV/dt    : ${dv.toFixed(1)} cm³/s`, 255, 160);
+      ctx.font = "10px Courier New";
+      ctx.fillStyle = "rgba(255,255,255,0.4)";
+      ctx.fillText(`Formula: dV/dt = 4\u03C0r\u00B2(dr/dt)`, 255, 180);
+
+    } else if (step === 8) {
+      const originX = 75;
+      const originY = 220;
+      const scaleX = 70;
+      const scaleY = 6;
+
+      drawAxes(ctx, originX, originY, "t", "y", rect);
+
+      ctx.strokeStyle = "#a3be8c";
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      for (let pt = 0; pt <= 5.0; pt += 0.1) {
+        const py = 0.5 * (3 * pt * pt - 4 * pt + 5);
+        const cx = originX + pt * scaleX;
+        const cy = originY - py * scaleY;
+        if (pt === 0) ctx.moveTo(cx, cy);
+        else ctx.lineTo(cx, cy);
+      }
+      ctx.stroke();
+
+      const limitX = sVal / 10;
+
+      ctx.fillStyle = "rgba(163, 190, 140, 0.2)";
+      ctx.beginPath();
+      ctx.moveTo(originX, originY);
+      for (let pt = 0; pt <= limitX; pt += 0.05) {
+        const py = 0.5 * (3 * pt * pt - 4 * pt + 5);
+        ctx.lineTo(originX + pt * scaleX, originY - py * scaleY);
+      }
+      ctx.lineTo(originX + limitX * scaleX, originY);
+      ctx.closePath();
+      ctx.fill();
+
+      const lxCanvas = originX + limitX * scaleX;
+      const ly = 0.5 * (3 * limitX * limitX - 4 * limitX + 5);
+      const lyCanvas = originY - ly * scaleY;
+
+      ctx.strokeStyle = "#ebcb8b";
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(lxCanvas, originY);
+      ctx.lineTo(lxCanvas, lyCanvas);
+      ctx.stroke();
+
+      ctx.fillStyle = "#ebcb8b";
+      ctx.beginPath();
+      ctx.arc(lxCanvas, lyCanvas, 5, 0, Math.PI * 2);
+      ctx.fill();
+
+      const heightVal = 3 * limitX * limitX - 4 * limitX + 5;
+      const areaVal = Math.pow(limitX, 3) - 2 * limitX * limitX + 5 * limitX;
+
+      ctx.fillStyle = "#eceff4";
+      ctx.font = "11px Courier New";
+      ctx.fillText(`f(t) = 3t² - 4t + 5`, 15, 30);
+      ctx.fillText(`Upper limit x = ${limitX.toFixed(2)}`, 15, 50);
+      
+      ctx.fillStyle = "#a3be8c";
+      ctx.fillText(`Area g(x) = ${areaVal.toFixed(2)}`, 15, 75);
+      
+      ctx.fillStyle = "#ebcb8b";
+      ctx.fillText(`Rate g'(x) = ${heightVal.toFixed(2)}`, 15, 95);
+      ctx.fillText(`t = x`, lxCanvas - 15, originY + 15);
     }
   }
 
