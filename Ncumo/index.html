@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ncumolwakhe ♡ Sthandwa Sam</title>
+  
+  <!-- SEO & Social Meta -->
+  <meta name="description" content="A romantic slice-of-life anime-themed digital sanctuary built with love for Ziyanda." />
+  <meta name="theme-color" content="#ffb7c5" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Parisienne&family=Jost:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet" />
+  
+  <!-- Three.js CDN for 3D Particle Heart -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  
+  <!-- KaTeX CDN for beautiful math rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="theme-sakura">
+
+  <!-- Lock Screen Overlay -->
+  <div id="lockScreen" class="lock-screen">
+    <div class="lock-card">
+      <div class="lock-heart">💔</div>
+      <h2>Sanctuary Locked 🔒</h2>
+      <p class="lock-message">Someone is currently a little upset with you... 🥺💔<br>Go text him, give him a hug, or say the magic word to make up.</p>
+      <div class="lock-input-group">
+        <input type="text" id="lockInput" placeholder="Enter the magic word..." autocomplete="off" />
+        <button id="lockUnlockBtn" class="btn btn--small">Unlock ♡</button>
+      </div>
+      <p id="lockFeedback" class="lock-feedback" hidden></p>
+    </div>
+  </div>
+
+  <!-- Star Twinkle Canvas (for Dark Mode / Midnight Theme) -->
+  <canvas id="starCanvas"></canvas>
+  
+  <!-- Interactive Confetti/Sparkle Canvas -->
+  <canvas id="particleCanvas"></canvas>
+
+  <div id="petals" aria-hidden="true"></div>
+
+  <!-- ===== Navigation Bar ===== -->
+  <nav class="nav">
+    <a class="nav__logo" href="#home">Ncumo</a>
+    <ul class="nav__links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">Her</a></li>
+      <li><a href="#sorry">I'm Sorry</a></li>
+      <li><a href="#story">Our Story</a></li>
+      <li><a href="#dimensionalSanctuary">3D Sanctuary</a></li>
+      <li><a href="#notes">Notes</a></li>
+      <li><a href="#games">Games</a></li>
+      <li><a href="#calculusGateSection">Calculus 🎓</a></li>
+      <li><a href="#bucket">Bucket List</a></li>
+      <li><a href="#moments">Moments</a></li>
+    </ul>
+    <div class="nav__actions">
+      <div class="theme-selector">
+        <button class="theme-btn active" id="themeSakura" title="Sakura Spring Theme">🌸</button>
+        <button class="theme-btn" id="themeCafe" title="Sunset Cafe Theme">☕</button>
+        <button class="theme-btn" id="themeDream" title="Midnight Dream Theme">🌌</button>
+        <button class="theme-btn" id="themeRain" title="Lofi Rain Theme">🌧️</button>
+      </div>
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle Menu">☰</button>
+    </div>
+  </nav>
+
+  <!-- ===== Hero Header ===== -->
+  <header class="hero" id="home">
+    <canvas id="webglCanvas"></canvas>
+    <div class="hero__decor hero__decor--left">Sthandwa</div>
+    <div class="hero__decor hero__decor--right">Sam</div>
+    
+    <p class="hero__eyebrow reveal">Sthandwa Sam ♡</p>
+    <h1 class="hero__title reveal">Ncumolwakhe</h1>
+    <p class="hero__subtitle reveal">Ziyanda... my Ncumo. A little anime-inspired digital garden, built with love — just for you.</p>
+    
+    <!-- Dynamic Greeting Bubble -->
+    <div class="hero__greeting-bubble reveal" id="heroGreeting" style="margin-top: 1.5rem; margin-bottom: 1.5rem;" hidden>
+      <span class="hero__greeting-text" id="heroGreetingText"></span>
+    </div>
+
+    <!-- Daily Notification glass panel -->
+    <div class="glass-panel daily-status reveal" id="dailyStatusPanel">
+      <h3 class="daily-status__title">📢 Daily Notices for Ncumo</h3>
+      <div class="status-alerts" id="statusAlerts">
+        <!-- Weather, Loadshedding and Work hours notices injected here -->
+      </div>
+    </div>
+    
+    <a href="#notes" class="btn reveal" style="margin-top: 1.5rem;">Open Your Love Notes ✉</a>
+    
+    <div class="hero__hearts" aria-hidden="true">
+      <span>💖</span><span>🌸</span><span>✨</span>
+    </div>
+  </header>
+
+  <!-- ===== Apology Section ===== -->
+  <section class="sorry" id="sorry">
+    <div class="glass-panel sorry__card reveal">
+      <span class="sorry__icon">🥺💐</span>
+      <h2 class="sorry__title">I'm Really Sorry, Ziyanda</h2>
+      <p class="sorry__lead">This morning I made a mistake — I left for work without waking you up and kissing you goodbye. I'm so sorry, sthandwa sam. 💔</p>
+
+      <div class="sorry__letter">
+        <p>You deserve to start every single day feeling loved, and this morning I robbed you of that little moment that's ours. I was rushing, but that's no excuse — you should always come first.</p>
+        <p>Waking up next to you is a blessing I never want to take for granted. I promise to do better: <strong>no more leaving without a kiss, a hug, and an "I love you," no matter how early or how busy I am.</strong></p>
+        <p>You are the first thing I want to think about in the morning and the last at night. Forgive me, my love. I'll make it up to you this weekend, and every day after. 🌹</p>
+      </div>
+
+      <p class="sorry__signature">Forever yours, with all my heart —<br><span>TEARN ♡</span></p>
+
+      <button class="btn sorry__btn" id="forgiveBtn">I forgive you ♡</button>
+      <p class="sorry__reply" id="forgiveReply" hidden>Thank you, my love. I promise to never let that morning happen again. 💖🌸</p>
+    </div>
+  </section>
+
+  <!-- ===== About Her Section ===== -->
+  <section class="about" id="about">
+    <div class="glass-panel about__card reveal">
+      <span class="about__badge">✿</span>
+      <h2>She is...</h2>
+      <div class="about__words">
+        <!-- Will be dynamically populated by date seed -->
+      </div>
+      <p>
+        <em>Ncumolwakhe</em> — her smile. And what a perfect name,
+        because your smile is the whole reason this page exists.
+        <em>Ziyanda</em> — growing, increasing. Just like everything
+        I feel for you, weekend after weekend.
+      </p>
+      
+      <!-- Interactive Anime Quote Panel -->
+      <div class="about__quote-bubble">
+        <p class="about__quote-text" id="animeQuote">"I wanted to tell you... wherever you are in the world, I'll search for you." — Your Name</p>
+        <button class="about__quote-btn" id="nextQuote">Draw Another Card 🎴</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Our Story Section ===== -->
+  <section class="story" id="story">
+    <h2 class="section-title reveal">Our Story</h2>
+    <p class="section-sub reveal">It began on the 5th of June, 2026 ♡</p>
+
+    <!-- Anniversary Live Tickers -->
+    <div class="story__counters reveal">
+      <div class="counter">
+        <span class="counter__num" id="cDays">0</span>
+        <span class="counter__label">Days</span>
+      </div>
+      <div class="counter">
+        <span class="counter__num" id="cHours">0</span>
+        <span class="counter__label">Hours</span>
+      </div>
+      <div class="counter">
+        <span class="counter__num" id="cMins">0</span>
+        <span class="counter__label">Minutes</span>
+      </div>
+      <div class="counter">
+        <span class="counter__num" id="cSecs">0</span>
+        <span class="counter__label">Seconds</span>
+      </div>
+    </div>
+
+    <!-- Monthly/Yearly Anniversary Progress Rings -->
+    <div class="story__progress-container reveal">
+      <div class="progress-ring-box">
+        <svg class="progress-ring-svg" width="90" height="90">
+          <circle class="progress-ring-circle-bg" cx="45" cy="45" r="36"/>
+          <circle class="progress-ring-circle" id="monthProgressCircle" cx="45" cy="45" r="36"/>
+        </svg>
+        <span class="progress-ring-label">Month Progress</span>
+      </div>
+      <div class="progress-ring-box">
+        <svg class="progress-ring-svg" width="90" height="90">
+          <circle class="progress-ring-circle-bg" cx="45" cy="45" r="36"/>
+          <circle class="progress-ring-circle" id="yearProgressCircle" cx="45" cy="45" r="36"/>
+        </svg>
+        <span class="progress-ring-label">Year Progress</span>
+      </div>
+    </div>
+
+    <!-- Weekend Counter -->
+    <div class="story__weekend reveal">
+      <h3 class="story__weekend-title">⏳ Weekend Countdown</h3>
+      <p class="story__weekend-text" id="weekendText">Loading our countdown...</p>
+      <p class="story__weekend-sub">Weekdays are for grinding. Weekends are for <em>us</em>.</p>
+    </div>
+
+    <!-- Birthday Section -->
+    <div class="birthday-section reveal">
+      <div class="birthday-card" id="cardHerBday">
+        <div class="birthday-card__title">🎂 Her Birthday</div>
+        <div class="birthday-card__days" id="herBirthday">0</div>
+        <p style="font-size: 0.7rem; color: var(--berry); font-weight: 500; margin-top: 0.5rem;">29 January</p>
+      </div>
+      <div class="birthday-card" id="cardMyBday">
+        <div class="birthday-card__title">🎉 My Birthday</div>
+        <div class="birthday-card__days" id="myBirthday">0</div>
+        <p style="font-size: 0.7rem; color: var(--berry); font-weight: 500; margin-top: 0.5rem;">8 December</p>
+      </div>
+    </div>
+
+    <!-- Anime Roadmap Timeline -->
+    <div class="timeline">
+      <div class="timeline__path"></div>
+      
+      <div class="timeline__item reveal">
+        <div class="timeline__node"></div>
+        <div class="timeline__content">
+          <span class="timeline__date">05 Jun 2026</span>
+          <h4 class="timeline__title">The First Spark ✨</h4>
+          <p class="timeline__desc">Our paths crossed, and the stars aligned. The day our story officially began.</p>
+        </div>
+      </div>
+      
+      <div class="timeline__item reveal">
+        <div class="timeline__node"></div>
+        <div class="timeline__content">
+          <span class="timeline__date">11 Jun 2026</span>
+          <h4 class="timeline__title">Interactive Space 🌸</h4>
+          <p class="timeline__desc">A little garden page created to keep our laughs, memories, and weekend plans alive.</p>
+        </div>
+      </div>
+      
+      <div class="timeline__item reveal">
+        <div class="timeline__node"></div>
+        <div class="timeline__content">
+          <span class="timeline__date">Future</span>
+          <h4 class="timeline__title">Next Chapters 💍</h4>
+          <p class="timeline__desc">Fly-away plans, sunset coffee dates, and matching memories waiting to be written.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Dimensional Sanctuary (10-Dimensional 3D Scrollverse) ===== -->
+  <section class="scroll3d-section" id="dimensionalSanctuary">
+    <div class="scroll3d-sticky">
+      <div class="scroll3d-viewport">
+        <!-- Main Canvas for WebGL, Point Cloud, Wireframes, Voxels, SBS VR, etc. -->
+        <canvas id="scroll3dCanvas"></canvas>
+        
+        <!-- Container for CSS 3D Cube Carousel -->
+        <div id="scroll3dCssCubeContainer" class="scroll3d-css-container">
+          <div class="scene3d">
+            <div class="cube3d">
+              <div class="cube3d__face cube3d__face--front">🌸</div>
+              <div class="cube3d__face cube3d__face--back">🌷</div>
+              <div class="cube3d__face cube3d__face--left">💖</div>
+              <div class="cube3d__face cube3d__face--right">✨</div>
+              <div class="cube3d__face cube3d__face--top">☕</div>
+              <div class="cube3d__face cube3d__face--bottom">💌</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Container for ASCII 3D Terminal Console -->
+        <div id="scroll3dAsciiContainer" class="scroll3d-ascii-container">
+          <pre id="scroll3dAsciiPre"></pre>
+        </div>
+        
+        <!-- Container for CSS 3D Typography Depth -->
+        <div id="scroll3dCssTyposContainer" class="scroll3d-css-container">
+          <div class="typo3d-container">
+            <div class="typo3d-letter" style="--depth: -120px;">N</div>
+            <div class="typo3d-letter" style="--depth: -60px;">C</div>
+            <div class="typo3d-letter" style="--depth: 0px;">U</div>
+            <div class="typo3d-letter" style="--depth: 60px;">M</div>
+            <div class="typo3d-letter" style="--depth: 120px;">O</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Scrolling cards overlay -->
+    <div class="scroll3d-panels">
+      <div class="scroll3d-panel" data-dimension="1">
+        <div class="scroll3d-card">
+          <span class="dimension-num">01 / 10</span>
+          <h3>Dimension 1: The Glass Core</h3>
+          <p>A WebGL raymarched glass heart that bends light, representing the core of our digital sanctuary. Drag the mouse to rotate the refraction field.</p>
+        </div>
+      </div>
+      <div class="scroll3d-panel" data-dimension="2">
+        <div class="scroll3d-card">
+          <span class="dimension-num">02 / 10</span>
+          <h3>Dimension 2: The Constellation of Us</h3>
+          <p>A 3D particle point cloud made of thousands of stardust nodes swirling together to form a rotating heart. Scrolling faster causes the particles to disperse and reform.</p>
+        </div>
+      </div>
+      <div class="scroll3d-panel" data-dimension="3">
+        <div class="scroll3d-card">
+          <span class="dimension-num">03 / 10</span>
+          <h3>Dimension 3: Memory Carousel</h3>
+          <p>A floating CSS 3D Cube whose faces display polaroids of our memories. As you move the mouse, the perspective shifts, rotating the cube in real physical 3D space.</p>
+        </div>
+      </div>
+      <div class="scroll3d-panel" data-dimension="4">
+        <div class="scroll3d-card">
+          <span class="dimension-num">04 / 10</span>
+          <h3>Dimension 4: The Blueprint of Love</h3>
+          <p>A vector wireframe torus knot projected onto a 3D perspective camera matrix. Drawn with mathematical lines, displaying the pure structure of our bond.</p>
+        </div>
+      </div>
+      <div class="scroll3d-panel" data-dimension="5">
+        <div class="scroll3d-card">
+          <span class="dimension-num">05 / 10</span>
+          <h3>Dimension 5: Lofi Cyber-Sanctuary</h3>
+          <p>An ASCII terminal engine displaying a rotating 3D heart in real-time characters. Bringing retro terminal aesthetics to our cozy romantic universe.</p>
+        </div>
+      </div>
+      <div class="scroll3d-panel" data-dimension="6">
+        <div class="scroll3d-card">
+          <span class="dimension-num">06 / 10</span>
+          <h3>Dimension 6: Pixels & Memories</h3>
+          <p>A 3D Voxel grid assembling small cubes in a volumetric layout. Watch the blocks align to form the shape of a heart, building our story block by block.</p>
+        </div>
+      </div>
+      <div class="scroll3d-panel" data-dimension="7">
+        <div class="scroll3d-card">
+          <span class="dimension-num">07 / 10</span>
+          <h3>Dimension 7: Split-Reality</h3>
+          <p>A red-cyan anaglyph stereoscopic render. Splitting reality into separate spectral dimensions, creating depth when viewed through classic 3D glasses.</p>
+        </div>
+      </div>
+      <div class="scroll3d-panel" data-dimension="8">
+        <div class="scroll3d-card">
+          <span class="dimension-num">08 / 10</span>
+          <h3>Dimension 8: Lenticular Hologram</h3>
+          <p>A holographic card effect with chromatic refraction. Moving the cursor shifts the layers horizontally to simulate a physical lenticular print.</p>
+        </div>
+      </div>
+      <div class="scroll3d-panel" data-dimension="9">
+        <div class="scroll3d-card">
+          <span class="dimension-num">09 / 10</span>
+          <h3>Dimension 9: Floating Sentiments</h3>
+          <p>CSS 3D parallax typography. Letters of "NCUMO" positioned at different Z-depths, creating a deep parallax effect as they tilt with mouse gestures.</p>
+        </div>
+      </div>
+      <div class="scroll3d-panel" data-dimension="10">
+        <div class="scroll3d-card">
+          <span class="dimension-num">10 / 10</span>
+          <h3>Dimension 10: Virtual Sanctuary</h3>
+          <p>Stereoscopic Side-by-Side (SBS) VR viewport. The scene is rendered from two separate eye-cameras, ready to be viewed in virtual reality.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Love Notes Section ===== -->
+  <section class="notes" id="notes">
+    <h2 class="section-title reveal">Love Notes</h2>
+    <p class="section-sub reveal">Tap a seal to read, or open the wax envelope below ♡</p>
+    
+    <div class="notes__grid">
+      <button class="note reveal" data-note="The 5th of June 2026. The day everything changed. Best yes of my life, Ziyanda.">
+        <span class="note__seal">♡</span><span class="note__label">05 · 06 · 26</span>
+      </button>
+      <button class="note reveal" data-note="Monday to Friday I count days. Saturday and Sunday I count blessings — because you're here with me.">
+        <span class="note__seal">❀</span><span class="note__label">Weekends</span>
+      </button>
+      <button class="note reveal" data-note="Your name says it all — Ncumolwakhe. Her smile. The one I think about all week long.">
+        <span class="note__seal">♡</span><span class="note__label">Her Smile</span>
+      </button>
+      <button class="note reveal" data-note="Ndiyakuthanda, sthandwa sam. From Commercia, Midrand to wherever you are — my heart always finds you.">
+        <span class="note__seal">✿</span><span class="note__label">Ndiyakuthanda</span>
+      </button>
+    </div>
+
+    <!-- Fold-open Anime Love Letter -->
+    <div class="envelope-container reveal">
+      <div class="envelope" id="loveLetterEnvelope" title="Click to open letter">
+        <div class="envelope__flap"></div>
+        <div class="envelope__back"></div>
+        <span class="envelope__seal-heart">💌</span>
+        <div class="envelope__letter">
+          <!-- Populated dynamically by javascript -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Games Section ===== -->
+  <section class="games" id="games">
+    <h2 class="section-title reveal">Little Games</h2>
+    <p class="section-sub reveal">Play to unlock badges and cute fortunes ♡</p>
+
+    <!-- Game 1: 3D Memory Card Match -->
+    <div class="glass-panel game-card reveal">
+      <h3 class="game-card__title">🌸 Flower Memory</h3>
+      <p class="game-card__hint" id="memLevelName">First Blush 🌸</p>
+      <div class="memory__stats">
+        <span>Stage: <strong id="memLevel">1</strong>/4</span>
+        <span>Moves: <strong id="memMoves">0</strong></span>
+        <span>Pairs: <strong id="memPairs">0/2</strong></span>
+      </div>
+      <div class="memory__grid" id="memoryGrid"></div>
+      <p class="game-card__win" id="memWin" hidden></p>
+      <button class="btn btn--small" id="memReset">Reset Deck</button>
+    </div>
+
+    <!-- Game 2: Catch the Falling Hearts -->
+    <div class="glass-panel game-card reveal">
+      <h3 class="game-card__title">💘 Catch My Hearts</h3>
+      <p class="game-card__hint" id="catchHint">Catch the falling bubbles before they fade! 20s round.</p>
+      <div class="catch__stats">
+        <span>Stage: <strong id="catchStage">1</strong>/3</span>
+        <span>Score: <strong id="catchScore">0</strong></span>
+        <span>Time: <strong id="catchTime">20</strong>s</span>
+        <span>High Record: <strong id="catchBest">0</strong></span>
+      </div>
+      <div class="catch__arena" id="catchArena">
+        <p class="catch__msg" id="catchMsg">Press start, sthandwa sam ♡</p>
+      </div>
+      <button class="btn btn--small" id="catchStart">Start catching</button>
+    </div>
+
+    <!-- Game 3: Anime Love Fortune Box (Omikuji) -->
+    <div class="glass-panel game-card reveal">
+      <h3 class="game-card__title">🎴 Love Fortune (Omikuji)</h3>
+      <p class="game-card__hint">Tap the wooden box to shake out a sweet fortune stick!</p>
+      
+      <div class="fortune-box">
+        <div class="omikuji-drawer" id="fortuneDrawer">
+          <div class="omikuji-stick" id="fortuneStick"></div>
+        </div>
+      </div>
+      
+      <p class="game-card__win" id="fortuneWin" style="margin-top: 1.5rem;" hidden></p>
+    </div>
+
+    <!-- Game 4: The Important Question -->
+    <div class="glass-panel game-card reveal">
+      <h3 class="game-card__title">🥺 One Important Question</h3>
+      <p class="question__text" id="questionText">Do you love me?</p>
+      <div class="question__btns" id="questionBtns">
+        <button class="btn btn--small" id="yesBtn">Yes 💖</button>
+        <button class="btn btn--small btn--ghost" id="noBtn">No</button>
+      </div>
+      <p class="game-card__win" id="yesWin" hidden>I knew it!! I love you more 💍✨</p>
+    </div>
+
+    <!-- Procedural Lofi Cassette Widget with Neon visualizer -->
+    <div class="cassette-widget reveal" id="cassetteWidget">
+      <div class="cassette-body">
+        <div class="cassette-label">
+          <span class="cassette-title-text" id="cassetteTrackName">Lofi Melodies: Ncumo Romance</span>
+          <span class="cassette-label-brand">Ncumo</span>
+        </div>
+        <div class="cassette-window">
+          <div class="cassette-tape-roll cassette-tape-roll--left"></div>
+          <div class="cassette-spindle"></div>
+          
+          <!-- Live Neon Wave Visualizer Canvas -->
+          <canvas id="cassetteVisualizer"></canvas>
+          
+          <div class="cassette-spindle"></div>
+          <div class="cassette-tape-roll cassette-tape-roll--right"></div>
+        </div>
+      </div>
+      <div class="cassette-controls">
+        <button class="cassette-btn" id="cassettePrev" title="Previous Synthesizer Chord Tone">◀</button>
+        <button class="cassette-btn cassette-btn--play" id="cassettePlay">PLAY</button>
+        <button class="cassette-btn" id="cassetteNext" title="Next Synthesizer Chord Tone">▶</button>
+      </div>
+      
+      <!-- Synthesized Cozy Rain ambient audio controller -->
+      <div class="rain-control" id="rainControlSec">
+        <label class="rain-control__label">
+          <input type="checkbox" id="rainToggle" />
+          <span>Synthesize Cozy Rain 🌧️</span>
+        </label>
+        
+        <!-- Interactive Lofi DJ Filter Control -->
+        <div class="filter-control">
+          <span class="filter-label">Muffle 🎛️</span>
+          <input type="range" id="lofiFilter" min="150" max="15000" value="15000" class="lofi-slider" title="Drag to filter/muffle lofi tones" />
+          <span class="filter-label">Clear</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Calculus Academy Gate ===== -->
+  <section class="games" id="calculusGateSection">
+    <div class="glass-panel calc-gate-card reveal">
+      <div class="calc-gate-content">
+        <span class="calc-gate-icon">🎓</span>
+        <h3>Calculus Academy</h3>
+        <p>Step into an immersive, chalk-scribed learning sanctuary. Master limits, derivatives, and integrals with interactive graphs and real-world tools. Let's explore together, sthandwa sam ♡</p>
+        <button class="btn" id="launchCalcBtn">Enter Academy 🚪✨</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Achievements Badges ===== -->
+  <section class="games" id="achievements">
+    <h2 class="section-title reveal">🏆 Badges</h2>
+    <p class="section-sub reveal">Interactive goals unlocked by playing ♡</p>
+    <div class="achievements__grid reveal" id="achievementsGrid"></div>
+  </section>
+
+  <!-- ===== Our Bucket List Section ===== -->
+  <section class="games" id="bucket">
+    <h2 class="section-title reveal">🎯 Our Bucket List</h2>
+    <p class="section-sub reveal">Check items off or add your own plans ♡</p>
+    <div class="bucket__grid" id="bucketGrid"></div>
+    
+    <div class="bucket-adder reveal">
+      <input type="text" class="bucket-adder__input" id="bucketInput" placeholder="Add a sweet new date idea..." aria-label="Bucket item title"/>
+      <button class="bucket-adder__btn" id="bucketAddBtn">Add Idea</button>
+    </div>
+  </section>
+
+  <!-- ===== Moments Polaroid Gallery ===== -->
+  <section class="moments" id="moments">
+    <h2 class="section-title reveal">Our Moments</h2>
+    <p class="section-sub reveal">Retro Polaroid frames holding our memories.</p>
+    <div class="moments__grid">
+      <figure class="moment reveal" style="--angle: -2.5deg;"><div class="moment__img">🌸</div><figcaption>The Day We Met</figcaption></figure>
+      <figure class="moment reveal" style="--angle: 3deg;"><div class="moment__img">🌷</div><figcaption>Our First Laugh</figcaption></figure>
+      <figure class="moment reveal" style="--angle: -1.8deg;"><div class="moment__img">🌺</div><figcaption>Golden Evenings</figcaption></figure>
+      <figure class="moment reveal" style="--angle: 2.2deg;"><div class="moment__img">💐</div><figcaption>Every Day With You</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <p class="footer__script">Ndiyakuthanda, Ncumolwakhe</p>
+    <p class="footer__small">with all my love · since 05.06.2026 ♡</p>
+  </footer>
+
+  <!-- ===== Detail Modal ===== -->
+  <div class="modal" id="modal" hidden>
+    <div class="modal__card">
+      <button class="modal__close" id="modalClose" aria-label="Close modal">×</button>
+      <span class="modal__ornament">❀ ♡ ❀</span>
+      <p class="modal__text" id="modalText"></p>
+    </div>
+  </div>
+
+  <!-- ===== Delayed Weekend Cleaning Popup Modal ===== -->
+  <div class="modal" id="weekendCleanModal" hidden>
+    <div class="modal__card weekend-clean-card">
+      <span class="modal__ornament">🧹 Sparkle Warning 🧼</span>
+      <p class="modal__text" id="weekendCleanText" style="margin-bottom: 2rem;"></p>
+      <div class="weekend-clean-btns" id="weekendCleanBtns" style="display: flex; flex-direction: column; gap: 0.8rem;">
+        <!-- Dynamic response buttons injected here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Full-Screen Calculus Academy Portal ===== -->
+  <div class="calc-portal" id="calcAcademyPortal" hidden>
+    <!-- Background Math Dust Canvas -->
+    <canvas id="chalkDustCanvas" style="position: absolute; inset: 0; pointer-events: none; z-index: 1; opacity: 0.25;"></canvas>
+    
+    <!-- Chalkboard Eraser Swipe Element -->
+    <div class="chalkboard-eraser" id="chalkboardEraser" hidden></div>
+
+    <div class="calc-portal__header" style="position: relative; z-index: 2;">
+      <div class="calc-portal__brand">
+        <span class="calc-portal__chalk-icon">✏️</span>
+        <h2>Calculus Chalkboard Sanctuary</h2>
+      </div>
+      <button class="btn btn--small btn--ghost calc-portal__exit" id="exitCalcBtn">Return to Sanctuary 🚪</button>
+    </div>
+    
+    <div class="calc-portal__body">
+      <!-- Left side: The Lesson Room -->
+      <div class="calc-portal__lesson-room">
+        <!-- Dashboard Tabs -->
+        <div class="calc-chalk-tabs">
+          <button class="calc-chalk-tab active" data-step="1">1. Limits 🔗</button>
+          <button class="calc-chalk-tab" data-step="2">2. First Principles 📈</button>
+          <button class="calc-chalk-tab" data-step="3">3. Rules ⚡</button>
+          <button class="calc-chalk-tab" data-step="4">4. Optimization 🎯</button>
+          <button class="calc-chalk-tab" data-step="5">5. Integration 💖</button>
+        </div>
+        
+        <!-- Lesson Theory Card -->
+        <div class="chalk-card" id="chalkTheoryCard">
+          <!-- Dynamically populated -->
+        </div>
+
+        <!-- Visualizer Board -->
+        <div class="chalk-card chalk-visualizer-card">
+          <h3>📐 Interactive Geometric Board</h3>
+          <canvas id="calcPortalCanvas" width="480" height="260"></canvas>
+          <div class="chalk-slider-container" id="chalkSliderContainer">
+            <!-- Dynamically populated slider -->
+          </div>
+        </div>
+
+        <!-- Challenge Board -->
+        <div class="chalk-card chalk-challenge-card">
+          <h3>📝 FreeCodeCamp Challenge</h3>
+          <p class="chalk-question" id="chalkQuestionText"></p>
+          
+          <!-- Interactive Hints Assistant -->
+          <div class="chalk-hints-box">
+            <div class="chalk-hints-status">
+              <span>Hints:</span>
+              <div class="chalk-hint-dots" id="chalkHintDots">
+                <span class="hint-dot"></span>
+                <span class="hint-dot"></span>
+                <span class="hint-dot"></span>
+                <span class="hint-dot"></span>
+                <span class="hint-dot"></span>
+              </div>
+            </div>
+            <button class="btn btn--small btn--ghost" id="revealHintBtn">Unlock Hint 💡</button>
+            <div class="chalk-hint-text" id="chalkHintText" hidden></div>
+          </div>
+
+          <div class="chalk-input-group">
+            <input type="text" id="chalkAnswerInput" class="chalk-input" placeholder="Enter answer value..." autocomplete="off">
+            <button id="chalkCheckBtn" class="btn">Check Answer 🌟</button>
+          </div>
+          <p id="chalkFeedbackText" class="chalk-feedback" hidden></p>
+          
+          <button id="chalkShowSolutionBtn" class="btn btn--small btn--ghost" style="margin-top: 1.5rem;" hidden>Show Step-by-Step Proof 📖</button>
+          <div id="chalkSolutionBox" class="chalk-solution-box" hidden></div>
+        </div>
+      </div>
+      
+      <!-- Right side: The Formula Assistant (Calculator) -->
+      <aside class="calc-portal__sidebar">
+        <div class="chalk-card chalk-calculator-card">
+          <h3>🧮 Chalkboard Calculator</h3>
+          <div class="chalk-calc-screen" id="chalkCalcScreen">0</div>
+          
+          <div class="chalk-calc-mode-select">
+            <button class="calc-mode-btn active" id="modeArithmetic">Arithmetic</button>
+            <button class="calc-mode-btn" id="modeAlgebraic">Calculus Tools</button>
+          </div>
+
+          <!-- Arithmetic Pad -->
+          <div class="chalk-calc-pad" id="calcArithmeticPad">
+            <button class="calc-key">7</button><button class="calc-key">8</button><button class="calc-key">9</button><button class="calc-key calc-key--op">/</button>
+            <button class="calc-key">4</button><button class="calc-key">5</button><button class="calc-key">6</button><button class="calc-key calc-key--op">*</button>
+            <button class="calc-key">1</button><button class="calc-key">2</button><button class="calc-key">3</button><button class="calc-key calc-key--op">-</button>
+            <button class="calc-key">0</button><button class="calc-key">.</button><button class="calc-key calc-key--op" id="calcClear">C</button><button class="calc-key calc-key--op">+</button>
+            <button class="calc-key calc-key--equal" id="calcEqual" style="grid-column: span 4;">=</button>
+          </div>
+
+          <!-- Calculus Tools Pad -->
+          <div class="chalk-calc-pad" id="calcAlgebraicPad" hidden>
+            <div class="calc-algebraic-input-group">
+              <label for="calcPolyInput">Function f(x):</label>
+              <input type="text" id="calcPolyInput" class="chalk-input" placeholder="e.g. 3x^2 + 5x" value="3x^2 + 5x">
+            </div>
+            
+            <div class="calc-algebraic-actions">
+              <button class="btn btn--small" id="calcDifferentiateBtn">Differentiate ⚡</button>
+              <button class="btn btn--small" id="calcEvaluateBtn">Evaluate at x = 2 📈</button>
+              <button class="btn btn--small btn--ghost" id="calcGraphBtn" style="margin-top: 0.2rem;">Plot Sandbox 📉</button>
+            </div>
+            
+            <div class="calc-algebraic-eval-x">
+              <label for="calcEvalXInput">Evaluate at x =:</label>
+              <input type="number" id="calcEvalXInput" class="chalk-input" value="2" style="max-width: 80px;">
+            </div>
+          </div>
+        </div>
+
+        <div class="chalk-card chalk-motivation-card">
+          <h3>💡 Study Tip</h3>
+          <p id="chalkMotivationText">Limits are like standing at a balcony together, leaning in closer and closer... but never quite stepping off. Mathematics is all about finding the beauty in closeness.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
