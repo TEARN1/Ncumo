@@ -1,7 +1,6 @@
 // =====================================================
 // Global Mouse / Touch Tracking & Math Utilities
 // =====================================================
-const SANCTUARY_LOCKED = false; // Set to false to disable the lock screen completely
 let mouseX = 0, mouseY = 0;
 window.addEventListener("mousemove", (e) => {
   mouseX = (e.clientX / window.innerWidth) * 2 - 1;
@@ -1833,7 +1832,6 @@ populateTimeline();
 updateGreetingMessage();
 fetchWeatherAndSetTheme();
 initWebGLHeart();
-initLockScreen();
 init3DScrollverse();
 
 // Quote changer
@@ -2372,66 +2370,6 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-// =====================================================
-// Sanctuary Angry / Upset Lock Screen Manager
-// =====================================================
-function initLockScreen() {
-  const lockScreen = document.getElementById("lockScreen");
-  const lockInput = document.getElementById("lockInput");
-  const lockUnlockBtn = document.getElementById("lockUnlockBtn");
-  const lockFeedback = document.getElementById("lockFeedback");
-  
-  if (!lockScreen) return;
-  
-  // If the lock is not enabled in code, or she already unlocked it in this browser session
-  if (!SANCTUARY_LOCKED || sessionStorage.getItem("sanctuaryUnlocked") === "true") {
-    lockScreen.style.display = "none";
-    return;
-  }
-  
-  // Show the lock screen
-  lockScreen.style.display = "flex";
-  
-  function attemptUnlock() {
-    const val = lockInput.value.trim().toLowerCase();
-    const magicWords = ["sorry", "i'm sorry", "im sorry", "apology", "forgive me", "i love you", "love"];
-    
-    if (magicWords.includes(val)) {
-      sessionStorage.setItem("sanctuaryUnlocked", "true");
-      lockFeedback.hidden = false;
-      lockFeedback.style.color = "#a3e635"; // light green
-      lockFeedback.textContent = "Apology accepted! ♡ Opening the sanctuary...";
-      
-      initAudio();
-      playWinFanfare();
-      triggerWinConfetti();
-      
-      setTimeout(() => {
-        lockScreen.style.opacity = "0";
-        lockScreen.style.transition = "opacity 0.8s ease";
-        setTimeout(() => {
-          lockScreen.style.display = "none";
-        }, 800);
-      }, 1500);
-    } else {
-      lockFeedback.hidden = false;
-      lockFeedback.style.color = "#ffaec1"; // pink/red
-      lockFeedback.textContent = "That's not the magic word... 🥺 (Hint: try saying sorry)";
-      lockInput.value = "";
-      
-      // Trigger a shake animation
-      lockFeedback.style.animation = "none";
-      setTimeout(() => {
-        lockFeedback.style.animation = "lockShake 0.4s ease";
-      }, 10);
-    }
-  }
-  
-  lockUnlockBtn.addEventListener("click", attemptUnlock);
-  lockInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") attemptUnlock();
-  });
-}
 
 // =====================================================
 // 🌌 10-Dimensional 3D Scrollverse (Dimensional Sanctuary)
