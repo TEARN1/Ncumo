@@ -3536,16 +3536,92 @@ function initCalculusAcademy() {
       ],
       correctIndex: 2,
       hint: "It is the most 'fundamental' bridge in all of calculus!"
+    },
+    {
+      question: "Evaluate the limit $$\\lim_{x \\to 3} \\frac{x^2 - 9}{x - 3}$$",
+      choices: ["0", "3", "6", "Undefined"],
+      correctIndex: 2,
+      hint: "Factor the numerator as a difference of squares, then cancel the common term before substituting."
+    },
+    {
+      question: "Using first principles, find f'(x) for $$f(x) = 2x^2$$.",
+      choices: ["2x", "4x", "x^2", "4x^2"],
+      correctIndex: 1,
+      hint: "Expand f(x+h), subtract f(x), divide by h, then take the limit as h approaches 0."
+    },
+    {
+      question: "Differentiate $$f(x) = (3x^2 + 2)^4$$ using the Chain Rule. What is f'(x)?",
+      choices: [
+        "12x(3x^2 + 2)^3",
+        "24x(3x^2 + 2)^3",
+        "4(3x^2 + 2)^3",
+        "6x(3x^2 + 2)^4"
+      ],
+      correctIndex: 1,
+      hint: "Differentiate the outer power first (4u^3), then multiply by the derivative of the inner function (6x)."
+    },
+    {
+      question: "At a critical point where f'(x) = 0, what could that point represent?",
+      choices: [
+        "A local maximum or minimum",
+        "A point where the function is undefined",
+        "The y-intercept",
+        "An asymptote"
+      ],
+      correctIndex: 0,
+      hint: "Setting the derivative to zero finds turning points, peaks, or valleys."
+    },
+    {
+      question: "What does $$\\int f(x)\\,dx$$ represent geometrically?",
+      choices: [
+        "The slope of the tangent line",
+        "The instantaneous rate of change",
+        "The accumulated area under the curve",
+        "The average rate of change"
+      ],
+      correctIndex: 2,
+      hint: "Integration accumulates infinitely many thin slices of area."
+    },
+    {
+      question: "In a related rates problem, what technique connects two changing quantities over time?",
+      choices: [
+        "Integration by parts",
+        "Implicit differentiation with respect to time",
+        "The Mean Value Theorem",
+        "Partial fractions"
+      ],
+      correctIndex: 1,
+      hint: "Differentiate both sides of an equation with respect to t, treating each variable as a function of time."
+    },
+    {
+      question: "According to the Fundamental Theorem of Calculus, if $$F'(x) = f(x)$$, what is $$\\int_a^b f(x)\\,dx$$?",
+      choices: [
+        "F(a) - F(b)",
+        "F(b) + F(a)",
+        "F(b) - F(a)",
+        "f(b) - f(a)"
+      ],
+      correctIndex: 2,
+      hint: "Evaluate the antiderivative at the upper bound and subtract its value at the lower bound."
     }
   ];
+
+  let lastGatewayIndex = -1;
 
   function startGatewayChallenge() {
     gatewayModal.hidden = false;
     gatewayFeedback.hidden = true;
     gatewayHintText.hidden = true;
     gatewayMiniCalc.hidden = true;
-    
-    const qObj = GATEWAY_QUESTIONS[Math.floor(Math.random() * GATEWAY_QUESTIONS.length)];
+
+    let pickIndex = Math.floor(Math.random() * GATEWAY_QUESTIONS.length);
+    if (GATEWAY_QUESTIONS.length > 1) {
+      while (pickIndex === lastGatewayIndex) {
+        pickIndex = Math.floor(Math.random() * GATEWAY_QUESTIONS.length);
+      }
+    }
+    lastGatewayIndex = pickIndex;
+    const qObj = GATEWAY_QUESTIONS[pickIndex];
     
     if (window.katex && qObj.question.includes("$$")) {
       try {
@@ -3567,8 +3643,14 @@ function initCalculusAcademy() {
       gatewayQ.textContent = qObj.question;
     }
 
-    gatewayOpts.innerHTML = qObj.choices.map((choiceText, idx) => {
-      return `<button class="btn btn--small btn--ghost gateway-option-btn" data-index="${idx}" style="text-align: left; width: 100%; text-transform: none; height: auto; padding: 0.6rem 1rem; border-color: rgba(255,255,255,0.2); font-size: 0.82rem;">${choiceText}</button>`;
+    const shuffledChoices = qObj.choices.map((text, originalIndex) => ({ text, originalIndex }));
+    for (let i = shuffledChoices.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledChoices[i], shuffledChoices[j]] = [shuffledChoices[j], shuffledChoices[i]];
+    }
+
+    gatewayOpts.innerHTML = shuffledChoices.map((choice, idx) => {
+      return `<button class="btn btn--small btn--ghost gateway-option-btn" data-index="${choice.originalIndex}" style="text-align: left; width: 100%; text-transform: none; height: auto; padding: 0.6rem 1rem; border-color: rgba(255,255,255,0.2); font-size: 0.82rem;">${choice.text}</button>`;
     }).join("");
 
     const optionBtns = gatewayOpts.querySelectorAll(".gateway-option-btn");
