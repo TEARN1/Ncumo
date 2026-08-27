@@ -89,40 +89,38 @@ const ADJECTIVES = [
 ];
 
 const ANIME_QUOTES = [
-  { text: '"I wanted to tell you... wherever you are in the world, I\'ll search for you."', author: "Your Name" },
+  { text: '"It was like you brought color into my world. You changed my life."', author: "Your Lie in April" },
   { text: '"If it\'s possible for one person to be hurt by another, then it\'s possible for that person to be healed by another."', author: "Fruits Basket" },
   { text: '"You made me realize that even if we are apart, my feelings will never change."', author: "Cardcaptor Sakura" },
-  { text: '"I love you. I knew it the minute I met you. No, even before I met you."', author: "Weathering With You" },
-  { text: '"It was like you brought color into my world. You changed my life."', author: "Your Lie in April" },
   { text: '"Meeting you was the best thing that ever happened to me."', author: "Kimi ni Todoke" },
-  { text: '"If I can meet you again, against the 6 billion to 1 odds, even if you can\'t move, I will marry you."', author: "Angel Beats" },
-  { text: '"I will love you forever, no matter what happens to us."', author: "Sailor Moon" },
-  // 20 Additional Romantic Anime Quotes
-  { text: '"In our stories, there is a beautiful light... you are my light."', author: "Clannad" },
-  { text: '"If I can be with you, I don\'t care about anything else."', author: "Sword Art Online" },
-  { text: '"I love you. I loved you since the day I first met you."', author: "Toradora!" },
+  { text: '"A lesson without pain is meaningless. That is because we can\'t gain without sacrificing something."', author: "Fullmetal Alchemist" },
+  { text: '"People\'s memories, and the bonds between people, are what give you power."', author: "Naruto" },
+  // 20 Additional Anime Quotes on Friendship & Growth
+  { text: '"In our stories, there is a beautiful light... you are part of that light."', author: "Clannad" },
+  { text: '"If I can be there for you, I don\'t care about anything else."', author: "Sword Art Online" },
+  { text: '"I\'m glad I met you. I\'ve felt that way since the day we first met."', author: "Toradora!" },
   { text: '"The moment I met you, my world had a sound again."', author: "Your Lie in April" },
   { text: '"You are the one who showed me that the world is beautiful."', author: "Violet Evergarden" },
-  { text: '"No matter how dark the night, I will always find my way to you."', author: "Fate/stay night" },
+  { text: '"No matter how dark the night, good friends help you find your way."', author: "Fate/stay night" },
   { text: '"Your hand is warm. It makes me feel safe."', author: "Clannad" },
-  { text: '"Since meeting you, my heart has never stopped beating for you."', author: "Kimi ni Todoke" },
-  { text: '"No matter what happens, I will protect you and stay by your side."', author: "Sword Art Online" },
-  { text: '"My world begins and ends with you."', author: "Steins;Gate" },
-  { text: '"If the world is against you, I\'ll be your only ally."', author: "Code Geass" },
-  { text: '"Meeting you was fate, becoming your friend was a choice, but falling in love was out of my control."', author: "L-DK" },
-  { text: '"I want to share all your happy moments, and hold you through all the sad ones."', author: "Fruits Basket" },
-  { text: '"Even if I lose my memories, I will fall in love with you all over again."', author: "Golden Time" },
-  { text: '"You are my home, the place where I belong."', author: "Kamisama Kiss" },
-  { text: '"If I have you, I have everything I need."', author: "Horimiya" },
-  { text: '"The warmth of your hand is the only thing I need to face the future."', author: "Noragami" },
-  { text: '"You are the melody that plays in my head every single day."', author: "Your Lie in April" },
-  { text: '"We can reach out to the stars, as long as we hold hands."', author: "Gurren Lagann" },
-  { text: '"I\'ll stay by your side forever. I promise."', author: "Sword Art Online" }
+  { text: '"Since meeting you, life has felt a little brighter."', author: "Kimi ni Todoke" },
+  { text: '"No matter what happens, I\'ll have your back."', author: "Sword Art Online" },
+  { text: '"My world feels a little fuller with you in it."', author: "Steins;Gate" },
+  { text: '"If the world is against you, I\'ll be your ally."', author: "Code Geass" },
+  { text: '"Meeting you was chance, becoming your friend was a choice worth making."', author: "L-DK" },
+  { text: '"I want to share all your happy moments, and stand by you through the sad ones."', author: "Fruits Basket" },
+  { text: '"Even if I lose my memories, I\'d want to become friends with you all over again."', author: "Golden Time" },
+  { text: '"You are like a second home, a place where I belong."', author: "Kamisama Kiss" },
+  { text: '"Having you as a friend is more than I need."', author: "Horimiya" },
+  { text: '"The warmth of a good friend is enough to help me face the future."', author: "Noragami" },
+  { text: '"You are the melody that plays in my head on a good day."', author: "Your Lie in April" },
+  { text: '"We can reach out to the stars, as long as we support each other."', author: "Gurren Lagann" },
+  { text: '"I\'ll stay in your corner. I promise."', author: "Sword Art Online" }
 ];
 
 const OMIKUJI_FORTUNES = [
-  { badge: "🌟 Dai-kichi (Great Blessing)", desc: "Perfect stars align! An extremely cozy weekend date is ahead. Hug chance: 100%." },
-  { badge: "🌸 Chuu-kichi (Middle Blessing)", desc: "A sweet text message is heading your way. Your smile is guaranteed to grow today." },
+  { badge: "🌟 Dai-kichi (Great Blessing)", desc: "Perfect stars align! An extremely cozy weekend hangout is ahead. Good vibes: 100%." },
+  { badge: "🌸 Chuu-kichi (Middle Blessing)", desc: "A sweet message from a friend is heading your way. Your smile is guaranteed to grow today." },
   { badge: "✨ Shou-kichi (Small Blessing)", desc: "A cozy laugh and hot chocolate are in your near future. Joy is in small things!" },
   { badge: "🍀 Kichi (Blessing)", desc: "Excellent vibes. The cozy ambient sounds will feel extra peaceful this weekend." }
 ];
@@ -138,93 +136,93 @@ const ACHIEVEMENTS = [
 
 const DEFAULT_BUCKET_ITEMS = [
   { emoji: "🏖️", text: "Sunset beach trip" },
-  { emoji: "🍽️", text: "Candlelight dinner" },
+  { emoji: "🍽️", text: "Nice dinner out" },
   { emoji: "🎬", text: "Cozy movie night" },
   { emoji: "🗻", text: "Mountain hiking trip" },
   { emoji: "✈️", text: "Fly away adventure" },
-  { emoji: "💍", text: "Making future plans" }
+  { emoji: "📋", text: "Making future plans" }
 ];
 
-const NOTE1_OPENINGS = ["Sthandwa sam,", "Ziyanda,", "My beautiful Ncumo,", "To my favourite person,", "My princess Ziyanda,"];
+const NOTE1_OPENINGS = ["Ncumo,", "Ziyanda,", "Dear Ncumo,", "To my favourite person,", "Hey Ziyanda,"];
 const NOTE1_BODIES = [
   "you make even the most ordinary days feel like a scene from a beautiful Ghibli film.",
   "your smile has this magical way of melting away all my weekday stress.",
-  "being with you makes me realize what it truly means to be happy.",
-  "every moment spent laughing with you is a memory I keep locked in my heart.",
+  "spending time with you makes me realize what it truly means to be happy.",
+  "every moment spent laughing with you is a memory I keep close.",
   "your warmth and kindness make the world feel so much softer and brighter."
 ];
-const NOTE1_CLOSINGS = ["Thank you for being you. ♡", "You are my whole world. 💖", "Ndiyakuthanda always. 💍", "Always yours. ♡", "Forever and always. ♡"];
+const NOTE1_CLOSINGS = ["Thank you for being you. ♡", "You mean a lot to me. 💖", "Enkosi always. ♡", "Take care always. ♡", "With gratitude, always. ♡"];
 
-const NOTE2_OPENINGS = ["Just a reminder,", "Hey stylist Ziyanda,", "By the way,", "Sweet Ziyanda,", "Dearest,"];
+const NOTE2_OPENINGS = ["Just a reminder,", "Hey stylist Ziyanda,", "By the way,", "Hey Ziyanda,", "Hey there,"];
 const NOTE2_BODIES = [
-  "your laugh is my absolute favourite soundtrack, and I hope to hear it every day.",
+  "your laugh is my absolute favourite soundtrack, and I hope to hear it often.",
   "I am still thinking about that sweet laugh we shared last weekend.",
-  "you look absolutely breathtaking in every single style under the sun.",
+  "you pull off every single style under the sun.",
   "you have this effortless way of bringing joy wherever you go.",
-  "my day is always ten times better the second I think of you."
+  "my day is always a little better the second I think of you."
 ];
-const NOTE2_CLOSINGS = ["Can't wait for our weekend date! 🗓️", "Sending you a huge virtual hug right now. 🤗", "Smile for me today! 🌸", "Hope this makes you grin! 🧸", "Ndiyakuthanda! ♡"];
+const NOTE2_CLOSINGS = ["Can't wait to catch up soon! 🗓️", "Sending you a huge virtual hug right now. 🤗", "Smile for me today! 🌸", "Hope this makes you grin! 🧸", "Enkosi! ♡"];
 
-const NOTE3_OPENINGS = ["Looking forward,", "Our future,", "Every single day,", "Looking ahead,"];
+const NOTE3_OPENINGS = ["Looking forward,", "Ahead of us,", "Every single day,", "Looking ahead,"];
 const NOTE3_BODIES = [
-  "is filled with so many sunset dates, coffee walks, and shared dinners.",
-  "has so many blank polaroid frames waiting to be filled by our adventures.",
-  "is going to be a beautiful story that we write together step by step.",
+  "is filled with so many sunset walks, coffee catch-ups, and shared meals to look forward to.",
+  "has so many blank polaroid frames waiting to be filled by good memories.",
+  "is going to be a nice story that keeps unfolding, one day at a time.",
   "holds so many exciting plans that I can't wait to share with you."
 ];
-const NOTE3_CLOSINGS = ["Let's build more memories this weekend. 🗺️", "Always countdown-ing to our next date. ⏳", "Excited for everything to come! ✨", "You and me, always. 💍"];
+const NOTE3_CLOSINGS = ["Let's build more memories this weekend. 🗺️", "Always looking forward to catching up. ⏳", "Excited for everything to come! ✨", "Cheers to more good times. ✨"];
 
-const NOTE4_OPENINGS = ["In a world of temporary things,", "No matter where we go,", "Since June 5th,", "Every single day,"];
+const NOTE4_OPENINGS = ["In a world of temporary things,", "No matter where life takes us,", "Since June 5th,", "Every single day,"];
 const NOTE4_BODIES = [
-  "you are my forever and my safest, warmest space.",
-  "my feelings for you only grow stronger and deeper with each passing day.",
-  "you are the absolute main character of my story, and always will be.",
-  "you prove to me that true love is the most beautiful thing in the world."
+  "you are a safe and warm presence in my life.",
+  "my appreciation for you only grows with each passing day.",
+  "you are an important character in my story, and always will be.",
+  "you remind me that true friendship is one of the most beautiful things in the world."
 ];
-const NOTE4_CLOSINGS = ["Forever mine. ♡", "Ndiyakuthanda, sthandwa sam. 💖", "You have all of my heart. 💍", "My irreplaceable girl. 🌸"];
+const NOTE4_CLOSINGS = ["Grateful, always. ♡", "Enkosi, Ncumo. 💖", "You have my appreciation. ♡", "My irreplaceable friend. 🌸"];
 
 // =====================================================
 // 42 Delayed Weekend Cleaning & Date Jokes
 // =====================================================
 const WEEKEND_PROMPTS = [
   {
-    text: "Shouldn't you be with me? 😉 Also... I haven't cleaned my place yet. You're going to help me clean when you come over, right? 🧹✨",
+    text: "We should hang out soon 😉 Also... I haven't cleaned my place yet. You're going to help me clean when you come over, right? 🧹✨",
     responses: ["Only if I get snacks! 🍫", "Of course! 🧼", "You're on your own 😜"]
   },
   {
-    text: "Shouldn't you be with me? 😉 Because my weekend has officially started and my favorite person is missing! 💖",
-    responses: ["Pick me up! 🚗", "Let's stay in 🍕", "On my way! 🏃‍♀️"]
+    text: "We should hang out soon 😉 Because my weekend has officially started and my favorite person is missing! 💖",
+    responses: ["Come get me! 🚗", "Let's stay in 🍕", "On my way! 🏃‍♀️"]
   },
   {
-    text: "Don't you miss me? 🥺 My room is too quiet, my schedule is empty, and I need a Ziyanda laugh right now. ♡",
-    responses: ["I miss you more! 🤗", "Only a little bit 😜", "Coming over! 🚀"]
+    text: "Been a while, huh? 🥺 My room is too quiet, my schedule is empty, and I need a Ziyanda laugh right now. ♡",
+    responses: ["Miss chatting too! 🤗", "It's been a bit 😜", "Coming over! 🚀"]
   },
   {
-    text: "Shouldn't you be with me? 😉 Let's drop whatever we are doing and go get some warm coffee. Thoughts? ☕",
-    responses: ["mocha for me! ☕", "Tea date instead 🍵", "You're buying! 💸"]
+    text: "We should hang out soon 😉 Let's drop whatever we are doing and go get some warm coffee. Thoughts? ☕",
+    responses: ["mocha for me! ☕", "Tea instead 🍵", "You're buying! 💸"]
   },
   {
-    text: "Don't you miss me? 🥺 Let's plan our weekend date right now. You can't say no! 🗺️✨",
+    text: "Been a while, huh? 🥺 Let's plan our weekend hangout right now. You can't say no! 🗺️✨",
     responses: ["Yes, please! 💖", "Let's explore 🔍", "Pick the spot! 🌳"]
   },
   {
-    text: "It's the weekend! 🏖️ Are we going on a date, or are you just gonna let me miss you all day?",
-    responses: ["Pick me up! 🚗", "Let's stay in 🍕", "Let me think 😜"]
+    text: "It's the weekend! 🏖️ Are we hanging out, or are you just gonna let me be bored all day?",
+    responses: ["Come get me! 🚗", "Let's stay in 🍕", "Let me think 😜"]
   },
   {
-    text: "Weekend warning: Extreme cuddle threat detected! Are you prepared?",
+    text: "Weekend warning: Extreme snack-run threat detected! Are you prepared?",
     responses: ["100% ready! 🤗", "Only with snacks 🍿", "I'm running away! 🏃‍♀️"]
   },
   {
-    text: "I was thinking... we look pretty good together. Let's test that today?",
-    responses: ["Definitely! 💍", "Need to double check 🔍", "We look amazing! ✨"]
+    text: "I was thinking... we make a pretty good team. Let's test that today?",
+    responses: ["Definitely! ✨", "Need to double check 🔍", "We're great together! ✨"]
   },
   {
-    text: "My weekend calendar has a huge slot marked: 'Spending time with my favorite girl.' You free?",
+    text: "My weekend calendar has a huge slot marked: 'Catching up with my favorite person.' You free?",
     responses: ["Always free for you! 💖", "Maybe for an hour 🕰️", "Yes, let's go! 🚀"]
   },
   {
-    text: "Just a heads up: my hoodie has been missing you. I think you need to wear it today.",
+    text: "Just a heads up: I've still got that hoodie you left here. Come grab it whenever.",
     responses: ["It's mine now! 🧥", "I'll think about it 😜", "Bring it over! 🛍️"]
   },
   {
@@ -232,12 +230,12 @@ const WEEKEND_PROMPTS = [
     responses: ["Already smiling! 😊", "Try harder! 😜", "Aww, thank you! ♡"]
   },
   {
-    text: "If we were in an anime, this would be the episode where we go on a cozy sunset coffee date. Thoughts?",
-    responses: ["I'll order the mocha! ☕", "Make it a tea date 🍵", "Only if you buy! 💸"]
+    text: "If we were in an anime, this would be the episode where we go on a cozy sunset coffee run. Thoughts?",
+    responses: ["I'll order the mocha! ☕", "Make it tea 🍵", "Only if you buy! 💸"]
   },
   {
-    text: "Hey Ncumo, I've got a challenge. Who can make the other laugh first? Winner gets a hug.",
-    responses: ["You're on! 🥊", "I always win! 🥇", "Easiest hug ever! 🤗"]
+    text: "Hey Ncumo, I've got a challenge. Who can make the other laugh first? Winner picks the snacks.",
+    responses: ["You're on! 🥊", "I always win! 🥇", "Easiest win ever! 🤗"]
   },
   {
     text: "Weekend checklist: Charge phone 🔌, buy snacks 🍿, hang out with my favorite person. How are we doing on the last one?",
@@ -248,48 +246,48 @@ const WEEKEND_PROMPTS = [
     responses: ["Only if I'm head chef! 👩‍🍳", "I'll do the eating 🍕", "Let's order takeout! 📱"]
   },
   {
-    text: "Weekend mood: counting down the minutes until I see you. What's your status?",
-    responses: ["Same here! ⏳", "Just getting ready 👗", "Busy thinking of you 💭"]
+    text: "Weekend mood: counting down the minutes until I catch up with you. What's your status?",
+    responses: ["Same here! ⏳", "Just getting ready 👗", "Excited too! 💭"]
   },
   {
-    text: "Just checked: my heart is still beating only for you this weekend. Strange, right? 💓",
-    responses: ["Not strange at all! 🥰", "Mine is too! 💖", "Smooth talker... 😉"]
+    text: "Just checked: I'm still looking forward to this weekend. Strange, right? 💓",
+    responses: ["Not strange at all! 🥰", "Me too! 💖", "Smooth talker... 😉"]
   },
   {
-    text: "Weekend assignment: Ziyanda has to let me hold her hand. No excuses allowed! 🤝",
-    responses: ["Granted! 🤝🌸", "Only if it's warm ☀️", "Maybe later! 😜"]
+    text: "Weekend assignment: Ziyanda has to tell me her best joke. No excuses allowed! 🤝",
+    responses: ["Granted! 🤝🌸", "Only if it's a good one ☀️", "Maybe later! 😜"]
   },
   {
     text: "The coffee shop is calling our name. Let's go grab a warm cup together? ☕",
     responses: ["Let's go! ☕✨", "Only if there are cakes 🍰", "Cozy walk first 🚶‍♀️"]
   },
   {
-    text: "Shouldn't you be with me? 😉 Also... I haven't done my laundry yet. You're going to help me fold, right? 👕",
+    text: "We should hang out soon 😉 Also... I haven't done my laundry yet. You're going to help me fold, right? 👕",
     responses: ["Fold it yourself! 😜", "Only the hoodies 🧥", "I'll supervise! 👑"]
   },
   {
-    text: "I was looking at this weekend and thinking it lacks a bit of 'us'. Let's fix that.",
+    text: "I was looking at this weekend and thinking it needs more of us catching up. Let's fix that.",
     responses: ["Yes, please! 💖", "On my way 🏃‍♀️", "What's the plan? 🗺️"]
   },
   {
-    text: "Cuddle index is at 100% today. I suggest we take immediate action.",
+    text: "Movie-marathon index is at 100% today. I suggest we take immediate action.",
     responses: ["Agreed! 🤗", "Wait for me! ⏳", "Only if it's cozy 🌧️"]
   },
   {
-    text: "My favorite spot in the world is right next to you. Are we going there today?",
-    responses: ["Definitely! 💍", "Let's find it 🗺️", "Always! ♡"]
+    text: "My favorite way to spend a weekend is catching up with you. Are we doing that today?",
+    responses: ["Definitely! ✨", "Let's find time 🗺️", "Always! ♡"]
   },
   {
-    text: "Warning: Missing you level has reached critical status this weekend! 🚨",
-    responses: ["Sending hug! 🤗", "I'll be there soon! 🚗", "Me too! 🥺"]
+    text: "Warning: it's been too long since we caught up this weekend! 🚨",
+    responses: ["Sending a wave! 🤗", "I'll be there soon! 🚗", "Same here! 🥺"]
   },
   {
     text: "Weekend plan: Do absolutely nothing... together. Sound like a plan?",
     responses: ["Sounds perfect! 🛌", "Only with movies 🎬", "Let's go out! 🌳"]
   },
   {
-    text: "I think you owe me a date this weekend. I'm here to collect! 💳",
-    responses: ["Payment accepted! 🎟️", "Next weekend! 😜", "Let's go now! 🚀"]
+    text: "I think you owe me a hangout this weekend. I'm here to collect! 💳",
+    responses: ["Deal accepted! 🎟️", "Next weekend! 😜", "Let's go now! 🚀"]
   },
   {
     text: "Are we matching outfits today, or are you going to let me look less cool than you?",
@@ -300,23 +298,23 @@ const WEEKEND_PROMPTS = [
     responses: ["Water fight! 🔫", "I'll watch 🍿", "Only if we play music 🎵"]
   },
   {
-    text: "Just a reminder: weekends are for us. Everything else can wait.",
-    responses: ["Exactly! 🌸", "Agreed 💯", "Let's focus on us! ♡"]
+    text: "Just a reminder: weekends are for catching up. Everything else can wait.",
+    responses: ["Exactly! 🌸", "Agreed 💯", "Let's make time! ♡"]
   },
   {
-    text: "My weekend is empty without your smile. Can you bring it over?",
-    responses: ["On my way! 🏃‍♀️", "Smiling already! 😊", "Coming soon! 💖"]
+    text: "My weekend feels quieter without your jokes. Can you bring some over?",
+    responses: ["On my way! 🏃‍♀️", "Already got some! 😊", "Coming soon! 💖"]
   },
   {
-    text: "If I got a flower for every time I thought of you this weekend, I'd have a massive garden. 🌷",
-    responses: ["So sweet! 💐", "Show me! 🔍", "Ndiyakuthanda! ♡"]
+    text: "If I got a flower for every time this weekend crossed my mind, I'd have a massive garden. 🌷",
+    responses: ["So sweet! 💐", "Show me! 🔍", "Enkosi! ♡"]
   },
   {
-    text: "I bought your favorite snacks. I think that means you have to come visit me.",
-    responses: ["Snack alert! 🍿", "Best boyfriend! 🥰", "Save some for me! 🏃‍♀️"]
+    text: "I bought your favorite snacks. I think that means you have to come visit.",
+    responses: ["Snack alert! 🍿", "Best friend ever! 🥰", "Save some for me! 🏃‍♀️"]
   },
   {
-    text: "Shouldn't you be with me? 😉 Also... my room is a mess. You're going to help me organize, right? 📦",
+    text: "We should hang out soon 😉 Also... my room is a mess. You're going to help me organize, right? 📦",
     responses: ["No way! 😜", "Only if we find treasures 🪙", "Clean up first! 🧹"]
   },
   {
@@ -324,35 +322,35 @@ const WEEKEND_PROMPTS = [
     responses: ["I will! 🥇", "Let's make it together 👩‍🍳", "You make it for me! 🥺"]
   },
   {
-    text: "My heart has been asking for you all morning. I think you should answer it.",
-    responses: ["Hello! 📞💖", "Coming! 🏃‍♀️", "Aww! ♡"]
+    text: "I've had a good story on my mind all morning that I think you should hear.",
+    responses: ["Tell me! 📞💖", "Coming! 🏃‍♀️", "Aww! ♡"]
   },
   {
     text: "I planned a little sunset walk for us. You coming, right?",
     responses: ["Love sunset walks! 🌅", "Only if it's warm ☀️", "Yes! 👟"]
   },
   {
-    text: "Weekend checklist item #1: Hold Ziyanda tight. Can we check it off?",
-    responses: ["Yes, please! 🤗", "Soon! 🕰", "Cuddle time! 💖"]
+    text: "Weekend checklist item #1: Catch up properly this time. Can we check it off?",
+    responses: ["Yes, please! 🤗", "Soon! 🕰", "Let's do it! 💖"]
   },
   {
-    text: "I was looking at the stars and thinking... none of them match your brightness. 🌌",
-    responses: ["So romantic! ✨", "Aww! 🥰", "My starry sky! ♡"]
+    text: "I was looking at the stars and thinking... this weekend needs a good catch-up. 🌌",
+    responses: ["So true! ✨", "Aww! 🥰", "Starry night walk! ♡"]
   },
   {
     text: "I haven't set up the movie list yet. You're going to help me pick, right? 🎬🍿",
-    responses: ["Anime night! 🌸", "Cozy romance 🍿", "Action movie! 💥"]
+    responses: ["Anime night! 🌸", "Cozy comedy 🍿", "Action movie! 💥"]
   },
   {
-    text: "Shouldn't you be with me? 😉 Also... I haven't done the dishes. You're going to help me rinse, right? 🍽️",
+    text: "We should hang out soon 😉 Also... I haven't done the dishes. You're going to help me rinse, right? 🍽️",
     responses: ["I'll dry! 🧼", "You wash them! 😜", "Let's use paper plates 😂"]
   },
   {
-    text: "Weekend energy: 100% cozy, 100% focused on you. What about you?",
-    responses: ["Same vibe! 🛌", "Excited! 🚀", "Ndiyakuthanda! ♡"]
+    text: "Weekend energy: 100% cozy, 100% ready to catch up. What about you?",
+    responses: ["Same vibe! 🛌", "Excited! 🚀", "Enkosi! ♡"]
   },
   {
-    text: "Shouldn't you be with me? 😉 Also... I haven't watered the plants. You're going to help me garden, right? 🪴",
+    text: "We should hang out soon 😉 Also... I haven't watered the plants. You're going to help me garden, right? 🪴",
     responses: ["Only if I get dirty 🌱", "I'll talk to the plants 🗣️", "Water fight instead! 💦"]
   }
 ];
@@ -705,13 +703,13 @@ function evaluateWeatherAlerts(data) {
   const rainProbTomorrow = data.daily.precipitation_probability_max[1];
   
   if (rainProbToday > 40) {
-    injectAlert("🌧️", `It might rain today in Commercia, Midrand (Probability: ${rainProbToday}%). Make sure you carry an umbrella, sthandwa sam! ☔`);
+    injectAlert("🌧️", `It might rain today in Commercia, Midrand (Probability: ${rainProbToday}%). Make sure you carry an umbrella, Ncumo! ☔`);
   }
   if (rainProbTomorrow > 50) {
     injectAlert("👕", "Just checked the forecast — rain is coming tomorrow. Better do your laundry today while the sun is out! ☀️👕");
   }
   if (rainProbToday <= 15 && maxTemp > 26) {
-    injectAlert("☀️", `It's going to be warm and beautiful today (${maxTemp}°C). Have a lovely walk, sthandwa sam!`);
+    injectAlert("☀️", `It's going to be warm and beautiful today (${maxTemp}°C). Have a lovely walk, Ncumo!`);
   }
   
   updateWorkAlerts();
@@ -769,14 +767,14 @@ function updateWaterAlerts(data) {
     const maxTemp = data.daily.temperature_2m_max[0];
     const rainProb = data.daily.precipitation_probability_max[0];
     if (maxTemp > 28) {
-      injectAlert("🚰", `Water Warning (Rabie Ridge Reservoir): Reservoir levels are stable. Due to high temperatures (${maxTemp}°C), demand is high. Please use water sparingly in Commercia, sthandwa sam! 💧`);
+      injectAlert("🚰", `Water Warning (Rabie Ridge Reservoir): Reservoir levels are stable. Due to high temperatures (${maxTemp}°C), demand is high. Please use water sparingly in Commercia, Ncumo! 💧`);
     } else if (rainProb > 50) {
       injectAlert("🚰", `Water Status (Rabie Ridge Tower): Pressure is stable and operations are normal. Stay warm and keep hydrated today! 🌧️💧`);
     } else {
       injectAlert("🚰", `Water Status (Rabie Ridge Reservoir): Flow is steady, pressure is normal in Commercia. Keep drinking water and stay glowing! 💧✨`);
     }
   } else {
-    injectAlert("🚰", `Water Status (Rabie Ridge Reservoir): Supply is normal for Commercia. Remember to drink water and take care of yourself, sthandwa sam! 💧`);
+    injectAlert("🚰", `Water Status (Rabie Ridge Reservoir): Supply is normal for Commercia. Remember to drink water and take care of yourself, Ncumo! 💧`);
   }
 }
 
@@ -806,10 +804,10 @@ function updateWorkAlerts() {
   const hours = now.getHours();
   
   if (day === 0) {
-    injectAlert("💼", "Heads up sthandwa sam, just a reminder that I work early tomorrow (Monday, 06:00 - 18:00) so I might be offline during the day, but I'll text you the moment I finish! 💼");
+    injectAlert("💼", "Heads up Ncumo, just a reminder that I work early tomorrow (Monday, 06:00 - 18:00) so I might be offline during the day, but I'll text you the moment I finish! 💼");
   }
   else if (day === 4) {
-    injectAlert("💼", "Heads up sthandwa sam, just a reminder that I work early tomorrow (Friday, 06:00 - 18:00). Have a beautiful day ahead! 💼🌸");
+    injectAlert("💼", "Heads up Ncumo, just a reminder that I work early tomorrow (Friday, 06:00 - 18:00). Have a beautiful day ahead! 💼🌸");
   }
   else if ((day === 1 || day === 5) && (hours >= 6 && hours < 18)) {
     injectAlert("💼", "I'm currently at work (06:00 - 18:00), counting down the hours until I can message you! 💼⏳");
@@ -1675,36 +1673,36 @@ function populateEnvelopeLetter() {
   
   let letterTitle = "Dearest Ziyanda,";
   let letterText = "";
-  
+
   if (month === 0 && day === 29) {
     letterTitle = "Happy Birthday Ziyanda! 🎂";
-    letterText = "Happy Birthday to the most beautiful girl in the universe! Today is all about celebrating you, my Ziyanda. You deserve all the joy, smiles, and love in the world. I'm so lucky to have you. Ndiyakuthanda! 🎂💖<br><br>— Yours ♡";
+    letterText = "Happy Birthday to a wonderful person! Today is all about celebrating you, my Ziyanda. You deserve all the joy and smiles in the world. I'm so lucky to know you. Enkosi! 🎂💖<br><br>— Your friend ♡";
   } else if (month === 11 && day === 8) {
     letterTitle = "Happy Birthday to Me! 🎉";
-    letterText = "It's my birthday today, but the greatest gift I could ever ask for is having you in my life. Thank you for making my world so much brighter. I'm so glad we get to celebrate these days together. ♡<br><br>— Yours ♡";
+    letterText = "It's my birthday today, but one of the best gifts is having you in my life. Thank you for making my world so much brighter. I'm so glad we get to celebrate these days. ♡<br><br>— Your friend ♡";
   } else if (day === 5) {
-    letterTitle = "Happy Monthly Anniversary! 💍";
-    letterText = "Happy Monthly Anniversary, sthandwa sam! Another month of being mine, of weekend dates, of endless laughs, and growing love. Here's to forever. Ndiyakuthanda, Ncumolwakhe! 💍✨<br><br>— Yours ♡";
+    letterTitle = "Happy Monthly Milestone! ✨";
+    letterText = "Happy Monthly Milestone, Ncumo! Another month of good hangouts, endless laughs, and growing friendship. Here's to many more. Enkosi, Ncumolwakhe! ✨<br><br>— Your friend ♡";
   } else {
     const seed = getDaySeed();
     const rnd = createPRNG(seed + 999);
     const letterOpenings = [
       "This little corner of the internet is dedicated to your beautiful smile. Thank you for filling my weekends with laughter and making the weekdays worth grinding for.",
       "Just wanted to write you a tiny reminder today of how much you mean to me. You bring so much color and warmth to my life.",
-      "Every single day since we started this journey, my feelings for you have grown stronger. You are my sunshine and my safest space.",
-      "No matter how tough or busy the weekdays get, thinking of you always brings a smile to my face. I'm so lucky to have you."
+      "Every single day since we became friends, I've been grateful for it. You are a real source of light and a safe space to talk to.",
+      "No matter how tough or busy the weekdays get, thinking of you always brings a smile to my face. I'm so lucky to know you."
     ];
     const letterBodies = [
-      " You are irreplaceable, and I cherish every little thing about you—your laugh, your kindness, and the way you look at me.",
-      " I hope this day brings you as much happiness as you bring to my heart every single second.",
-      " I'm constantly counting down the days until the weekend, so I can see you again and make you laugh.",
-      " You make everything feel so special. I'm looking forward to all our future dates and adventures together."
+      " You are irreplaceable, and I cherish every little thing about you—your laugh, your kindness, and the way you see the world.",
+      " I hope this day brings you as much happiness as you bring to the people around you every single day.",
+      " I'm constantly counting down the days until the weekend, so I can catch up with you and make you laugh.",
+      " You make everything feel so special. I'm looking forward to all our future hangouts and adventures together."
     ];
     const letterClosings = [
-      "<br><br>Ndiyakuthanda, Ncumolwakhe! ♡<br><br>— Yours ♡",
-      "<br><br>Forever yours, sthandwa sam! 💖<br><br>— Yours ♡",
-      "<br><br>Always and forever, my love! 💍<br><br>— Yours ♡",
-      "<br><br>With all my love, sthandwa sam! 🌸<br><br>— Yours ♡"
+      "<br><br>Enkosi, Ncumolwakhe! ♡<br><br>— Your friend ♡",
+      "<br><br>Grateful for you, Ncumo! 💖<br><br>— Your friend ♡",
+      "<br><br>Always in your corner! ✨<br><br>— Your friend ♡",
+      "<br><br>With appreciation, Ncumo! 🌸<br><br>— Your friend ♡"
     ];
     
     const opening = letterOpenings[Math.floor(rnd() * letterOpenings.length)];
@@ -1743,20 +1741,20 @@ function populateTimeline() {
   const seed = getDaySeed();
   const rnd = createPRNG(seed + 8888);
   const milestoneNotes = [
-    "Laughing together, holding hands, and making every second count.",
-    "Another beautiful day in our story. Every page is better with you.",
-    "Days are passing, but my love for you keeps growing higher.",
+    "Laughing together and making every second count.",
+    "Another good day in our story. Every page is better with a good friend.",
+    "Days are passing, and my appreciation for our friendship keeps growing.",
     "So grateful for every laugh we shared and every plan we are building.",
-    "Watching our future dreams fold closer day by day."
+    "Watching our future plans come together day by day."
   ];
   const noteText = milestoneNotes[Math.floor(rnd() * milestoneNotes.length)];
   const todayStr = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
-  
+
   dynNode.innerHTML = `
     <div class="timeline__node"></div>
     <div class="timeline__content">
       <span class="timeline__date">${todayStr} (Day ${daysVal})</span>
-      <h4 class="timeline__title">Today With You 💖</h4>
+      <h4 class="timeline__title">Today's Note 💖</h4>
       <p class="timeline__desc">${noteText}</p>
     </div>
   `;
@@ -1785,11 +1783,11 @@ function updateGreetingMessage() {
     const diffDays = Math.floor(diffHours / 24);
     
     if (diffDays >= 7) {
-      longingMsg = `It's been a whole week (${diffDays} days) since you were last here... 😭 Did you forget about me, sthandwa sam? I missed you so much it hurts! 💔`;
+      longingMsg = `It's been a whole week (${diffDays} days) since you were last here... 😭 Good to see you again, Ncumo! Missed catching up. ♡`;
     } else if (diffDays >= 3) {
-      longingMsg = `It's been ${diffDays} days since you last visited... 🥺 I was starting to feel really lonely and sad. I missed you so much! 💔`;
+      longingMsg = `It's been ${diffDays} days since you last visited... 🥺 Glad you're back, I was hoping you'd swing by! ♡`;
     } else if (diffHours >= 24) {
-      longingMsg = `I missed you yesterday... 🥺 It felt like a lifetime. I'm so glad you're back today, sthandwa sam! ♡`;
+      longingMsg = `Been a day since your last visit... 🥺 Glad you're back today, Ncumo! ♡`;
     }
   }
   
@@ -1808,7 +1806,7 @@ function updateGreetingMessage() {
       if (hours >= 20) {
         msg = "It's late, Ncumo. Go get some rest. 🌙";
       } else if (hours < 5) {
-        msg = "Go back to sleep, sthandwa sam. Dreamland is waiting for you. 🥱💤";
+        msg = "Go back to sleep, Ncumo. Dreamland is waiting for you. 🥱💤";
       } else if (hours === 5) {
         msg = "Up early? Good morning! ☀️";
       } else if (hours === 6) {
@@ -1931,9 +1929,9 @@ let memLevel = 1;
 
 const MEM_LEVELS = [
   { pairs: 2, cols: 2, name: "First Blush 🌸", emojis: ["🌸", "💖"] },
-  { pairs: 4, cols: 4, name: "Growing Feelings 🌷", emojis: ["🌸", "🌷", "💖", "🧸"] },
+  { pairs: 4, cols: 4, name: "Growing Vibes 🌷", emojis: ["🌸", "🌷", "💖", "🧸"] },
   { pairs: 6, cols: 4, name: "Sweet Harmony 🦋", emojis: ["🌸", "🌷", "💖", "🧸", "🦋", "✨"] },
-  { pairs: 8, cols: 4, name: "Infinite Love 💍", emojis: ["🌸", "🌷", "💖", "🧸", "🦋", "✨", "🎀", "💍"] }
+  { pairs: 8, cols: 4, name: "Endless Fun 🎀", emojis: ["🌸", "🌷", "💖", "🧸", "🦋", "✨", "🎀", "🌟"] }
 ];
 
 function buildMemory() {
@@ -2016,7 +2014,7 @@ function flipCard(container) {
             buildMemory();
           });
         } else {
-          memWin.innerHTML = `Ultimate Level Cleared! 💍 You matched all of them, just like you matched my heart! 💍✨<br><button class="btn btn--small" id="memRestartBtn" style="margin-top:0.8rem;">Restart Stages 🔄</button>`;
+          memWin.innerHTML = `Ultimate Level Cleared! 🌟 You matched all of them, nicely done! ✨<br><button class="btn btn--small" id="memRestartBtn" style="margin-top:0.8rem;">Restart Stages 🔄</button>`;
           memWin.hidden = false;
           unlockAchievement("memory_win");
           document.getElementById("memRestartBtn").addEventListener("click", () => {
@@ -2065,8 +2063,8 @@ catchBest.textContent = best;
 let catchStage = 1;
 const CATCH_STAGES = [
   { id: 1, name: "Soft Breeze 🌸", target: 15, durationMin: 2.2, durationMax: 3.2, spawnRate: 600, hint: "Catch the falling bubbles. Simple and sweet." },
-  { id: 2, name: "Shower of Affection 💖", target: 25, durationMin: 1.5, durationMax: 2.2, spawnRate: 400, hint: "Hearts fall faster now! Focus, sthandwa sam." },
-  { id: 3, name: "Storm of Love ⛈️", target: 35, durationMin: 1.0, durationMax: 1.7, spawnRate: 350, hint: "Blazing fast! Avoid clicking the work stress 💻!" }
+  { id: 2, name: "Shower of Sparkles 💖", target: 25, durationMin: 1.5, durationMax: 2.2, spawnRate: 400, hint: "Hearts fall faster now! Focus, Ncumo." },
+  { id: 3, name: "Storm of Fun ⛈️", target: 35, durationMin: 1.0, durationMax: 1.7, spawnRate: 350, hint: "Blazing fast! Avoid clicking the work stress 💻!" }
 ];
 
 function spawnHeart() {
@@ -2140,7 +2138,7 @@ function endCatch() {
           document.getElementById("catchStage").textContent = catchStage;
           document.getElementById("catchHint").textContent = CATCH_STAGES[0].hint;
           playBubbleSFX();
-          catchMsg.innerHTML = `Ready to play again, sthandwa sam?`;
+          catchMsg.innerHTML = `Ready to play again, Ncumo?`;
         });
       }, 50);
     }
@@ -3008,7 +3006,7 @@ if (forgiveBtn) {
     forgiveReply.hidden = false;
     forgiveBtn.disabled = true;
     forgiveBtn.style.opacity = "0.6";
-    forgiveBtn.textContent = "Thank you, my love ♡";
+    forgiveBtn.textContent = "Thank you ♡";
     if (typeof initAudio === "function") initAudio();
     if (typeof triggerWinConfetti === "function") triggerWinConfetti();
     const rect = forgiveBtn.getBoundingClientRect();
@@ -3582,7 +3580,7 @@ function initCalculusAcademy() {
           if (typeof triggerWinConfetti === "function") triggerWinConfetti();
           gatewayFeedback.hidden = false;
           gatewayFeedback.className = "chalk-feedback success";
-          gatewayFeedback.innerHTML = "Correct! Welcome to the sanctuary, sthandwa sam! 💖";
+          gatewayFeedback.innerHTML = "Correct! Welcome to the sanctuary, Ncumo! 💖";
           
           setTimeout(() => {
             gatewayModal.hidden = true;
@@ -3592,7 +3590,7 @@ function initCalculusAcademy() {
           playChalkSound("click");
           gatewayFeedback.hidden = false;
           gatewayFeedback.className = "chalk-feedback error";
-          gatewayFeedback.textContent = "Almost! Try again, sthandwa sam, or reveal the hint if you need a guide! 🌸";
+          gatewayFeedback.textContent = "Almost! Try again, Ncumo, or reveal the hint if you need a guide! 🌸";
         }
       });
     });
@@ -4561,7 +4559,7 @@ function initCalculusAcademy() {
     if (ans === mod.correctAnswer) {
       feedbackText.hidden = false;
       feedbackText.className = "chalk-feedback success";
-      feedbackText.innerHTML = `Amazing job, sthandwa sam! You got it right! 🌟<br>Derivative checked and verified.`;
+      feedbackText.innerHTML = `Amazing job, Ncumo! You got it right! 🌟<br>Derivative checked and verified.`;
       
       calcState.completed[calcState.activeStep - 1] = true;
       localStorage.setItem("ncumoCalcCompleted", JSON.stringify(calcState.completed));
@@ -4585,7 +4583,7 @@ function initCalculusAcademy() {
       playChalkSound("click");
       feedbackText.hidden = false;
       feedbackText.className = "chalk-feedback error";
-      feedbackText.textContent = "Almost there! Double-check your math, sthandwa sam, or reveal a hint if you need a guide! 🌸";
+      feedbackText.textContent = "Almost there! Double-check your math, Ncumo, or reveal a hint if you need a guide! 🌸";
       showSolutionBtn.hidden = false;
     }
   });

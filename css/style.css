@@ -141,13 +141,24 @@ body.theme-dream #starCanvas {
 
 /* ============ Floating Sakura Petals ============ */
 #petals { position: fixed; inset: 0; pointer-events: none; z-index: 1; }
+.hero__visual {
+  position: relative;
+  width: min(78vw, 460px);
+  height: min(78vw, 460px);
+  max-height: 55vh;
+  margin: 0 auto 1.25rem;
+  border-radius: 50%;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 45%, rgba(255, 183, 197, 0.28), rgba(255, 183, 197, 0.04) 70%);
+  box-shadow: 0 25px 70px rgba(242, 123, 155, 0.25);
+  z-index: 5;
+}
 #webglCanvas {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  z-index: 1;
+  display: block;
   pointer-events: none;
-  opacity: 0.85;
 }
 .hero__decor, .hero__eyebrow, .hero__title, .hero__subtitle, .hero__greeting-bubble, .hero .btn, .hero__hearts, .daily-status {
   position: relative;
