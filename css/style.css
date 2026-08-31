@@ -2702,6 +2702,7 @@ body.theme-dream .sorry__letter { background: rgba(38, 23, 61, 0.45); }
   padding: 1rem;
   transition: opacity 0.3s ease;
 }
+.calc-gateway-modal[hidden] { display: none; }
 .calc-gateway-content {
   max-width: 440px;
   width: 100%;
