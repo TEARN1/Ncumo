@@ -80,42 +80,35 @@ let curBg2Color = [...THEME_COLORS.sakura.bg2];
 // Databases & Dictionaries (Names Purged for Anonymity)
 // =====================================================
 const ADJECTIVES = [
-  "Radiant", "Kind", "Graceful", "Brilliant", "Loved", "Irreplaceable", "Ethereal", "Angelic", 
-  "Playful", "Dreamy", "Breathtaking", "Captivating", "Compassionate", "Genuine", "Inspiring", 
-  "Magical", "Pure-hearted", "Warm-hearted", "Affectionate", "Charming", "Dazzling", "Elegant", 
-  "Fascinating", "Gorgeous", "Heavenly", "Luminous", "Splendid", "Sweet", "Tender", "Wonderful", 
-  "Adorable", "Beautiful", "Cheerful", "Delightful", "Exquisite", "Joyful", "Lovely", "Precious", 
-  "Sparkling", "Unique", "Vibrant", "Enchanting", "Cute", "Fabulous", "Warm", "Gentle"
+  "Radiant", "Kind", "Graceful", "Brilliant", "Ethereal", "Playful", "Dreamy", "Breathtaking",
+  "Captivating", "Compassionate", "Genuine", "Inspiring", "Magical", "Charming", "Dazzling",
+  "Elegant", "Fascinating", "Gorgeous", "Luminous", "Splendid", "Wonderful", "Cheerful",
+  "Delightful", "Exquisite", "Joyful", "Sparkling", "Unique", "Vibrant", "Enchanting",
+  "Fabulous", "Gentle", "Curious", "Bold", "Whimsical", "Serene", "Resilient", "Creative"
 ];
 
 const ANIME_QUOTES = [
-  { text: '"It was like you brought color into my world. You changed my life."', author: "Your Lie in April" },
-  { text: '"If it\'s possible for one person to be hurt by another, then it\'s possible for that person to be healed by another."', author: "Fruits Basket" },
-  { text: '"You made me realize that even if we are apart, my feelings will never change."', author: "Cardcaptor Sakura" },
-  { text: '"Meeting you was the best thing that ever happened to me."', author: "Kimi ni Todoke" },
   { text: '"A lesson without pain is meaningless. That is because we can\'t gain without sacrificing something."', author: "Fullmetal Alchemist" },
   { text: '"People\'s memories, and the bonds between people, are what give you power."', author: "Naruto" },
-  // 20 Additional Anime Quotes on Friendship & Growth
-  { text: '"In our stories, there is a beautiful light... you are part of that light."', author: "Clannad" },
-  { text: '"If I can be there for you, I don\'t care about anything else."', author: "Sword Art Online" },
-  { text: '"I\'m glad I met you. I\'ve felt that way since the day we first met."', author: "Toradora!" },
-  { text: '"The moment I met you, my world had a sound again."', author: "Your Lie in April" },
-  { text: '"You are the one who showed me that the world is beautiful."', author: "Violet Evergarden" },
-  { text: '"No matter how dark the night, good friends help you find your way."', author: "Fate/stay night" },
-  { text: '"Your hand is warm. It makes me feel safe."', author: "Clannad" },
-  { text: '"Since meeting you, life has felt a little brighter."', author: "Kimi ni Todoke" },
-  { text: '"No matter what happens, I\'ll have your back."', author: "Sword Art Online" },
-  { text: '"My world feels a little fuller with you in it."', author: "Steins;Gate" },
-  { text: '"If the world is against you, I\'ll be your ally."', author: "Code Geass" },
-  { text: '"Meeting you was chance, becoming your friend was a choice worth making."', author: "L-DK" },
-  { text: '"I want to share all your happy moments, and stand by you through the sad ones."', author: "Fruits Basket" },
-  { text: '"Even if I lose my memories, I\'d want to become friends with you all over again."', author: "Golden Time" },
-  { text: '"You are like a second home, a place where I belong."', author: "Kamisama Kiss" },
-  { text: '"Having you as a friend is more than I need."', author: "Horimiya" },
-  { text: '"The warmth of a good friend is enough to help me face the future."', author: "Noragami" },
-  { text: '"You are the melody that plays in my head on a good day."', author: "Your Lie in April" },
-  { text: '"We can reach out to the stars, as long as we support each other."', author: "Gurren Lagann" },
-  { text: '"I\'ll stay in your corner. I promise."', author: "Sword Art Online" }
+  { text: '"It\'s not about becoming someone else. It\'s about becoming more of who you are."', author: "My Hero Academia" },
+  { text: '"Whatever you lose, you\'ll find it again. But what you throw away you\'ll never get back."', author: "Kenshin" },
+  { text: '"Fear is not evil. It tells you what your weakness is."', author: "Fairy Tail" },
+  { text: '"No matter how deep the night, it always turns to day, eventually."', author: "Brave10" },
+  { text: '"If you don\'t take risks, you can\'t create a future."', author: "One Piece" },
+  { text: '"The world is not beautiful; therefore, it is."', author: "Kino's Journey" },
+  { text: '"Whatever happens, happens."', author: "Cowboy Bebop" },
+  { text: '"A person grows up when they\'re able to overcome hardships."', author: "Naruto" },
+  { text: '"It\'s always darkest before the dawn."', author: "Fullmetal Alchemist" },
+  { text: '"Hard work is worthless for those that don\'t believe in themselves."', author: "Naruto" },
+  { text: '"You should enjoy the little detours to the fullest, because that\'s where you\'ll find the things more important than what you want."', author: "Ging Freecss, Hunter x Hunter" },
+  { text: '"Forget about your rank. Forget about your reputation. All that matters is what you decide to do right now."', author: "Attack on Titan" },
+  { text: '"The moment you think of giving up, think of the reason why you held on so long."', author: "Natsu, Fairy Tail" },
+  { text: '"Being alone is more painful than getting hurt."', author: "Naruto" },
+  { text: '"If you don\'t like your destiny, don\'t accept it."', author: "Naruto" },
+  { text: '"Believing in yourself is not something someone else can give you — you have to earn it."', author: "Naruto" },
+  { text: '"Sometimes the questions are complicated, and the answers are simple."', author: "Dr. Seuss (via Detective Conan)" },
+  { text: '"We can\'t start a fire without a spark, and that\'s us — we\'re the spark that starts the flame."', author: "Gurren Lagann" },
+  { text: '"A dropout will beat a genius through hard work."', author: "Rock Lee, Naruto" }
 ];
 
 const OMIKUJI_FORTUNES = [
@@ -129,7 +122,6 @@ const ACHIEVEMENTS = [
   { id: "memory_win", icon: "🧠", label: "Memory Master" },
   { id: "hearts_50", icon: "💝", label: "50 Hearts" },
   { id: "hearts_100", icon: "💌", label: "100 Hearts" },
-  { id: "question_yes", icon: "💖", label: "Said Yes" },
   { id: "fortune_draw", icon: "🎴", label: "Fortune Seeker" },
   { id: "calculus_master", icon: "🎓", label: "Calculus Guru" }
 ];
@@ -143,215 +135,215 @@ const DEFAULT_BUCKET_ITEMS = [
   { emoji: "📋", text: "Making future plans" }
 ];
 
-const NOTE1_OPENINGS = ["Ncumo,", "Ziyanda,", "Dear Ncumo,", "To my favourite person,", "Hey Ziyanda,"];
+const NOTE1_OPENINGS = ["A reminder,", "Just a note,", "Hey there,", "To whoever's reading,", "Quick note,"];
 const NOTE1_BODIES = [
-  "you make even the most ordinary days feel like a scene from a beautiful Ghibli film.",
-  "your smile has this magical way of melting away all my weekday stress.",
-  "spending time with you makes me realize what it truly means to be happy.",
-  "every moment spent laughing with you is a memory I keep close.",
-  "your warmth and kindness make the world feel so much softer and brighter."
+  "ordinary days can feel like a scene from a beautiful film if you pay attention.",
+  "a genuine smile has this magical way of melting away stress.",
+  "small good moments add up to what it truly means to be happy.",
+  "little things worth laughing about are memories worth keeping.",
+  "warmth and kindness make the world feel so much softer and brighter."
 ];
-const NOTE1_CLOSINGS = ["Thank you for being you. ♡", "You mean a lot to me. 💖", "Enkosi always. ♡", "Take care always. ♡", "With gratitude, always. ♡"];
+const NOTE1_CLOSINGS = ["Take care. ✿", "Have a good one. 🌸", "Enkosi for stopping by. ✿", "Take care always. ✿", "With gratitude. ✿"];
 
-const NOTE2_OPENINGS = ["Just a reminder,", "Hey stylist Ziyanda,", "By the way,", "Hey Ziyanda,", "Hey there,"];
+const NOTE2_OPENINGS = ["Just a reminder,", "By the way,", "Hey there,", "Quick thought,"];
 const NOTE2_BODIES = [
-  "your laugh is my absolute favourite soundtrack, and I hope to hear it often.",
-  "I am still thinking about that sweet laugh we shared last weekend.",
-  "you pull off every single style under the sun.",
-  "you have this effortless way of bringing joy wherever you go.",
-  "my day is always a little better the second I think of you."
+  "a good laugh is one of the best soundtracks to a day.",
+  "small joys are worth noticing, even on a busy weekend.",
+  "there's no single right style — the best one is whatever feels like you.",
+  "there's an effortless way to bring joy wherever you go.",
+  "a day is always a little better with a bit of gratitude in it."
 ];
-const NOTE2_CLOSINGS = ["Can't wait to catch up soon! 🗓️", "Sending you a huge virtual hug right now. 🤗", "Smile for me today! 🌸", "Hope this makes you grin! 🧸", "Enkosi! ♡"];
+const NOTE2_CLOSINGS = ["Have a great week! 🗓️", "Sending good vibes your way. 🤗", "Smile today! 🌸", "Hope this made you grin! 🧸", "Enkosi! ✿"];
 
-const NOTE3_OPENINGS = ["Looking forward,", "Ahead of us,", "Every single day,", "Looking ahead,"];
+const NOTE3_OPENINGS = ["Looking forward,", "Ahead,", "Every single day,", "Looking ahead,"];
 const NOTE3_BODIES = [
-  "is filled with so many sunset walks, coffee catch-ups, and shared meals to look forward to.",
-  "has so many blank polaroid frames waiting to be filled by good memories.",
-  "is going to be a nice story that keeps unfolding, one day at a time.",
-  "holds so many exciting plans that I can't wait to share with you."
+  "there are sunset walks, coffee, and good meals to look forward to.",
+  "there are blank polaroid frames waiting to be filled with good memories.",
+  "life keeps unfolding into a nice story, one day at a time.",
+  "there are exciting plans worth making time for."
 ];
-const NOTE3_CLOSINGS = ["Let's build more memories this weekend. 🗺️", "Always looking forward to catching up. ⏳", "Excited for everything to come! ✨", "Cheers to more good times. ✨"];
+const NOTE3_CLOSINGS = ["Here's to more good memories. 🗺️", "Always something to look forward to. ⏳", "Excited for what's ahead! ✨", "Cheers to more good times. ✨"];
 
-const NOTE4_OPENINGS = ["In a world of temporary things,", "No matter where life takes us,", "Since June 5th,", "Every single day,"];
+const NOTE4_OPENINGS = ["In a world of temporary things,", "No matter where life takes you,", "Since day one,", "Every single day,"];
 const NOTE4_BODIES = [
-  "you are a safe and warm presence in my life.",
-  "my appreciation for you only grows with each passing day.",
-  "you are an important character in my story, and always will be.",
-  "you remind me that true friendship is one of the most beautiful things in the world."
+  "a little warmth goes a long way.",
+  "gratitude is worth practicing daily.",
+  "small good habits are worth keeping.",
+  "kindness is one of the most beautiful things in the world."
 ];
-const NOTE4_CLOSINGS = ["Grateful, always. ♡", "Enkosi, Ncumo. 💖", "You have my appreciation. ♡", "My irreplaceable friend. 🌸"];
+const NOTE4_CLOSINGS = ["Grateful, always. ✿", "Enkosi. 🌸", "With appreciation. ✿", "Take care. 🌸"];
 
 // =====================================================
-// 42 Delayed Weekend Cleaning & Date Jokes
+// Delayed Weekend Chore & Self-Care Reminders
 // =====================================================
 const WEEKEND_PROMPTS = [
   {
-    text: "We should hang out soon 😉 Also... I haven't cleaned my place yet. You're going to help me clean when you come over, right? 🧹✨",
-    responses: ["Only if I get snacks! 🍫", "Of course! 🧼", "You're on your own 😜"]
+    text: "Weekend reminder: the place still needs a good clean. 🧹✨",
+    responses: ["On it! 🧼", "Later maybe 😜", "Already done! ✅"]
   },
   {
-    text: "We should hang out soon 😉 Because my weekend has officially started and my favorite person is missing! 💖",
-    responses: ["Come get me! 🚗", "Let's stay in 🍕", "On my way! 🏃‍♀️"]
+    text: "The weekend has officially started — time to unwind a little. 🌸",
+    responses: ["Finally! 🎉", "Sounds good 🍕", "Let's relax 🛌"]
   },
   {
-    text: "Been a while, huh? 🥺 My room is too quiet, my schedule is empty, and I need a Ziyanda laugh right now. ♡",
-    responses: ["Miss chatting too! 🤗", "It's been a bit 😜", "Coming over! 🚀"]
+    text: "It's been a quiet week. Maybe it's time for a good laugh somewhere. 🥺",
+    responses: ["Good idea! 🤗", "Noted 😜", "Already planning it! 🚀"]
   },
   {
-    text: "We should hang out soon 😉 Let's drop whatever we are doing and go get some warm coffee. Thoughts? ☕",
-    responses: ["mocha for me! ☕", "Tea instead 🍵", "You're buying! 💸"]
+    text: "Weekend suggestion: drop whatever you're doing and go get some warm coffee. ☕",
+    responses: ["Mocha please! ☕", "Tea instead 🍵", "Maybe later 💸"]
   },
   {
-    text: "Been a while, huh? 🥺 Let's plan our weekend hangout right now. You can't say no! 🗺️✨",
-    responses: ["Yes, please! 💖", "Let's explore 🔍", "Pick the spot! 🌳"]
+    text: "Weekend planning time — what's on the list? 🗺️✨",
+    responses: ["Let's plan! ✨", "Let's explore 🔍", "Pick a spot! 🌳"]
   },
   {
-    text: "It's the weekend! 🏖️ Are we hanging out, or are you just gonna let me be bored all day?",
-    responses: ["Come get me! 🚗", "Let's stay in 🍕", "Let me think 😜"]
+    text: "It's the weekend! 🏖️ Got any plans, or is it a lazy one?",
+    responses: ["Getting out! 🚗", "Staying in 🍕", "Deciding... 😜"]
   },
   {
-    text: "Weekend warning: Extreme snack-run threat detected! Are you prepared?",
-    responses: ["100% ready! 🤗", "Only with snacks 🍿", "I'm running away! 🏃‍♀️"]
+    text: "Weekend warning: snack supplies running low. Time for a run? 🍿",
+    responses: ["100% ready! 🤗", "Stocking up 🍿", "Later! 🏃"]
   },
   {
-    text: "I was thinking... we make a pretty good team. Let's test that today?",
-    responses: ["Definitely! ✨", "Need to double check 🔍", "We're great together! ✨"]
+    text: "Reminder: a little teamwork goes a long way today. ✨",
+    responses: ["Agreed! ✨", "Noted 🔍", "On it! ✨"]
   },
   {
-    text: "My weekend calendar has a huge slot marked: 'Catching up with my favorite person.' You free?",
-    responses: ["Always free for you! 💖", "Maybe for an hour 🕰️", "Yes, let's go! 🚀"]
+    text: "Weekend calendar slot: 'Catch up on things.' Ready?",
+    responses: ["Always! 🕰️", "Maybe an hour 🕰️", "Let's go! 🚀"]
   },
   {
-    text: "Just a heads up: I've still got that hoodie you left here. Come grab it whenever.",
-    responses: ["It's mine now! 🧥", "I'll think about it 😜", "Bring it over! 🛍️"]
+    text: "Reminder: that hoodie in the closet still needs a wash. 🧥",
+    responses: ["Doing laundry! 🧥", "Later 😜", "On the list! 🛍️"]
   },
   {
-    text: "Weekend rule #1: You have to smile at least ten times. Let me help you with the first one.",
-    responses: ["Already smiling! 😊", "Try harder! 😜", "Aww, thank you! ♡"]
+    text: "Weekend rule #1: smile at least ten times today. Starting now. 🌸",
+    responses: ["Already smiling! 😊", "Trying! 😜", "Noted! ✿"]
   },
   {
-    text: "If we were in an anime, this would be the episode where we go on a cozy sunset coffee run. Thoughts?",
-    responses: ["I'll order the mocha! ☕", "Make it tea 🍵", "Only if you buy! 💸"]
+    text: "Sounds like a good day for a cozy sunset coffee run. Thoughts?",
+    responses: ["Let's do it! ☕", "Make it tea 🍵", "Maybe later! 💸"]
   },
   {
-    text: "Hey Ncumo, I've got a challenge. Who can make the other laugh first? Winner picks the snacks.",
-    responses: ["You're on! 🥊", "I always win! 🥇", "Easiest win ever! 🤗"]
+    text: "Challenge: can today be a genuinely good day? Let's find out.",
+    responses: ["Challenge accepted! 🥊", "Easy win! 🥇", "Let's try! 🤗"]
   },
   {
-    text: "Weekend checklist: Charge phone 🔌, buy snacks 🍿, hang out with my favorite person. How are we doing on the last one?",
-    responses: ["Let's make it happen! 🗓️", "On my way! 🏃‍♀️", "Working on it! 🌸"]
+    text: "Weekend checklist: charge phone 🔌, buy snacks 🍿, take a breather. How's it going?",
+    responses: ["Making progress! 🗓️", "Working on it! 🌸", "Almost done! ✅"]
   },
   {
-    text: "I haven't cooked anything yet. You're going to help me cook when you come over, right? 🍳😋",
-    responses: ["Only if I'm head chef! 👩‍🍳", "I'll do the eating 🍕", "Let's order takeout! 📱"]
+    text: "Reminder: the kitchen still needs some attention today. 🍳",
+    responses: ["Cooking now! 👩‍🍳", "Ordering in 📱", "Later! 🍕"]
   },
   {
-    text: "Weekend mood: counting down the minutes until I catch up with you. What's your status?",
-    responses: ["Same here! ⏳", "Just getting ready 👗", "Excited too! 💭"]
+    text: "Weekend mood check: counting down to some downtime. What's the status?",
+    responses: ["Same here! ⏳", "Getting ready 👗", "Excited! 💭"]
   },
   {
-    text: "Just checked: I'm still looking forward to this weekend. Strange, right? 💓",
-    responses: ["Not strange at all! 🥰", "Me too! 💖", "Smooth talker... 😉"]
+    text: "Still looking forward to this weekend. Anything planned?",
+    responses: ["A few things! 🥰", "Nothing yet 😅", "Working on it! 😉"]
   },
   {
-    text: "Weekend assignment: Ziyanda has to tell me her best joke. No excuses allowed! 🤝",
-    responses: ["Granted! 🤝🌸", "Only if it's a good one ☀️", "Maybe later! 😜"]
+    text: "Weekend assignment: think of your best joke today. No excuses. 🤝",
+    responses: ["Granted! 🤝🌸", "Working on it ☀️", "Later! 😜"]
   },
   {
-    text: "The coffee shop is calling our name. Let's go grab a warm cup together? ☕",
-    responses: ["Let's go! ☕✨", "Only if there are cakes 🍰", "Cozy walk first 🚶‍♀️"]
+    text: "The coffee shop down the road is calling. Worth a visit? ☕",
+    responses: ["Let's go! ☕✨", "Only for cake 🍰", "Cozy walk first 🚶"]
   },
   {
-    text: "We should hang out soon 😉 Also... I haven't done my laundry yet. You're going to help me fold, right? 👕",
-    responses: ["Fold it yourself! 😜", "Only the hoodies 🧥", "I'll supervise! 👑"]
+    text: "Reminder: laundry has been piling up. Time to tackle it? 👕",
+    responses: ["Doing it now! 👕", "Later 😜", "Small pile only 🧺"]
   },
   {
-    text: "I was looking at this weekend and thinking it needs more of us catching up. Let's fix that.",
-    responses: ["Yes, please! 💖", "On my way 🏃‍♀️", "What's the plan? 🗺️"]
+    text: "This weekend could use a bit more catching up on things. Let's fix that.",
+    responses: ["Yes, please! ✨", "On it! 🏃", "What's the plan? 🗺️"]
   },
   {
-    text: "Movie-marathon index is at 100% today. I suggest we take immediate action.",
-    responses: ["Agreed! 🤗", "Wait for me! ⏳", "Only if it's cozy 🌧️"]
+    text: "Movie-marathon index is at 100% today. Consider taking action.",
+    responses: ["Agreed! 🤗", "Soon! ⏳", "Only if it's cozy 🌧️"]
   },
   {
-    text: "My favorite way to spend a weekend is catching up with you. Are we doing that today?",
-    responses: ["Definitely! ✨", "Let's find time 🗺️", "Always! ♡"]
+    text: "A quiet weekend at home sounds pretty good today. Thoughts?",
+    responses: ["Perfect! ✨", "Let's see 🗺️", "Sounds nice! 🌸"]
   },
   {
-    text: "Warning: it's been too long since we caught up this weekend! 🚨",
-    responses: ["Sending a wave! 🤗", "I'll be there soon! 🚗", "Same here! 🥺"]
+    text: "Reminder: it's been a while since a proper catch-up on chores. 🚨",
+    responses: ["Starting now! 🤗", "Soon! 🚗", "Noted! 🥺"]
   },
   {
-    text: "Weekend plan: Do absolutely nothing... together. Sound like a plan?",
+    text: "Weekend plan: do absolutely nothing for a bit. Sound like a plan?",
     responses: ["Sounds perfect! 🛌", "Only with movies 🎬", "Let's go out! 🌳"]
   },
   {
-    text: "I think you owe me a hangout this weekend. I'm here to collect! 💳",
-    responses: ["Deal accepted! 🎟️", "Next weekend! 😜", "Let's go now! 🚀"]
+    text: "A weekend off is well earned. Time to enjoy it. 🎟️",
+    responses: ["Deal accepted! 🎟️", "Next weekend! 😜", "Starting now! 🚀"]
   },
   {
-    text: "Are we matching outfits today, or are you going to let me look less cool than you?",
-    responses: ["Let's match! 👕", "I'm always cooler 😎", "Surprise me! 🎲"]
+    text: "Weekend fit check: any outfit ideas for today?",
+    responses: ["Got it! 👕", "Keeping it simple 😎", "Surprise me! 🎲"]
   },
   {
-    text: "I haven't washed my car yet. You're going to help me splash water, right? 🚗💦",
-    responses: ["Water fight! 🔫", "I'll watch 🍿", "Only if we play music 🎵"]
+    text: "Reminder: the car could use a wash this weekend. 🚗💦",
+    responses: ["Doing it! 🔫", "Later 🍿", "With music on! 🎵"]
   },
   {
-    text: "Just a reminder: weekends are for catching up. Everything else can wait.",
-    responses: ["Exactly! 🌸", "Agreed 💯", "Let's make time! ♡"]
+    text: "Just a reminder: weekends are for resting. Everything else can wait.",
+    responses: ["Exactly! 🌸", "Agreed 💯", "Making time! ✿"]
   },
   {
-    text: "My weekend feels quieter without your jokes. Can you bring some over?",
-    responses: ["On my way! 🏃‍♀️", "Already got some! 😊", "Coming soon! 💖"]
+    text: "A quieter week than usual. Time to recharge a little?",
+    responses: ["Yes please! 🏃", "Already resting! 😊", "Soon! 🌸"]
   },
   {
-    text: "If I got a flower for every time this weekend crossed my mind, I'd have a massive garden. 🌷",
-    responses: ["So sweet! 💐", "Show me! 🔍", "Enkosi! ♡"]
+    text: "Weekend note: flowers make any space feel better. 🌷",
+    responses: ["So true! 💐", "Noted! 🔍", "Enkosi! ✿"]
   },
   {
-    text: "I bought your favorite snacks. I think that means you have to come visit.",
-    responses: ["Snack alert! 🍿", "Best friend ever! 🥰", "Save some for me! 🏃‍♀️"]
+    text: "Snacks are stocked. That usually means good weekend vibes ahead.",
+    responses: ["Snack alert! 🍿", "Nice! 🥰", "Saving some! 🏃"]
   },
   {
-    text: "We should hang out soon 😉 Also... my room is a mess. You're going to help me organize, right? 📦",
-    responses: ["No way! 😜", "Only if we find treasures 🪙", "Clean up first! 🧹"]
+    text: "Reminder: the room could use some organizing today. 📦",
+    responses: ["Not today! 😜", "Finding treasures! 🪙", "Cleaning up! 🧹"]
   },
   {
     text: "Weekend challenge: who can make the coziest cup of hot chocolate? ☕🍫",
-    responses: ["I will! 🥇", "Let's make it together 👩‍🍳", "You make it for me! 🥺"]
+    responses: ["Challenge on! 🥇", "Making it now! 👩‍🍳", "Maybe later! 🥺"]
   },
   {
-    text: "I've had a good story on my mind all morning that I think you should hear.",
-    responses: ["Tell me! 📞💖", "Coming! 🏃‍♀️", "Aww! ♡"]
+    text: "There's a good story worth telling this morning. Care to hear it?",
+    responses: ["Tell me! 📞", "Later! 🏃", "Sure! ✿"]
   },
   {
-    text: "I planned a little sunset walk for us. You coming, right?",
-    responses: ["Love sunset walks! 🌅", "Only if it's warm ☀️", "Yes! 👟"]
+    text: "A sunset walk sounds like a good plan for later. Thoughts?",
+    responses: ["Love sunset walks! 🌅", "If it's warm ☀️", "Yes! 👟"]
   },
   {
-    text: "Weekend checklist item #1: Catch up properly this time. Can we check it off?",
-    responses: ["Yes, please! 🤗", "Soon! 🕰", "Let's do it! 💖"]
+    text: "Weekend checklist item #1: actually rest this time. Can it be checked off?",
+    responses: ["Yes, please! 🤗", "Soon! 🕰", "Let's do it! ✿"]
   },
   {
-    text: "I was looking at the stars and thinking... this weekend needs a good catch-up. 🌌",
-    responses: ["So true! ✨", "Aww! 🥰", "Starry night walk! ♡"]
+    text: "Looking at the stars tonight sounds like a good weekend idea. 🌌",
+    responses: ["So true! ✨", "Sounds nice! 🥰", "Starry night walk! ✿"]
   },
   {
-    text: "I haven't set up the movie list yet. You're going to help me pick, right? 🎬🍿",
+    text: "Movie list still needs picking for tonight. Any preferences? 🎬🍿",
     responses: ["Anime night! 🌸", "Cozy comedy 🍿", "Action movie! 💥"]
   },
   {
-    text: "We should hang out soon 😉 Also... I haven't done the dishes. You're going to help me rinse, right? 🍽️",
-    responses: ["I'll dry! 🧼", "You wash them! 😜", "Let's use paper plates 😂"]
+    text: "Reminder: the dishes are still waiting. 🍽️",
+    responses: ["Doing them! 🧼", "Later 😜", "Paper plates today 😂"]
   },
   {
-    text: "Weekend energy: 100% cozy, 100% ready to catch up. What about you?",
-    responses: ["Same vibe! 🛌", "Excited! 🚀", "Enkosi! ♡"]
+    text: "Weekend energy: 100% cozy, 100% ready to recharge. What about you?",
+    responses: ["Same vibe! 🛌", "Excited! 🚀", "Enkosi! ✿"]
   },
   {
-    text: "We should hang out soon 😉 Also... I haven't watered the plants. You're going to help me garden, right? 🪴",
-    responses: ["Only if I get dirty 🌱", "I'll talk to the plants 🗣️", "Water fight instead! 💦"]
+    text: "Reminder: the plants still need watering. 🪴",
+    responses: ["On it! 🌱", "Talking to them 🗣️", "Getting the hose! 💦"]
   }
 ];
 
@@ -703,13 +695,13 @@ function evaluateWeatherAlerts(data) {
   const rainProbTomorrow = data.daily.precipitation_probability_max[1];
   
   if (rainProbToday > 40) {
-    injectAlert("🌧️", `It might rain today in Commercia, Midrand (Probability: ${rainProbToday}%). Make sure you carry an umbrella, Ncumo! ☔`);
+    injectAlert("🌧️", `It might rain today in Commercia, Midrand (Probability: ${rainProbToday}%). Make sure you carry an umbrella! ☔`);
   }
   if (rainProbTomorrow > 50) {
     injectAlert("👕", "Just checked the forecast — rain is coming tomorrow. Better do your laundry today while the sun is out! ☀️👕");
   }
   if (rainProbToday <= 15 && maxTemp > 26) {
-    injectAlert("☀️", `It's going to be warm and beautiful today (${maxTemp}°C). Have a lovely walk, Ncumo!`);
+    injectAlert("☀️", `It's going to be warm and beautiful today (${maxTemp}°C). Have a lovely walk!`);
   }
   
   updateWorkAlerts();
@@ -767,14 +759,14 @@ function updateWaterAlerts(data) {
     const maxTemp = data.daily.temperature_2m_max[0];
     const rainProb = data.daily.precipitation_probability_max[0];
     if (maxTemp > 28) {
-      injectAlert("🚰", `Water Warning (Rabie Ridge Reservoir): Reservoir levels are stable. Due to high temperatures (${maxTemp}°C), demand is high. Please use water sparingly in Commercia, Ncumo! 💧`);
+      injectAlert("🚰", `Water Warning (Rabie Ridge Reservoir): Reservoir levels are stable. Due to high temperatures (${maxTemp}°C), demand is high. Please use water sparingly in Commercia! 💧`);
     } else if (rainProb > 50) {
       injectAlert("🚰", `Water Status (Rabie Ridge Tower): Pressure is stable and operations are normal. Stay warm and keep hydrated today! 🌧️💧`);
     } else {
       injectAlert("🚰", `Water Status (Rabie Ridge Reservoir): Flow is steady, pressure is normal in Commercia. Keep drinking water and stay glowing! 💧✨`);
     }
   } else {
-    injectAlert("🚰", `Water Status (Rabie Ridge Reservoir): Supply is normal for Commercia. Remember to drink water and take care of yourself, Ncumo! 💧`);
+    injectAlert("🚰", `Water Status (Rabie Ridge Reservoir): Supply is normal for Commercia. Remember to drink water and take care of yourself! 💧`);
   }
 }
 
@@ -804,13 +796,13 @@ function updateWorkAlerts() {
   const hours = now.getHours();
   
   if (day === 0) {
-    injectAlert("💼", "Heads up Ncumo, just a reminder that I work early tomorrow (Monday, 06:00 - 18:00) so I might be offline during the day, but I'll text you the moment I finish! 💼");
+    injectAlert("💼", "Reminder: work starts early tomorrow (Monday, 06:00 - 18:00), so things might be quiet during the day. 💼");
   }
   else if (day === 4) {
-    injectAlert("💼", "Heads up Ncumo, just a reminder that I work early tomorrow (Friday, 06:00 - 18:00). Have a beautiful day ahead! 💼🌸");
+    injectAlert("💼", "Reminder: work starts early tomorrow (Friday, 06:00 - 18:00). Have a beautiful day ahead! 💼🌸");
   }
   else if ((day === 1 || day === 5) && (hours >= 6 && hours < 18)) {
-    injectAlert("💼", "I'm currently at work (06:00 - 18:00), counting down the hours until I can message you! 💼⏳");
+    injectAlert("💼", "Currently at work (06:00 - 18:00), counting down the hours! 💼⏳");
   }
 }
 
@@ -1498,7 +1490,7 @@ document.querySelectorAll(".nav__links a").forEach(link => {
   });
 });
 
-// Wax Envelope Open Letter Toggler
+// Wax Envelope Open Note Toggler
 const envelope = document.getElementById("loveLetterEnvelope");
 envelope.addEventListener("click", (e) => {
   e.stopPropagation();
@@ -1508,95 +1500,6 @@ envelope.addEventListener("click", (e) => {
     spawnSparklesAt(window.innerWidth / 2, window.innerHeight / 2, 12);
   }
 });
-
-// =====================================================
-// Date Tickers & Anniversary Counters
-// =====================================================
-const ANNIVERSARY = new Date(2026, 5, 5); // June 5, 2026
-const HER_BIRTHDAY = new Date(2026, 0, 29); // Jan 29
-const MY_BIRTHDAY = new Date(2026, 11, 8); // Dec 8
-
-function updateAnniversaryProgress(daysElapsed) {
-  const monthProgress = (daysElapsed % 30.4) / 30.4;
-  const yearProgress = (daysElapsed % 365.25) / 365.25;
-  
-  const mCircle = document.getElementById("monthProgressCircle");
-  const yCircle = document.getElementById("yearProgressCircle");
-  const circ = 2 * Math.PI * 36;
-  
-  if (mCircle && yCircle) {
-    mCircle.style.strokeDasharray = `${circ} ${circ}`;
-    mCircle.style.strokeDashoffset = circ - (monthProgress * circ);
-    
-    yCircle.style.strokeDasharray = `${circ} ${circ}`;
-    yCircle.style.strokeDashoffset = circ - (yearProgress * circ);
-  }
-}
-
-function updateTogether() {
-  let diff = Date.now() - ANNIVERSARY.getTime();
-  if (diff < 0) diff = 0;
-  const secs = Math.floor(diff / 1000);
-  const daysVal = Math.floor(secs / 86400);
-  
-  document.getElementById("cDays").textContent = daysVal;
-  document.getElementById("cHours").textContent = Math.floor((secs % 86400) / 3600);
-  document.getElementById("cMins").textContent = Math.floor((secs % 3600) / 60);
-  document.getElementById("cSecs").textContent = secs % 60;
-  
-  updateAnniversaryProgress(daysVal);
-}
-updateTogether();
-setInterval(updateTogether, 1000);
-
-function updateBirthdays() {
-  const now = new Date();
-  let nextHer = new Date(now.getFullYear(), HER_BIRTHDAY.getMonth(), HER_BIRTHDAY.getDate());
-  let nextMine = new Date(now.getFullYear(), MY_BIRTHDAY.getMonth(), MY_BIRTHDAY.getDate());
-
-  if (now > nextHer) nextHer.setFullYear(now.getFullYear() + 1);
-  if (now > nextMine) nextMine.setFullYear(now.getFullYear() + 1);
-
-  const daysHer = Math.ceil((nextHer - now) / 86400000);
-  const daysMine = Math.ceil((nextMine - now) / 86400000);
-
-  document.getElementById("herBirthday").textContent = daysHer;
-  document.getElementById("myBirthday").textContent = daysMine;
-}
-updateBirthdays();
-setInterval(updateBirthdays, 60000);
-
-document.getElementById("cardHerBday").addEventListener("click", () => {
-  playSynthNote(523, 'sine', 0.25, 783);
-  modalText.textContent = "29 January — An Aquarius princess who lights up the whole room! 🌟";
-  modal.hidden = false;
-});
-document.getElementById("cardMyBday").addEventListener("click", () => {
-  playSynthNote(349, 'sine', 0.25, 523);
-  modalText.textContent = "8 December — A Sagittarius guy who is incredibly lucky to have you. ♐";
-  modal.hidden = false;
-});
-
-// Weekend Countdown
-const weekendText = document.getElementById("weekendText");
-function updateWeekend() {
-  const now = new Date();
-  const day = now.getDay();
-  if (day === 6 || day === 0) {
-    weekendText.innerHTML = "It's the weekend — you're mine right now 💖";
-    return;
-  }
-  const next = new Date(now);
-  next.setDate(now.getDate() + ((6 - day + 7) % 7));
-  next.setHours(0, 0, 0, 0);
-  const diff = next - now;
-  const d = Math.floor(diff / 86400000);
-  const h = Math.floor((diff % 86400000) / 3600000);
-  const m = Math.floor((diff % 3600000) / 60000);
-  weekendText.textContent = `${d}d ${h}h ${m}m until I see you again, Ziyanda ♡`;
-}
-updateWeekend();
-setInterval(updateWeekend, 30000);
 
 // =====================================================
 // Seeded Dynamic Populators (Daily Updates)
@@ -1671,40 +1574,40 @@ function populateEnvelopeLetter() {
   const day = now.getDate();
   const month = now.getMonth();
   
-  let letterTitle = "Dearest Ziyanda,";
+  let letterTitle = "A Little Note,";
   let letterText = "";
 
   if (month === 0 && day === 29) {
-    letterTitle = "Happy Birthday Ziyanda! 🎂";
-    letterText = "Happy Birthday to a wonderful person! Today is all about celebrating you, my Ziyanda. You deserve all the joy and smiles in the world. I'm so lucky to know you. Enkosi! 🎂💖<br><br>— Your friend ♡";
+    letterTitle = "Happy Birthday! 🎂";
+    letterText = "Happy Birthday to whoever's reading this today! Hope your day is full of joy and good moments. Enkosi! 🎂✿<br><br>— Ncumolwakhe";
   } else if (month === 11 && day === 8) {
     letterTitle = "Happy Birthday to Me! 🎉";
-    letterText = "It's my birthday today, but one of the best gifts is having you in my life. Thank you for making my world so much brighter. I'm so glad we get to celebrate these days. ♡<br><br>— Your friend ♡";
+    letterText = "It's my birthday today. Grateful for the small good things that make up a good year. Here's to more of them. ✿<br><br>— Ncumolwakhe";
   } else if (day === 5) {
     letterTitle = "Happy Monthly Milestone! ✨";
-    letterText = "Happy Monthly Milestone, Ncumo! Another month of good hangouts, endless laughs, and growing friendship. Here's to many more. Enkosi, Ncumolwakhe! ✨<br><br>— Your friend ♡";
+    letterText = "Another month gone by — a good excuse to notice the small wins. Here's to many more. Enkosi! ✨<br><br>— Ncumolwakhe";
   } else {
     const seed = getDaySeed();
     const rnd = createPRNG(seed + 999);
     const letterOpenings = [
-      "This little corner of the internet is dedicated to your beautiful smile. Thank you for filling my weekends with laughter and making the weekdays worth grinding for.",
-      "Just wanted to write you a tiny reminder today of how much you mean to me. You bring so much color and warmth to my life.",
-      "Every single day since we became friends, I've been grateful for it. You are a real source of light and a safe space to talk to.",
-      "No matter how tough or busy the weekdays get, thinking of you always brings a smile to my face. I'm so lucky to know you."
+      "This little corner of the internet is a work in progress, built one weekend at a time.",
+      "Just a small reminder today: there's always something worth being grateful for.",
+      "Every single day is a chance to notice something good.",
+      "No matter how busy the weekdays get, there's usually a small reason to smile."
     ];
     const letterBodies = [
-      " You are irreplaceable, and I cherish every little thing about you—your laugh, your kindness, and the way you see the world.",
-      " I hope this day brings you as much happiness as you bring to the people around you every single day.",
-      " I'm constantly counting down the days until the weekend, so I can catch up with you and make you laugh.",
-      " You make everything feel so special. I'm looking forward to all our future hangouts and adventures together."
+      " Small, good habits add up to a good life — a laugh, a bit of kindness, a fresh perspective.",
+      " Hope this day brings a bit of happiness, wherever you're reading this from.",
+      " Counting down the days until the weekend is a small ritual worth keeping.",
+      " Little things make everything feel special — worth noticing more often."
     ];
     const letterClosings = [
-      "<br><br>Enkosi, Ncumolwakhe! ♡<br><br>— Your friend ♡",
-      "<br><br>Grateful for you, Ncumo! 💖<br><br>— Your friend ♡",
-      "<br><br>Always in your corner! ✨<br><br>— Your friend ♡",
-      "<br><br>With appreciation, Ncumo! 🌸<br><br>— Your friend ♡"
+      "<br><br>Enkosi! ✿<br><br>— Ncumolwakhe",
+      "<br><br>Grateful for the small stuff. 🌸<br><br>— Ncumolwakhe",
+      "<br><br>Take care! ✨<br><br>— Ncumolwakhe",
+      "<br><br>With appreciation. 🌸<br><br>— Ncumolwakhe"
     ];
-    
+
     const opening = letterOpenings[Math.floor(rnd() * letterOpenings.length)];
     const body = letterBodies[Math.floor(rnd() * letterBodies.length)];
     const closing = letterClosings[Math.floor(rnd() * letterClosings.length)];
@@ -1722,45 +1625,6 @@ function setupDailyQuote() {
   if (quoteEl) {
     quoteEl.textContent = `${q.text} — ${q.author}`;
   }
-}
-
-function populateTimeline() {
-  const timeline = document.querySelector(".timeline");
-  if (!timeline) return;
-  const items = timeline.querySelectorAll(".timeline__item");
-  
-  const diff = Date.now() - ANNIVERSARY.getTime();
-  const daysVal = Math.max(0, Math.floor(diff / 86400000));
-  
-  const existingDyn = timeline.querySelector(".timeline__item--dynamic");
-  if (existingDyn) existingDyn.remove();
-  
-  const dynNode = document.createElement("div");
-  dynNode.className = "timeline__item timeline__item--dynamic reveal visible";
-  
-  const seed = getDaySeed();
-  const rnd = createPRNG(seed + 8888);
-  const milestoneNotes = [
-    "Laughing together and making every second count.",
-    "Another good day in our story. Every page is better with a good friend.",
-    "Days are passing, and my appreciation for our friendship keeps growing.",
-    "So grateful for every laugh we shared and every plan we are building.",
-    "Watching our future plans come together day by day."
-  ];
-  const noteText = milestoneNotes[Math.floor(rnd() * milestoneNotes.length)];
-  const todayStr = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
-
-  dynNode.innerHTML = `
-    <div class="timeline__node"></div>
-    <div class="timeline__content">
-      <span class="timeline__date">${todayStr} (Day ${daysVal})</span>
-      <h4 class="timeline__title">Today's Note 💖</h4>
-      <p class="timeline__desc">${noteText}</p>
-    </div>
-  `;
-  
-  const lastItem = items[items.length - 1];
-  timeline.insertBefore(dynNode, lastItem);
 }
 
 function updateGreetingMessage() {
@@ -1783,11 +1647,11 @@ function updateGreetingMessage() {
     const diffDays = Math.floor(diffHours / 24);
     
     if (diffDays >= 7) {
-      longingMsg = `It's been a whole week (${diffDays} days) since you were last here... 😭 Good to see you again, Ncumo! Missed catching up. ♡`;
+      longingMsg = `It's been a whole week (${diffDays} days) since your last visit... Good to see you again! ✿`;
     } else if (diffDays >= 3) {
-      longingMsg = `It's been ${diffDays} days since you last visited... 🥺 Glad you're back, I was hoping you'd swing by! ♡`;
+      longingMsg = `It's been ${diffDays} days since your last visit... Glad you're back! ✿`;
     } else if (diffHours >= 24) {
-      longingMsg = `Been a day since your last visit... 🥺 Glad you're back today, Ncumo! ♡`;
+      longingMsg = `Been a day since your last visit... Glad you're back today! ✿`;
     }
   }
   
@@ -1801,16 +1665,16 @@ function updateGreetingMessage() {
     let msg = "";
     const isWeekend = (day === 0 || day === 6);
     if (isWeekend) {
-      msg = "Shouldn't you be with me? 😉";
+      msg = "Happy weekend! Hope it's a good one. ✿";
     } else {
       if (hours >= 20) {
-        msg = "It's late, Ncumo. Go get some rest. 🌙";
+        msg = "It's late — go get some rest. 🌙";
       } else if (hours < 5) {
-        msg = "Go back to sleep, Ncumo. Dreamland is waiting for you. 🥱💤";
+        msg = "Go back to sleep. Dreamland is waiting for you. 🥱💤";
       } else if (hours === 5) {
         msg = "Up early? Good morning! ☀️";
       } else if (hours === 6) {
-        msg = "Good morning, Ncumolwakhe. Hope you woke up with a smile today! ☀️🌸";
+        msg = "Good morning! Hope you woke up with a smile today! ☀️🌸";
       } else {
         msg = "Have a good day! Go crush it. 🚀✨";
       }
@@ -1826,7 +1690,6 @@ populateAdjectives();
 populateLoveNotes();
 populateEnvelopeLetter();
 setupDailyQuote();
-populateTimeline();
 updateGreetingMessage();
 fetchWeatherAndSetTheme();
 initWebGLHeart();
@@ -2218,54 +2081,6 @@ fortuneDrawer.addEventListener("click", () => {
 });
 
 // =====================================================
-// Game 4: One Important Question
-// =====================================================
-const yesBtn = document.getElementById("yesBtn");
-const noBtn = document.getElementById("noBtn");
-const questionBtns = document.getElementById("questionBtns");
-const questionText = document.getElementById("questionText");
-const yesWin = document.getElementById("yesWin");
-const NO_TAUNTS = ["No", "Are you sure?", "Really?? 🥺", "Think again!", "Nani?! 😳", "No way! ✨", "Excuses... 🌸"];
-let noDodges = 0;
-
-function dodge() {
-  noDodges++;
-  playDodgeSFX();
-  noBtn.classList.add("fleeing");
-  
-  const maxX = questionBtns.clientWidth - noBtn.offsetWidth;
-  const maxY = questionBtns.clientHeight - noBtn.offsetHeight;
-  noBtn.style.left = Math.random() * Math.max(maxX, 0) + "px";
-  noBtn.style.top = Math.random() * Math.max(maxY, 0) + "px";
-  
-  noBtn.textContent = NO_TAUNTS[Math.min(noDodges, NO_TAUNTS.length - 1)];
-  const scaleDodge = Math.max(0.4, 1 - noDodges * 0.1);
-  const scaleYes = 1 + Math.min(noDodges, 8) * 0.12;
-  
-  noBtn.style.transform = `scale(${scaleDodge})`;
-  yesBtn.style.transform = `scale(${scaleYes})`;
-  
-  if (noDodges >= 7) {
-    noBtn.remove();
-  }
-}
-
-noBtn.addEventListener("mouseenter", dodge);
-noBtn.addEventListener("click", dodge);
-noBtn.addEventListener("touchstart", (e) => {
-  e.preventDefault();
-  dodge();
-});
-
-yesBtn.addEventListener("click", () => {
-  questionText.textContent = "💖💖💖";
-  questionBtns.hidden = true;
-  yesWin.hidden = false;
-  unlockAchievement("question_yes");
-  setTimeout(triggerWinConfetti, 50);
-});
-
-// =====================================================
 // Cassette Player Controller
 // =====================================================
 const cassettePlay = document.getElementById("cassettePlay");
@@ -2347,10 +2162,10 @@ if (heartTarget) {
 }
 
 // =====================================================
-// Konami Code Easter Egg (L-O-V-E)
+// Secret Word Easter Egg (Y-A-Y)
 // =====================================================
 let eggInput = "";
-const targetWord = "love";
+const targetWord = "yay";
 document.addEventListener("keydown", (e) => {
   eggInput += e.key.toLowerCase();
   if (eggInput.length > targetWord.length) {
@@ -2362,7 +2177,7 @@ document.addEventListener("keydown", (e) => {
     playWinFanfare();
     for (let i = 0; i < 40; i++) {
       setTimeout(() => {
-        spawnSparklesAt(Math.random() * window.innerWidth, Math.random() * window.innerHeight, 5, ["💖", "💗", "✨", "🌸"]);
+        spawnSparklesAt(Math.random() * window.innerWidth, Math.random() * window.innerHeight, 5, ["🎉", "✨", "🌸", "🌟"]);
       }, i * 80);
     }
   }
@@ -2999,23 +2814,6 @@ const idx = xp + yp * width;
 // =====================================================
 // Apology Section: "I forgive you" button
 // =====================================================
-const forgiveBtn = document.getElementById("forgiveBtn");
-const forgiveReply = document.getElementById("forgiveReply");
-if (forgiveBtn) {
-  forgiveBtn.addEventListener("click", () => {
-    forgiveReply.hidden = false;
-    forgiveBtn.disabled = true;
-    forgiveBtn.style.opacity = "0.6";
-    forgiveBtn.textContent = "Thank you ♡";
-    if (typeof initAudio === "function") initAudio();
-    if (typeof triggerWinConfetti === "function") triggerWinConfetti();
-    const rect = forgiveBtn.getBoundingClientRect();
-    if (typeof spawnSparklesAt === "function") {
-      spawnSparklesAt(rect.left + rect.width / 2, rect.top, 14, ["💖", "🌹", "🌸", "✨", "💐"]);
-    }
-  });
-}
-
 // =====================================================
 // 🎓 Calculus Academy Portal Logic
 // =====================================================
@@ -3024,12 +2822,12 @@ const CALC_MODULES = [
   {
     step: 1,
     title: "1. Limits 🔗",
-    conceptTitle: "The Heartbeat of Limits: Infinite Closeness",
-    conceptText: "In Calculus, a limit is the value a function approaches as the input gets closer and closer to some number. Even if the function is undefined at that exact spot, the limit can still exist! It is about the journey, not the destination. Just like how two hearts can align closer and closer until they beat as one.",
+    conceptTitle: "The Idea of Limits: Infinite Closeness",
+    conceptText: "In Calculus, a limit is the value a function approaches as the input gets closer and closer to some number. Even if the function is undefined at that exact spot, the limit can still exist! It is about the journey, not the destination.",
     realWorldTitle: "GPS Velocity tracking",
     realWorldText: "To calculate your exact speed at a specific instant (instantaneous velocity), a GPS device cannot divide by zero elapsed time. Instead, it takes the limit of your average velocity as the time interval approaches 0.",
     mathFormula: "\\lim_{x \\to 3} \\frac{x^2 - 9}{x - 3} = 6",
-    chalkMotivation: "Limits are like standing on a balcony together, leaning in closer and closer... but never stepping off. Mathematics is all about finding the beauty in closeness.",
+    chalkMotivation: "Limits are about getting closer and closer to a value without ever quite stepping past it. Mathematics is all about finding the beauty in precision.",
     challengeQuestion: "Evaluate the limit algebraically:<br><strong>$$\\lim_{x \\to 3} \\frac{x^2 - 9}{x - 3}$$</strong>",
     correctAnswer: "6",
     hints: [
@@ -3662,7 +3460,7 @@ function initCalculusAcademy() {
           if (typeof triggerWinConfetti === "function") triggerWinConfetti();
           gatewayFeedback.hidden = false;
           gatewayFeedback.className = "chalk-feedback success";
-          gatewayFeedback.innerHTML = "Correct! Welcome to the sanctuary, Ncumo! 💖";
+          gatewayFeedback.innerHTML = "Correct! Welcome to the sanctuary! ✨";
           
           setTimeout(() => {
             gatewayModal.hidden = true;
@@ -3672,7 +3470,7 @@ function initCalculusAcademy() {
           playChalkSound("click");
           gatewayFeedback.hidden = false;
           gatewayFeedback.className = "chalk-feedback error";
-          gatewayFeedback.textContent = "Almost! Try again, Ncumo, or reveal the hint if you need a guide! 🌸";
+          gatewayFeedback.textContent = "Almost! Try again, or reveal the hint if you need a guide! 🌸";
         }
       });
     });
@@ -4641,7 +4439,7 @@ function initCalculusAcademy() {
     if (ans === mod.correctAnswer) {
       feedbackText.hidden = false;
       feedbackText.className = "chalk-feedback success";
-      feedbackText.innerHTML = `Amazing job, Ncumo! You got it right! 🌟<br>Derivative checked and verified.`;
+      feedbackText.innerHTML = `Amazing job! You got it right! 🌟<br>Derivative checked and verified.`;
       
       calcState.completed[calcState.activeStep - 1] = true;
       localStorage.setItem("ncumoCalcCompleted", JSON.stringify(calcState.completed));
@@ -4665,7 +4463,7 @@ function initCalculusAcademy() {
       playChalkSound("click");
       feedbackText.hidden = false;
       feedbackText.className = "chalk-feedback error";
-      feedbackText.textContent = "Almost there! Double-check your math, Ncumo, or reveal a hint if you need a guide! 🌸";
+      feedbackText.textContent = "Almost there! Double-check your math, or reveal a hint if you need a guide! 🌸";
       showSolutionBtn.hidden = false;
     }
   });

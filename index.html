@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ncumolwakhe ♡ For Ziyanda</title>
+  <title>Ncumolwakhe</title>
 
   <!-- SEO & Social Meta -->
-  <meta name="description" content="A warm, anime-themed digital sanctuary built for a cherished friend, Ziyanda." />
+  <meta name="description" content="A warm, anime-inspired personal site with interactive 3D scenes, mini-games, and a calculus study corner." />
   <meta name="theme-color" content="#ffb7c5" />
   
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -37,15 +37,13 @@
     <a class="nav__logo" href="#home">Ncumo</a>
     <ul class="nav__links" id="navLinks">
       <li><a href="#home">Home</a></li>
-      <li><a href="#about">Her</a></li>
-      <li><a href="#sorry">I'm Sorry</a></li>
-      <li><a href="#story">Our Story</a></li>
+      <li><a href="#about">About</a></li>
       <li><a href="#dimensionalSanctuary">3D Sanctuary</a></li>
       <li><a href="#notes">Notes</a></li>
       <li><a href="#games">Games</a></li>
       <li><a href="#calculusGateSection">Calculus 🎓</a></li>
       <li><a href="#bucket">Bucket List</a></li>
-      <li><a href="#moments">Moments</a></li>
+      <li><a href="#moments">Gallery</a></li>
     </ul>
     <div class="nav__actions">
       <div class="theme-selector">
@@ -60,16 +58,16 @@
 
   <!-- ===== Hero Header ===== -->
   <header class="hero" id="home">
-    <div class="hero__decor hero__decor--left">Sthandwa</div>
-    <div class="hero__decor hero__decor--right">Sam</div>
+    <div class="hero__decor hero__decor--left">Est.</div>
+    <div class="hero__decor hero__decor--right">2026</div>
 
     <div class="hero__visual reveal" aria-hidden="true">
       <canvas id="webglCanvas"></canvas>
     </div>
 
-    <p class="hero__eyebrow reveal">For Ziyanda ♡</p>
+    <p class="hero__eyebrow reveal">Welcome</p>
     <h1 class="hero__title reveal">Ncumolwakhe</h1>
-    <p class="hero__subtitle reveal">Ziyanda... my Ncumo. A little anime-inspired digital garden, built with care — just for you.</p>
+    <p class="hero__subtitle reveal">A little anime-inspired digital garden — interactive 3D scenes, mini-games, and a calculus study corner, built with care.</p>
     
     <!-- Dynamic Greeting Bubble -->
     <div class="hero__greeting-bubble reveal" id="heroGreeting" style="margin-top: 1.5rem; margin-bottom: 1.5rem;" hidden>
@@ -78,155 +76,37 @@
 
     <!-- Daily Notification glass panel -->
     <div class="glass-panel daily-status reveal" id="dailyStatusPanel">
-      <h3 class="daily-status__title">📢 Daily Notices for Ncumo</h3>
+      <h3 class="daily-status__title">📢 Daily Notices</h3>
       <div class="status-alerts" id="statusAlerts">
         <!-- Weather, Loadshedding and Work hours notices injected here -->
       </div>
     </div>
     
-    <a href="#notes" class="btn reveal" style="margin-top: 1.5rem;">Open Your Notes ✉</a>
-    
+    <a href="#notes" class="btn reveal" style="margin-top: 1.5rem;">Open Notes ✉</a>
+
     <div class="hero__hearts" aria-hidden="true">
-      <span>💖</span><span>🌸</span><span>✨</span>
+      <span>🌸</span><span>✨</span><span>🌷</span>
     </div>
   </header>
 
-  <!-- ===== Apology Section ===== -->
-  <section class="sorry" id="sorry">
-    <div class="glass-panel sorry__card reveal">
-      <span class="sorry__icon">🥺💐</span>
-      <h2 class="sorry__title">I'm Really Sorry, Ziyanda</h2>
-      <p class="sorry__lead">This morning I made a mistake — I rushed off without checking in and saying a proper goodbye. I'm sorry about that, Ncumo. 💔</p>
-
-      <div class="sorry__letter">
-        <p>You deserve to start every day feeling appreciated, and this morning I skipped that little moment that matters. I was rushing, but that's no excuse — you should always come first.</p>
-        <p>Having you in my life is something I never want to take for granted. I promise to do better: <strong>no more rushing off without a proper hello and a "take care," no matter how early or how busy I am.</strong></p>
-        <p>You're someone I think about often, and I don't want a rushed morning to change that. Forgive me — I'll make it up to you this weekend, and every day after. 🌹</p>
-      </div>
-
-      <p class="sorry__signature">With gratitude and care —<br><span>TEARN ♡</span></p>
-
-      <button class="btn sorry__btn" id="forgiveBtn">I forgive you ♡</button>
-      <p class="sorry__reply" id="forgiveReply" hidden>Thank you. I promise to never let that morning happen again. 💖🌸</p>
-    </div>
-  </section>
-
-  <!-- ===== About Her Section ===== -->
+  <!-- ===== About Section ===== -->
   <section class="about" id="about">
     <div class="glass-panel about__card reveal">
       <span class="about__badge">✿</span>
-      <h2>She is...</h2>
+      <h2>Today's words</h2>
       <div class="about__words">
         <!-- Will be dynamically populated by date seed -->
       </div>
       <p>
-        <em>Ncumolwakhe</em> — her smile. And what a perfect name,
-        because your smile is a big part of why this page exists.
-        <em>Ziyanda</em> — growing, increasing. Just like the
-        appreciation I have for you, weekend after weekend.
+        <em>Ncumolwakhe</em> — a smile. A small anime-inspired corner
+        of the internet, built to be a calm, playful place to visit —
+        with a few interactive scenes, games, and a study corner tucked inside.
       </p>
-      
+
       <!-- Interactive Anime Quote Panel -->
       <div class="about__quote-bubble">
         <p class="about__quote-text" id="animeQuote">"I wanted to tell you... wherever you are in the world, I'll search for you." — Your Name</p>
         <button class="about__quote-btn" id="nextQuote">Draw Another Card 🎴</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== Our Story Section ===== -->
-  <section class="story" id="story">
-    <h2 class="section-title reveal">Our Story</h2>
-    <p class="section-sub reveal">It began on the 5th of June, 2026 ♡</p>
-
-    <!-- Anniversary Live Tickers -->
-    <div class="story__counters reveal">
-      <div class="counter">
-        <span class="counter__num" id="cDays">0</span>
-        <span class="counter__label">Days</span>
-      </div>
-      <div class="counter">
-        <span class="counter__num" id="cHours">0</span>
-        <span class="counter__label">Hours</span>
-      </div>
-      <div class="counter">
-        <span class="counter__num" id="cMins">0</span>
-        <span class="counter__label">Minutes</span>
-      </div>
-      <div class="counter">
-        <span class="counter__num" id="cSecs">0</span>
-        <span class="counter__label">Seconds</span>
-      </div>
-    </div>
-
-    <!-- Monthly/Yearly Anniversary Progress Rings -->
-    <div class="story__progress-container reveal">
-      <div class="progress-ring-box">
-        <svg class="progress-ring-svg" width="90" height="90">
-          <circle class="progress-ring-circle-bg" cx="45" cy="45" r="36"/>
-          <circle class="progress-ring-circle" id="monthProgressCircle" cx="45" cy="45" r="36"/>
-        </svg>
-        <span class="progress-ring-label">Month Progress</span>
-      </div>
-      <div class="progress-ring-box">
-        <svg class="progress-ring-svg" width="90" height="90">
-          <circle class="progress-ring-circle-bg" cx="45" cy="45" r="36"/>
-          <circle class="progress-ring-circle" id="yearProgressCircle" cx="45" cy="45" r="36"/>
-        </svg>
-        <span class="progress-ring-label">Year Progress</span>
-      </div>
-    </div>
-
-    <!-- Weekend Counter -->
-    <div class="story__weekend reveal">
-      <h3 class="story__weekend-title">⏳ Weekend Countdown</h3>
-      <p class="story__weekend-text" id="weekendText">Loading our countdown...</p>
-      <p class="story__weekend-sub">Weekdays are for grinding. Weekends are for <em>us</em>.</p>
-    </div>
-
-    <!-- Birthday Section -->
-    <div class="birthday-section reveal">
-      <div class="birthday-card" id="cardHerBday">
-        <div class="birthday-card__title">🎂 Her Birthday</div>
-        <div class="birthday-card__days" id="herBirthday">0</div>
-        <p style="font-size: 0.7rem; color: var(--berry); font-weight: 500; margin-top: 0.5rem;">29 January</p>
-      </div>
-      <div class="birthday-card" id="cardMyBday">
-        <div class="birthday-card__title">🎉 My Birthday</div>
-        <div class="birthday-card__days" id="myBirthday">0</div>
-        <p style="font-size: 0.7rem; color: var(--berry); font-weight: 500; margin-top: 0.5rem;">8 December</p>
-      </div>
-    </div>
-
-    <!-- Anime Roadmap Timeline -->
-    <div class="timeline">
-      <div class="timeline__path"></div>
-      
-      <div class="timeline__item reveal">
-        <div class="timeline__node"></div>
-        <div class="timeline__content">
-          <span class="timeline__date">05 Jun 2026</span>
-          <h4 class="timeline__title">The First Spark ✨</h4>
-          <p class="timeline__desc">Our paths crossed, and the stars aligned. The day our story officially began.</p>
-        </div>
-      </div>
-      
-      <div class="timeline__item reveal">
-        <div class="timeline__node"></div>
-        <div class="timeline__content">
-          <span class="timeline__date">11 Jun 2026</span>
-          <h4 class="timeline__title">Interactive Space 🌸</h4>
-          <p class="timeline__desc">A little garden page created to keep our laughs, memories, and weekend plans alive.</p>
-        </div>
-      </div>
-      
-      <div class="timeline__item reveal">
-        <div class="timeline__node"></div>
-        <div class="timeline__content">
-          <span class="timeline__date">Future</span>
-          <h4 class="timeline__title">Next Chapters 💍</h4>
-          <p class="timeline__desc">Fly-away plans, sunset coffee dates, and matching memories waiting to be written.</p>
-        </div>
       </div>
     </div>
   </section>
@@ -244,7 +124,7 @@
             <div class="cube3d">
               <div class="cube3d__face cube3d__face--front">🌸</div>
               <div class="cube3d__face cube3d__face--back">🌷</div>
-              <div class="cube3d__face cube3d__face--left">💖</div>
+              <div class="cube3d__face cube3d__face--left">✨</div>
               <div class="cube3d__face cube3d__face--right">✨</div>
               <div class="cube3d__face cube3d__face--top">☕</div>
               <div class="cube3d__face cube3d__face--bottom">💌</div>
@@ -276,49 +156,49 @@
         <div class="scroll3d-card">
           <span class="dimension-num">01 / 10</span>
           <h3>Chapter 1: Where It Started</h3>
-          <p>A WebGL raymarched glass heart, catching and bending light — the way a story starts as something small and clear before it grows into everything else. Drag the mouse to turn it and see it from another angle.</p>
+          <p>A WebGL raymarched glass heart, catching and bending light — a small, clear shape that grows into something bigger the longer you look at it. Drag the mouse to turn it and see it from another angle.</p>
         </div>
       </div>
       <div class="scroll3d-panel" data-dimension="2">
         <div class="scroll3d-card">
           <span class="dimension-num">02 / 10</span>
           <h3>Chapter 2: All the Little Moments</h3>
-          <p>Thousands of stardust particles swirling together into one shape — every small conversation and shared moment adding up to something bigger than any one of them alone.</p>
+          <p>Thousands of stardust particles swirling together into one shape — small pieces adding up to something bigger than any one of them alone.</p>
         </div>
       </div>
       <div class="scroll3d-panel" data-dimension="3">
         <div class="scroll3d-card">
           <span class="dimension-num">03 / 10</span>
           <h3>Chapter 3: Memory Carousel</h3>
-          <p>A floating 3D cube turning through snapshots of memories. Move the mouse and watch the perspective shift — the same moments, seen a little differently each time you look back.</p>
+          <p>A floating 3D cube turning through a set of snapshots. Move the mouse and watch the perspective shift — the same images, seen a little differently each time you look back.</p>
         </div>
       </div>
       <div class="scroll3d-panel" data-dimension="4">
         <div class="scroll3d-card">
           <span class="dimension-num">04 / 10</span>
           <h3>Chapter 4: The Shape Underneath</h3>
-          <p>A wireframe knot, drawn in pure mathematical lines — what's left when you strip everything back to structure: the plain, steady shape of a friendship that held up over time.</p>
+          <p>A wireframe knot, drawn in pure mathematical lines — what's left when you strip everything back to structure: a plain, steady shape that holds together over time.</p>
         </div>
       </div>
       <div class="scroll3d-panel" data-dimension="5">
         <div class="scroll3d-card">
           <span class="dimension-num">05 / 10</span>
-          <h3>Chapter 5: Late-Night Talks</h3>
-          <p>An ASCII terminal rendering a heart in real-time characters — a nod to the easy, unfiltered conversations that happen late at night, low-key and a little old-school.</p>
+          <h3>Chapter 5: Low-Key and Old-School</h3>
+          <p>An ASCII terminal rendering a heart in real-time characters — a nod to old-school text-mode computing, low-key and a little nostalgic.</p>
         </div>
       </div>
       <div class="scroll3d-panel" data-dimension="6">
         <div class="scroll3d-card">
           <span class="dimension-num">06 / 10</span>
           <h3>Chapter 6: Built Piece by Piece</h3>
-          <p>A voxel grid assembling small cubes into a whole. Nothing here happened all at once — it was built block by block, day by day.</p>
+          <p>A voxel grid assembling small cubes into a whole. Nothing here happened all at once — this site was built block by block, feature by feature.</p>
         </div>
       </div>
       <div class="scroll3d-panel" data-dimension="7">
         <div class="scroll3d-card">
           <span class="dimension-num">07 / 10</span>
-          <h3>Chapter 7: Two Sides of the Same Story</h3>
-          <p>A red-cyan anaglyph render splitting one image into two perspectives that combine into depth — a reminder that every shared memory has two people's view of it.</p>
+          <h3>Chapter 7: Two Perspectives</h3>
+          <p>A red-cyan anaglyph render splitting one image into two perspectives that combine into depth — proof that a single scene can be seen from more than one angle at once.</p>
         </div>
       </div>
       <div class="scroll3d-panel" data-dimension="8">
@@ -345,32 +225,32 @@
     </div>
   </section>
 
-  <!-- ===== Love Notes Section ===== -->
+  <!-- ===== Kind Notes Section ===== -->
   <section class="notes" id="notes">
     <h2 class="section-title reveal">Kind Notes</h2>
-    <p class="section-sub reveal">Tap a seal to read, or open the wax envelope below ♡</p>
+    <p class="section-sub reveal">Tap a seal to read, or open the wax envelope below ✿</p>
 
     <div class="notes__grid">
-      <button class="note reveal" data-note="The 5th of June 2026. A day worth remembering. Grateful to have you as a friend, Ziyanda.">
-        <span class="note__seal">♡</span><span class="note__label">05 · 06 · 26</span>
+      <button class="note reveal" data-note="A day worth remembering — good things start small and grow.">
+        <span class="note__seal">✿</span><span class="note__label">Milestones</span>
       </button>
-      <button class="note reveal" data-note="Monday to Friday I count days. Saturday and Sunday I count blessings — glad to have you around.">
+      <button class="note reveal" data-note="Monday to Friday, count the days. Saturday and Sunday, count your blessings.">
         <span class="note__seal">❀</span><span class="note__label">Weekends</span>
       </button>
-      <button class="note reveal" data-note="Your name says it all — Ncumolwakhe. Her smile. The one that brightens the week.">
-        <span class="note__seal">♡</span><span class="note__label">Her Smile</span>
+      <button class="note reveal" data-note="A smile can brighten a whole week — share yours often.">
+        <span class="note__seal">✿</span><span class="note__label">Smiles</span>
       </button>
-      <button class="note reveal" data-note="Enkosi, Ncumo. From Commercia, Midrand to wherever you are — thinking of you well-wishes.">
+      <button class="note reveal" data-note="Enkosi — thank you for visiting, wherever you're reading this from.">
         <span class="note__seal">✿</span><span class="note__label">Enkosi</span>
       </button>
     </div>
 
-    <!-- Fold-open Anime Love Letter -->
+    <!-- Fold-open note -->
     <div class="envelope-container reveal">
-      <div class="envelope" id="loveLetterEnvelope" title="Click to open letter">
+      <div class="envelope" id="loveLetterEnvelope" title="Click to open note">
         <div class="envelope__flap"></div>
         <div class="envelope__back"></div>
-        <span class="envelope__seal-heart">💌</span>
+        <span class="envelope__seal-heart">📜</span>
         <div class="envelope__letter">
           <!-- Populated dynamically by javascript -->
         </div>
@@ -381,7 +261,7 @@
   <!-- ===== Games Section ===== -->
   <section class="games" id="games">
     <h2 class="section-title reveal">Little Games</h2>
-    <p class="section-sub reveal">Play to unlock badges and cute fortunes ♡</p>
+    <p class="section-sub reveal">Play to unlock badges and cute fortunes ✿</p>
 
     <!-- Game 1: 3D Memory Card Match -->
     <div class="glass-panel game-card reveal">
@@ -397,9 +277,9 @@
       <button class="btn btn--small" id="memReset">Reset Deck</button>
     </div>
 
-    <!-- Game 2: Catch the Falling Hearts -->
+    <!-- Game 2: Catch the Falling Sparkles -->
     <div class="glass-panel game-card reveal">
-      <h3 class="game-card__title">💘 Catch My Hearts</h3>
+      <h3 class="game-card__title">✨ Catch the Sparkles</h3>
       <p class="game-card__hint" id="catchHint">Catch the falling bubbles before they fade! 20s round.</p>
       <div class="catch__stats">
         <span>Stage: <strong id="catchStage">1</strong>/3</span>
@@ -408,7 +288,7 @@
         <span>High Record: <strong id="catchBest">0</strong></span>
       </div>
       <div class="catch__arena" id="catchArena">
-        <p class="catch__msg" id="catchMsg">Press start, have fun ♡</p>
+        <p class="catch__msg" id="catchMsg">Press start, have fun ✿</p>
       </div>
       <button class="btn btn--small" id="catchStart">Start catching</button>
     </div>
@@ -427,22 +307,11 @@
       <p class="game-card__win" id="fortuneWin" style="margin-top: 1.5rem;" hidden></p>
     </div>
 
-    <!-- Game 4: The Important Question -->
-    <div class="glass-panel game-card reveal">
-      <h3 class="game-card__title">🥺 One Important Question</h3>
-      <p class="question__text" id="questionText">Are we still friends?</p>
-      <div class="question__btns" id="questionBtns">
-        <button class="btn btn--small" id="yesBtn">Yes 💖</button>
-        <button class="btn btn--small btn--ghost" id="noBtn">No</button>
-      </div>
-      <p class="game-card__win" id="yesWin" hidden>I knew it!! Glad to have you as a friend ✨</p>
-    </div>
-
     <!-- Procedural Lofi Cassette Widget with Neon visualizer -->
     <div class="cassette-widget reveal" id="cassetteWidget">
       <div class="cassette-body">
         <div class="cassette-label">
-          <span class="cassette-title-text" id="cassetteTrackName">Lofi Melodies: Ncumo Romance</span>
+          <span class="cassette-title-text" id="cassetteTrackName">Lofi Melodies: Ncumo Vibes</span>
           <span class="cassette-label-brand">Ncumo</span>
         </div>
         <div class="cassette-window">
@@ -485,7 +354,7 @@
       <div class="calc-gate-content">
         <span class="calc-gate-icon">🎓</span>
         <h3>Calculus Academy</h3>
-        <p>Step into an immersive, chalk-scribed learning sanctuary. Master limits, derivatives, and integrals with interactive graphs and real-world tools. Let's explore together ♡</p>
+        <p>Step into an immersive, chalk-scribed learning sanctuary. Master limits, derivatives, and integrals with interactive graphs and real-world tools.</p>
         <button class="btn" id="launchCalcBtn">Enter Academy 🚪✨</button>
       </div>
     </div>
@@ -494,45 +363,45 @@
   <!-- ===== Achievements Badges ===== -->
   <section class="games" id="achievements">
     <h2 class="section-title reveal">🏆 Badges</h2>
-    <p class="section-sub reveal">Interactive goals unlocked by playing ♡</p>
+    <p class="section-sub reveal">Interactive goals unlocked by playing ✿</p>
     <div class="achievements__grid reveal" id="achievementsGrid"></div>
   </section>
 
-  <!-- ===== Our Bucket List Section ===== -->
+  <!-- ===== Bucket List Section ===== -->
   <section class="games" id="bucket">
-    <h2 class="section-title reveal">🎯 Our Bucket List</h2>
-    <p class="section-sub reveal">Check items off or add your own plans ♡</p>
+    <h2 class="section-title reveal">🎯 Bucket List</h2>
+    <p class="section-sub reveal">Check items off or add your own plans ✿</p>
     <div class="bucket__grid" id="bucketGrid"></div>
-    
+
     <div class="bucket-adder reveal">
-      <input type="text" class="bucket-adder__input" id="bucketInput" placeholder="Add a fun new hangout idea..." aria-label="Bucket item title"/>
+      <input type="text" class="bucket-adder__input" id="bucketInput" placeholder="Add a fun new idea..." aria-label="Bucket item title"/>
       <button class="bucket-adder__btn" id="bucketAddBtn">Add Idea</button>
     </div>
   </section>
 
-  <!-- ===== Moments Polaroid Gallery ===== -->
+  <!-- ===== Gallery ===== -->
   <section class="moments" id="moments">
-    <h2 class="section-title reveal">Our Moments</h2>
-    <p class="section-sub reveal">Retro Polaroid frames holding our memories.</p>
+    <h2 class="section-title reveal">Gallery</h2>
+    <p class="section-sub reveal">Retro Polaroid frames holding a few good moments.</p>
     <div class="moments__grid">
-      <figure class="moment reveal" style="--angle: -2.5deg;"><div class="moment__img">🌸</div><figcaption>The Day We Met</figcaption></figure>
-      <figure class="moment reveal" style="--angle: 3deg;"><div class="moment__img">🌷</div><figcaption>Our First Laugh</figcaption></figure>
+      <figure class="moment reveal" style="--angle: -2.5deg;"><div class="moment__img">🌸</div><figcaption>Spring Morning</figcaption></figure>
+      <figure class="moment reveal" style="--angle: 3deg;"><div class="moment__img">🌷</div><figcaption>A Good Laugh</figcaption></figure>
       <figure class="moment reveal" style="--angle: -1.8deg;"><div class="moment__img">🌺</div><figcaption>Golden Evenings</figcaption></figure>
-      <figure class="moment reveal" style="--angle: 2.2deg;"><div class="moment__img">💐</div><figcaption>Good Days Together</figcaption></figure>
+      <figure class="moment reveal" style="--angle: 2.2deg;"><div class="moment__img">💐</div><figcaption>Good Days</figcaption></figure>
     </div>
   </section>
 
   <!-- ===== Footer ===== -->
   <footer class="footer">
     <p class="footer__script">Enkosi, Ncumolwakhe</p>
-    <p class="footer__small">with warmth and gratitude · since 05.06.2026 ♡</p>
+    <p class="footer__small">with warmth and gratitude · since 05.06.2026</p>
   </footer>
 
   <!-- ===== Detail Modal ===== -->
   <div class="modal" id="modal" hidden>
     <div class="modal__card">
       <button class="modal__close" id="modalClose" aria-label="Close modal">×</button>
-      <span class="modal__ornament">❀ ♡ ❀</span>
+      <span class="modal__ornament">❀ ✿ ❀</span>
       <p class="modal__text" id="modalText"></p>
     </div>
   </div>
@@ -630,7 +499,7 @@
           <button class="calc-chalk-tab" data-step="2">2. First Principles 📈</button>
           <button class="calc-chalk-tab" data-step="3">3. Rules ⚡</button>
           <button class="calc-chalk-tab" data-step="4">4. Optimization 🎯</button>
-          <button class="calc-chalk-tab" data-step="5">5. Integration 💖</button>
+          <button class="calc-chalk-tab" data-step="5">5. Integration ∫</button>
           <button class="calc-chalk-tab" data-step="6">6. Chain Rule ⛓️</button>
           <button class="calc-chalk-tab" data-step="7">7. Related Rates 🎈</button>
           <button class="calc-chalk-tab" data-step="8">8. FTC Theorem 📖</button>
@@ -725,7 +594,7 @@
 
         <div class="chalk-card chalk-motivation-card">
           <h3>💡 Study Tip</h3>
-          <p id="chalkMotivationText">Limits are like standing at a balcony together, leaning in closer and closer... but never quite stepping off. Mathematics is all about finding the beauty in closeness.</p>
+          <p id="chalkMotivationText">Limits are about getting closer and closer to a value without ever quite stepping past it. Mathematics is all about finding the beauty in precision.</p>
         </div>
       </aside>
     </div>
